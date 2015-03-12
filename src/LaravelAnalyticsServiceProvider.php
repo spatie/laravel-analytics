@@ -1,6 +1,9 @@
 <?php namespace Spatie\LaravelAnalytics;
 
 use Illuminate\Support\ServiceProvider;
+use Google_Client;
+use Config;
+use Spatie\LaravelAnalytics\Helpers\GoogleApiHelper;
 
 class LaravelAnalyticsServiceProvider extends ServiceProvider{
 
@@ -23,7 +26,14 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider{
      */
     public function register()
     {
+        $this->app->bind('laravelanalytics', function($app)
+        {
+            $client = $this->getGoogleClient();
 
+            $analyticsApi = new LaravelAnalytics($client, Config::get('laravelanalytics.siteId'), Config::get('laravelanalytics.cacheLifetime'));
+
+            return $analyticsApi;
+        });
     }
 
     protected function getGoogleClient()
@@ -44,17 +54,17 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider{
 
     protected function guardAgainstMissingP12()
     {
-        if(!\File::exists(Config::get('analytics-reports::certificate_path')))
+        if(!\File::exists(Config::get('laravelanalytics.certificate_path')))
         {
-            throw new \Exception("Can't find the .p12 certificate in: " . Config::get('analytics-reports::certificate_path'));
+            throw new \Exception("Can't find the .p12 certificate in: " . Config::get('laravelanalytics.certificate_path'));
         }
     }
 
     protected function getGoogleCientConfig()
     {
         return [
-            'oauth2_client_id' => Config::get('analytics-reports::client_id'),
-            'use_objects' => Config::get('analytics-reports::use_objects'),
+            'oauth2_client_id' => Config::get('laravelanalytics.client_id'),
+            'use_objects' => Config::get('laravelanalytics.use_objects'),
         ];
     }
 
@@ -62,9 +72,9 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider{
     {
         $client->setAssertionCredentials(
             new \Google_Auth_AssertionCredentials(
-                Config::get('analytics-reports::service_email'),
+                Config::get('laravelanalytics.service_email'),
                 ['https://www.googleapis.com/auth/analytics.readonly'],
-                file_get_contents(Config::get('analytics-reports::certificate_path'))
+                file_get_contents(Config::get('laravelanalytics.certificate_path'))
             )
         );
 
