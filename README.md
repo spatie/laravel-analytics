@@ -31,7 +31,7 @@ This package also comes with a facade, which provides an easy way to call the th
 You can publish the config file of this package using Artisan.
 
 ``` bash
-    php vendor:publish --provider="spatie/laravelanalytics"
+    php artisan vendor:publish --provider="Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider"
 ```
 
 ## Usage
