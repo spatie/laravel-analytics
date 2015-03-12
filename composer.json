@@ -42,7 +42,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Spatie\\Analytics\\Tests": "tests"
+      "Spatie\\LaravelAnalytics\\Tests": "tests"
     }
   }
 }
