@@ -37,12 +37,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Spatie\\LaravelAnalytics": "src"
+      "Spatie\\LaravelAnalytics\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Spatie\\LaravelAnalytics\\Tests": "tests"
+      "Spatie\\LaravelAnalytics\\Tests\\": "tests"
     }
   }
 }
