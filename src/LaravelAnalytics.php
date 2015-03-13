@@ -17,7 +17,7 @@ class LaravelAnalytics
 
     /**
      * @param GoogleApiHelper $client
-     * @param string          $siteId
+     * @param string $siteId
      */
     public function __construct(GoogleApiHelper $client, $siteId = '')
     {
