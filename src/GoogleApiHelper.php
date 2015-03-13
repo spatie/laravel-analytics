@@ -28,7 +28,7 @@ class GoogleApiHelper
      * @param $metrics
      * @param array $others
      *
-     * @return Google_Service_Analytics_GaData
+     * @return mixed
      */
     public function performQuery($id, $startDate, $endDate, $metrics, $others = [])
     {
@@ -59,11 +59,7 @@ class GoogleApiHelper
      */
     public function getSiteIdByUrl($url)
     {
-        static $siteIds = null;
-
-        if (is_null($siteIds)) {
-            $siteIds = $this->getSiteIds();
-        }
+        $siteIds = $this->getSiteIds();
 
         if (isset($siteIds[$url])) {
             return $siteIds[$url];
@@ -79,15 +75,18 @@ class GoogleApiHelper
      */
     public function getAllSiteIds()
     {
-        if (empty($this->siteIds)) {
-            $sites = $this->service->management_profiles->listManagementProfiles("~all", "~all");
+        static $siteIds = null;
 
-            foreach ($sites['items'] as $site) {
-                $this->siteIds[$site['websiteUrl']] = 'ga:'.$site['id'];
-            }
+        if (! is_null($siteIds))
+        {
+            retur $siteIds;
         }
 
-        return $this->siteIds;
+        foreach ($this->service->management_profiles->listManagementProfiles("~all", "~all") as $site) {
+            $siteIds[$site['websiteUrl']] = 'ga:'.$site['id'];
+        }
+
+        return $siteIds;
     }
 
     /**
