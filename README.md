@@ -88,6 +88,8 @@ return
 
 ### How to obtain the credentials to communicate with Google Analytics
 
+If you haven't already done so, [set up a Google Analtyics property](https://support.google.com/analytics/answer/1042508) and [install the tracking code on your site](https://support.google.com/analytics/answer/1008080?hl=en#GA).
+
 This package needs valid configuration values for `siteId`, `clientId` and `serviceEmail`. Additionally a `p12-file`is required.
  
 To obtain these credentials start by going to the [Google Developers Console](https://console.developers.google.com).
@@ -99,10 +101,9 @@ On this screen you should press `Create new Client ID`. In the creation screen m
 
 This wil generate a new public/private key pair and the .p12-file will get downloaded to your machine. Store this file in the location specified in the configfile of this package.
 
-
 In the properties of the newly create Service Account you'll find the values for the `serviceEmail` and `clientId` listed as `CLIEND ID` and `EMAIL ADDRESS`.
 
-To find the right value for `siteId` log in to [Google Analytics](http://www.google.be/intl/en/analytics/) and go the the Admin section.
+To find the right value for `siteId` log in to [Google Analytics](http://www.google.be/intl/en/analytics/) go the the Admin section.
 In the property-column select the website name of which you want to retrieve data, then click `View Settings` in the `View`-column.
 
 The value presented as `View Id` prepended with 'ga:' can be used as `siteId`.
@@ -129,7 +130,7 @@ $analyticsData = LaravelAnalytics::getMostVisitedPages(365, 20)
 ```
 ## Provided methods
 
-###Visitors and Pageviews
+###Visitors and pageviews
 These methods return a Collection with columns "date", "vistors" and "pageViews". When grouping by yearMonth, the first column will be called "yearMonth".
 ```php
     /**
