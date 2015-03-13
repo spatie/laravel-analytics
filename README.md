@@ -1,4 +1,4 @@
-An opinionated Laravel 5 package to retrieve Google Analytics data.
+testAn opinionated Laravel 5 package to retrieve Google Analytics data.
 
 ## Install
 
