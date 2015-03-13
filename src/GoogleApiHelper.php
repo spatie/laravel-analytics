@@ -34,7 +34,7 @@ class GoogleApiHelper
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
-        if ($this->useCache() and $this->cache->has($cacheName)) {
+        if ($this->useCache() && $this->cache->has($cacheName)) {
 
             return $this->cache->get($cacheName);
         }
