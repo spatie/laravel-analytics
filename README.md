@@ -118,7 +118,7 @@ Here is an example to retrieve visitors and pageview data for the last seven day
 /*
 * $analyticsData now contains a Collection with 3 columns: "date", "visitors" and "pageViews"
 */
-$analyticsData = LaravelAnalytics::getVisitorsAndPageViews(7)
+$analyticsData = LaravelAnalytics::getVisitorsAndPageViews(7);
 ```
 
 Here's another example to get the 20 most visited pages of the last 365 days
@@ -126,7 +126,7 @@ Here's another example to get the 20 most visited pages of the last 365 days
 /*
 * $analyticsData now contains a Collection with 2 columns: "url" and "pageViews"
 */
-$analyticsData = LaravelAnalytics::getMostVisitedPages(365, 20)
+$analyticsData = LaravelAnalytics::getMostVisitedPages(365, 20);
 ```
 ## Provided methods
 
