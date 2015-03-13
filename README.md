@@ -45,7 +45,6 @@ php artisan vendor:publish --provider="Spatie\LaravelAnalytics\LaravelAnalyticsS
 
 The following config file will be published in `config/laravel-analytics.php`
 ```php
-
 return
 
     [
