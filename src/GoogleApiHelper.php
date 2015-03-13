@@ -79,7 +79,7 @@ class GoogleApiHelper
 
         if (! is_null($siteIds))
         {
-            retur $siteIds;
+            return $siteIds;
         }
 
         foreach ($this->service->management_profiles->listManagementProfiles("~all", "~all") as $site) {
