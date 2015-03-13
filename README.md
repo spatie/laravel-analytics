@@ -262,8 +262,6 @@ To perform all other GA queries use  ```performQuery```.  [Google's Core Reporti
     public function performQuery($startDate, $endDate, $metrics, $others = array())
 ```    
 
-## Testing
-
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
