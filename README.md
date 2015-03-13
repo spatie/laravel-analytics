@@ -85,20 +85,24 @@ return
     ];
 ```
 
-### How to obtain the credentials to talk to Google Analytics
+### How to obtain the credentials to communicate with Google Analytics
 
 This package needs valid configuration values for `siteId`, `clientId` and `serviceEmail`. Additionally a `p12-file`is required.
  
-To obtain your these credentials start by going to the [Google Developers Console](https://console.developers.google.com). If you don't have a project present in the console yet, create one.
+To obtain these credentials start by going to the [Google Developers Console](https://console.developers.google.com).
+
+If you don't have a project present in the console yet, create one.
 If you click on the project name, you'll see a menu item `APIs` under `APIs & auth` on the left hand side. Click it to go the the Enabled API's screen. On that screen you should enable the Analytics API.
 Now, again under the `APIs & Auth`-menu click `Credentials`.
-On this screen you should press `Create new Client ID`. In the creation screen make sure you select application type `Service Account` and key type `P12-key.
+On this screen you should press `Create new Client ID`. In the creation screen make sure you select application type `Service Account` and key type `P12-key`.
 
-This wil generate a new public/private key pair and the .p12-file will get downloaded to your machine.
+This wil generate a new public/private key pair and the .p12-file will get downloaded to your machine. Store this file in the location specified in the configfile of this package.
+
+
 In the properties of the newly create Service Account you'll find the values for the `serviceEmail` and `clientId` listed as `CLIEND ID` and `EMAIL ADDRESS`.
 
 To find the right value for `siteId` log in to [Google Analytics](http://www.google.be/intl/en/analytics/) and go the the Admin section.
-In the property-column select the right website name, then click View Settings in the View-column.
+In the property-column select the website name of which you want to retrieve data, then click `View Settings` in the `View`-column.
 
 The value presented as `View Id` prepended with 'ga:' can be used as `siteId`.
 
