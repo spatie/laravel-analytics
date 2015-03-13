@@ -60,8 +60,8 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     protected function guardAgainstMissingP12()
     {
-        if (!\File::exists(Config::get('laravel-analytics.certificate_path'))) {
-            throw new \Exception("Can't find the .p12 certificate in: ".Config::get('laravel-analytics.certificate_path'));
+        if (!\File::exists(Config::get('laravel-analytics.certificatePath'))) {
+            throw new \Exception("Can't find the .p12 certificate in: ".Config::get('laravel-analytics.certificatePath'));
         }
     }
 
@@ -73,7 +73,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     protected function getGoogleClientConfig()
     {
         return [
-            'oauth2_client_id' => Config::get('laravel-analytics.client_id'),
+            'oauth2_client_id' => Config::get('laravel-analytics.clientId'),
             'use_objects' => true,
         ];
     }
@@ -89,9 +89,9 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     {
         $client->setAssertionCredentials(
             new \Google_Auth_AssertionCredentials(
-                Config::get('laravel-analytics.service_email'),
+                Config::get('laravel-analytics.serviceEmail'),
                 ['https://www.googleapis.com/auth/analytics.readonly'],
-                file_get_contents(Config::get('laravel-analytics.certificate_path'))
+                file_get_contents(Config::get('laravel-analytics.certificatePath'))
             )
         );
     }
