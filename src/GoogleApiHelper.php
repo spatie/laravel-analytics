@@ -95,10 +95,8 @@ class GoogleApiHelper
      */
     private function determineCacheName(array $properties)
     {
-        return 'spatie.laravel-analytics.'. md5(serialize($properties));
+        return 'spatie.laravel-analytics.'.md5(serialize($properties));
     }
-
-
 
     /**
      * Determine if request to Google should be cached.
@@ -113,7 +111,7 @@ class GoogleApiHelper
     /**
      * Set the cache time
      *
-     * @param int $cacheTimeInMinutes
+     * @param  int   $cacheTimeInMinutes
      * @return $this
      */
     public function setCacheTimeInMinutes($cacheTimeInMinutes)

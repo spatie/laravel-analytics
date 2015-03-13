@@ -84,6 +84,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
                 file_get_contents(Config::get('laravel-analytics.certificatePath'))
             )
         );
+
         return $client;
     }
 }

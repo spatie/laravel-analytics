@@ -2,7 +2,6 @@
 
 use DateTime;
 use Illuminate\Support\Collection;
-use Cache;
 use Carbon\Carbon;
 
 class LaravelAnalytics
@@ -17,8 +16,8 @@ class LaravelAnalytics
     protected $siteId;
 
     /**
-     * @param GoogleApiHelper $client An already authenticated client
-     * @param string $siteId Should look something like ga:xxxxxxxxx
+     * @param GoogleApiHelper $client
+     * @param string          $siteId
      */
     public function __construct(GoogleApiHelper $client, $siteId = '')
     {
@@ -29,8 +28,8 @@ class LaravelAnalytics
     /**
      * Get the amount of visitors and pageViews.
      *
-     * @param int $numberOfDays
-     * @param string $groupBy Possible values: date, yearMonth
+     * @param int    $numberOfDays
+     * @param string $groupBy      Possible values: date, yearMonth
      *
      * @return Collection
      */
@@ -46,7 +45,7 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param string $groupBy Possible values: date, yearMonth
+     * @param string   $groupBy   Possible values: date, yearMonth
      *
      * @return Collection
      */
@@ -82,7 +81,7 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int $maxResults
+     * @param int      $maxResults
      *
      * @return Collection
      */
@@ -213,7 +212,7 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int $maxResults
+     * @param int      $maxResults
      *
      * @return Collection
      */
@@ -254,7 +253,7 @@ class LaravelAnalytics
      * @param DateTime $startDate
      * @param DateTime $endDate
      * @param $metrics
-     * @param array $others
+     * @param array    $others
      *
      * @return mixed
      */
@@ -272,7 +271,6 @@ class LaravelAnalytics
     {
         return $this->siteId != '';
     }
-
 
     /**
      * Returns an array with the current date and the date minus the number of days specified.
