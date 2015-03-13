@@ -3,7 +3,7 @@
 [![Latest Version](https://img.shields.io/github/release/freekmurze/laravel-analytics.svg?style=flat-square)](https://github.com/freekmurze/laravel-analytics/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Quality Score](https://img.shields.io/scrutinizer/g/freekmurze/laravel-analytics.svg?style=flat-square)](https://scrutinizer-ci.com/g/freekmurze/laravel-analytics)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-analytics_name.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-analytics)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-analytics.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-analytics)
 
 An opinionated Laravel 5 package to retrieve Google Analytics data.
 
