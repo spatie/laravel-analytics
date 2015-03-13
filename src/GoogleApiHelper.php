@@ -59,7 +59,7 @@ class GoogleApiHelper
      */
     public function getSiteIdByUrl($url)
     {
-        $siteIds = $this->getSiteIds();
+        $siteIds = $this->getAllSiteIds();
 
         if (isset($siteIds[$url])) {
             return $siteIds[$url];
