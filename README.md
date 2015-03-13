@@ -83,7 +83,7 @@ return
          */
         'cacheLifetime' => 60 * 24 * 2,
     ];
-``
+```
 
 ### How to obtain the credentials to talk to Google Analytics
 
