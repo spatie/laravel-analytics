@@ -12,33 +12,35 @@ An opinionated Laravel 5 package to retrieve Google Analytics data.
 This package can be installed through Composer.
 
 ``` bash
-$ composer require spatie/laravel-analytics
+composer require spatie/laravel-analytics
 ```
 
 You must install this service provider.
 
 ```php
-    // config/app.php
-    'provider' => [
-        '...',
-        'Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider',
-    ];
+// config/app.php
+'provider' => [
+    ...
+    'Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider',
+    ...
+];
 ```
 
 This package also comes with a facade, which provides an easy way to call the the class.
 
 ```php
-    // config/app.php
-    'aliases' => [
-        '...',
-        'LaravelAnalytics' => 'Spatie\LaravelAnalytics\LaravelAnalyticsFacade',
-    ];
+// config/app.php
+'aliases' => [
+    ...
+    'LaravelAnalytics' => 'Spatie\LaravelAnalytics\LaravelAnalyticsFacade',
+    ...
+];
 ```
 
 You can publish the config file of this package with this command:
 
 ``` bash
-    php artisan vendor:publish --provider="Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider"
+php artisan vendor:publish --provider="Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider"
 ```
 
 The following config file will be published in `config/laravel-analytics.php`
