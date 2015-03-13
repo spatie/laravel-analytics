@@ -14,7 +14,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config/laravelanalytics.php' =>  config_path('laravel-analytics.php'),
-        ], 'config');
+        ]);
     }
 
     /**
