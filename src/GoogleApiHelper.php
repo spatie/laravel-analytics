@@ -8,12 +8,15 @@ class GoogleApiHelper
 {
     protected $service;
 
-    protected $cacheTimeInMinutes;
+    protected $cache;
 
-    public function __construct(Google_Client $client)
+    protected $cacheLifeTimeInMinutes;
+
+    public function __construct(Google_Client $client, $cache)
     {
         $this->service = new Google_Service_Analytics($client);
-        $this->cacheTimeInMinutes = 0;
+        $this->cache = $cache;
+        $this->cacheLifeTimeInMinutes = 0;
     }
 
     /**
@@ -31,14 +34,15 @@ class GoogleApiHelper
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
-        if ($this->useCache() and Cache::has($cacheName)) {
-            return Cache::get($cacheName);
+        if ($this->useCache() and $this->cache->has($cacheName)) {
+
+            return $this->cache->get($cacheName);
         }
 
         $googleAnswer = $this->service->data_ga->get($id, $startDate, $endDate, $metrics, $others);
 
         if ($this->useCache()) {
-            Cache::put($cacheName, $googleAnswer, $this->cacheLifeTimeInMinutes);
+            $this->cache->put($cacheName, $googleAnswer, $this->cacheLifeTimeInMinutes);
         }
 
         return $googleAnswer;
@@ -111,12 +115,12 @@ class GoogleApiHelper
     /**
      * Set the cache time
      *
-     * @param  int   $cacheTimeInMinutes
+     * @param  int   $CacheLifeTimeInMinutes
      * @return $this
      */
-    public function setCacheTimeInMinutes($cacheTimeInMinutes)
+    public function setCacheLifeTimeInMinutes($CacheLifeTimeInMinutes)
     {
-        $this->cacheTimeInMinutes = $cacheTimeInMinutes;
+        $this->cacheLifeTimeInMinutes = $CacheLifeTimeInMinutes;
 
         return $this;
     }

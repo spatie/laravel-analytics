@@ -9,7 +9,7 @@ return
          *
          * Should look like: ga:xxxxxxxx.
          */
-        'siteId' => get_env('ANALYTICS_SITE_ID'),
+        'siteId' => env('ANALYTICS_SITE_ID'),
 
         /*
          * Set the client id
@@ -17,7 +17,7 @@ return
          * Should look like:
          * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
          */
-        'clientId' => get_env('ANALYTICS_CLIENT_ID'),
+        'clientId' => env('ANALYTICS_CLIENT_ID'),
 
         /*
          * Set the service account name
@@ -25,7 +25,7 @@ return
          * Should look like:
          * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@developer.gserviceaccount.com
          */
-        'serviceEmail' => get_env('ANALYTICS_SERVICE_EMAIL'),
+        'serviceEmail' => env('ANALYTICS_SERVICE_EMAIL'),
 
         /*
          * You need to download a p12-certifciate from the Google API console
