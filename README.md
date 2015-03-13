@@ -1,4 +1,4 @@
-# Laravel Analytics
+#  Retrieve data from Google Analytics
 
 [![Latest Version](https://img.shields.io/github/release/freekmurze/laravel-analytics.svg?style=flat-square)](https://github.com/freekmurze/laravel-analytics/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
