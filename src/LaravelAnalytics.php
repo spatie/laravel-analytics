@@ -1,8 +1,8 @@
 <?php namespace Spatie\LaravelAnalytics;
 
+use DateTime;
 use Illuminate\Support\Collection;
 use Cache;
-use Spatie\LaravelAnalytics\Helpers\GoogleApiHelper;
 use Carbon\Carbon;
 
 class LaravelAnalytics
@@ -15,25 +15,19 @@ class LaravelAnalytics
      * @var string
      */
     protected $siteId;
-    /**
-     * @var int
-     */
-    protected $cacheLifeTimeInMinutes;
 
     /**
      * @param GoogleApiHelper $client An already authenticated client
      * @param string $siteId Should look something like ga:xxxxxxxxx
-     * @param int $cacheLifeTimeInMinutes
      */
-    public function __construct(GoogleApiHelper $client, $siteId = '', $cacheLifeTimeInMinutes = 0)
+    public function __construct(GoogleApiHelper $client, $siteId = '')
     {
         $this->client = $client;
         $this->siteId = $siteId;
-        $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes;
     }
 
     /**
-     * Get the amount of visitors and pageviews.
+     * Get the amount of visitors and pageViews.
      *
      * @param int $numberOfDays
      * @param string $groupBy Possible values: date, yearMonth
@@ -50,8 +44,8 @@ class LaravelAnalytics
     /**
      * Get the amount of visitors and pageviews for the given period.
      *
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate
+     * @param DateTime $endDate
      * @param string $groupBy Possible values: date, yearMonth
      *
      * @return Collection
@@ -86,8 +80,8 @@ class LaravelAnalytics
     /**
      * Get the top keywords for the given period.
      *
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate
+     * @param DateTime $endDate
      * @param int $maxResults
      *
      * @return Collection
@@ -127,8 +121,8 @@ class LaravelAnalytics
     /**
      * Get the top referrers for the given period.
      *
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate
+     * @param DateTime $endDate
      * @param $maxResults
      *
      * @return Collection
@@ -168,8 +162,8 @@ class LaravelAnalytics
     /**
      * Get the top browsers for the given period.
      *
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate
+     * @param DateTime $endDate
      * @param $maxResults
      *
      * @return Collection
@@ -217,8 +211,8 @@ class LaravelAnalytics
     /**
      * Get the most visited pages for the given period.
      *
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate
+     * @param DateTime $endDate
      * @param int $maxResults
      *
      * @return Collection
@@ -257,8 +251,8 @@ class LaravelAnalytics
     /**
      * Call the query method on the autenthicated client.
      *
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate
+     * @param DateTime $endDate
      * @param $metrics
      * @param array $others
      *
@@ -266,19 +260,7 @@ class LaravelAnalytics
      */
     public function performQuery($startDate, $endDate, $metrics, $others = array())
     {
-        $cacheName = $this->determineCacheName(func_get_args());
-
-        if ($this->useCache() and Cache::has($cacheName)) {
-            return Cache::get($cacheName);
-        }
-
-        $answer = $this->client->query($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'), $metrics, $others);
-
-        if ($this->useCache()) {
-            Cache::put($cacheName, $answer, $this->cacheLifeTimeInMinutes);
-        }
-
-        return $answer;
+        return $this->client->performQuery($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'), $metrics, $others);
     }
 
     /**
@@ -288,20 +270,9 @@ class LaravelAnalytics
      */
     public function isEnabled()
     {
-        return !$this->siteId == '';
+        return $this->siteId != '';
     }
 
-    /**
-     * Determine the cache name for the set of query properties given.
-     *
-     * @param array $properties
-     *
-     * @return string
-     */
-    private function determineCacheName(array $properties)
-    {
-        return 'spatie.laravelanalytics.'.md5(serialize($properties));
-    }
 
     /**
      * Returns an array with the current date and the date minus the number of days specified.
@@ -316,15 +287,5 @@ class LaravelAnalytics
         $startDate = Carbon::today()->subDays($numberOfDays);
 
         return [$startDate, $endDate];
-    }
-
-    /**
-     * Determine if request to Google should be cached.
-     *
-     * @return bool
-     */
-    private function useCache()
-    {
-        return $this->cacheLifeTimeInMinutes > 0;
     }
 }

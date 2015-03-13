@@ -3,7 +3,6 @@
 use Illuminate\Support\ServiceProvider;
 use Google_Client;
 use Config;
-use Spatie\LaravelAnalytics\Helpers\GoogleApiHelper;
 
 class LaravelAnalyticsServiceProvider extends ServiceProvider
 {
@@ -25,7 +24,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
         $this->app->bind('laravelAnalytics', function ($app) {
             $googleApiHelper = $this->getGoogleApiHelperClient();
 
-            $laravelAnalytics = new LaravelAnalytics($googleApiHelper, Config::get('laravel-analytics.siteId'), Config::get('laravel-analytics.cacheLifetime'));
+            $laravelAnalytics = new LaravelAnalytics($googleApiHelper, Config::get('laravel-analytics.siteId'));
 
             return $laravelAnalytics;
         }, true);
@@ -42,15 +41,12 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     {
         $this->guardAgainstMissingP12();
 
-        $config = $this->getGoogleClientConfig();
+        $client = $this->getGoogleClient();
 
-        $client = new Google_Client($config);
+        $googleApiHelper = (new GoogleApiHelper($client))
+            ->setCacheTimeInMinutes(Config::get('laravel-analytics.cacheLifetime'));
 
-        $client->setAccessType('offline');
-
-        $this->configureCredentials($client);
-
-        return new GoogleApiHelper($client);
+        return $googleApiHelper;
     }
 
     /**
@@ -66,27 +62,21 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Prepare the configuration with published config values.
-     *
-     * @return array
-     */
-    protected function getGoogleClientConfig()
-    {
-        return [
-            'oauth2_client_id' => Config::get('laravel-analytics.clientId'),
-            'use_objects' => true,
-        ];
-    }
-
-    /**
-     * Set the Google Analytics credentials with published config values.
-     *
-     * @param Google_Client $client
+     * Get a configured GoogleClient
      *
      * @return Google_Client
      */
-    protected function configureCredentials(Google_Client $client)
+    protected function getGoogleClient()
     {
+        $client = new Google_Client(
+            [
+                'oauth2_client_id' => Config::get('laravel-analytics.clientId'),
+                'use_objects' => true,
+            ]
+        );
+
+        $client->setAccessType('offline');
+
         $client->setAssertionCredentials(
             new \Google_Auth_AssertionCredentials(
                 Config::get('laravel-analytics.serviceEmail'),
@@ -94,5 +84,6 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
                 file_get_contents(Config::get('laravel-analytics.certificatePath'))
             )
         );
+        return $client;
     }
 }
