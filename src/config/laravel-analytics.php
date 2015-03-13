@@ -5,18 +5,24 @@ return
     [
         /*
          * The siteId is used to retrieve and display Google Analytics statistics
-         * in the admin-section. Should be something like ga:xxxxxxxx.
+         * in the admin-section.
+         *
+         * Should look like: ga:xxxxxxxx.
          */
         'siteId' => get_env('ANALYTICS_SITE_ID'),
 
         /*
-         * Set your client id, it should look something like:
+         * Set the client id
+         *
+         * Should look like:
          * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
          */
         'clientId' => get_env('ANALYTICS_CLIENT_ID'),
 
         /*
-         * Set your service account name, it should look something like:
+         * Set the service account name
+         *
+         * Should look like:
          * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@developer.gserviceaccount.com
          */
         'serviceEmail' => get_env('ANALYTICS_SERVICE_EMAIL'),
@@ -28,7 +34,7 @@ return
         'certificatePath' => storage_path('laravel-analytics/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-privatekey.p12'),
 
         /*
-         *  The amount of minutes the Google API responses will be cached.
+         * The amount of minutes the Google API responses will be cached.
          * If you set this to zero, the responses won't be cached at all.
          */
         'cacheLifetime' => 60 * 24 * 2,

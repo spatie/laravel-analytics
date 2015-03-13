@@ -35,31 +35,72 @@ This package also comes with a facade, which provides an easy way to call the th
     ];
 ```
 
-You can publish the config file of this package using Artisan.
+You can publish the config file of this package with this command:
 
 ``` bash
     php artisan vendor:publish --provider="Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider"
 ```
 
-And now fill in your _Analytics credentials_ in config/laravel-analytics.php.
+The following config file will be published in `config/laravel-analytics.php`
+```php
 
-## Analytics Credentials ##
+return
 
-To obtain your Analytics Credentials start by going to the [Google Developers Console](https://console.developers.google.com) and choosing the correct 'project'.
+    [
+        /*
+         * The siteId is used to retrieve and display Google Analytics statistics
+         * in the admin-section.
+         *
+         * Should look like: ga:xxxxxxxx.
+         */
+        'siteId' => get_env('ANALYTICS_SITE_ID'),
 
-Next, click APIs under APIs & auth (_left side-menu_) and enable the Analytics API.
-Now, under the same submenu click Credentials.
-In here create a new oAuth 2.0 Client Id with the service account setting.
+        /*
+         * Set the client id
+         *
+         * Should look like:
+         * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+         */
+        'clientId' => get_env('ANALYTICS_CLIENT_ID'),
 
-This will automatically create the needed keys and download the .p12 certificate.
+        /*
+         * Set the service account name
+         *
+         * Should look like:
+         * xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@developer.gserviceaccount.com
+         */
+        'serviceEmail' => get_env('ANALYTICS_SERVICE_EMAIL'),
 
-Now the service_email and client_id will be listed on right side as CLIENT ID and EMAIL ADDRESS.
+        /*
+         * You need to download a p12-certifciate from the Google API console
+         * Be sure to store this file in a secure location.
+         */
+        'certificatePath' => storage_path('laravel-analytics/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-privatekey.p12'),
 
-To find your siteId log in to [Google Analytics](http://www.google.be/intl/en/analytics/) and go the the _Admin_ section.
+        /*
+         * The amount of minutes the Google API responses will be cached.
+         * If you set this to zero, the responses won't be cached at all.
+         */
+        'cacheLifetime' => 60 * 24 * 2,
+    ];
+``
+
+### How to obtain the credentials to talk to Google Analytics
+
+This package needs valid configuration values for `siteId`, `clientId` and `serviceEmail`. Additionally a `p12-file`is required.
+ 
+To obtain your these credentials start by going to the [Google Developers Console](https://console.developers.google.com). If you don't have a project present in the console yet, create one.
+If you click on the project name, you'll see a menu item `APIs` under `APIs & auth` on the left hand side. Click it to go the the Enabled API's screen. On that screen you should enable the Analytics API.
+Now, again under the `APIs & Auth`-menu click `Credentials`.
+On this screen you should press `Create new Client ID`. In the creation screen make sure you select application type `Service Account` and key type `P12-key.
+
+This wil generate a new public/private key pair and the .p12-file will get downloaded to your machine.
+In the properties of the newly create Service Account you'll find the values for the `serviceEmail` and `clientId` listed as `CLIEND ID` and `EMAIL ADDRESS`.
+
+To find the right value for `siteId` log in to [Google Analytics](http://www.google.be/intl/en/analytics/) and go the the Admin section.
 In the property-column select the right website name, then click View Settings in the View-column.
 
-The View Id is what we call siteId. To use this in our configuration prepend it with 'ga:'.
-So a View Id of 12345678 would become ga:12345678.
+The value presented as `View Id` prepended with 'ga:' can be used as `siteId`.
 
 ## Usage
 
