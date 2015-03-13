@@ -37,7 +37,6 @@
 
         'client_id'        => 'xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com',
 
-
         /*
         |--------------------------------------------------------------------------
         | Service Account Name
@@ -49,7 +48,6 @@
         */
 
         'service_email'    => 'xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx@developer.gserviceaccount.com',
-
 
         /*
         |--------------------------------------------------------------------------
@@ -64,19 +62,5 @@
         |
         */
 
-        'certificate_path' => __DIR__ . '/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-privatekey.p12',
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Returns objects
-        |--------------------------------------------------------------------------
-        |
-        | Returns objects of the Google API Service instead of associative arrays
-        |
-        */
-
-        'use_objects'      => true,
-
-
+        'certificate_path' => __DIR__.'/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-privatekey.p12',
     ];

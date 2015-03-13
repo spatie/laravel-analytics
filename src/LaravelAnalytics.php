@@ -21,9 +21,9 @@ class LaravelAnalytics
     protected $cacheLifeTimeInMinutes;
 
     /**
-     * @param GoogleApiHelper $client                 An already authenticated client
-     * @param string          $siteId                 Should look something like ga:xxxxxxxxx
-     * @param int             $cacheLifeTimeInMinutes
+     * @param GoogleApiHelper $client An already authenticated client
+     * @param string $siteId Should look something like ga:xxxxxxxxx
+     * @param int $cacheLifeTimeInMinutes
      */
     public function __construct(GoogleApiHelper $client, $siteId = '', $cacheLifeTimeInMinutes = 0)
     {
@@ -35,8 +35,8 @@ class LaravelAnalytics
     /**
      * Get the amount of visitors and pageviews.
      *
-     * @param int    $numberOfDays
-     * @param string $groupBy      Possible values: date, yearMonth
+     * @param int $numberOfDays
+     * @param string $groupBy Possible values: date, yearMonth
      *
      * @return Collection
      */
@@ -52,7 +52,7 @@ class LaravelAnalytics
      *
      * @param \DateTime $startDate
      * @param \DateTime $endDate
-     * @param string    $groupBy   Possible values: date, yearMonth
+     * @param string $groupBy Possible values: date, yearMonth
      *
      * @return Collection
      */
@@ -88,7 +88,7 @@ class LaravelAnalytics
      *
      * @param \DateTime $startDate
      * @param \DateTime $endDate
-     * @param int       $maxResults
+     * @param int $maxResults
      *
      * @return Collection
      */
@@ -219,7 +219,7 @@ class LaravelAnalytics
      *
      * @param \DateTime $startDate
      * @param \DateTime $endDate
-     * @param int       $maxResults
+     * @param int $maxResults
      *
      * @return Collection
      */
@@ -260,7 +260,7 @@ class LaravelAnalytics
      * @param \DateTime $startDate
      * @param \DateTime $endDate
      * @param $metrics
-     * @param array     $others
+     * @param array $others
      *
      * @return mixed
      */

@@ -13,7 +13,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/laravelanalytics.php' =>  config_path('laravel-analytics.php'),
+            __DIR__.'/config/laravel-analytics.php' =>  config_path('laravel-analytics.php'),
         ]);
     }
 
@@ -23,11 +23,11 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('laravelAnalytics', function ($app) {
-            $client = $this->getGoogleApiHelperClient();
+            $googleApiHelper = $this->getGoogleApiHelperClient();
 
-            $analyticsApi = new LaravelAnalytics($client, Config::get('laravel-analytics.siteId'), Config::get('laravel-analytics.cacheLifetime'));
+            $laravelAnalytics = new LaravelAnalytics($googleApiHelper, Config::get('laravel-analytics.siteId'), Config::get('laravel-analytics.cacheLifetime'));
 
-            return $analyticsApi;
+            return $laravelAnalytics;
         }, true);
     }
 
@@ -48,7 +48,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
 
         $client->setAccessType('offline');
 
-        $client = $this->configureCredentials($client);
+        $this->configureCredentials($client);
 
         return new GoogleApiHelper($client);
     }
@@ -94,7 +94,5 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
                 file_get_contents(Config::get('laravel-analytics.certificate_path'))
             )
         );
-
-        return $client;
     }
 }
