@@ -101,7 +101,7 @@ On this screen you should press `Create new Client ID`. In the creation screen m
 
 This wil generate a new public/private key pair and the .p12-file will get downloaded to your machine. Store this file in the location specified in the configfile of this package.
 
-In the properties of the newly create Service Account you'll find the values for the `serviceEmail` and `clientId` listed as `CLIEND ID` and `EMAIL ADDRESS`.
+In the properties of the newly create Service Account you'll find the values for the `serviceEmail` and `clientId` listed as `CLIENT ID` and `EMAIL ADDRESS`.
 
 To find the right value for `siteId` log in to [Google Analytics](http://www.google.be/intl/en/analytics/) go the the Admin section.
 In the property-column select the website name of which you want to retrieve data, then click `View Settings` in the `View`-column.
