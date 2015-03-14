@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.0.2
+- Lowered minimum required PHP version to 5.4
+
 ## 1.0.1
 - Use Laraval 5 contracts to typehint cache
 - Add DateTime type hints
