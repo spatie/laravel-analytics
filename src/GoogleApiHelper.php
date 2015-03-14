@@ -24,14 +24,14 @@ class GoogleApiHelper
      * Query the Google Analytics Service with given parameters.
      *
      * @param int      $id
-     * @param DateTime $startDate
-     * @param DateTime $endDate
+     * @param string   $startDate
+     * @param string   $endDate
      * @param int      $metrics
      * @param array    $others
      *
      * @return mixed
      */
-    public function performQuery($id, DateTime $startDate, DateTime $endDate, $metrics, array $others = [])
+    public function performQuery($id, $startDate, $endDate, $metrics, array $others = [])
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
