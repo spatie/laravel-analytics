@@ -27,6 +27,7 @@
   ],
   "require": {
     "php" : ">=5.5.0",
+    "illuminate/contracts": "~5.0",
     "illuminate/support": "~5.0",
     "google/apiclient" : "1.1.*",
     "nesbot/carbon": "~1.17"
