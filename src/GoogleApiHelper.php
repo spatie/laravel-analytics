@@ -3,6 +3,7 @@
 use Exception;
 use Google_Client;
 use Google_Service_Analytics;
+use Illuminate\Contracts\Cache\Repository as CacheContract;
 
 class GoogleApiHelper
 {
@@ -12,7 +13,7 @@ class GoogleApiHelper
 
     protected $cacheLifeTimeInMinutes;
 
-    public function __construct(Google_Client $client, $cache)
+    public function __construct(Google_Client $client, CacheContract $cache)
     {
         $this->service = new Google_Service_Analytics($client);
         $this->cache = $cache;
