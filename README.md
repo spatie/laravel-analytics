@@ -105,8 +105,9 @@ In the properties of the newly create Service Account you'll find the values for
 
 To find the right value for `siteId` log in to [Google Analytics](http://www.google.be/intl/en/analytics/) go the the Admin section.
 In the property-column select the website name of which you want to retrieve data, then click `View Settings` in the `View`-column.
-
 The value presented as `View Id` prepended with 'ga:' can be used as `siteId`.
+
+Make sure you've added the `ANALYTICS_SERVICE_EMAIL` to the Google Analytics Account otherwise you will get a `403: User does not have any Google Analytics Account` error. [You can read Google's instructions here](http://support.google.com/analytics/bin/answer.py?hl=en&answer=1009702).
 
 ## Usage
 
