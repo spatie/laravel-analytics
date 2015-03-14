@@ -69,7 +69,7 @@ class GoogleApiHelper
     }
 
     /**
-     * Get all siteIds
+     * Get all siteIds.
      *
      * @return array
      */
@@ -112,14 +112,14 @@ class GoogleApiHelper
     }
 
     /**
-     * Set the cache time
+     * Set the cache time.
      *
-     * @param  int   $CacheLifeTimeInMinutes
+     * @param  int   $cacheLifeTimeInMinutes
      * @return $this
      */
-    public function setCacheLifeTimeInMinutes($CacheLifeTimeInMinutes)
+    public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
     {
-        $this->cacheLifeTimeInMinutes = $CacheLifeTimeInMinutes;
+        $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes;
 
         return $this;
     }
