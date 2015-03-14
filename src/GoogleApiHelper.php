@@ -23,15 +23,15 @@ class GoogleApiHelper
     /**
      * Query the Google Analytics Service with given parameters.
      *
-     * @param $id
-     * @param $startDate
-     * @param $endDate
-     * @param $metrics
-     * @param array $others
+     * @param int      $id
+     * @param DateTime $startDate
+     * @param DateTime $endDate
+     * @param int      $metrics
+     * @param array    $others
      *
      * @return mixed
      */
-    public function performQuery($id, $startDate, $endDate, $metrics, $others = [])
+    public function performQuery($id, DateTime $startDate, DateTime $endDate, $metrics, array $others = [])
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
@@ -52,7 +52,7 @@ class GoogleApiHelper
     /**
      * Get a site Id by its URL.
      *
-     * @param $url
+     * @param string $url
      *
      * @return mixed
      *
@@ -115,8 +115,8 @@ class GoogleApiHelper
     /**
      * Set the cache time.
      *
-     * @param  int   $cacheLifeTimeInMinutes
-     * @return $this
+     * @param  int             $cacheLifeTimeInMinutes
+     * @return GoogleApiHelper $this
      */
     public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
     {
