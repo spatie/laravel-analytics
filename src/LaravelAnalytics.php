@@ -49,7 +49,7 @@ class LaravelAnalytics
      *
      * @return Collection
      */
-    public function getVisitorsAndPageViewsForPeriod($startDate, $endDate, $groupBy = 'date')
+    public function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate, $groupBy = 'date')
     {
         $visitorData = [];
         $answer = $this->performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:'.$groupBy]);
@@ -85,7 +85,7 @@ class LaravelAnalytics
      *
      * @return Collection
      */
-    public function getTopKeyWordsForPeriod($startDate, $endDate, $maxResults = 30)
+    public function getTopKeyWordsForPeriod(DateTime $startDate, DateTime $endDate, $maxResults = 30)
     {
         $keywordData = [];
 
@@ -126,7 +126,7 @@ class LaravelAnalytics
      *
      * @return Collection
      */
-    public function getTopReferrersForPeriod($startDate, $endDate, $maxResults)
+    public function getTopReferrersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults)
     {
         $referrerData = [];
 
@@ -167,7 +167,7 @@ class LaravelAnalytics
      *
      * @return Collection
      */
-    public function getTopBrowsersForPeriod($startDate, $endDate, $maxResults)
+    public function getTopBrowsersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults)
     {
         $browserData = [];
         $answer = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
@@ -216,7 +216,7 @@ class LaravelAnalytics
      *
      * @return Collection
      */
-    public function getMostVisitedPagesForPeriod($startDate, $endDate, $maxResults = 20)
+    public function getMostVisitedPagesForPeriod(DateTime $startDate, DateTime $endDate, $maxResults = 20)
     {
         $pagesData = [];
 
@@ -257,7 +257,7 @@ class LaravelAnalytics
      *
      * @return mixed
      */
-    public function performQuery($startDate, $endDate, $metrics, $others = array())
+    public function performQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
     {
         return $this->client->performQuery($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'), $metrics, $others);
     }
