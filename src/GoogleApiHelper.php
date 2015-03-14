@@ -3,6 +3,7 @@
 use Exception;
 use Google_Client;
 use Google_Service_Analytics;
+use Illuminate\Contracts\Cache\Repository as CacheContract;
 
 class GoogleApiHelper
 {
@@ -12,7 +13,7 @@ class GoogleApiHelper
 
     protected $cacheLifeTimeInMinutes;
 
-    public function __construct(Google_Client $client, $cache)
+    public function __construct(Google_Client $client, CacheContract $cache)
     {
         $this->service = new Google_Service_Analytics($client);
         $this->cache = $cache;
@@ -69,7 +70,7 @@ class GoogleApiHelper
     }
 
     /**
-     * Get all siteIds
+     * Get all siteIds.
      *
      * @return array
      */
@@ -112,14 +113,14 @@ class GoogleApiHelper
     }
 
     /**
-     * Set the cache time
+     * Set the cache time.
      *
-     * @param  int   $CacheLifeTimeInMinutes
+     * @param  int   $cacheLifeTimeInMinutes
      * @return $this
      */
-    public function setCacheLifeTimeInMinutes($CacheLifeTimeInMinutes)
+    public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
     {
-        $this->cacheLifeTimeInMinutes = $CacheLifeTimeInMinutes;
+        $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes;
 
         return $this;
     }
