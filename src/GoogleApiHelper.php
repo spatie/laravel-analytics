@@ -116,7 +116,7 @@ class GoogleApiHelper
      * Set the cache time.
      *
      * @param  int             $cacheLifeTimeInMinutes
-     * @return GoogleApiHelper $this
+     * @return self
      */
     public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
     {
