@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Collection;
 
-class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
+class LaravelAnalyticsText extends PHPUnit_Framework_TestCase
+{
 
     protected $client;
     protected $laravelAnalytics;
@@ -27,7 +28,7 @@ class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
         $this->client
             ->shouldReceive('performQuery')
             ->with($this->siteId, $startDate, $endDate, "ga:visits,ga:pageviews", ['dimensions' => 'ga:date'])
-            ->andReturn((object)['rows'=>[['20140101', 2, 3]]]);
+            ->andReturn((object) ['rows' => [['20140101', 2, 3]]]);
 
         $googleResult = $this->laravelAnalytics->getVisitorsAndPageViews();
 
@@ -35,8 +36,7 @@ class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue(count($googleResult) === 1);
 
-        foreach($resultProperties as $property)
-        {
+        foreach ($resultProperties as $property) {
             $this->assertArrayHasKey($property, $googleResult[0]);
         }
     }
@@ -52,11 +52,11 @@ class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
         $this->client
             ->shouldReceive('performQuery')
             ->with($this->siteId, $startDate, $endDate, "ga:sessions", ['dimensions' => 'ga:keyword', 'sort' => '-ga:sessions', 'max-results' => 30, 'filters' => 'ga:keyword!=(not set);ga:keyword!=(not provided)'])
-            ->andReturn((object)['rows'=>[['first', 'second']]]);
+            ->andReturn((object) ['rows' => [['first', 'second']]]);
 
         $googleResult = $this->laravelAnalytics->getTopKeyWords();
 
-        $this->assertEquals($googleResult, new Collection([['keyword'=> 'first', 'sessions' => 'second']]));
+        $this->assertEquals($googleResult, new Collection([['keyword' => 'first', 'sessions' => 'second']]));
     }
 
     /**
@@ -69,8 +69,8 @@ class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
 
         $this->client
             ->shouldReceive('performQuery')
-            ->with($this->siteId, $startDate, $endDate, "ga:pageviews", ['dimensions'=>'ga:fullReferrer','sort'=>'-ga:pageviews','max-results'=>20])
-            ->andReturn((object)['rows'=>[['foundUrl', '123']]]);
+            ->with($this->siteId, $startDate, $endDate, "ga:pageviews", ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => 20])
+            ->andReturn((object) ['rows' => [['foundUrl', '123']]]);
 
         $googleResult = $this->laravelAnalytics->getTopReferrers();
 
@@ -88,7 +88,7 @@ class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
         $this->client
             ->shouldReceive('performQuery')
             ->with($this->siteId, $startDate, $endDate, "ga:sessions", ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions'])
-            ->andReturn((object)['rows'=>[['Google Chrome', '123']]]);
+            ->andReturn((object) ['rows' => [['Google Chrome', '123']]]);
 
         $googleResult = $this->laravelAnalytics->getTopBrowsers();
 
@@ -106,7 +106,7 @@ class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
         $this->client
             ->shouldReceive('performQuery')
             ->with($this->siteId, $startDate, $endDate, "ga:pageviews", ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => 20])
-            ->andReturn((object)['rows'=>[['visited url', '123']]]);
+            ->andReturn((object) ['rows' => [['visited url', '123']]]);
 
         $googleResult = $this->laravelAnalytics->getMostVisitedPages();
 
@@ -144,7 +144,6 @@ class LaravelAnalyticsText extends PHPUnit_Framework_TestCase {
             ->shouldReceive('performQuery')
             ->with($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'), $metrics, $others)
             ->andReturn($queryResult);
-
 
         $googleResult = $this->laravelAnalytics->performQuery($startDate, $endDate, $metrics, $others);
 
