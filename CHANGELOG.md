@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.0.4
+- Lowered minimum required Carbon version from 1.17 to ~1.0
+
 ## 1.0.3
 - Fix the breaking error in the Api Helper.
 
