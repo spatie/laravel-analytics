@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Collection;
 
-class LaravelAnalyticsText extends PHPUnit_Framework_TestCase
+class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
 {
 
     protected $client;
