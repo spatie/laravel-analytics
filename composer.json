@@ -31,9 +31,11 @@
     "illuminate/support": "~5.0",
     "google/apiclient" : "1.1.*",
     "nesbot/carbon": "~1.0"
+
   },
   "require-dev": {
     "phpunit/phpunit" : "4.*",
+    "mockery/mockery": "0.9.*",
     "scrutinizer/ocular": "~1.1"
   },
   "autoload": {

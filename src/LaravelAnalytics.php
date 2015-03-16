@@ -55,6 +55,10 @@ class LaravelAnalytics
         $visitorData = [];
         $answer = $this->performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:'.$groupBy]);
 
+        if (is_null($answer->rows)) {
+            return new Collection([]);
+        }
+
         foreach ($answer->rows as $dateRow) {
             $visitorData[] = [$groupBy => Carbon::createFromFormat(($groupBy == 'yearMonth' ? 'Ym' : 'Ymd'), $dateRow[0]), 'visitors' => $dateRow[1], 'pageViews' => $dateRow[2]];
         }
