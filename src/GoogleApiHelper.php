@@ -45,7 +45,6 @@ class GoogleApiHelper
         $cacheName = $this->determineCacheName(func_get_args());
 
         if ($this->useCache() && $this->cache->has($cacheName)) {
-
             return $this->cache->get($cacheName);
         }
 
@@ -87,8 +86,7 @@ class GoogleApiHelper
     {
         static $siteIds = null;
 
-        if (! is_null($siteIds))
-        {
+        if (! is_null($siteIds)) {
             return $siteIds;
         }
 
