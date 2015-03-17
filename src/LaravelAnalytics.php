@@ -222,7 +222,7 @@ class LaravelAnalytics
         $answer = $this->performRealTimeQuery('rt:activeUsers');
     
         if (is_null($answer->rows)) {
-            return new Collection([]);
+            return 0;
         }
     	
         return $answer->rows[0][0];
