@@ -213,6 +213,22 @@ class LaravelAnalytics
     }
 
     /**
+     * Get nubmer of active users currenlty on the site
+     *
+     * @return Collection
+     */
+    public function getActiveUsers()
+    {
+        $answer = $this->performRealTimeQuery('rt:activeUsers');
+    
+        if (is_null($answer->rows)) {
+            return new Collection([]);
+        }
+    	
+        return $answer->rows[0][0];
+    }
+    
+    /**
      * Get the most visited pages for the given period.
      *
      * @param DateTime $startDate
@@ -275,7 +291,7 @@ class LaravelAnalytics
      *
      * @return mixed
      */
-    public function performRealTimeQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
+    public function performRealTimeQuery($metrics, $others = array())
     {
         return $this->client->performRealTimeQuery($this->siteId, $metrics, $others);
     }
