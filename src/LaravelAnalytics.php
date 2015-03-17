@@ -219,7 +219,7 @@ class LaravelAnalytics
      */
     public function getActiveUsers($others = array())
     {
-        $answer = $this->performRealTimeQuery('rt:activeUsers', $others = array());
+        $answer = $this->performRealTimeQuery('rt:activeUsers', $others);
     
         if (is_null($answer->rows)) {
             return 0;
