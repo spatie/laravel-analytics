@@ -215,7 +215,7 @@ class LaravelAnalytics
     /**
      * Get nubmer of active users currenlty on the site
      *
-     * @return Collection
+     * @return int
      */
     public function getActiveUsers()
     {
