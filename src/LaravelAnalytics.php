@@ -268,6 +268,19 @@ class LaravelAnalytics
     }
 
     /**
+     * Call the real time query method on the authenticated client.
+     *
+     * @param string   $metrics
+     * @param array    $others
+     *
+     * @return mixed
+     */
+    public function performRealTimeQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
+    {
+        return $this->client->performRealTimeQuery($this->siteId, $metrics, $others);
+    }
+    
+    /**
      * Return true if this site is configured to use Google Analytics.
      *
      * @return bool
