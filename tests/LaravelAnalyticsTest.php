@@ -161,4 +161,42 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
         $disabledAnalytics = new \Spatie\LaravelAnalytics\LaravelAnalytics($this->client);
         $this->assertFalse($disabledAnalytics->isEnabled());
     }
+    
+    /**
+     * Test method performRealTimeQuery()
+     */
+    public function testPerformRealTimeQuery()
+    {
+        $metrics = 'rt:somedummymetric';
+        $others = ['first', 'second'];
+
+        $queryResult = 'result';
+
+        $this->client
+            ->shouldReceive('performRealTimeQuery')
+            ->with($this->siteId, $metrics, $others)
+            ->andReturn($queryResult);
+
+        $googleResult = $this->laravelAnalytics->performRealTimeQuery($metrics, $others);
+
+        $this->assertSame($googleResult, $queryResult);
+    }
+
+    /**
+     * Test method getActiveUsers()
+     */
+    public function testGetActiveUsers()
+    {
+	$others = ['first', 'second'];
+	$metrics = 'rt:activeUsers';
+
+	$this->client
+            ->shouldReceive('performRealTimeQuery')
+            ->with($this->siteId, $metrics, $others)
+            ->andReturn((object) ['rows' => [[0, '500']]]);
+
+        $googleResult = $this->laravelAnalytics->getActiveUsers($others);
+
+        $this->assertInternalType('int', $googleResult);
+    }
 }
