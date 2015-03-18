@@ -1,5 +1,6 @@
 <?php namespace Spatie\LaravelAnalytics;
 
+use Carbon\Carbon;
 use Exception;
 use Google_Client;
 use Google_Service_Analytics;
@@ -83,7 +84,7 @@ class GoogleApiHelper
         $googleAnswer =  $this->service->data_realtime->get($id, $metrics, $others);
 
         if ($this->useRealTimeCache()) {
-            $this->cache->put($realTimeCacheName, $googleAnswer, $this->realTimeCacheLifeTimeInSeconds);
+            $this->cache->put($realTimeCacheName, $googleAnswer, Carbon::now()->addSeconds($this->realTimeCacheLifeTimeInSeconds));
         }
     }
 
