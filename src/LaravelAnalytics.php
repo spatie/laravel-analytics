@@ -213,7 +213,7 @@ class LaravelAnalytics
     }
 
     /**
-     * Get nubmer of active users currenlty on the site
+     * Get the number of active users currently on the site
      *
      * @param array  $others
      * 

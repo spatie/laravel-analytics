@@ -84,6 +84,13 @@ return
          * If you set this to zero, the responses won't be cached at all.
          */
         'cacheLifetime' => 60 * 24 * 2,
+        
+        /*
+         * The amount of seconds the Google API responses will be cached for
+         * queries that use the real time query method. If you set this to zero,
+         * the responses of real time queries won't be cached at all.
+         */
+        'realTimeCacheLifetimeInSeconds' => 5,
     ];
 ```
 
@@ -109,6 +116,8 @@ In the property-column select the website name of which you want to retrieve dat
 The value presented as `View Id` prepended with 'ga:' can be used as `siteId`.
 
 Make sure you've added the `ANALYTICS_SERVICE_EMAIL` to the Google Analytics Account otherwise you will get a `403: User does not have any Google Analytics Account` error. [You can read Google's instructions here](http://support.google.com/analytics/bin/answer.py?hl=en&answer=1009702).
+
+If you want to use the realtime methods you should [request access](https://docs.google.com/forms/d/1qfRFysCikpgCMGqgF3yXdUyQW4xAlLyjKuOoOEFN2Uw/viewform) to the beta version of [Google's Real Time Reporting API](https://developers.google.com/analytics/devguides/reporting/realtime/v3/).
 
 ## Usage
 
@@ -248,6 +257,18 @@ These methods return a Collection with columns "url" and "pageViews".
      */
     public function getMostVisitedPagesForPeriod($startDate, $endDate, $maxResults = 20)
 ```
+
+###Currently active visitors
+This method uses the real time reporting API. It returns the amount of visitors that are viewing your site
+right now.
+```php
+    /**
+     * Get the number of active users currently on the site
+     *
+     */
+    public function getActiveUsers()
+``    
+   
 
 ###All other Google Analytics Queries
 To perform all other GA queries use  ```performQuery```.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on on which metrics and dimensions might be used. 
