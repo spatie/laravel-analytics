@@ -259,7 +259,7 @@ These methods return a Collection with columns "url" and "pageViews".
 ```
 
 ###Currently active visitors
-This method uses the real time reporting API. It returns the amount of visitors that are viewing your site
+This method uses the real time reporting API. It returns the number of visitors that are viewing your site
 right now.
 ```php
     /**
@@ -267,7 +267,7 @@ right now.
      *
      */
     public function getActiveUsers()
-``    
+```
    
 
 ###All other Google Analytics Queries

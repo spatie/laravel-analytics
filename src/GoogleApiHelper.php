@@ -181,7 +181,7 @@ class GoogleApiHelper
      */
     private function useRealTimeCache()
     {
-        return $this->RealTimecacheLifeTimeInMinutes > 0;
+        return $this->realTimecacheLifeTimeInMinutes > 0;
     }
 
     /**
