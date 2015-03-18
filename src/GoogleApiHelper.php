@@ -80,7 +80,7 @@ class GoogleApiHelper
             return $this->cache->get($realTimeCacheName);
         }
 
-        $googleAnswer =  $this->service->data_RealTime->get($id, $metrics, $others);
+        $googleAnswer =  $this->service->data_realtime->get($id, $metrics, $others);
 
         if ($this->useRealTimeCache()) {
             $this->cache->put($realTimeCacheName, $googleAnswer, $this->realTimeCacheLifeTimeInSeconds);
