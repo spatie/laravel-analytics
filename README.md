@@ -267,9 +267,8 @@ right now.
      *
      */
     public function getActiveUsers()
-``    
+```
    
-
 ###All other Google Analytics Queries
 To perform all other GA queries use  ```performQuery```.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on on which metrics and dimensions might be used. 
 ```php
