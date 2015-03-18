@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.1.1
+- Corrected a bug that caused the realtime-cache to be stored for too long
+
 ## 1.1.0
 - Added support for the [Real Time Reporting API](https://developers.google.com/analytics/devguides/reporting/realtime/v3/)
 
