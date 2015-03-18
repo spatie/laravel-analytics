@@ -45,7 +45,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
 
         $googleApiHelper = (new GoogleApiHelper($client, app()->make('Illuminate\Contracts\Cache\Repository')))
             ->setCacheLifeTimeInMinutes(Config::get('laravel-analytics.cacheLifetime'))
-            ->setRealtimeCacheLifeTimeInMinutes(Config::get('laravel-analytics.realTimeCacheLifetimeInSeconds'));
+            ->setRealTimeCacheLifeTimeInMinutes(Config::get('laravel-analytics.realTimeCacheLifetimeInSeconds'));
 
         return $googleApiHelper;
     }

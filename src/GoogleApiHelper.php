@@ -190,7 +190,7 @@ class GoogleApiHelper
      * @param  int  $realTimeCacheLifeTimeInSeconds
      * @return self
      */
-    public function setRealtimeCacheLifeTimeInMinutes($realTimeCacheLifeTimeInSeconds)
+    public function setRealTimeCacheLifeTimeInMinutes($realTimeCacheLifeTimeInSeconds)
     {
         $this->realTimeCacheLifeTimeInSeconds = $realTimeCacheLifeTimeInSeconds;
 
