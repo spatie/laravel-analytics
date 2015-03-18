@@ -22,11 +22,17 @@ class GoogleApiHelper
      */
     protected $cacheLifeTimeInMinutes;
 
+    /**
+     * @var int
+     */
+    protected $realTimeCacheLifeTimeInSeconds;
+
     public function __construct(Google_Client $client, CacheContract $cache)
     {
         $this->service = new Google_Service_Analytics($client);
         $this->cache = $cache;
         $this->cacheLifeTimeInMinutes = 0;
+        $this->realTimeCacheLifeTimeInSeconds = 0;
     }
 
     /**
@@ -68,7 +74,17 @@ class GoogleApiHelper
      */
     public function performRealTimeQuery($id, $metrics, array $others = [])
     {
-        return $this->service->data_realtime->get($id, $metrics, $others);
+        $realTimeCacheName = $this->determineRealTimeCacheName(func_get_args());
+
+        if ($this->useRealTimeCache() && $this->cache->has($realTimeCacheName)) {
+            return $this->cache->get($realTimeCacheName);
+        }
+
+        $googleAnswer =  $this->service->data_RealTime->get($id, $metrics, $others);
+
+        if ($this->useRealTimeCache()) {
+            $this->cache->put($realTimeCacheName, $googleAnswer, $this->realTimeCacheLifeTimeInSeconds);
+        }
     }
 
     /**
@@ -142,6 +158,41 @@ class GoogleApiHelper
     public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
     {
         $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes;
+
+        return $this;
+    }
+
+    /**
+     * Determine the cache name for RealTime function calls for the set of query properties given.
+     *
+     * @param array $properties
+     *
+     * @return string
+     */
+    private function determineRealTimeCacheName(array $properties)
+    {
+        return 'spatie.laravel-analytics.RealTime.'.md5(serialize($properties));
+    }
+
+    /**
+     * Determine if RealTime request to Google should be cached.
+     *
+     * @return bool
+     */
+    private function useRealTimeCache()
+    {
+        return $this->RealTimecacheLifeTimeInMinutes > 0;
+    }
+
+    /**
+     * Set the cache time.
+     *
+     * @param  int  $realTimeCacheLifeTimeInSeconds
+     * @return self
+     */
+    public function setRealtimeCacheLifeTimeInMinutes($realTimeCacheLifeTimeInSeconds)
+    {
+        $this->realTimeCacheLifeTimeInSeconds = $realTimeCacheLifeTimeInSeconds;
 
         return $this;
     }

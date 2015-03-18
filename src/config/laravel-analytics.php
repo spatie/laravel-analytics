@@ -38,4 +38,10 @@ return
          * If you set this to zero, the responses won't be cached at all.
          */
         'cacheLifetime' => 60 * 24 * 2,
+
+        /*
+         * The amount of seconds the Google API responses will be cached for.
+         * queries that use the real time query method
+         */
+        'realTimeCacheLifetimeInSeconds' => 5,
     ];
