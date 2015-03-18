@@ -213,6 +213,24 @@ class LaravelAnalytics
     }
 
     /**
+     * Get nubmer of active users currenlty on the site
+     *
+     * @param array  $others
+     * 
+     * @return int
+     */
+    public function getActiveUsers($others = array())
+    {
+        $answer = $this->performRealTimeQuery('rt:activeUsers', $others);
+    
+        if (is_null($answer->rows)) {
+            return 0;
+        }
+    	
+        return $answer->rows[0][0];
+    }
+    
+    /**
      * Get the most visited pages for the given period.
      *
      * @param DateTime $startDate
@@ -267,6 +285,19 @@ class LaravelAnalytics
         return $this->client->performQuery($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'), $metrics, $others);
     }
 
+    /**
+     * Call the real time query method on the authenticated client.
+     *
+     * @param string   $metrics
+     * @param array    $others
+     *
+     * @return mixed
+     */
+    public function performRealTimeQuery($metrics, $others = array())
+    {
+        return $this->client->performRealTimeQuery($this->siteId, $metrics, $others);
+    }
+    
     /**
      * Return true if this site is configured to use Google Analytics.
      *

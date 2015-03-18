@@ -56,6 +56,20 @@ class GoogleApiHelper
 
         return $googleAnswer;
     }
+    
+    /**
+     * Query the Google Analytics Real Time Reporting Service with given parameters.
+     *
+     * @param int    $id
+     * @param string $metrics
+     * @param array  $others
+     *
+     * @return mixed
+     */
+    public function performRealTimeQuery($id, $metrics, array $others = [])
+    {
+        return $this->service->data_realtime->get($id, $metrics, $others);
+    }
 
     /**
      * Get a site Id by its URL.
