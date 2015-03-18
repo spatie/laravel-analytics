@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.1.0
+- Added support for the [Real Time Reporting API](https://developers.google.com/analytics/devguides/reporting/realtime/v3/)
+
 ## 1.0.4
 - Lowered minimum required Carbon version from 1.17 to ~1.0
 
