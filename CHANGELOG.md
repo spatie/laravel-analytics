@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.1.2
+- Corrected a bug that caused an error when using the realtime-cache
+
 ## 1.1.1
 - Corrected a bug that caused the realtime-cache to be stored for too long
 
