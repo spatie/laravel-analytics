@@ -86,6 +86,7 @@ class GoogleApiHelper
         if ($this->useRealTimeCache()) {
             $this->cache->put($realTimeCacheName, $googleAnswer, Carbon::now()->addSeconds($this->realTimeCacheLifeTimeInSeconds));
         }
+        return $googleAnswer;
     }
 
     /**
@@ -182,7 +183,7 @@ class GoogleApiHelper
      */
     private function useRealTimeCache()
     {
-        return $this->realTimecacheLifeTimeInMinutes > 0;
+        return $this->realTimeCacheLifeTimeInSeconds > 0;
     }
 
     /**
