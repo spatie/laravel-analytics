@@ -9,7 +9,7 @@
     "reports",
     "laravel"
   ],
-  "homepage": "https://github.com/freekmurze/laravel-analytics",
+  "homepage": "https://github.com/spatie/laravel-analytics",
   "license": "MIT",
   "authors": [
     {
