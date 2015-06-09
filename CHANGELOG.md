@@ -2,8 +2,11 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
-## 1.1.3
+## 1.1.4
 - Handled a breaking change caused by Laravel 5.1
+
+## 1.1.3
+- Moved the repo
 
 ## 1.1.2
 - Corrected a bug that caused an error when using the realtime-cache
