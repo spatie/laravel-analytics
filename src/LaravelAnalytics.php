@@ -189,7 +189,7 @@ class LaravelAnalytics
 
         if (count($browserData) > $maxResults) {
             $otherBrowsers = new Collection(array_slice($browserData, $maxResults - 1));
-            $otherBrowsersCount = array_sum($otherBrowsers->lists('sessions'));
+            $otherBrowsersCount = array_sum(Collection::make($otherBrowsers->lists('sessions'))->toArray());
 
             $browserCollection->put(null, ['browser' => 'other', 'sessions' => $otherBrowsersCount]);
         }
