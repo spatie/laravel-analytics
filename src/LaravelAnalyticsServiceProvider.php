@@ -75,6 +75,8 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
                 'use_objects' => true,
             ]
         );
+        
+        $client->setClassConfig('Google_Cache_File', 'directory', storage_path('app/google_cache'));
 
         $client->setAccessType('offline');
 
