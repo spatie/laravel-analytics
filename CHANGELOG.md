@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.1.5
+- Store Google Api's cache in Laravel's storage directory
+
 ## 1.1.4
 - Handled a breaking change caused by Laravel 5.1
 
