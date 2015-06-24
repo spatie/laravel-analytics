@@ -76,7 +76,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
             ]
         );
         
-        $client->setClassConfig('Google_Cache_File', 'directory', storage_path('app/google_cache'));
+        $client->setClassConfig('Google_Cache_File', 'directory', storage_path('app/laravel-analytics-cache'));
 
         $client->setAccessType('offline');
 
