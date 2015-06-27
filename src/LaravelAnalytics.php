@@ -307,6 +307,20 @@ class LaravelAnalytics
     {
         return $this->siteId != '';
     }
+    
+    /**
+     * Set the siteId
+     *
+     * @param string $siteId
+
+     * @return $this
+     */
+    public function setSiteId($siteId)
+    {
+        $this->siteId = $siteId;
+
+        return $this;
+    }
 
     /**
      * Returns an array with the current date and the date minus the number of days specified.
