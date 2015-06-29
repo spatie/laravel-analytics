@@ -284,6 +284,14 @@ To perform all other GA queries use  ```performQuery```.  [Google's Core Reporti
     public function performQuery($startDate, $endDate, $metrics, $others = array())
 ```    
 
+###Manually setting the siteId at runtime.
+You can also set the siteId at runtime. This can be useful if you need to get statistics from multiple sites in one project.
+```php
+ LaravelAnalytics::setSiteId('ga:12345')->getVisitorsAndPageViews(); // will use the given siteId
+ LaravelAnalytics->getVisitorsAndPageViews();` // will use the siteId specified in the config file.
+ ```
+
+
 ## Testing
 
 Run the tests with:

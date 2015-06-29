@@ -22,12 +22,13 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('laravelAnalytics', function ($app) {
+
             $googleApiHelper = $this->getGoogleApiHelperClient();
 
             $laravelAnalytics = new LaravelAnalytics($googleApiHelper, Config::get('laravel-analytics.siteId'));
 
             return $laravelAnalytics;
-        }, true);
+        });
     }
 
     /**

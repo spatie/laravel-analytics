@@ -39,7 +39,7 @@ class GoogleApiHelper
     /**
      * Query the Google Analytics Service with given parameters.
      *
-     * @param int    $id
+     * @param int    $siteId
      * @param string $startDate
      * @param string $endDate
      * @param string $metrics
@@ -47,7 +47,7 @@ class GoogleApiHelper
      *
      * @return mixed
      */
-    public function performQuery($id, $startDate, $endDate, $metrics, array $others = [])
+    public function performQuery($siteId, $startDate, $endDate, $metrics, array $others = [])
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
@@ -55,7 +55,7 @@ class GoogleApiHelper
             return $this->cache->get($cacheName);
         }
 
-        $googleAnswer = $this->service->data_ga->get($id, $startDate, $endDate, $metrics, $others);
+        $googleAnswer = $this->service->data_ga->get($siteId, $startDate, $endDate, $metrics, $others);
 
         if ($this->useCache()) {
             $this->cache->put($cacheName, $googleAnswer, $this->cacheLifeTimeInMinutes);

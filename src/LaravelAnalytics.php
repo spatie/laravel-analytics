@@ -27,6 +27,20 @@ class LaravelAnalytics
     }
 
     /**
+     * Set the siteId
+     *
+     * @param string $siteId
+
+     * @return $this
+     */
+    public function setSiteId($siteId)
+    {
+        $this->siteId = $siteId;
+
+        return $this;
+    }
+
+    /**
      * Get the amount of visitors and pageViews.
      *
      * @param int    $numberOfDays
@@ -36,6 +50,7 @@ class LaravelAnalytics
      */
     public function getVisitorsAndPageViews($numberOfDays = 365, $groupBy = 'date')
     {
+        var_dump($this->siteId);
         list($startDate, $endDate) = $this->calculateNumberOfDays($numberOfDays);
 
         return $this->getVisitorsAndPageViewsForPeriod($startDate, $endDate, $groupBy);
@@ -308,19 +323,7 @@ class LaravelAnalytics
         return $this->siteId != '';
     }
     
-    /**
-     * Set the siteId
-     *
-     * @param string $siteId
 
-     * @return $this
-     */
-    public function setSiteId($siteId)
-    {
-        $this->siteId = $siteId;
-
-        return $this;
-    }
 
     /**
      * Returns an array with the current date and the date minus the number of days specified.
