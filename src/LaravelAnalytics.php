@@ -50,7 +50,6 @@ class LaravelAnalytics
      */
     public function getVisitorsAndPageViews($numberOfDays = 365, $groupBy = 'date')
     {
-        var_dump($this->siteId);
         list($startDate, $endDate) = $this->calculateNumberOfDays($numberOfDays);
 
         return $this->getVisitorsAndPageViewsForPeriod($startDate, $endDate, $groupBy);
