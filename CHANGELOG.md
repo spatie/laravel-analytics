@@ -2,7 +2,11 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.2.1
+- Removed a var_dump-call that was not supposed to be there
+
 ## 1.2.0
+###Do not use this version as it contains a var_dump that will mess up your output
 - Added a method to set the siteId at runtime
 
 ## 1.1.5
