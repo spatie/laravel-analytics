@@ -8,7 +8,7 @@
 
 This is an opinionated Laravel 5 package to retrieve Google Analytics data.
 
-Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## Install
 
@@ -317,7 +317,7 @@ If you discover any security related issues, please email freek@spatie.be instea
 - [All Contributors](../../contributors)
 
 ## About Spatie
-Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## License
 
