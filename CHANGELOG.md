@@ -3,7 +3,7 @@
 All Notable changes to Laravel-Analytics will be documented in this file
 
 ## 1.2.2
-- An injected `Spatie\Analytics`-object will now be properly configured
+- An injected `Spatie\LaravelAnalytics\LaravelAnalytics`-object will now be properly configured
 
 ## 1.2.1
 - Removed a var_dump-call that was not supposed to be there
