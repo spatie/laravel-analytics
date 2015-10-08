@@ -66,7 +66,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get a configured GoogleClient
+     * Get a configured GoogleClient.
      *
      * @return Google_Client
      */
@@ -78,7 +78,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
                 'use_objects' => true,
             ]
         );
-        
+
         $client->setClassConfig('Google_Cache_File', 'directory', storage_path('app/laravel-analytics-cache'));
 
         $client->setAccessType('offline');

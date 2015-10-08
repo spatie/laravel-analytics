@@ -63,7 +63,7 @@ class GoogleApiHelper
 
         return $googleAnswer;
     }
-    
+
     /**
      * Query the Google Analytics Real Time Reporting Service with given parameters.
      *
@@ -86,6 +86,7 @@ class GoogleApiHelper
         if ($this->useRealTimeCache()) {
             $this->cache->put($realTimeCacheName, $googleAnswer, Carbon::now()->addSeconds($this->realTimeCacheLifeTimeInSeconds));
         }
+
         return $googleAnswer;
     }
 
@@ -154,7 +155,8 @@ class GoogleApiHelper
     /**
      * Set the cache time.
      *
-     * @param  int  $cacheLifeTimeInMinutes
+     * @param int $cacheLifeTimeInMinutes
+     *
      * @return self
      */
     public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
@@ -189,7 +191,8 @@ class GoogleApiHelper
     /**
      * Set the cache time.
      *
-     * @param  int  $realTimeCacheLifeTimeInSeconds
+     * @param int $realTimeCacheLifeTimeInSeconds
+     *
      * @return self
      */
     public function setRealTimeCacheLifeTimeInMinutes($realTimeCacheLifeTimeInSeconds)

@@ -4,7 +4,6 @@ use Illuminate\Support\Collection;
 
 class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
 {
-
     protected $client;
     protected $laravelAnalytics;
     protected $siteId;
@@ -18,7 +17,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getVisitorsAndPageViews()
+     * Test method getVisitorsAndPageViews().
      */
     public function testGetVisitorsAndPageViews()
     {
@@ -42,7 +41,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopKeywords()
+     * Test method getTopKeywords().
      */
     public function testGetTopKeywords()
     {
@@ -60,7 +59,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopReferrers()
+     * Test method getTopReferrers().
      */
     public function testGetTopReferrers()
     {
@@ -78,7 +77,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopReferrers()
+     * Test method getTopReferrers().
      */
     public function testGetTopBrowsers()
     {
@@ -96,7 +95,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getTopReferrers()
+     * Test method getTopReferrers().
      */
     public function testGetMostVisitedPages()
     {
@@ -114,7 +113,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getSiteIdByUrl()
+     * Test method getSiteIdByUrl().
      */
     public function testGetSiteIdByUrl()
     {
@@ -129,7 +128,7 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method performQuery()
+     * Test method performQuery().
      */
     public function testPerformQuery()
     {
@@ -161,9 +160,9 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
         $disabledAnalytics = new \Spatie\LaravelAnalytics\LaravelAnalytics($this->client);
         $this->assertFalse($disabledAnalytics->isEnabled());
     }
-    
+
     /**
-     * Test method performRealTimeQuery()
+     * Test method performRealTimeQuery().
      */
     public function testPerformRealTimeQuery()
     {
@@ -183,14 +182,14 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test method getActiveUsers()
+     * Test method getActiveUsers().
      */
     public function testGetActiveUsers()
     {
-	$others = ['first', 'second'];
-	$metrics = 'rt:activeUsers';
+        $others = ['first', 'second'];
+        $metrics = 'rt:activeUsers';
 
-	$this->client
+        $this->client
             ->shouldReceive('performRealTimeQuery')
             ->with($this->siteId, $metrics, $others)
             ->andReturn((object) ['rows' => [[0, '500']]]);
