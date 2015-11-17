@@ -21,7 +21,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(LaravelAnalytics::class, function ($app) {
+        $this->app->bind('Spatie\LaravelAnalytics\LaravelAnalytics', function ($app) {
 
             $googleApiHelper = $this->getGoogleApiHelperClient();
 
@@ -30,7 +30,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
             return $laravelAnalytics;
         });
 
-        $this->app->alias(LaravelAnalytics::class, 'laravelAnalytics');
+        $this->app->alias('Spatie\LaravelAnalytics\LaravelAnalytics', 'laravelAnalytics');
     }
 
     /**

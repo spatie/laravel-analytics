@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.2.3
+- Fix PHP 5.4 compatibility
+
 ## 1.2.2
 - An injected `Spatie\LaravelAnalytics\LaravelAnalytics`-object will now be properly configured
 
