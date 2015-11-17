@@ -1,4 +1,6 @@
-<?php namespace Spatie\LaravelAnalytics;
+<?php
+
+namespace Spatie\LaravelAnalytics;
 
 use Illuminate\Support\Facades\Facade;
 

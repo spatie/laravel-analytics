@@ -1,4 +1,6 @@
-<?php namespace Spatie\LaravelAnalytics;
+<?php
+
+namespace Spatie\LaravelAnalytics;
 
 use Illuminate\Support\ServiceProvider;
 use Google_Client;
@@ -12,7 +14,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/laravel-analytics.php' =>  config_path('laravel-analytics.php'),
+            __DIR__.'/config/laravel-analytics.php' => config_path('laravel-analytics.php'),
         ]);
     }
 
