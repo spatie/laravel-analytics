@@ -43,6 +43,16 @@ class LaravelAnalytics
     }
 
     /**
+     * Get the siteId
+     *
+     * @return string $siteId
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
+    }
+
+    /**
      * Get the amount of visitors and pageViews.
      *
      * @param int    $numberOfDays
