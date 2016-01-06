@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.3.1
+- make `calculateNumberOfDays`-function protected
+
 ## 1.3.0
 - Added method getSiteId() 
 
