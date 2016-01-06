@@ -341,7 +341,7 @@ class LaravelAnalytics
      *
      * @return array
      */
-    private function calculateNumberOfDays($numberOfDays)
+    protected function calculateNumberOfDays($numberOfDays)
     {
         $endDate = Carbon::today();
         $startDate = Carbon::today()->subDays($numberOfDays);
