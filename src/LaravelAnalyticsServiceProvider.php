@@ -23,9 +23,22 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->guardAgainstMissingP12();
+
+        $this->app->bind('Spatie\LaravelAnalytics\GoogleApiHelper', function ($app) {
+
+            $client = $this->getGoogleClient();
+
+            $googleApiHelper = (new GoogleApiHelper($client, $app->make('Illuminate\Contracts\Cache\Repository')))
+                ->setCacheLifeTimeInMinutes(Config::get('laravel-analytics.cacheLifetime'))
+                ->setRealTimeCacheLifeTimeInMinutes(Config::get('laravel-analytics.realTimeCacheLifetimeInSeconds'));
+
+            return $googleApiHelper;
+        });
+
         $this->app->bind('Spatie\LaravelAnalytics\LaravelAnalytics', function ($app) {
 
-            $googleApiHelper = $this->getGoogleApiHelperClient();
+            $googleApiHelper = $app->make('Spatie\LaravelAnalytics\GoogleApiHelper');
 
             $laravelAnalytics = new LaravelAnalytics($googleApiHelper, Config::get('laravel-analytics.siteId'));
 
@@ -33,26 +46,6 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('Spatie\LaravelAnalytics\LaravelAnalytics', 'laravelAnalytics');
-    }
-
-    /**
-     * Return a GoogleApiHelper with given configuration.
-     *
-     * @return GoogleApiHelper
-     *
-     * @throws \Exception
-     */
-    protected function getGoogleApiHelperClient()
-    {
-        $this->guardAgainstMissingP12();
-
-        $client = $this->getGoogleClient();
-
-        $googleApiHelper = (new GoogleApiHelper($client, app()->make('Illuminate\Contracts\Cache\Repository')))
-            ->setCacheLifeTimeInMinutes(Config::get('laravel-analytics.cacheLifetime'))
-            ->setRealTimeCacheLifeTimeInMinutes(Config::get('laravel-analytics.realTimeCacheLifetimeInSeconds'));
-
-        return $googleApiHelper;
     }
 
     /**
