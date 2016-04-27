@@ -23,8 +23,6 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->guardAgainstMissingP12();
-
         $this->app->bind('Spatie\LaravelAnalytics\GoogleApiHelper', function ($app) {
 
             $client = $this->getGoogleClient();
@@ -67,6 +65,8 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     protected function getGoogleClient()
     {
+        $this->guardAgainstMissingP12();
+
         $client = new Google_Client(
             [
                 'oauth2_client_id' => Config::get('laravel-analytics.clientId'),
