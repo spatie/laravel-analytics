@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
@@ -21,8 +22,9 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
      */
     public function testGetVisitorsAndPageViews()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
@@ -45,8 +47,9 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTopKeywords()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
@@ -63,8 +66,9 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTopReferrers()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
@@ -81,8 +85,9 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTopBrowsers()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
@@ -99,8 +104,9 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
      */
     public function testGetMostVisitedPages()
     {
-        $startDate = (new DateTime())->modify('-1 year')->format('Y-m-d');
-        $endDate = date('Y-m-d');
+        $startDate = Carbon::now()->subDays('365')->format('Y-m-d');
+
+        $endDate = Carbon::now()->format('Y-m-d');
 
         $this->client
             ->shouldReceive('performQuery')
@@ -132,8 +138,10 @@ class LaravelAnalyticsTest extends PHPUnit_Framework_TestCase
      */
     public function testPerformQuery()
     {
-        $startDate = (new DateTime())->modify('-1 year');
-        $endDate = new DateTime();
+        $startDate = Carbon::now()->subDays('365');
+
+        $endDate = Carbon::now();
+
         $metrics = 'ga:somedummymetric';
         $others = ['first', 'second'];
 
