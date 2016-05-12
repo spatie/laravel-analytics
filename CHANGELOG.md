@@ -2,6 +2,10 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 1.4.0 - 2015-05-11
+
+- removing the use of facades
+
 ## 1.3.1
 - make `calculateNumberOfDays`-function protected
 
