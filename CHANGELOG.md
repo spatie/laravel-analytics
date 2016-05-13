@@ -8,7 +8,7 @@ All Notable changes to Laravel-Analytics will be documented in this file
 
 ## 1.4.0 - 2015-05-11
 
-_This version does not work, please upgrade to 1.4.0_
+*This version does not work, please upgrade to 1.4.0*
 
 - removing the use of facades
 
