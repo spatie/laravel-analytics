@@ -295,6 +295,16 @@ class LaravelAnalytics
     {
         return $this->client->getSiteIdByUrl($url);
     }
+    
+    /**
+    * return account summaries list
+    *
+    * @return \Google_Service_Analytics_AccountSummaries
+    */
+    public function AccountSummariesList()
+    {
+        return $this->client->getAllAccountSummaries();
+    }
 
     /**
      * Call the query method on the authenticated client.
