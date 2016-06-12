@@ -141,6 +141,16 @@ Here's another example to get the 20 most visited pages of the last 365 days
 */
 $analyticsData = LaravelAnalytics::getMostVisitedPages(365, 20);
 ```
+
+Here's example of collection all account summaries using the Management API
+```
+/*
+* Requests a list of all account summaries for the authorized user.
+* accounts must have read/analyze permissions added for the ANALYTICS_SERVICE_EMAIL
+*/
+$accounts = LaravelAnalytics::getAccountSummariesList();
+```
+
 ## Provided methods
 
 ###Visitors and pageviews
