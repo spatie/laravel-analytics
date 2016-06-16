@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\LaravelAnalytics;
+namespace Spatie\Analytics;
 
 use Carbon\Carbon;
 use Exception;

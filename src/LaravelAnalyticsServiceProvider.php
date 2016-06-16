@@ -1,9 +1,12 @@
 <?php
 
-namespace Spatie\LaravelAnalytics;
+namespace Spatie\Analytics;
 
 use Google_Client;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Analytics\Exceptions\InvalidConfiguration;
+use Spatie\Analytics\LaravelAnalytics;
 
 class LaravelAnalyticsServiceProvider extends ServiceProvider
 {
@@ -22,7 +25,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('Spatie\LaravelAnalytics\LaravelAnalytics', function ($app) {
+        $this->app->bind(LaravelAnalytics::class, function (Application $app) {
 
             $googleApiHelper = $this->getGoogleApiHelperClient();
 
@@ -31,7 +34,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
             return $laravelAnalytics;
         });
 
-        $this->app->alias('Spatie\LaravelAnalytics\LaravelAnalytics', 'laravelAnalytics');
+        $this->app->alias(LaravelAnalytics::class, 'laravel-analytics');
     }
 
     /**
@@ -43,7 +46,7 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
      */
     protected function getGoogleApiHelperClient()
     {
-        $this->guardAgainstMissingP12();
+        $this->guardAgainstInvalidConfiguration(config('laravel-analytics'));
 
         $client = $this->getGoogleClient();
 
@@ -54,15 +57,18 @@ class LaravelAnalyticsServiceProvider extends ServiceProvider
         return $googleApiHelper;
     }
 
-    /**
-     * Throw exception if .p12 file is not present in specified folder.
-     *
-     * @throws \Exception
-     */
-    protected function guardAgainstMissingP12()
+    protected function guardAgainstInvalidConfiguration(array $analyticsConfig)
     {
-        if (!$this->app['files']->exists(config('laravel-analytics.certificatePath'))) {
-            throw new \Exception("Can't find the .p12 certificate in: ".config('laravel-analytics.certificatePath'));
+        if (empty($analyticsConfig['site_id'])) {
+            throw InvalidConfiguration::siteIdNotSpecified();
+        }
+
+        if (! starts_with($analyticsConfig['site_id'], 'ga:')) {
+            throw InvalidConfiguration::siteIdNotValid($analyticsConfig['site_id']);
+        }
+        
+        if (! file_exists($analyticsConfig['client_secret_json'])) {
+            throw InvalidConfiguration::clientSecretJsonFileDoesNotExist();
         }
     }
 

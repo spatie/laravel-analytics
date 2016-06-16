@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\LaravelAnalytics;
+namespace Spatie\Analytics;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -8,6 +8,6 @@ class LaravelAnalyticsFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'laravelAnalytics';
+        return 'laravel-analytics';
     }
 }
