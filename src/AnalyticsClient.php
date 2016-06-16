@@ -69,6 +69,12 @@ class AnalyticsClient
         });
     }
 
+    public function getAnalyticsService(): Google_Service_Analytics
+    {
+        return $this->service;
+    }
+
+
     /*
      * Determine the cache name for the set of query properties given.
      */

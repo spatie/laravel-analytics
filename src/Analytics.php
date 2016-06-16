@@ -5,9 +5,12 @@ namespace Spatie\Analytics;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Traits\Macroable;
 
 class Analytics
 {
+    use Macroable;
+
     /** @var \Spatie\Analytics\AnalyticsClient */
     protected $client;
 
@@ -59,31 +62,14 @@ class Analytics
         });
     }
 
-    /**
-     * Get the top referrers.
-     *
-     * @param int $numberOfDays
-     * @param int $maxResults
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getTopReferrers($numberOfDays = 365, $maxResults = 20): Collection
+    public function getTopReferrers(int $numberOfDays = 365, int $maxResults = 20): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
 
         return $this->getTopReferrersForPeriod($period->startDate, $period->endDate, $maxResults);
     }
 
-    /**
-     * Get the top referrers for the given period.
-     *
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param int      $maxResults
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getTopReferrersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults): Collection
+    public function getTopReferrersForPeriod(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
@@ -99,31 +85,14 @@ class Analytics
         });
     }
 
-    /**
-     * Get the top browsers.
-     *
-     * @param int $numberOfDays
-     * @param int $maxResults
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getTopBrowsers($numberOfDays = 365, $maxResults = 6): Collection
+    public function getTopBrowsers(int $numberOfDays = 365, int $maxResults = 10): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
 
         return $this->getTopBrowsersForPeriod($period->startDate, $period->endDate, $maxResults);
     }
 
-    /**
-     * Get the top browsers for the given period.
-     *
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param int      $maxResults
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getTopBrowsersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults): Collection
+    public function getTopBrowsersForPeriod(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
 
@@ -152,31 +121,14 @@ class Analytics
             ->push($otherBrowsersRow);
     }
 
-    /**
-     * Get the most visited pages.
-     *
-     * @param int $numberOfDays
-     * @param int $maxResults
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getMostVisitedPages($numberOfDays = 365, $maxResults = 20): Collection
+    public function getMostVisitedPages(int $numberOfDays = 365, int $maxResults = 20): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
 
         return $this->getMostVisitedPagesForPeriod($period->startDate, $period->endDate, $maxResults);
     }
 
-    /**
-     * Get the most visited pages for the given period.
-     *
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param int      $maxResults
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getMostVisitedPagesForPeriod(DateTime $startDate, DateTime $endDate, $maxResults = 20): Collection
+    public function getMostVisitedPagesForPeriod(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
@@ -188,7 +140,7 @@ class Analytics
                 ];
             });
     }
-
+    
     /**
      * Call the query method on the authenticated client.
      *
@@ -199,7 +151,7 @@ class Analytics
      *
      * @return array|null
      */
-    public function performQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
+    public function performQuery(DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
     {
         return $this->client->performQuery(
             $this->viewId,

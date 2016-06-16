@@ -63,7 +63,7 @@ return [
      * Path to the client secret json file. Take a look at the README of this package
      * to learn how to get this file.
      */
-    'client_secret_json' => storage('app/laravel-google-analytics/client_secret.json'),
+    'service_account_credentials_json' => storage('app/laravel-google-analytics/client_secret.json'),
 
     /*
      * The amount of minutes the Google API responses will be cached.
@@ -76,28 +76,7 @@ return [
 
 ### How to obtain the credentials to communicate with Google Analytics
 
-If you haven't already done so, [set up a Google Analtyics property](https://support.google.com/analytics/answer/1042508) and [install the tracking code on your site](https://support.google.com/analytics/answer/1008080?hl=en#GA).
 
-This package needs valid configuration values for `siteId`, `clientId` and `serviceEmail`. Additionally a `p12-file`is required.
- 
-To obtain these credentials start by going to the [Google Developers Console](https://console.developers.google.com).
-
-If you don't have a project present in the console yet, create one.
-If you click on the project name, you'll see a menu item `APIs` under `APIs & auth` on the left hand side. Click it to go the the Enabled API's screen. On that screen you should enable the Analytics API.
-Now, again under the `APIs & Auth`-menu click `Credentials`.
-On this screen you should press `Create new Client ID`. In the creation screen make sure you select application type `Service Account` and key type `P12-key`.
-
-This wil generate a new public/private key pair and the .p12-file will get downloaded to your machine. Store this file in the location specified in the configfile of this package.
-
-In the properties of the newly created Service Account you'll find the values for the `serviceEmail` and `clientId` listed as `CLIENT ID` and `EMAIL ADDRESS`.
-
-To find the right value for `siteId` log in to [Google Analytics](http://www.google.be/intl/en/analytics/) go the the Admin section.
-In the property-column select the website name of which you want to retrieve data, then click `View Settings` in the `View`-column.
-The value presented as `View Id` prepended with 'ga:' can be used as `siteId`.
-
-Make sure you've added the `ANALYTICS_SERVICE_EMAIL` to the Google Analytics Account otherwise you will get a `403: User does not have any Google Analytics Account` error. [You can read Google's instructions here](http://support.google.com/analytics/bin/answer.py?hl=en&answer=1009702).
-
-If you want to use the realtime methods you should [request access](https://docs.google.com/forms/d/1qfRFysCikpgCMGqgF3yXdUyQW4xAlLyjKuOoOEFN2Uw/viewform) to the beta version of [Google's Real Time Reporting API](https://developers.google.com/analytics/devguides/reporting/realtime/v3/).
 
 ## Usage
 
