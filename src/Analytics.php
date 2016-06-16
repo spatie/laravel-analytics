@@ -4,14 +4,15 @@ namespace Spatie\Analytics;
 
 use Carbon\Carbon;
 use DateTime;
+use Google_Service_Analytics;
 use Illuminate\Support\Collection;
 
-class LaravelAnalytics
+class Analytics
 {
     /**
-     * @var Analytics
+     * @var Google_Service_Analytics
      */
-    protected $client;
+    protected $service;
 
     /**
      * @var string
@@ -19,12 +20,13 @@ class LaravelAnalytics
     protected $siteId;
 
     /**
-     * @param GoogleApiHelper $client
-     * @param string          $siteId
+     * @param Google_Service_Analytics $service
+     * @param string $siteId
      */
-    public function __construct(GoogleApiHelper $client, $siteId = '')
+    public function __construct(Google_Service_Analytics $service, string $siteId)
     {
-        $this->client = $client;
+        $this->service = $service;
+
         $this->siteId = $siteId;
     }
 
@@ -35,7 +37,7 @@ class LaravelAnalytics
      *
      * @return $this
      */
-    public function setSiteId($siteId)
+    public function setSiteId(string $siteId)
     {
         $this->siteId = $siteId;
 
@@ -55,16 +57,16 @@ class LaravelAnalytics
     /**
      * Get the amount of visitors and pageViews.
      *
-     * @param int    $numberOfDays
-     * @param string $groupBy      Possible values: date, yearMonth
+     * @param int $numberOfDays
+     * @param string $groupBy Possible values: date, yearMonth
      *
      * @return Collection
      */
     public function getVisitorsAndPageViews($numberOfDays = 365, $groupBy = 'date')
     {
-        list($startDate, $endDate) = $this->calculateNumberOfDays($numberOfDays);
+        $period = $this->calculateNumberOfDays($numberOfDays);
 
-        return $this->getVisitorsAndPageViewsForPeriod($startDate, $endDate, $groupBy);
+        return $this->getVisitorsAndPageViewsForPeriod($period->startDate, $period, $groupBy);
     }
 
     /**
@@ -72,14 +74,14 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param string   $groupBy   Possible values: date, yearMonth
+     * @param string $groupBy Possible values: date, yearMonth
      *
      * @return Collection
      */
     public function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate, $groupBy = 'date')
     {
         $visitorData = [];
-        $answer = $this->performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:'.$groupBy]);
+        $answer = $this->performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:' . $groupBy]);
 
         if (is_null($answer->rows)) {
             return new Collection([]);
@@ -89,7 +91,7 @@ class LaravelAnalytics
             $visitorData[] = [$groupBy => Carbon::createFromFormat(($groupBy == 'yearMonth' ? 'Ym' : 'Ymd'), $dateRow[0]), 'visitors' => $dateRow[1], 'pageViews' => $dateRow[2]];
         }
 
-        return new Collection($visitorData);
+        return collect($visitorData);
     }
 
     /**
@@ -112,7 +114,7 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int      $maxResults
+     * @param int $maxResults
      *
      * @return Collection
      */
@@ -123,14 +125,14 @@ class LaravelAnalytics
         $answer = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:keyword', 'sort' => '-ga:sessions', 'max-results' => $maxResults, 'filters' => 'ga:keyword!=(not set);ga:keyword!=(not provided)']);
 
         if (is_null($answer->rows)) {
-            return new Collection([]);
+            return collect();
         }
 
         foreach ($answer->rows as $pageRow) {
             $keywordData[] = ['keyword' => $pageRow[0], 'sessions' => $pageRow[1]];
         }
 
-        return new Collection($keywordData);
+        return collect();
     }
 
     /**
@@ -153,7 +155,7 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int      $maxResults
+     * @param int $maxResults
      *
      * @return Collection
      */
@@ -171,7 +173,7 @@ class LaravelAnalytics
             $referrerData[] = ['url' => $pageRow[0], 'pageViews' => $pageRow[1]];
         }
 
-        return new Collection($referrerData);
+        return collect($referrerData);
     }
 
     /**
@@ -194,7 +196,7 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int      $maxResults
+     * @param int $maxResults
      *
      * @return Collection
      */
@@ -239,29 +241,11 @@ class LaravelAnalytics
     }
 
     /**
-     * Get the number of active users currently on the site.
-     *
-     * @param array $others
-     *
-     * @return int
-     */
-    public function getActiveUsers($others = array())
-    {
-        $answer = $this->performRealTimeQuery('rt:activeUsers', $others);
-
-        if (is_null($answer->rows)) {
-            return 0;
-        }
-
-        return $answer->rows[0][0];
-    }
-
-    /**
      * Get the most visited pages for the given period.
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int      $maxResults
+     * @param int $maxResults
      *
      * @return Collection
      */
@@ -279,21 +263,7 @@ class LaravelAnalytics
             $pagesData[] = ['url' => $pageRow[0], 'pageViews' => $pageRow[1]];
         }
 
-        return new Collection($pagesData);
-    }
-
-    /**
-     * Returns the site id (ga:xxxxxxx) for the given url.
-     *
-     * @param string $url
-     *
-     * @throws \Exception
-     *
-     * @return string
-     */
-    public function getSiteIdByUrl($url)
-    {
-        return $this->client->getSiteIdByUrl($url);
+        return collect($pagesData);
     }
 
     /**
@@ -301,37 +271,19 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param string   $metrics
-     * @param array    $others
+     * @param string $metrics
+     * @param array $others
      *
      * @return mixed
      */
     public function performQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
     {
-        return $this->client->performQuery($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'), $metrics, $others);
-    }
-
-    /**
-     * Call the real time query method on the authenticated client.
-     *
-     * @param string $metrics
-     * @param array  $others
-     *
-     * @return mixed
-     */
-    public function performRealTimeQuery($metrics, $others = array())
-    {
-        return $this->client->performRealTimeQuery($this->siteId, $metrics, $others);
-    }
-
-    /**
-     * Return true if this site is configured to use Google Analytics.
-     *
-     * @return bool
-     */
-    public function isEnabled()
-    {
-        return $this->siteId != '';
+        return $this->service->performQuery(
+            $this->siteId,
+            $startDate->format('Y-m-d'),
+            $endDate->format('Y-m-d'),
+            $metrics, $others
+        );
     }
 
     /**
@@ -341,7 +293,7 @@ class LaravelAnalytics
      *
      * @return array
      */
-    protected function calculateNumberOfDays($numberOfDays)
+    protected function period(int $numberOfDays)
     {
         $endDate = Carbon::today();
         $startDate = Carbon::today()->subDays($numberOfDays);
