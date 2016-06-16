@@ -1,20 +1,17 @@
 <?php
 
 return [
-    
+
     /*
-     * The site id is used to retrieve and display Google Analytics statistics
-     * in the admin section.
-     *
-     * The provided value should look like: ga:xxxxxxxx.
+     * The view id of which you want to display data.
      */
-    'site_id' => env('ANALYTICS_SITE_ID'),
+    'view_id' => env('ANALYTICS_VIEW_ID'),
 
     /*
      * Path to the client secret json file. Take a look at the README of this package
      * to learn how to get this file.
      */
-    'client_secret_json' => storage('app/laravel-google-analytics/client_secret.json'),
+    'client_secret_json' => storage_path('app/laravel-google-analytics/service-account-credentials.json'),
 
     /*
      * The amount of minutes the Google API responses will be cached.

@@ -12,41 +12,41 @@ class Analytics
     protected $service;
 
     /** @var string */
-    protected $siteId;
+    protected $viewId;
 
     /**
      * @param Service $service
-     * @param string  $siteId
+     * @param string  $viewId
      */
-    public function __construct(Service $service, string $siteId)
+    public function __construct(Service $service, string $viewId)
     {
         $this->service = $service;
 
-        $this->siteId = $siteId;
+        $this->viewId = $viewId;
     }
 
     /**
-     * Set the siteId.
+     * Set the viewId.
      *
-     * @param string $siteId
+     * @param string $viewId
      *
      * @return $this
      */
-    public function setSiteId(string $siteId)
+    public function setViewId(string $viewId)
     {
-        $this->siteId = $siteId;
+        $this->viewId = $viewId;
 
         return $this;
     }
 
     /**
-     * Get the siteId.
+     * Get the viewId.
      *
      * @return string $siteId
      */
-    public function getSiteId()
+    public function getViewId()
     {
-        return $this->siteId;
+        return $this->viewId;
     }
 
     public function getVisitorsAndPageViews(int $numberOfDays = 365, string $groupBy = 'date'): Collection
@@ -210,9 +210,9 @@ class Analytics
     public function performQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
     {
         return $this->service->performQuery(
-            $this->siteId,
-            $startDate->format('Y-m-d'),
-            $endDate->format('Y-m-d'),
+            $this->viewId,
+            $startDate,
+            $endDate,
             $metrics,
             $others
         );

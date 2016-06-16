@@ -6,7 +6,7 @@ use Exception;
 
 class InvalidConfiguration extends Exception
 {
-    public static function siteIdNotSpecified()
+    public static function viewIdNotSpecified()
     {
         return new static('You must provide a valid site id');
     }

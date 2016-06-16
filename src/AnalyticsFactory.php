@@ -4,6 +4,7 @@ namespace Spatie\Analytics;
 
 use Google_Client;
 use Google_Service_Analytics;
+use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsFactory
 {
@@ -13,9 +14,9 @@ class AnalyticsFactory
 
         $googleService = new Google_Service_Analytics($authenticatedClient);
 
-        $service = new Service($googleService);
+        $service = new Service($googleService, app(Repository::class));
 
-        return new Analytics($service, $config['siteId']);
+        return new Analytics($service, $config['view_id']);
     }
 
     public static function getAuthenticatedGoogleClient($config): Google_Client

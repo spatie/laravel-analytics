@@ -35,7 +35,7 @@ This package also comes with a facade, which provides an easy way to call the th
 // config/app.php
 'aliases' => [
     ...
-    'LaravelAnalytics' => Spatie\Analytics\AnalyticsFacade::class,
+    'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
     ...
 ];
 ```
@@ -109,7 +109,7 @@ Here is an example to retrieve visitors and pageview data for the last seven day
 /*
 * $analyticsData now contains a Collection with 3 columns: "date", "visitors" and "pageViews"
 */
-$analyticsData = LaravelAnalytics::getVisitorsAndPageViews(7);
+$analyticsData = Analytics::getVisitorsAndPageViews(7);
 ```
 
 Here's another example to get the 20 most visited pages of the last 365 days
@@ -117,7 +117,7 @@ Here's another example to get the 20 most visited pages of the last 365 days
 /*
 * $analyticsData now contains a Collection with 2 columns: "url" and "pageViews"
 */
-$analyticsData = LaravelAnalytics::getMostVisitedPages(365, 20);
+$analyticsData = Analytics::getMostVisitedPages(365, 20);
 ```
 ## Provided methods
 
@@ -267,7 +267,7 @@ To perform all other GA queries use  ```performQuery```.  [Google's Core Reporti
 ###Manually setting the siteId at runtime.
 You can also set the siteId at runtime. This can be useful if you need to get statistics from multiple sites in one project.
 ```php
- LaravelAnalytics::setSiteId('ga:12345')->getVisitorsAndPageViews(); // will use the given siteId
+ Analytics::setSiteId('ga:12345')->getVisitorsAndPageViews(); // will use the given siteId
  LaravelAnalytics->getVisitorsAndPageViews();` // will use the siteId specified in the config file.
  ```
 

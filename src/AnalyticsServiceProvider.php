@@ -25,9 +25,9 @@ class AnalyticsServiceProvider extends ServiceProvider
     {
         $analyticsConfig = config('laravel-analytics');
 
-        $this->guardAgainstInvalidConfiguration($analyticsConfig);
-
         $this->app->bind(LaravelAnalytics::class, function () use ($analyticsConfig) {
+
+            $this->guardAgainstInvalidConfiguration($analyticsConfig);
 
             return AnalyticsFactory::createForConfig($analyticsConfig);
 
@@ -38,12 +38,8 @@ class AnalyticsServiceProvider extends ServiceProvider
 
     protected function guardAgainstInvalidConfiguration(array $analyticsConfig)
     {
-        if (empty($analyticsConfig['site_id'])) {
-            throw InvalidConfiguration::siteIdNotSpecified();
-        }
-
-        if (!starts_with($analyticsConfig['site_id'], 'ga:')) {
-            throw InvalidConfiguration::siteIdNotValid($analyticsConfig['site_id']);
+        if (empty($analyticsConfig['view_id'])) {
+            throw InvalidConfiguration::viewIdNotSpecified();
         }
 
         if (!file_exists($analyticsConfig['client_secret_json'])) {
