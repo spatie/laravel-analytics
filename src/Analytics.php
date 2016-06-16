@@ -67,7 +67,7 @@ class Analytics
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getTopReferrers($numberOfDays = 365, $maxResults = 20)
+    public function getTopReferrers($numberOfDays = 365, $maxResults = 20): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
 
@@ -83,7 +83,7 @@ class Analytics
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getTopReferrersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults)
+    public function getTopReferrersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
@@ -107,7 +107,7 @@ class Analytics
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getTopBrowsers($numberOfDays = 365, $maxResults = 6)
+    public function getTopBrowsers($numberOfDays = 365, $maxResults = 6): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
 
@@ -123,7 +123,7 @@ class Analytics
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getTopBrowsersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults)
+    public function getTopBrowsersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
 
@@ -160,7 +160,7 @@ class Analytics
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getMostVisitedPages($numberOfDays = 365, $maxResults = 20)
+    public function getMostVisitedPages($numberOfDays = 365, $maxResults = 20): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
 
@@ -176,7 +176,7 @@ class Analytics
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getMostVisitedPagesForPeriod(DateTime $startDate, DateTime $endDate, $maxResults = 20)
+    public function getMostVisitedPagesForPeriod(DateTime $startDate, DateTime $endDate, $maxResults = 20): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 

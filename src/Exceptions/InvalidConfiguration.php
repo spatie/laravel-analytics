@@ -8,12 +8,7 @@ class InvalidConfiguration extends Exception
 {
     public static function viewIdNotSpecified()
     {
-        return new static('You must provide a valid site id');
-    }
-
-    public static function siteIdNotValid(string $invalidSiteId)
-    {
-        return new static("The provided value for site id `{$invalidSiteId}` is invalid. It should start with 'ga:'");
+        return new static('You must provide a valid view id');
     }
 
     public static function clientSecretJsonFileDoesNotExist(string $path)
