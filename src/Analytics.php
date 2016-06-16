@@ -140,7 +140,7 @@ class Analytics
                 ];
             });
     }
-    
+
     /**
      * Call the query method on the authenticated client.
      *

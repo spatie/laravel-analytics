@@ -74,7 +74,6 @@ class AnalyticsClient
         return $this->service;
     }
 
-
     /*
      * Determine the cache name for the set of query properties given.
      */

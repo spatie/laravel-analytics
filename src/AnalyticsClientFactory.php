@@ -17,11 +17,14 @@ class AnalyticsClientFactory
         return self::createAnalyticsClient($analyticsConfig, $googleService);
     }
 
-    public static function createAuthenticatedGoogleClient($config): Google_Client
+    public static function createAuthenticatedGoogleClient(array $config): Google_Client
     {
         $client = new Google_Client();
 
-        $credentials = $client->loadServiceAccountJson($config['service_account_credentials_json'], 'https://www.googleapis.com/auth/analytics.readonly');
+        $credentials = $client->loadServiceAccountJson(
+            $config['service_account_credentials_json'],
+            'https://www.googleapis.com/auth/analytics.readonly'
+        );
 
         $client->setAssertionCredentials($credentials);
 
