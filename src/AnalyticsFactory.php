@@ -11,11 +11,11 @@ class AnalyticsFactory
     {
         $authenticatedClient = self::getAuthenticatedGoogleClient($config);
 
-        $service = new Google_Service_Analytics($authenticatedClient);
+        $googleService = new Google_Service_Analytics($authenticatedClient);
         
-        
+        $service = new Service($googleService);
 
-        return new Analytics($service, $config['calendarId']);
+        return new Analytics($service, $config['siteId']);
     }
 
     public static function getAuthenticatedGoogleClient($config): Google_Client

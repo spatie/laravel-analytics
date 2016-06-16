@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 use Spatie\Analytics\LaravelAnalytics;
 
-class LaravelAnalyticsServiceProvider extends ServiceProvider
+class AnalyticsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application events.

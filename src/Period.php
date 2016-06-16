@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\LaravelAnalytics;
+namespace Spatie\Analytics;
 
 use Carbon\Carbon;
 use DateTime;
@@ -8,14 +8,15 @@ use DateTime;
 class Period
 {
     /** @var \DateTime */
-    protected $startDate;
+    public $startDate;
 
     /** @var \DateTime */
-    protected $endDate;
+    public $endDate;
 
     public static function createForNumberOfDays(int $numberOfDays)
     {
         $endDate = Carbon::today();
+
         $startDate = Carbon::today()->subDays($numberOfDays);
 
         return new static($startDate, $endDate);
