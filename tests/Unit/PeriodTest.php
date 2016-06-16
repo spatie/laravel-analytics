@@ -1,5 +1,7 @@
 <?php
 
+namespace \Spatie\Analytics\Tests;
+
 use Carbon\Carbon;
 use Spatie\Analytics\Period;
 
