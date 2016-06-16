@@ -8,19 +8,19 @@ use Illuminate\Support\Collection;
 
 class Analytics
 {
-    /** @var Service */
-    protected $service;
+    /** @var \Spatie\Analytics\AnalyticsClient */
+    protected $client;
 
     /** @var string */
     protected $viewId;
 
     /**
-     * @param Service $service
-     * @param string  $viewId
+     * @param AnalyticsClient $client
+     * @param string          $viewId
      */
-    public function __construct(Service $service, string $viewId)
+    public function __construct(AnalyticsClient $client, string $viewId)
     {
-        $this->service = $service;
+        $this->client = $client;
 
         $this->viewId = $viewId;
     }
@@ -39,16 +39,6 @@ class Analytics
         return $this;
     }
 
-    /**
-     * Get the viewId.
-     *
-     * @return string $siteId
-     */
-    public function getViewId()
-    {
-        return $this->viewId;
-    }
-
     public function getVisitorsAndPageViews(int $numberOfDays = 365, string $groupBy = 'date'): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
@@ -63,8 +53,8 @@ class Analytics
         return collect($response['rows'] ?? [])->map(function (array $dateRow) use ($groupBy) {
             return [
                 $groupBy => Carbon::createFromFormat(($groupBy == 'yearMonth' ? 'Ym' : 'Ymd'), $dateRow[0]),
-                'visitors' => $dateRow[1],
-                'pageViews' => $dateRow[2],
+                'visitors' => (int) $dateRow[1],
+                'pageViews' => (int) $dateRow[2],
             ];
         });
     }
@@ -104,7 +94,7 @@ class Analytics
         return collect($response['rows'] ?? [])->map(function (array $pageRow) {
             return [
                 'url' => $pageRow[0],
-                'pageViews' => $pageRow[1],
+                'pageViews' => (int) $pageRow[1],
             ];
         });
     }
@@ -140,7 +130,7 @@ class Analytics
         $topBrowsers = collect($response['rows'] ?? [])->map(function (array $browserRow) {
             return [
                 'browser' => $browserRow[0],
-                'sessions' => $browserRow[1],
+                'sessions' => (int) $browserRow[1],
             ];
         });
 
@@ -151,9 +141,11 @@ class Analytics
         $otherBrowsersRow = $topBrowsers
             ->splice($maxResults - 2)
             ->reduce(function (array $totals, array $browserRow) {
-                $totals['browser'] += $browserRow['browser'];
-                $totals['sessions'] += $browserRow['sessions'];
-            }, ['browser' => 0, 'sessions' => 0]);
+
+                $totals['sessions'] += (int) $browserRow['sessions'];
+
+                return $totals;
+            }, ['browser' => 'Others', 'sessions' => 0]);
 
         return $topBrowsers
             ->take($maxResults - 1)
@@ -192,7 +184,7 @@ class Analytics
             ->map(function (array $pageRow) {
                 return [
                     'url' => $pageRow[0],
-                    'pageViews' => $pageRow[1],
+                    'pageViews' => (int) $pageRow[1],
                 ];
             });
     }
@@ -209,7 +201,7 @@ class Analytics
      */
     public function performQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
     {
-        return $this->service->performQuery(
+        return $this->client->performQuery(
             $this->viewId,
             $startDate,
             $endDate,

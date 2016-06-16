@@ -8,24 +8,33 @@ use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsFactory
 {
-    public static function createForConfig(array $config)
+    public static function createForConfig(array $analyticsConfig)
     {
-        $authenticatedClient = self::getAuthenticatedGoogleClient($config);
+        $authenticatedClient = self::createAuthenticatedGoogleClient($analyticsConfig);
 
         $googleService = new Google_Service_Analytics($authenticatedClient);
 
-        $service = new Service($googleService, app(Repository::class));
+        $analyticsClient = self::createAnalyticsClient($analyticsConfig, $googleService);
 
-        return new Analytics($service, $config['view_id']);
+        return new Analytics($analyticsClient, $analyticsConfig['view_id']);
     }
 
-    public static function getAuthenticatedGoogleClient($config): Google_Client
+    public static function createAuthenticatedGoogleClient($config): Google_Client
     {
         $client = new Google_Client();
 
         $credentials = $client->loadServiceAccountJson($config['client_secret_json'], 'https://www.googleapis.com/auth/analytics.readonly');
 
         $client->setAssertionCredentials($credentials);
+
+        return $client;
+    }
+
+    protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService): AnalyticsClient
+    {
+        $client = new AnalyticsClient($googleService, app(Repository::class));
+
+        $client->setCacheLifeTimeInMinutes($analyticsConfig['cache_lifetime_in_minutes']);
 
         return $client;
     }

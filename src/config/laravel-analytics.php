@@ -17,5 +17,5 @@ return [
      * The amount of minutes the Google API responses will be cached.
      * If you set this to zero, the responses won't be cached at all.
      */
-    'cacheLifetime' => 60 * 24,
+    'cache_lifetime_in_minutes' => 60 * 24,
 ];

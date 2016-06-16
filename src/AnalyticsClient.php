@@ -6,7 +6,7 @@ use DateTime;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
 
-class Service
+class AnalyticsClient
 {
     /** @var \Google_Service_Analytics */
     protected $service;
@@ -41,11 +41,11 @@ class Service
     /**
      * Query the Google Analytics Service with given parameters.
      *
-     * @param string $viewId
+     * @param string    $viewId
      * @param \DateTime $startDate
      * @param \DateTime $endDate
-     * @param string $metrics
-     * @param array  $others
+     * @param string    $metrics
+     * @param array     $others
      *
      * @return array|null
      */
@@ -53,10 +53,15 @@ class Service
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
+        if ($this->cacheLifeTimeInMinutes == 0) {
+            $this->cache->forget($cacheName);
+        }
+
         return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others) {
+
            return $this->service->data_ga->get(
-               "ga:{$viewId}", 
-               $startDate->format('Y-m-d'), 
+               "ga:{$viewId}",
+               $startDate->format('Y-m-d'),
                $endDate->format('Y-m-d'),
                $metrics,
                $others
