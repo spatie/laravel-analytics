@@ -26,7 +26,7 @@ class Service
     public function __construct(Google_Service_Analytics $service, Repository $cache)
     {
         $this->service = $service;
-        
+
         $this->cache = $cache;
     }
 
@@ -58,12 +58,12 @@ class Service
     public function performQuery($siteId, $startDate, $endDate, $metrics, array $others = [])
     {
         $cacheName = $this->determineCacheName(func_get_args());
-        
-        return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function() use ($siteId, $startDate, $endDate, $metrics, $others)  {
+
+        return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($siteId, $startDate, $endDate, $metrics, $others) {
            return $this->service->data_ga->get($siteId, $startDate, $endDate, $metrics, $others);
         });
     }
-    
+
     /**
      * Determine the cache name for the set of query properties given.
      *

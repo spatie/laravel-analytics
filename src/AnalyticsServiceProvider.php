@@ -2,11 +2,9 @@
 
 namespace Spatie\Analytics;
 
-use Google_Client;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
-use Spatie\Analytics\LaravelAnalytics;
 
 class AnalyticsServiceProvider extends ServiceProvider
 {
@@ -26,19 +24,17 @@ class AnalyticsServiceProvider extends ServiceProvider
     public function register()
     {
         $analyticsConfig = config('laravel-analytics');
-        
+
         $this->guardAgainstInvalidConfiguration($analyticsConfig);
-        
+
         $this->app->bind(LaravelAnalytics::class, function () use ($analyticsConfig) {
-            
+
             return AnalyticsFactory::createForConfig($analyticsConfig);
-            
+
         });
 
         $this->app->alias(LaravelAnalytics::class, 'laravel-analytics');
     }
-
-   
 
     protected function guardAgainstInvalidConfiguration(array $analyticsConfig)
     {
@@ -46,11 +42,11 @@ class AnalyticsServiceProvider extends ServiceProvider
             throw InvalidConfiguration::siteIdNotSpecified();
         }
 
-        if (! starts_with($analyticsConfig['site_id'], 'ga:')) {
+        if (!starts_with($analyticsConfig['site_id'], 'ga:')) {
             throw InvalidConfiguration::siteIdNotValid($analyticsConfig['site_id']);
         }
-        
-        if (! file_exists($analyticsConfig['client_secret_json'])) {
+
+        if (!file_exists($analyticsConfig['client_secret_json'])) {
             throw InvalidConfiguration::clientSecretJsonFileDoesNotExist();
         }
     }

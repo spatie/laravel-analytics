@@ -16,7 +16,7 @@ class Analytics
 
     /**
      * @param Service $service
-     * @param string $siteId
+     * @param string  $siteId
      */
     public function __construct(Service $service, string $siteId)
     {
@@ -40,7 +40,7 @@ class Analytics
     }
 
     /**
-     * Get the siteId
+     * Get the siteId.
      *
      * @return string $siteId
      */
@@ -58,13 +58,13 @@ class Analytics
 
     public function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate, string $groupBy = 'date'): Collection
     {
-        $response = $this->performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => "ga:{$groupBy}"]);
+        $response = $this->performQuery($startDate, $endDate, 'ga:users,ga:pageviews', ['dimensions' => "ga:{$groupBy}"]);
 
         return collect($response['rows'] ?? [])->map(function (array $dateRow) use ($groupBy) {
             return [
                 $groupBy => Carbon::createFromFormat(($groupBy == 'yearMonth' ? 'Ym' : 'Ymd'), $dateRow[0]),
                 'visitors' => $dateRow[1],
-                'pageViews' => $dateRow[2]
+                'pageViews' => $dateRow[2],
             ];
         });
     }
@@ -89,7 +89,7 @@ class Analytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int $maxResults
+     * @param int      $maxResults
      *
      * @return \Illuminate\Support\Collection
      */
@@ -129,7 +129,7 @@ class Analytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int $maxResults
+     * @param int      $maxResults
      *
      * @return \Illuminate\Support\Collection
      */
@@ -140,7 +140,7 @@ class Analytics
         $topBrowsers = collect($response['rows'] ?? [])->map(function (array $browserRow) {
             return [
                 'browser' => $browserRow[0],
-                'sessions' => $browserRow[1]
+                'sessions' => $browserRow[1],
             ];
         });
 
@@ -180,7 +180,7 @@ class Analytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param int $maxResults
+     * @param int      $maxResults
      *
      * @return \Illuminate\Support\Collection
      */
@@ -202,8 +202,8 @@ class Analytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param string $metrics
-     * @param array $others
+     * @param string   $metrics
+     * @param array    $others
      *
      * @return array|null
      */

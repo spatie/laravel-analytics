@@ -8,7 +8,7 @@ class InvalidConfiguration extends Exception
 {
     public static function siteIdNotSpecified()
     {
-        return new static("You must provide a valid site id");
+        return new static('You must provide a valid site id');
     }
 
     public static function siteIdNotValid(string $invalidSiteId)

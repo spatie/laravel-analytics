@@ -9,7 +9,7 @@ return [
      */
     'site_id' => env('ANALYTICS_SITE_ID'),
 
-    /**
+    /*
      * Path to the client secret json file
      */
     'client_secret_json' => storage('app/laravel-google-analytics/client_secret.json'),

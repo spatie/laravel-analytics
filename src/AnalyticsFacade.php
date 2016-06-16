@@ -4,7 +4,7 @@ namespace Spatie\Analytics;
 
 use Illuminate\Support\Facades\Facade;
 
-class LaravelAnalyticsFacade extends Facade
+class AnalyticsFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {

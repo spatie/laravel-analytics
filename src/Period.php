@@ -28,7 +28,4 @@ class Period
 
         $this->endDate = $endDate;
     }
-
-
-
 }

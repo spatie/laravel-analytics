@@ -12,7 +12,7 @@ class AnalyticsFactory
         $authenticatedClient = self::getAuthenticatedGoogleClient($config);
 
         $googleService = new Google_Service_Analytics($authenticatedClient);
-        
+
         $service = new Service($googleService);
 
         return new Analytics($service, $config['siteId']);
@@ -25,8 +25,7 @@ class AnalyticsFactory
         $credentials = $client->loadServiceAccountJson($config['client_secret_json'], 'https://www.googleapis.com/auth/analytics.readonly');
 
         $client->setAssertionCredentials($credentials);
-        
+
         return $client;
     }
-
 }
