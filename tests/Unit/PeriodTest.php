@@ -1,8 +1,9 @@
 <?php
 
-namespace \Spatie\Analytics\Tests;
+namespace Spatie\Analytics\Tests;
 
 use Carbon\Carbon;
+use PHPUnit_Framework_TestCase;
 use Spatie\Analytics\Period;
 
 class PeriodTest extends PHPUnit_Framework_TestCase

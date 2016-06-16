@@ -153,6 +153,8 @@ class Analytics
      */
     public function performQuery(DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
     {
+        die($startDate->format('Y-m-d H:i:s') . '-' . $endDate->format('Y-m-d H:i:s'));
+
         return $this->client->performQuery(
             $this->viewId,
             $startDate,

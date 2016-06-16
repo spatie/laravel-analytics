@@ -17,7 +17,7 @@ class Period
     {
         $endDate = Carbon::today();
 
-        $startDate = Carbon::today()->subDays($numberOfDays);
+        $startDate = Carbon::today()->subDays($numberOfDays)->startOfDay();
 
         return new static($startDate, $endDate);
     }
