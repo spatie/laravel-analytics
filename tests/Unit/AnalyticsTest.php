@@ -43,7 +43,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
             $this->expectCarbonDate('2015-01-01'),
             $this->expectCarbonDate('2016-01-01'),
             'ga:users,ga:pageviews',
-            ['dimensions' => 'ga:date']
+            ['dimensions' => 'ga:date'],
         ];
 
         $this->analyticsClient

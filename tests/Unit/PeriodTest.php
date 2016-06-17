@@ -18,6 +18,4 @@ class PeriodTest extends PHPUnit_Framework_TestCase
         $this->assertSame('2016-01-01', $period->endDate->format('Y-m-d'));
         $this->assertSame('2015-12-22', $period->startDate->format('Y-m-d'));
     }
-
-
 }
