@@ -103,16 +103,23 @@ Save the json inside your Laravel project at the location specified in the `serv
 
 ### Granting permissions to your Analytics property
 
-I'm assuming that you've already created a Analytics property on the [Analytics site](https://analytics.google.com/analytics). Go to "User management" in the Admin-section of the property.
+I'm assuming that you've already created a Analytics account on the [Analytics site](https://analytics.google.com/analytics). Go to "User management" in the Admin-section of the property.
 
-[image]
+![5](https://spatie.github.io/laravel-analytics/v2/5.jpg)
 
- On this screen you'll have to add the xxxxx found in the json file you download in the previous step. Read only access is enough.
+On this screen you can grant access to the email address found in the `client_email` key from the json file you download in the previous step. Read only access is enough.
+
+![6](https://spatie.github.io/laravel-analytics/v2/6.jpg)
  
- ### Getting the view id
+### Getting the view id
  
-The last thing you'll have to do is fill in the `view_id` in the config file. You can get the right value on the [Analytics site](https://analytics.google.com/analytics). Go to "View setting" in the Admin-section of the property. You'll need the `View ID` displayed there.
+The last thing you'll have to do is fill in the `view_id` in the config file. You can get the right value on the [Analytics site](https://analytics.google.com/analytics). Go to "View setting" in the Admin-section of the property.
 
+![7](https://spatie.github.io/laravel-analytics/v2/7.jpg)
+
+You'll need the `View ID` displayed there.
+
+![8](https://spatie.github.io/laravel-analytics/v2/8.jpg)
 
 ## Usage
 
