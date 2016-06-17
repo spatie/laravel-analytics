@@ -36,7 +36,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_can_retrieve()
+    public function it_can_retrieve_the_visitor_and_page_views()
     {
         $expectedArguments = [
             $this->viewId,
@@ -53,7 +53,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
         $this->analytics->getVisitorsAndPageViews();
     }
 
-    public function expectCarbonDate(string $dateString)
+    protected function expectCarbonDate(string $dateString)
     {
         return Mockery::on(function (Carbon $argument) use ($dateString) {
             return $argument->format('Y-m-d H:i:s') == "{$dateString} 00:00:00";
