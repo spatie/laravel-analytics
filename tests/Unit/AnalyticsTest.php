@@ -40,11 +40,10 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
     {
         $expectedArguments = [
             $this->viewId,
-            Carbon::now()->subDay(365)->startOfDay(),
-          //  Carbon::now()->startOfDay(),
-          //  'ga:users,ga:pageviews',
-          //  ['dimensions' => 'ga:date']
-
+            $this->expectCarbonDate('2015-01-01'),
+            $this->expectCarbonDate('2016-01-01'),
+            'ga:users,ga:pageviews',
+            ['dimensions' => 'ga:date']
         ];
 
         $this->analyticsClient
@@ -52,5 +51,12 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
             ->andReturnNull();
 
         $this->analytics->getVisitorsAndPageViews();
+    }
+
+    public function expectCarbonDate(string $dateString)
+    {
+        return Mockery::on(function (Carbon $argument) use ($dateString) {
+            return $argument->format('Y-m-d H:i:s') == "{$dateString} 00:00:00";
+        });
     }
 }
