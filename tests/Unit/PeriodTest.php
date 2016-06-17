@@ -18,4 +18,13 @@ class PeriodTest extends PHPUnit_Framework_TestCase
         $this->assertSame('2016-01-01', $period->endDate->format('Y-m-d'));
         $this->assertSame('2015-12-22', $period->startDate->format('Y-m-d'));
     }
+
+    public function expectCarbonDate(string $dateString)
+    {
+        //http://stackoverflow.com/questions/29917856/mockery-object-argument-validation-issue
+
+        return \Mockery::on(function(Carbon $argument) use ($dateString) {
+            return $argument->format('Y-m-d H:i:s') === "{$dateString} 00:00:00";
+        });
+    }
 }
