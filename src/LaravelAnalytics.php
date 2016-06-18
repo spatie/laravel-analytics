@@ -56,7 +56,7 @@ class LaravelAnalytics
      * Get the amount of visitors and pageViews.
      *
      * @param int    $numberOfDays
-     * @param string $groupBy Possible values: date, yearMonth
+     * @param string $groupBy      Possible values: date, yearMonth
      *
      * @return Collection
      */
@@ -72,27 +72,21 @@ class LaravelAnalytics
      *
      * @param DateTime $startDate
      * @param DateTime $endDate
-     * @param string   $groupBy Possible values: date, yearMonth
+     * @param string   $groupBy   Possible values: date, yearMonth
      *
      * @return Collection
      */
     public function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate, $groupBy = 'date')
     {
         $visitorData = [];
-        $answer      = $this->performQuery($startDate, $endDate, 'ga:visits,ga:pageviews',
-            ['dimensions' => 'ga:' . $groupBy]);
+        $answer = $this->performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:'.$groupBy]);
 
         if (is_null($answer->rows)) {
             return new Collection([]);
         }
 
         foreach ($answer->rows as $dateRow) {
-            $visitorData[] = [
-                $groupBy    => Carbon::createFromFormat(($groupBy == 'yearMonth' ? 'Ym' : 'Ymd'),
-                    $dateRow[0]),
-                'visitors'  => $dateRow[1],
-                'pageViews' => $dateRow[2]
-            ];
+            $visitorData[] = [$groupBy => Carbon::createFromFormat(($groupBy == 'yearMonth' ? 'Ym' : 'Ymd'), $dateRow[0]), 'visitors' => $dateRow[1], 'pageViews' => $dateRow[2]];
         }
 
         return new Collection($visitorData);
@@ -126,12 +120,7 @@ class LaravelAnalytics
     {
         $keywordData = [];
 
-        $answer = $this->performQuery($startDate, $endDate, 'ga:sessions', [
-            'dimensions'  => 'ga:keyword',
-            'sort'        => '-ga:sessions',
-            'max-results' => $maxResults,
-            'filters'     => 'ga:keyword!=(not set);ga:keyword!=(not provided)'
-        ]);
+        $answer = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:keyword', 'sort' => '-ga:sessions', 'max-results' => $maxResults, 'filters' => 'ga:keyword!=(not set);ga:keyword!=(not provided)']);
 
         if (is_null($answer->rows)) {
             return new Collection([]);
@@ -172,8 +161,7 @@ class LaravelAnalytics
     {
         $referrerData = [];
 
-        $answer = $this->performQuery($startDate, $endDate, 'ga:pageviews',
-            ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
+        $answer = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
         if (is_null($answer->rows)) {
             return new Collection([]);
@@ -213,8 +201,7 @@ class LaravelAnalytics
     public function getTopBrowsersForPeriod(DateTime $startDate, DateTime $endDate, $maxResults)
     {
         $browserData = [];
-        $answer      = $this->performQuery($startDate, $endDate, 'ga:sessions',
-            ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
+        $answer = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
 
         if (is_null($answer->rows)) {
             return new Collection([]);
@@ -227,7 +214,7 @@ class LaravelAnalytics
         $browserCollection = new Collection(array_slice($browserData, 0, $maxResults - 1));
 
         if (count($browserData) > $maxResults) {
-            $otherBrowsers      = new Collection(array_slice($browserData, $maxResults - 1));
+            $otherBrowsers = new Collection(array_slice($browserData, $maxResults - 1));
             $otherBrowsersCount = array_sum(Collection::make($otherBrowsers->lists('sessions'))->toArray());
 
             $browserCollection->put(null, ['browser' => 'other', 'sessions' => $otherBrowsersCount]);
@@ -282,8 +269,7 @@ class LaravelAnalytics
     {
         $pagesData = [];
 
-        $answer = $this->performQuery($startDate, $endDate, 'ga:pageviews',
-            ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
+        $answer = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
         if (is_null($answer->rows)) {
             return new Collection([]);
@@ -309,6 +295,7 @@ class LaravelAnalytics
     {
         return $this->client->getSiteIdByUrl($url);
     }
+
 
     /**
      * return account summaries list
@@ -370,8 +357,7 @@ class LaravelAnalytics
      */
     public function performQuery(DateTime $startDate, DateTime $endDate, $metrics, $others = array())
     {
-        return $this->client->performQuery($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'),
-            $metrics, $others);
+        return $this->client->performQuery($this->siteId, $startDate->format('Y-m-d'), $endDate->format('Y-m-d'), $metrics, $others);
     }
 
     /**
@@ -406,7 +392,7 @@ class LaravelAnalytics
      */
     protected function calculateNumberOfDays($numberOfDays)
     {
-        $endDate   = Carbon::today();
+        $endDate = Carbon::today();
         $startDate = Carbon::today()->subDays($numberOfDays);
 
         return [$startDate, $endDate];
