@@ -11,8 +11,8 @@ Using this package you can easily retrieve data from Google Analytics.
 Here are a few examples of the provided methods:
 
 ```php
-Analytics::getMostVisistedPages();
-Analytics::fetchVisitorsAndPageViews();
+Analytics::fetchMostVisitedPages($startDate, $endDate);
+Analytics::fetchVisitorsAndPageViews($startDate, $endDate);
 ```
 
 Most methods will return an `\Illuminate\Support\Collection` object containing the results.
