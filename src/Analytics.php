@@ -29,8 +29,6 @@ class Analytics
     }
 
     /**
-     * Set the viewId.
-     *
      * @param string $viewId
      *
      * @return $this
@@ -42,16 +40,9 @@ class Analytics
         return $this;
     }
 
-    public function getVisitorsAndPageViews(int $numberOfDays = 365): Collection
+    public function getVisitorsAndPageViews(DateTime $startDate, DateTime $endDate): Collection
     {
-        $period = Period::createForNumberOfDays($numberOfDays);
-
-        return $this->getVisitorsAndPageViewsForPeriod($period->startDate, $period->endDate);
-    }
-
-    public function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate): Collection
-    {
-        $response = $this->performQuery($startDate, $endDate, 'ga:users,ga:pageviews', ['dimensions' => "ga:date"]);
+        $response = $this->performQuery($startDate, $endDate, 'ga:users,ga:pageviews', ['dimensions' => 'ga:date']);
 
         return collect($response['rows'] ?? [])->map(function (array $dateRow) {
             return [
@@ -62,14 +53,20 @@ class Analytics
         });
     }
 
-    public function getTopReferrers(int $numberOfDays = 365, int $maxResults = 20): Collection
+    public function getMostVisitedPages(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
     {
-        $period = Period::createForNumberOfDays($numberOfDays);
+        $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
-        return $this->getTopReferrersForPeriod($period->startDate, $period->endDate, $maxResults);
+        return collect($response['rows'] ?? [])
+            ->map(function (array $pageRow) {
+                return [
+                    'url' => $pageRow[0],
+                    'pageViews' => (int) $pageRow[1],
+                ];
+            });
     }
 
-    public function getTopReferrersForPeriod(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+    public function getTopReferrers(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
@@ -85,14 +82,7 @@ class Analytics
         });
     }
 
-    public function getTopBrowsers(int $numberOfDays = 365, int $maxResults = 10): Collection
-    {
-        $period = Period::createForNumberOfDays($numberOfDays);
-
-        return $this->getTopBrowsersForPeriod($period->startDate, $period->endDate, $maxResults);
-    }
-
-    public function getTopBrowsersForPeriod(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
+    public function getTopBrowsers(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
 
@@ -119,26 +109,6 @@ class Analytics
         return $topBrowsers
             ->take($maxResults - 1)
             ->push($otherBrowsersRow);
-    }
-
-    public function getMostVisitedPages(int $numberOfDays = 365, int $maxResults = 20): Collection
-    {
-        $period = Period::createForNumberOfDays($numberOfDays);
-
-        return $this->getMostVisitedPagesForPeriod($period->startDate, $period->endDate, $maxResults);
-    }
-
-    public function getMostVisitedPagesForPeriod(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
-    {
-        $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
-
-        return collect($response['rows'] ?? [])
-            ->map(function (array $pageRow) {
-                return [
-                    'url' => $pageRow[0],
-                    'pageViews' => (int) $pageRow[1],
-                ];
-            });
     }
 
     /**
