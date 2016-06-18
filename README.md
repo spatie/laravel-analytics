@@ -144,31 +144,45 @@ $analyticsData = Analytics::fetchVisitorsAndPageViews($startDate, $endDate);
 public function fetchVisitorsAndPageViews(DateTime $startDate, DateTime $endDate): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`
+The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`.
+
+### Most visited pages
+
+```php
+public function fetchMostVisitedPages(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+```
+
+The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
+
+### Top referrers
+
+```php
+public function fetchTopReferrers(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+```
+
+The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
+
+### Top browsers
+
+```php
+public function fetchTopBrowsers(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
+```
+
+The function returns a `Collection` in which each item is an array that holds keys `browser` and `sessions`.
 
 ### All other Google Analytics queries
 
-To perform all other GA queries use  ```performQuery```.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on on which metrics and dimensions might be used. 
-```php
-    /**
-     * Call the query method on the autenthicated client
-     *
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
-     * @param $metrics
-     * @param array $others
-     * @return mixed
-     */
-    public function performQuery($startDate, $endDate, $metrics, $others = array())
-```    
+To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on on which metrics and dimensions might be used. 
 
-### Manually setting the siteId at runtime.
-
-You can also set the `viewId` at runtime. This can be useful if you need to get statistics from multiple sites in one project.
 ```php
- Analytics::setViewId('1234567')->fetchVisitorsAndPageViews(); // will use the given siteId
- LaravelAnalytics->fetchVisitorsAndPageViews();` // will use the siteId specified in the config file.
- ```
+public function performQuery(DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
+```
+
+You can get access to the underlying `Google_Service_Analytics` object:
+
+```php
+Analytics::getAnalyticsService()
+```
 
 ## Testing
 
@@ -189,7 +203,6 @@ If you discover any security related issues, please email freek@spatie.be instea
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
-- [Matthias De Winter](https://github.com/MatthiasDeWinter)
 - [All Contributors](../../contributors)
 
 ## About Spatie
