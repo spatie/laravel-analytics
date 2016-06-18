@@ -3,6 +3,7 @@
 namespace Spatie\Analytics\Tests;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Mockery;
 use PHPUnit_Framework_TestCase;
 use Spatie\Analytics\Analytics;
@@ -48,9 +49,18 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
 
         $this->analyticsClient
             ->shouldReceive('performQuery')->withArgs($expectedArguments)
-            ->andReturnNull();
+            ->once()
+            ->andReturnNull()
+            ->andReturn([
+                'rows' => [['20160101', '1', '2']]
+            ]);
 
-        $this->analytics->getVisitorsAndPageViews();
+        $response = $this->analytics->getVisitorsAndPageViews();
+
+        $this->assertInstanceOf(Collection::class, $response);
+        $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
+        $this->assertEquals(1, $response->first()['visitors']);
+        $this->assertEquals(2, $response->first()['pageViews']);
     }
 
     protected function expectCarbonDate(string $dateString)

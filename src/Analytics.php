@@ -42,20 +42,20 @@ class Analytics
         return $this;
     }
 
-    public function getVisitorsAndPageViews(int $numberOfDays = 365, string $groupBy = 'date'): Collection
+    public function getVisitorsAndPageViews(int $numberOfDays = 365): Collection
     {
         $period = Period::createForNumberOfDays($numberOfDays);
 
-        return $this->getVisitorsAndPageViewsForPeriod($period->startDate, $period->endDate, $groupBy);
+        return $this->getVisitorsAndPageViewsForPeriod($period->startDate, $period->endDate);
     }
 
-    public function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate, string $groupBy = 'date'): Collection
+    public function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate): Collection
     {
-        $response = $this->performQuery($startDate, $endDate, 'ga:users,ga:pageviews', ['dimensions' => "ga:{$groupBy}"]);
+        $response = $this->performQuery($startDate, $endDate, 'ga:users,ga:pageviews', ['dimensions' => "ga:date"]);
 
-        return collect($response['rows'] ?? [])->map(function (array $dateRow) use ($groupBy) {
+        return collect($response['rows'] ?? [])->map(function (array $dateRow) {
             return [
-                $groupBy => Carbon::createFromFormat(($groupBy == 'yearMonth' ? 'Ym' : 'Ymd'), $dateRow[0]),
+                'date' => Carbon::createFromFormat('Ymd', $dateRow[0]),
                 'visitors' => (int) $dateRow[1],
                 'pageViews' => (int) $dateRow[2],
             ];
