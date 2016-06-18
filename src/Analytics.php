@@ -4,6 +4,7 @@ namespace Spatie\Analytics;
 
 use Carbon\Carbon;
 use DateTime;
+use Google_Service_Analytics;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
@@ -131,5 +132,16 @@ class Analytics
             $metrics,
             $others
         );
+    }
+
+    /**
+     * Get the underlying Google_Service_Analytics object. You can use this
+     * to basically call anything on the Google Analytics API.
+     *
+     * @return \Google_Service_Analytics
+     */
+    public function getAnalyticsService(): Google_Service_Analytics
+    {
+        return $this->client->getAnalyticsService();
     }
 }
