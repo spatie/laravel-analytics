@@ -146,9 +146,19 @@ Here's example of collection all account summaries using the Management API
 ```
 /*
 * Requests a list of all account summaries for the authorized user.
+* Each Account may have multiple properties
+* Each Property will contain ANALYTICS_SITE_ID
 * accounts must have read/analyze permissions added for the ANALYTICS_SERVICE_EMAIL
 */
-$accounts = LaravelAnalytics::getAccountSummariesList();
+
+	// return account summaries list
+    $accounts = LaravelAnalytics::AccountSummariesList();
+    
+    //  webproperties for each account indexed by account id
+	$properties = LaravelAnalytics::getWebProperties();
+	
+	// profiles for each web property indexed by property id
+    $profiles   = LaravelAnalytics::getProfiles();
 ```
 
 ## Provided methods
