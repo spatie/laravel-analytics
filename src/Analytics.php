@@ -70,10 +70,6 @@ class Analytics
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
-        if (is_null($response->rows)) {
-            return new Collection([]);
-        }
-
         return collect($response['rows'] ?? [])->map(function (array $pageRow) {
             return [
                 'url' => $pageRow[0],

@@ -97,6 +97,33 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(123, $response->first()['pageViews']);
     }
 
+    /** @test */
+    public function it_can_fetch_the_top_referrers()
+    {
+        $maxResults = 10;
+
+        $expectedArguments = [
+            $this->viewId,
+            $this->expectCarbon($this->startDate),
+            $this->expectCarbon($this->endDate),
+            'ga:pageviews',
+            ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults],
+        ];
+
+        $this->analyticsClient
+            ->shouldReceive('performQuery')->withArgs($expectedArguments)
+            ->once()
+            ->andReturn([
+                'rows' => [['https://referrer.com', '123']],
+            ]);
+        
+        $response = $this->analytics->fetchTopReferrers($this->startDate, $this->endDate, $maxResults);
+
+        $this->assertInstanceOf(Collection::class, $response);
+        $this->assertEquals('https://referrer.com', $response->first()['url']);
+        $this->assertEquals(123, $response->first()['pageViews']);
+    }
+
     protected function expectCarbon(Carbon $carbon)
     {
         return Mockery::on(function (Carbon $argument) use ($carbon) {
