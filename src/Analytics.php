@@ -40,7 +40,7 @@ class Analytics
         return $this;
     }
 
-    public function getVisitorsAndPageViews(DateTime $startDate, DateTime $endDate): Collection
+    public function fetchVisitorsAndPageViews(DateTime $startDate, DateTime $endDate): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:users,ga:pageviews', ['dimensions' => 'ga:date']);
 
@@ -53,7 +53,7 @@ class Analytics
         });
     }
 
-    public function getMostVisitedPages(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+    public function fetchMostVisitedPages(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
@@ -66,7 +66,7 @@ class Analytics
             });
     }
 
-    public function getTopReferrers(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+    public function fetchTopReferrers(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
@@ -82,7 +82,7 @@ class Analytics
         });
     }
 
-    public function getTopBrowsers(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
+    public function fetchTopBrowsers(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
     {
         $response = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
 

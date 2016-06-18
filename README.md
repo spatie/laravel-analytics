@@ -12,7 +12,7 @@ Here are a few examples of the provided methods:
 
 ```php
 Analytics::getMostVisistedPages();
-Analytics::getVisitorsAndPageViews();
+Analytics::fetchVisitorsAndPageViews();
 ```
 
 Most methods will return an `\Illuminate\Support\Collection` object containing the results.
@@ -131,7 +131,7 @@ Here is an example to retrieve visitors and pageview data for the last seven day
 /*
 * $analyticsData now contains a Collection with 3 columns: "date", "visitors" and "pageViews"
 */
-$analyticsData = Analytics::getVisitorsAndPageViews(7);
+$analyticsData = Analytics::fetchVisitorsAndPageViews(7);
 ```
 
 Here's another example to get the 20 most visited pages of the last 365 days
@@ -139,7 +139,7 @@ Here's another example to get the 20 most visited pages of the last 365 days
 /*
 * $analyticsData now contains a Collection with 2 columns: "url" and "pageViews"
 */
-$analyticsData = Analytics::getMostVisitedPages(365, 20);
+$analyticsData = Analytics::fetchMostVisitedPages(365, 20);
 ```
 ## Provided methods
 
@@ -154,7 +154,7 @@ These methods return a Collection with columns "date", "vistors" and "pageViews"
      * @param string $groupBy Possible values: date, yearMonth
      * @return Collection
      */
-    public function getVisitorsAndPageViews($numberOfDays = 365, $groupBy = 'date')
+    public function fetchVisitorsAndPageViews($numberOfDays = 365, $groupBy = 'date')
 
     /**
      * Get the amount of visitors and pageviews for the given period
@@ -164,7 +164,7 @@ These methods return a Collection with columns "date", "vistors" and "pageViews"
      * @param string $groupBy Possible values: date, yearMonth
      * @return Collection
      */
-    public function getVisitorsAndPageViewsForPeriod($startDate, $endDate, $groupBy = 'date')
+    public function fetchVisitorsAndPageViewsForPeriod($startDate, $endDate, $groupBy = 'date')
 ```    
 
 
@@ -179,7 +179,7 @@ These methods return a Collection with columns "url" and "pageViews".
      * @param int $maxResults
      * @return Collection
      */
-    public function getTopReferrers($numberOfDays = 365, $maxResults = 20)
+    public function fetchTopReferrers($numberOfDays = 365, $maxResults = 20)
 
     /**
      * Get the top referrers for the given period
@@ -189,7 +189,7 @@ These methods return a Collection with columns "url" and "pageViews".
      * @param $maxResults
      * @return Collection
      */
-    public function getTopReferrersForPeriod($startDate, $endDate, $maxResults)
+    public function fetchTopReferrersForPeriod($startDate, $endDate, $maxResults)
 ``` 
 
 ### Browsers
@@ -205,7 +205,7 @@ If there are  more used browsers than the number specified in maxResults, then a
      * @param int $maxResults
      * @return Collection
      */
-    public function getTopBrowsers($numberOfDays = 365, $maxResults = 6)
+    public function fetchTopBrowsers($numberOfDays = 365, $maxResults = 6)
     
     /**
      * Get the top browsers for the given period
@@ -215,7 +215,7 @@ If there are  more used browsers than the number specified in maxResults, then a
      * @param $maxResults
      * @return Collection
      */
-    public function getTopBrowsersForPeriod($startDate, $endDate, $maxResults) 
+    public function fetchTopBrowsersForPeriod($startDate, $endDate, $maxResults) 
 ```     
 
 ### Most visited pages
@@ -229,7 +229,7 @@ These methods return a Collection with columns "url" and "pageViews".
      * @param int $maxResults
      * @return Collection
      */
-    public function getMostVisitedPages($numberOfDays = 365, $maxResults = 20)
+    public function fetchMostVisitedPages($numberOfDays = 365, $maxResults = 20)
     
     /**
      * Get the most visited pages for the given period
@@ -239,7 +239,7 @@ These methods return a Collection with columns "url" and "pageViews".
      * @param int $maxResults
      * @return Collection
      */
-    public function getMostVisitedPagesForPeriod($startDate, $endDate, $maxResults = 20)
+    public function fetchMostVisitedPagesForPeriod($startDate, $endDate, $maxResults = 20)
 ```
 
    
@@ -263,8 +263,8 @@ To perform all other GA queries use  ```performQuery```.  [Google's Core Reporti
 
 You can also set the `viewId` at runtime. This can be useful if you need to get statistics from multiple sites in one project.
 ```php
- Analytics::setViewId('1234567')->getVisitorsAndPageViews(); // will use the given siteId
- LaravelAnalytics->getVisitorsAndPageViews();` // will use the siteId specified in the config file.
+ Analytics::setViewId('1234567')->fetchVisitorsAndPageViews(); // will use the given siteId
+ LaravelAnalytics->fetchVisitorsAndPageViews();` // will use the siteId specified in the config file.
  ```
 
 ## Testing
