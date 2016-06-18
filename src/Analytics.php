@@ -93,8 +93,13 @@ class Analytics
             return $topBrowsers;
         }
 
+        return $this->summarizeTopBrowsers($topBrowsers, $maxResults - 1);
+    }
+
+    protected function summarizeTopBrowsers(Collection $topBrowsers, int $summarizeAfter)
+    {
         $otherBrowsersRow = $topBrowsers
-            ->splice($maxResults - 2)
+            ->splice($summarizeAfter)
             ->reduce(function (array $totals, array $browserRow) {
 
                 $totals['sessions'] += (int) $browserRow['sessions'];
@@ -103,7 +108,7 @@ class Analytics
             }, ['browser' => 'Others', 'sessions' => 0]);
 
         return $topBrowsers
-            ->take($maxResults - 1)
+            ->take($summarizeAfter)
             ->push($otherBrowsersRow);
     }
 

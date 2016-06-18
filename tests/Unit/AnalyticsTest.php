@@ -80,7 +80,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
             'ga:pageviews',
-            ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]
+            ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults],
         ];
 
         $this->analyticsClient
@@ -116,12 +116,46 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
             ->andReturn([
                 'rows' => [['https://referrer.com', '123']],
             ]);
-        
+
         $response = $this->analytics->fetchTopReferrers($this->startDate, $this->endDate, $maxResults);
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('https://referrer.com', $response->first()['url']);
         $this->assertEquals(123, $response->first()['pageViews']);
+    }
+
+    /** @test */
+    public function it_can_fetch_the_top_browsers()
+    {
+        $expectedArguments = [
+            $this->viewId,
+            $this->expectCarbon($this->startDate),
+            $this->expectCarbon($this->endDate),
+            'ga:sessions',
+            ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions'],
+        ];
+
+        $this->analyticsClient
+            ->shouldReceive('performQuery')->withArgs($expectedArguments)
+            ->once()
+            ->andReturn([
+                'rows' => [
+                    ['Browser 1', '100'],
+                    ['Browser 2', '90'],
+                    ['Browser 3', '30'],
+                    ['Browser 4', '20'],
+                    ['Browser 1', '10'],
+                ],
+            ]);
+
+        $response = $this->analytics->fetchTopBrowsers($this->startDate, $this->endDate, 3);
+
+        $this->assertInstanceOf(Collection::class, $response);
+        $this->assertEquals([
+            ['browser' => 'Browser 1', 'sessions' => 100],
+            ['browser' => 'Browser 2', 'sessions' => 90],
+            ['browser' => 'Others', 'sessions' => 60],
+        ], $response->toArray());
     }
 
     protected function expectCarbon(Carbon $carbon)
