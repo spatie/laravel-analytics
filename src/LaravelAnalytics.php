@@ -296,6 +296,55 @@ class LaravelAnalytics
         return $this->client->getSiteIdByUrl($url);
     }
 
+
+    /**
+     * return account summaries list
+     *
+     * @return \Google_Service_Analytics_AccountSummaries
+     */
+    public function AccountSummariesList()
+    {
+        return $this->client->getAllAccountSummaries()->getItems();
+    }
+
+    /**
+     * array of webproperties for each account
+     * indexed by account id
+     *
+     * @return array
+     */
+    public function getWebProperties()
+    {
+        $accounts      = $this->AccountSummariesList();
+        $webProperties = [];
+
+        foreach ($accounts as $account) {
+            $webProperties[$account['id']] = $account->getWebProperties();
+        }
+
+        return $webProperties;
+    }
+
+    /**
+     * get the array of profiles for each web property
+     * indexed by property id
+     *
+     * @return array
+     */
+    public function getProfiles()
+    {
+        $accounts = $this->AccountSummariesList();
+        $profiles = [];
+
+        foreach ($accounts as $account) {
+            foreach ($account->getWebProperties() as $property) {
+                $profiles[$property['id']] = $property->getProfiles();
+            }
+        }
+
+        return $profiles;
+    }
+
     /**
      * Call the query method on the authenticated client.
      *

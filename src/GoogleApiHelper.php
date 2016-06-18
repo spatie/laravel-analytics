@@ -131,6 +131,17 @@ class GoogleApiHelper
 
         return $siteIds;
     }
+    
+    /**
+     * Connect to the Management API and return list of all Accounts
+     * https://www.googleapis.com/analytics/v3/management/accountSummaries 
+     * 
+     * @return \Google_Service_Analytics_AccountSummaries
+     */
+    public function getAllAccountSummaries()
+    {
+        return $this->service->management_accountSummaries->listManagementAccountSummaries();
+    }
 
     /**
      * Determine the cache name for the set of query properties given.
