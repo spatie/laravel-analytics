@@ -51,7 +51,8 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
             $this->viewId,
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
-            'ga:users,ga:pageviews', ['dimensions' => 'ga:date'],
+            'ga:users,ga:pageviews',
+            ['dimensions' => 'ga:date'],
         ];
 
         $this->analyticsClient
@@ -72,26 +73,28 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_fetch_the_most_visited_pages()
     {
+        $maxResults = 10;
+
         $expectedArguments = [
             $this->viewId,
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
-            'ga:users,ga:pageviews', ['dimensions' => 'ga:date'],
+            'ga:pageviews',
+            ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]
         ];
 
         $this->analyticsClient
             ->shouldReceive('performQuery')->withArgs($expectedArguments)
             ->once()
             ->andReturn([
-                'rows' => [['20160101', '1', '2']],
+                'rows' => [['https://test.com', '123']],
             ]);
 
-        $response = $this->analytics->fetchVisitorsAndPageViews($this->startDate, $this->endDate);
+        $response = $this->analytics->fetchMostVisitedPages($this->startDate, $this->endDate, $maxResults);
 
         $this->assertInstanceOf(Collection::class, $response);
-        $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
-        $this->assertEquals(1, $response->first()['visitors']);
-        $this->assertEquals(2, $response->first()['pageViews']);
+        $this->assertEquals('https://test.com', $response->first()['url']);
+        $this->assertEquals(123, $response->first()['pageViews']);
     }
 
     protected function expectCarbon(Carbon $carbon)
