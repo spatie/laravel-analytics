@@ -43,7 +43,11 @@ class AnalyticsServiceProvider extends ServiceProvider
         $this->app->alias(Analytics::class, 'laravel-analytics');
     }
 
-    protected function guardAgainstInvalidConfiguration(array $analyticsConfig)
+    /**
+     * @param array|null $analyticsConfig
+     * @throws \Spatie\Analytics\Exceptions\InvalidConfiguration
+     */
+    protected function guardAgainstInvalidConfiguration($analyticsConfig)
     {
         if (empty($analyticsConfig['view_id'])) {
             throw InvalidConfiguration::viewIdNotSpecified();
