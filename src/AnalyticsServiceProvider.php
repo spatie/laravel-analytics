@@ -45,6 +45,7 @@ class AnalyticsServiceProvider extends ServiceProvider
 
     /**
      * @param array|null $analyticsConfig
+     *
      * @throws \Spatie\Analytics\Exceptions\InvalidConfiguration
      */
     protected function guardAgainstInvalidConfiguration($analyticsConfig)
