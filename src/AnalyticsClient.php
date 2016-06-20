@@ -57,7 +57,7 @@ class AnalyticsClient
             $this->cache->forget($cacheName);
         }
 
-        return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($resource, $viewId, $startDate, $endDate, $metrics, $others) {
+        return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others) {
 
            return $this->service->data_ga->get(
                "ga:{$viewId}",

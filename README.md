@@ -12,10 +12,12 @@ Using this package you can easily retrieve data from Google Analytics.
 Here are a few examples of the provided methods:
 
 ```php
-//fetch the most visited pages for the last 7 days
+use Spatie\Analytics\Period;
+
+//fetch the most visited pages for today and the last 7 days
 Analytics::fetchMostVisitedPages(Period::days(7));
 
-//fetch visitors and page views for the last 7 days
+//fetch visitors and page views for today and the last 7 days
 Analytics::fetchVisitorsAndPageViews(Period::days(7));
 ```
 
@@ -60,17 +62,17 @@ php artisan vendor:publish --provider="Spatie\Analytics\AnalyticsServiceProvider
 ```
 
 The following config file will be published in `config/laravel-analytics.php`
+
 ```php
 
-return [
-    
+return [ 
     /*
      * The view id of which you want to display data.
      */
     'view_id' => env('ANALYTICS_VIEW_ID'),
 
     /*
-     * Path to the client secret json file. Take a look at the README of this package
+     * Path to the json file with service account credentials. Take a look at the README of this package
      * to learn how to get this file.
      */
     'service_account_credentials_json' => storage_path('app/laravel-google-analytics/service-account-credentials.json'),
@@ -81,6 +83,7 @@ return [
      */
     'cache_lifetime_in_minutes' => 60 * 24,
 ];
+
 ```
 
 ## How to obtain the credentials to communicate with Google Analytics
@@ -130,12 +133,21 @@ You'll need the `View ID` displayed there.
 When the installation is done you can easily retrieve Analytics data. Nearly all methods will return an `Illuminate\Support\Collection`-instance.
 
 
-Here is an example to retrieve visitors and pageview data for the last seven days.
+Here is an example to retrieve visitors and pageview data for the current day and the last seven days.
 ```php
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 ```
 
 `$analyticsData` is a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`
+
+If you want to have more control over the period you want to fetch data for, you can pass a `startDate` and an `endDate` to the period object.
+
+```php
+$startDate = Carbon::now();
+$endDate = Carbon::now()->subYear();
+
+Period::create($startDate, $endDate);
+```
 
 ## Provided methods
 
