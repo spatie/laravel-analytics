@@ -2,7 +2,7 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
-# 2.0.0 - 2015-06-20
+## 2.0.0 - 2015-06-20
 
 - refactored all methods
 - use json credentials instead of .p12 file
