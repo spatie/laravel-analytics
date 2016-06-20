@@ -4,6 +4,7 @@ namespace Spatie\Analytics;
 
 use Carbon\Carbon;
 use DateTime;
+use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class Period
 {
@@ -29,6 +30,10 @@ class Period
 
     public function __construct(DateTime $startDate, DateTime $endDate)
     {
+        if ($startDate > $endDate) {
+            throw InvalidPeriod::startDateCannotBeAfterEndDate($startDate, $endDate);
+        }
+
         $this->startDate = $startDate;
 
         $this->endDate = $endDate;

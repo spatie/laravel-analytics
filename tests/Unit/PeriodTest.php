@@ -4,6 +4,7 @@ namespace Spatie\Analytics\Tests;
 
 use Carbon\Carbon;
 use PHPUnit_Framework_TestCase;
+use Spatie\Analytics\Exceptions\InvalidPeriod;
 use Spatie\Analytics\Period;
 
 class PeriodTest extends PHPUnit_Framework_TestCase
@@ -29,5 +30,16 @@ class PeriodTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('2015-12-22', $period->startDate->format('Y-m-d'));
         $this->assertSame('2016-01-01', $period->endDate->format('Y-m-d'));
+    }
+
+    /** @test */
+    public function it_will_throw_an_exception_if_the_start_date_comes_after_the_end_date()
+    {
+        $startDate = Carbon::create(2016, 1, 1);
+        $endDate = Carbon::create(2015, 1, 1);
+
+        $this->setExpectedException(InvalidPeriod::class);
+
+        Period::create($startDate, $endDate);
     }
 }
