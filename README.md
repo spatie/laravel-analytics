@@ -12,8 +12,11 @@ Using this package you can easily retrieve data from Google Analytics.
 Here are a few examples of the provided methods:
 
 ```php
-Analytics::fetchMostVisitedPages($startDate, $endDate);
-Analytics::fetchVisitorsAndPageViews($startDate, $endDate);
+//fetch the most visited pages for the last 7 days
+Analytics::fetchMostVisitedPages(Period::days(7));
+
+//fetch visitors and page views for the last 7 days
+Analytics::fetchVisitorsAndPageViews(Period::days(7));
 ```
 
 Most methods will return an `\Illuminate\Support\Collection` object containing the results.
@@ -129,10 +132,7 @@ When the installation is done you can easily retrieve Analytics data. Nearly all
 
 Here is an example to retrieve visitors and pageview data for the last seven days.
 ```php
-$startDate = \Carbon\Carbon::now()->subWeek();
-$endDate = \Carbon\Carbon::now();
-
-$analyticsData = Analytics::fetchVisitorsAndPageViews($startDate, $endDate);
+$analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 ```
 
 `$analyticsData` is a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`
@@ -142,7 +142,7 @@ $analyticsData = Analytics::fetchVisitorsAndPageViews($startDate, $endDate);
 ### Visitors and pageviews
 
 ```php
-public function fetchVisitorsAndPageViews(DateTime $startDate, DateTime $endDate): Collection
+public function fetchVisitorsAndPageViews(Period $period): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`.
@@ -150,7 +150,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Most visited pages
 
 ```php
-public function fetchMostVisitedPages(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
@@ -158,7 +158,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top referrers
 
 ```php
-public function fetchTopReferrers(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
@@ -166,7 +166,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top browsers
 
 ```php
-public function fetchTopBrowsers(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
+public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `browser` and `sessions`.
@@ -176,7 +176,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on on which metrics and dimensions might be used. 
 
 ```php
-public function performQuery(DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
+public function performQuery(Period $period, string $metrics, array $others = [])
 ```
 
 You can get access to the underlying `Google_Service_Analytics` object:

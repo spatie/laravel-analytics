@@ -3,7 +3,6 @@
 namespace Spatie\Analytics;
 
 use Carbon\Carbon;
-use DateTime;
 use Google_Service_Analytics;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
@@ -41,9 +40,9 @@ class Analytics
         return $this;
     }
 
-    public function fetchVisitorsAndPageViews(DateTime $startDate, DateTime $endDate): Collection
+    public function fetchVisitorsAndPageViews(Period $period): Collection
     {
-        $response = $this->performQuery($startDate, $endDate, 'ga:users,ga:pageviews', ['dimensions' => 'ga:date']);
+        $response = $this->performQuery($period, 'ga:users,ga:pageviews', ['dimensions' => 'ga:date']);
 
         return collect($response['rows'] ?? [])->map(function (array $dateRow) {
             return [
@@ -54,9 +53,9 @@ class Analytics
         });
     }
 
-    public function fetchMostVisitedPages(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+    public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
     {
-        $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
+        $response = $this->performQuery($period, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
         return collect($response['rows'] ?? [])
             ->map(function (array $pageRow) {
@@ -67,9 +66,9 @@ class Analytics
             });
     }
 
-    public function fetchTopReferrers(DateTime $startDate, DateTime $endDate, int $maxResults = 20): Collection
+    public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
     {
-        $response = $this->performQuery($startDate, $endDate, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
+        $response = $this->performQuery($period, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
         return collect($response['rows'] ?? [])->map(function (array $pageRow) {
             return [
@@ -79,9 +78,9 @@ class Analytics
         });
     }
 
-    public function fetchTopBrowsers(DateTime $startDate, DateTime $endDate, int $maxResults = 10): Collection
+    public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
     {
-        $response = $this->performQuery($startDate, $endDate, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
+        $response = $this->performQuery($period, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
 
         $topBrowsers = collect($response['rows'] ?? [])->map(function (array $browserRow) {
             return [
@@ -116,19 +115,18 @@ class Analytics
     /**
      * Call the query method on the authenticated client.
      *
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param string   $metrics
-     * @param array    $others
+     * @param Period $period
+     * @param string $metrics
+     * @param array  $others
      *
      * @return array|null
      */
-    public function performQuery(DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
+    public function performQuery(Period $period, string $metrics, array $others = [])
     {
         return $this->client->performQuery(
             $this->viewId,
-            $startDate,
-            $endDate,
+            $period->startDate,
+            $period->endDate,
             $metrics,
             $others
         );

@@ -8,6 +8,7 @@ use Mockery;
 use PHPUnit_Framework_TestCase;
 use Spatie\Analytics\Analytics;
 use Spatie\Analytics\AnalyticsClient;
+use Spatie\Analytics\Period;
 
 class AnalyticsTest extends PHPUnit_Framework_TestCase
 {
@@ -62,7 +63,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
                 'rows' => [['20160101', '1', '2']],
             ]);
 
-        $response = $this->analytics->fetchVisitorsAndPageViews($this->startDate, $this->endDate);
+        $response = $this->analytics->fetchVisitorsAndPageViews(Period::create($this->startDate, $this->endDate));
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
@@ -90,7 +91,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
                 'rows' => [['https://test.com', '123']],
             ]);
 
-        $response = $this->analytics->fetchMostVisitedPages($this->startDate, $this->endDate, $maxResults);
+        $response = $this->analytics->fetchMostVisitedPages(Period::create($this->startDate, $this->endDate), $maxResults);
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('https://test.com', $response->first()['url']);
@@ -117,7 +118,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
                 'rows' => [['https://referrer.com', '123']],
             ]);
 
-        $response = $this->analytics->fetchTopReferrers($this->startDate, $this->endDate, $maxResults);
+        $response = $this->analytics->fetchTopReferrers(Period::create($this->startDate, $this->endDate), $maxResults);
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('https://referrer.com', $response->first()['url']);
@@ -148,7 +149,7 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $response = $this->analytics->fetchTopBrowsers($this->startDate, $this->endDate, 3);
+        $response = $this->analytics->fetchTopBrowsers(Period::create($this->startDate, $this->endDate), 3);
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals([
