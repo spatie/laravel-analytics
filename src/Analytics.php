@@ -18,8 +18,8 @@ class Analytics
     protected $viewId;
 
     /**
-     * @param AnalyticsClient $client
-     * @param string          $viewId
+     * @param \Spatie\Analytics\AnalyticsClient $client
+     * @param string                            $viewId
      */
     public function __construct(AnalyticsClient $client, string $viewId)
     {
@@ -42,7 +42,11 @@ class Analytics
 
     public function fetchVisitorsAndPageViews(Period $period): Collection
     {
-        $response = $this->performQuery($period, 'ga:users,ga:pageviews', ['dimensions' => 'ga:date']);
+        $response = $this->performQuery(
+            $period,
+            'ga:users,ga:pageviews',
+            ['dimensions' => 'ga:date']
+        );
 
         return collect($response['rows'] ?? [])->map(function (array $dateRow) {
             return [
@@ -55,7 +59,15 @@ class Analytics
 
     public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
     {
-        $response = $this->performQuery($period, 'ga:pageviews', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
+        $response = $this->performQuery(
+            $period,
+            'ga:pageviews',
+            [
+                'dimensions' => 'ga:pagePath',
+                'sort' => '-ga:pageviews',
+                'max-results' => $maxResults,
+            ]
+        );
 
         return collect($response['rows'] ?? [])
             ->map(function (array $pageRow) {
@@ -68,7 +80,14 @@ class Analytics
 
     public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
     {
-        $response = $this->performQuery($period, 'ga:pageviews', ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
+        $response = $this->performQuery($period,
+            'ga:pageviews',
+            [
+                'dimensions' => 'ga:fullReferrer',
+                'sort' => '-ga:pageviews',
+                'max-results' => $maxResults,
+            ]
+        );
 
         return collect($response['rows'] ?? [])->map(function (array $pageRow) {
             return [
@@ -80,7 +99,14 @@ class Analytics
 
     public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
     {
-        $response = $this->performQuery($period, 'ga:sessions', ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions']);
+        $response = $this->performQuery(
+            $period,
+            'ga:sessions',
+            [
+                'dimensions' => 'ga:browser',
+                'sort' => '-ga:sessions',
+            ]
+        );
 
         $topBrowsers = collect($response['rows'] ?? [])->map(function (array $browserRow) {
             return [
@@ -93,23 +119,17 @@ class Analytics
             return $topBrowsers;
         }
 
-        return $this->summarizeTopBrowsers($topBrowsers, $maxResults - 1);
+        return $this->summarizeTopBrowsers($topBrowsers, $maxResults);
     }
 
-    protected function summarizeTopBrowsers(Collection $topBrowsers, int $summarizeAfter)
+    protected function summarizeTopBrowsers(Collection $topBrowsers, int $maxResults): Collection
     {
-        $otherBrowsersRow = $topBrowsers
-            ->splice($summarizeAfter)
-            ->reduce(function (array $totals, array $browserRow) {
-
-                $totals['sessions'] += (int) $browserRow['sessions'];
-
-                return $totals;
-            }, ['browser' => 'Others', 'sessions' => 0]);
-
         return $topBrowsers
-            ->take($summarizeAfter)
-            ->push($otherBrowsersRow);
+            ->take($maxResults - 1)
+            ->push([
+                'browser' => 'Others',
+                'sessions' => $topBrowsers->splice($maxResults - 1)->sum('sessions'),
+            ]);
     }
 
     /**
