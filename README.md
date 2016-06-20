@@ -14,10 +14,10 @@ Here are a few examples of the provided methods:
 ```php
 use Spatie\Analytics\Period;
 
-//fetch the most visited pages for today and the last 7 days
+//fetch the most visited pages for today and the past week
 Analytics::fetchMostVisitedPages(Period::days(7));
 
-//fetch visitors and page views for today and the last 7 days
+//fetch visitors and page views for the past week
 Analytics::fetchVisitorsAndPageViews(Period::days(7));
 ```
 
