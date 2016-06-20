@@ -2,7 +2,6 @@
 
 namespace Spatie\Analytics;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 
