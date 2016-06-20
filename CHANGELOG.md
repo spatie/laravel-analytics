@@ -5,9 +5,9 @@ All Notable changes to Laravel-Analytics will be documented in this file
 ## 2.0.0 - 2015-06-20
 
 - refactored all methods
-- use json credentials instead of .p12 file
-- make `Spatie\Analytics\Analtyics` easy to extend
-- introduce `Period` to specify date ranges
+- introduced `Spatie\Analytics\Period` to specify date ranges
+- the package now uses json credentials instead of .p12 file
+- the `Spatie\Analytics\Analtyics` class is much easier to extend
 
 ## 1.4.1 - 2015-05-12
 
