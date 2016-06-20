@@ -194,7 +194,7 @@ public function performQuery(Period $period, string $metrics, array $others = []
 You can get access to the underlying `Google_Service_Analytics` object:
 
 ```php
-Analytics::getAnalyticsService()
+Analytics::getAnalyticsService();
 ```
 
 ## Testing
