@@ -157,7 +157,7 @@ Period::create($startDate, $endDate);
 public function fetchVisitorsAndPageViews(Period $period): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, `pageTitle` and `pageViews`.
 
 ### Most visited pages
 
@@ -165,7 +165,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `url`, `pageTitle` and `pageViews`.
 
 ### Top referrers
 
