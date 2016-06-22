@@ -54,7 +54,7 @@ class AnalyticsServiceProvider extends ServiceProvider
         }
 
         if (!file_exists($analyticsConfig['service_account_credentials_json'])) {
-            throw InvalidConfiguration::credentialsJsonDoesNotExist();
+            throw InvalidConfiguration::credentialsJsonDoesNotExist($analyticsConfig['service_account_credentials_json']);
         }
     }
 }
