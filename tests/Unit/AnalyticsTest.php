@@ -82,20 +82,21 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
             'ga:pageviews',
-            ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults],
+            ['dimensions' => 'ga:pagePath,ga:pageTitle', 'sort' => '-ga:pageviews', 'max-results' => $maxResults],
         ];
 
         $this->analyticsClient
             ->shouldReceive('performQuery')->withArgs($expectedArguments)
             ->once()
             ->andReturn([
-                'rows' => [['https://test.com', '123']],
+                'rows' => [['https://test.com', 'Page title', '123']],
             ]);
 
         $response = $this->analytics->fetchMostVisitedPages(Period::create($this->startDate, $this->endDate), $maxResults);
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('https://test.com', $response->first()['url']);
+        $this->assertEquals('Page title', $response->first()['pageTitle']);
         $this->assertEquals(123, $response->first()['pageViews']);
     }
 

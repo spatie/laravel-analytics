@@ -64,7 +64,7 @@ class Analytics
             $period,
             'ga:pageviews',
             [
-                'dimensions' => 'ga:pagePath',
+                'dimensions' => 'ga:pagePath,ga:pageTitle',
                 'sort' => '-ga:pageviews',
                 'max-results' => $maxResults,
             ]
@@ -74,7 +74,8 @@ class Analytics
             ->map(function (array $pageRow) {
                 return [
                     'url' => $pageRow[0],
-                    'pageViews' => (int) $pageRow[1],
+                    'pageTitle' => $pageRow[1],
+                    'pageViews' => (int) $pageRow[2],
                 ];
             });
     }
