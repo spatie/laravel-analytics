@@ -2,6 +2,10 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 2.1.0 - 2015-06-22
+- add `pageTitle` to `fetchVisitorsAndPageViews` and `fetchMostVisitedPages`
+- fixed `credentialsJsonDoesNotExist` exception
+
 ## 2.0.0 - 2015-06-20
 
 - refactored all methods
