@@ -20,7 +20,7 @@
     }
   ],
   "require": {
-    "php" : "^7.0",
+    "php" : ">=5.5.9",
     "illuminate/contracts": "^5.1",
     "illuminate/support": "^5.1",
     "google/apiclient" : "^1.1",
