@@ -20,7 +20,7 @@ class Analytics {
 	 * @param \Spatie\Analytics\AnalyticsClient $client
 	 * @param string                            $viewId
 	 */
-	public function __construct(AnalyticsClient $client, string $viewId) {
+	public function __construct(AnalyticsClient $client, $viewId) {
 		$this->client = $client;
 
 		$this->viewId = $viewId;
@@ -31,7 +31,7 @@ class Analytics {
 	 *
 	 * @return $this
 	 */
-	public function setViewId(string $viewId) {
+	public function setViewId($viewId) {
 		$this->viewId = $viewId;
 
 		return $this;
@@ -54,7 +54,7 @@ class Analytics {
 		});
 	}
 
-	public function fetchMostVisitedPages(Period $period, int $maxResults = 20) {
+	public function fetchMostVisitedPages(Period $period = null, $maxResults = 20) {
 		$response = $this->performQuery(
 			$period,
 			'ga:pageviews',
@@ -75,7 +75,7 @@ class Analytics {
 			});
 	}
 
-	public function fetchTopReferrers(Period $period, int $maxResults = 20) {
+	public function fetchTopReferrers(Period $period, $maxResults = 20) {
 		$response = $this->performQuery($period,
 			'ga:pageviews',
 			[
@@ -93,7 +93,7 @@ class Analytics {
 		});
 	}
 
-	public function fetchTopBrowsers(Period $period, int $maxResults = 10) {
+	public function fetchTopBrowsers(Period $period, $maxResults = 10) {
 		$response = $this->performQuery(
 			$period,
 			'ga:sessions',
@@ -117,7 +117,7 @@ class Analytics {
 		return $this->summarizeTopBrowsers($topBrowsers, $maxResults);
 	}
 
-	protected function summarizeTopBrowsers(Collection $topBrowsers, int $maxResults) {
+	protected function summarizeTopBrowsers(Collection $topBrowsers, $maxResults) {
 		return $topBrowsers
 			->take($maxResults - 1)
 			->push([
@@ -135,7 +135,7 @@ class Analytics {
 	 *
 	 * @return array|null
 	 */
-	public function performQuery(Period $period, string $metrics, array $others = []) {
+	public function performQuery(Period $period, $metrics, array $others = []) {
 		return $this->client->performQuery(
 			$this->viewId,
 			$period->startDate,
