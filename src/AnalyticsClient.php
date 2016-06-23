@@ -72,7 +72,7 @@ class AnalyticsClient {
 	/*
 	 * Determine the cache name for the set of query properties given.
 	 */
-	protected function determineCacheName(array $properties): string {
+	protected function determineCacheName(array $properties) {
 		return 'spatie.laravel-analytics.' . md5(serialize($properties));
 	}
 }

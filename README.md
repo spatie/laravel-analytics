@@ -154,7 +154,7 @@ Period::create($startDate, $endDate);
 ### Visitors and pageviews
 
 ```php
-public function fetchVisitorsAndPageViews(Period $period): Collection
+public function fetchVisitorsAndPageViews(Period $period)
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, `pageTitle` and `pageViews`.
@@ -162,7 +162,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Most visited pages
 
 ```php
-public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
+public function fetchMostVisitedPages(Period $period, int $maxResults = 20)
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `url`, `pageTitle` and `pageViews`.
@@ -170,7 +170,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top referrers
 
 ```php
-public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
+public function fetchTopReferrers(Period $period, int $maxResults = 20)
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
@@ -178,7 +178,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top browsers
 
 ```php
-public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
+public function fetchTopBrowsers(Period $period, int $maxResults = 10)
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `browser` and `sessions`.
