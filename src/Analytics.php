@@ -44,7 +44,7 @@ class Analytics {
 			['dimensions' => 'ga:date,ga:pageTitle']
 		);
 
-		return collect($response['rows'] ?? [])->map(function (array $dateRow) {
+		return collect($response['rows'] ?: [])->map(function (array $dateRow) {
 			return [
 				'date' => Carbon::createFromFormat('Ymd', $dateRow[0]),
 				'pageTitle' => $dateRow[1],
