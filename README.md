@@ -94,11 +94,11 @@ The first thing you’ll need to do is to get some credentials to use Google API
 
 ![1](https://spatie.github.io/laravel-analytics/v2/1.jpg)
 
-Next up we must specify which API’s the project may consume. In the list of available API’s click "Google Calendar API". On the next screen click "Enable".
+Next up we must specify which API’s the project may consume. In the list of available API’s click "Google Analytics API". On the next screen click "Enable".
 
 ![2](https://spatie.github.io/laravel-analytics/v2/2.jpg)
 
-Now that you’ve created a project that has access to the Calendar API it’s time to download a file with these credentials. Click "Credentials" in the sidebar. You’ll want to create a "Service account key".
+Now that you’ve created a project that has access to the Analytics API it’s time to download a file with these credentials. Click "Credentials" in the sidebar. You’ll want to create a "Service account key".
 
 ![3](https://spatie.github.io/laravel-analytics/v2/3.jpg)
 
