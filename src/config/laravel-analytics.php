@@ -22,6 +22,6 @@ return [
     /*
      * The storage location for the Google API cache
      */
-    'cache_location' =>  storage_path('app/laravel-google-analytics/google-cache/'),
+    'cache_location' => storage_path('app/laravel-google-analytics/google-cache/'),
 
 ];
