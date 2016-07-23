@@ -20,7 +20,7 @@ return [
     'cache_lifetime_in_minutes' => 60 * 24,
 
     /*
-     * The storage location for the Google API cache
+     * The directory where the underlying Google_Client will store it's cache files.
      */
     'cache_location' => storage_path('app/laravel-google-analytics/google-cache/'),
 
