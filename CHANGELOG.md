@@ -2,8 +2,11 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 2.2.0 - 2015-07-23
+- added config setting to specify cache path
+
 ## 2.1.0 - 2015-06-22
-- add `pageTitle` to `fetchVisitorsAndPageViews` and `fetchMostVisitedPages`
+- added `pageTitle` to `fetchVisitorsAndPageViews` and `fetchMostVisitedPages`
 - fixed `credentialsJsonDoesNotExist` exception
 
 ## 2.0.0 - 2015-06-20
