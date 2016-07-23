@@ -21,6 +21,8 @@ class AnalyticsClientFactory
     {
         $client = new Google_Client();
 
+        $client->setClassConfig('Google_Cache_File', 'directory', $config['cache_location']);
+
         $credentials = $client->loadServiceAccountJson(
             $config['service_account_credentials_json'],
             'https://www.googleapis.com/auth/analytics.readonly'
