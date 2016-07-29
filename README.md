@@ -27,7 +27,7 @@ Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all
 
 ## Postcardware
 
-You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown. Please mention which of our package(s) you are using.
+You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown, mentioning which of our package(s) you are using.
 
 Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
 
