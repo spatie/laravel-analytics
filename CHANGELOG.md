@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 2.2.1 - 2015-08-02
+- added a fallback for the cache path setting
+
 ## 2.2.0 - 2015-07-23
 - added config setting to specify cache path
 
