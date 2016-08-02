@@ -90,6 +90,11 @@ return [
      * If you set this to zero, the responses won't be cached at all.
      */
     'cache_lifetime_in_minutes' => 60 * 24,
+    
+    /*
+     * The directory where the underlying Google_Client will store it's cache files.
+     */
+    'cache_location' => storage_path('app/laravel-google-analytics/google-cache/'),
 ];
 
 ```
