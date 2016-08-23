@@ -58,8 +58,7 @@ class AnalyticsClient
         }
 
         return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others) {
-
-           return $this->service->data_ga->get(
+            return $this->service->data_ga->get(
                "ga:{$viewId}",
                $startDate->format('Y-m-d'),
                $endDate->format('Y-m-d'),

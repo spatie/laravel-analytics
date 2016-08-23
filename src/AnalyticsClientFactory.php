@@ -22,8 +22,8 @@ class AnalyticsClientFactory
         $client = new Google_Client();
 
         $client->setClassConfig(
-            'Google_Cache_File', 
-            'directory', 
+            'Google_Cache_File',
+            'directory',
             $config['cache_location'] ?? storage_path('app/laravel-google-analytics/google-cache/')
         );
 
