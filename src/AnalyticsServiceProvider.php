@@ -25,13 +25,10 @@ class AnalyticsServiceProvider extends ServiceProvider
         $analyticsConfig = config('laravel-analytics');
 
         $this->app->bind(AnalyticsClient::class, function () use ($analyticsConfig) {
-
             return AnalyticsClientFactory::createForConfig($analyticsConfig);
-
         });
 
         $this->app->bind(Analytics::class, function () use ($analyticsConfig) {
-
             $this->guardAgainstInvalidConfiguration($analyticsConfig);
 
             $client = app(AnalyticsClient::class);
@@ -53,7 +50,7 @@ class AnalyticsServiceProvider extends ServiceProvider
             throw InvalidConfiguration::viewIdNotSpecified();
         }
 
-        if (!file_exists($analyticsConfig['service_account_credentials_json'])) {
+        if (! file_exists($analyticsConfig['service_account_credentials_json'])) {
             throw InvalidConfiguration::credentialsJsonDoesNotExist($analyticsConfig['service_account_credentials_json']);
         }
     }
