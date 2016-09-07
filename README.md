@@ -199,7 +199,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 
 ### All other Google Analytics queries
 
-To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on on which metrics and dimensions might be used. 
+To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on which metrics and dimensions might be used. 
 
 ```php
 public function performQuery(Period $period, string $metrics, array $others = [])
