@@ -2,31 +2,31 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
-## 2.2.2 - 2015-08-23
+## 2.2.2 - 2016-08-23
 - added L5.3 compatibility
 
-## 2.2.1 - 2015-08-02
+## 2.2.1 - 2016-08-02
 - added a fallback for the cache path setting
 
-## 2.2.0 - 2015-07-23
+## 2.2.0 - 2016-07-23
 - added config setting to specify cache path
 
-## 2.1.0 - 2015-06-22
+## 2.1.0 - 2016-06-22
 - added `pageTitle` to `fetchVisitorsAndPageViews` and `fetchMostVisitedPages`
 - fixed `credentialsJsonDoesNotExist` exception
 
-## 2.0.0 - 2015-06-20
+## 2.0.0 - 2016-06-20
 
 - refactored all methods
 - introduced `Spatie\Analytics\Period` to specify date ranges
 - the package now uses json credentials instead of .p12 file
 - the `Spatie\Analytics\Analtyics` class is much easier to extend
 
-## 1.4.1 - 2015-05-12
+## 1.4.1 - 2016-05-12
 
 - fixes a bug introduced in 1.4.0 where the check whether a p12 certificate is present was broken 
 
-## 1.4.0 - 2015-05-11
+## 1.4.0 - 2016-05-11
 
 **This version does not work, please upgrade to 1.4.0**
 
