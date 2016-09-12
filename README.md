@@ -157,8 +157,8 @@ $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 If you want to have more control over the period you want to fetch data for, you can pass a `startDate` and an `endDate` to the period object.
 
 ```php
-$startDate = Carbon::now();
-$endDate = Carbon::now()->subYear();
+$startDate = Carbon::now()->subYear();
+$endDate = Carbon::now();
 
 Period::create($startDate, $endDate);
 ```
