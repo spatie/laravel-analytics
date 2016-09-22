@@ -90,22 +90,24 @@ return [
 
 ```
 
-You must also configure `Google_Client`:
+You must also configure `Google_Client` on your `AppServiceProvider`:
 
 
 ```
-$client = new Google_Client();
+$this->app->singleton('Google_Client' , function() {
+    $client = new Google_Client();
+    
+    $client->setScopes([
+        'https://www.googleapis.com/auth/analytics.readonly'
+    ]);
+    
+    $client->setAuthConfig('/path/to/service-account.json');
+    
+    /// or if you have GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json in your .env
+    $client->useApplicationDefaultCredentials();
 
-$client->setScopes([
-    'https://www.googleapis.com/auth/analytics.readonly'
-]);
-
-$client->setAuthConfig('/path/to/service-account.json');
-
-or 
-
-/// if you have GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json in your .env
-$client->useApplicationDefaultCredentials();
+    return $client;
+}
 ```
 
 ## How to obtain the credentials to communicate with Google Analytics
