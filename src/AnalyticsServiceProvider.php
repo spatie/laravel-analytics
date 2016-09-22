@@ -27,6 +27,7 @@ class AnalyticsServiceProvider extends ServiceProvider
 
         $this->app->bind(AnalyticsClient::class, function () use ($analyticsConfig) {
             $client = app(Google_Client::class);
+
             return AnalyticsClientFactory::createForConfig($client, $analyticsConfig);
         });
 
