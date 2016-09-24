@@ -2,7 +2,6 @@
 
 namespace Spatie\Analytics;
 
-use Google_Client;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 
@@ -26,9 +25,7 @@ class AnalyticsServiceProvider extends ServiceProvider
         $analyticsConfig = config('laravel-analytics');
 
         $this->app->bind(AnalyticsClient::class, function () use ($analyticsConfig) {
-            $client = app(Google_Client::class);
-
-            return AnalyticsClientFactory::createForConfig($client, $analyticsConfig);
+            return AnalyticsClientFactory::createForConfig($analyticsConfig);
         });
 
         $this->app->bind(Analytics::class, function () use ($analyticsConfig) {
@@ -51,6 +48,10 @@ class AnalyticsServiceProvider extends ServiceProvider
     {
         if (empty($analyticsConfig['view_id'])) {
             throw InvalidConfiguration::viewIdNotSpecified();
+        }
+
+        if (! file_exists($analyticsConfig['service_account_credentials_json'])) {
+            throw InvalidConfiguration::credentialsJsonDoesNotExist($analyticsConfig['service_account_credentials_json']);
         }
     }
 }

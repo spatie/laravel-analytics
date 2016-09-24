@@ -8,11 +8,26 @@ use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsClientFactory
 {
-    public static function createForConfig(Google_Client $client, array $analyticsConfig): AnalyticsClient
+    public static function createForConfig(array $analyticsConfig): AnalyticsClient
     {
-        $googleService = new Google_Service_Analytics($client);
+        $authenticatedClient = self::createAuthenticatedGoogleClient($analyticsConfig);
+
+        $googleService = new Google_Service_Analytics($authenticatedClient);
 
         return self::createAnalyticsClient($analyticsConfig, $googleService);
+    }
+
+    public static function createAuthenticatedGoogleClient(array $config): Google_Client
+    {
+        $client = new Google_Client();
+
+        $client->setScopes([
+            Google_Service_Analytics::ANALYTICS_READONLY
+        ]);
+
+        $client->setAuthConfig($config['service_account_credentials_json']);
+
+        return $client;
     }
 
     protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService): AnalyticsClient

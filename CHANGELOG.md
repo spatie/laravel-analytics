@@ -1,12 +1,9 @@
 # Changelog
 
 All Notable changes to Laravel-Analytics will be documented in this file
-## 2016-08-23
 
-**This version contains major breaking changes**
-
+## 3.0.0 - 2016-08-23
 - Add support to `google/apiclient:^2.0`
-- Move responsability of creating and configuring `Google_Client` to package consumer
 
 
 ## 2.2.2 - 2016-08-23

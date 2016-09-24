@@ -81,6 +81,12 @@ return [
     'view_id' => env('ANALYTICS_VIEW_ID'),
 
     /*
+     * Path to the client secret json file. Take a look at the README of this package
+     * to learn how to get this file.
+     */
+    'service_account_credentials_json' => storage_path('app/laravel-google-analytics/service-account-credentials.json'),
+
+    /*
      * The amount of minutes the Google API responses will be cached.
      * If you set this to zero, the responses won't be cached at all.
      */
@@ -88,27 +94,6 @@ return [
 
 ];
 
-```
-
-You must also configure `Google_Client` on your `AppServiceProvider`:
-
-
-```
-$this->app->singleton('Google_Client' , function() {
-    $client = new Google_Client();
-    
-    $client->setScopes([
-        'https://www.googleapis.com/auth/analytics.readonly'
-    ]);
-    
-    $client->setAuthConfig('/path/to/service-account.json');
-    
-    /// or if you have GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json in your .env
-    $client->useApplicationDefaultCredentials();
-
-    return $client;
-}
-```
 
 ## How to obtain the credentials to communicate with Google Analytics
 
