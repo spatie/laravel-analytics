@@ -81,8 +81,7 @@ return [
     'view_id' => env('ANALYTICS_VIEW_ID'),
 
     /*
-     * Path to the client secret json file. Take a look at the README of this package
-     * to learn how to get this file.
+     * Path to the json file with service account credentials. Take a look at the README of this package
      */
     'service_account_credentials_json' => storage_path('app/laravel-google-analytics/service-account-credentials.json'),
 
@@ -94,6 +93,7 @@ return [
 
 ];
 
+```
 
 ## How to obtain the credentials to communicate with Google Analytics
 

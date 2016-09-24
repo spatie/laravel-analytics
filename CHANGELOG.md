@@ -5,7 +5,6 @@ All Notable changes to Laravel-Analytics will be documented in this file
 ## 3.0.0 - 2016-08-23
 - Add support to `google/apiclient:^2.0`
 
-
 ## 2.2.2 - 2016-08-23
 - added L5.3 compatibility
 
