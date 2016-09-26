@@ -23,7 +23,7 @@ class AnalyticsClientFactory
         $client = new Google_Client();
 
         $client->setScopes([
-            Google_Service_Analytics::ANALYTICS_READONLY
+            Google_Service_Analytics::ANALYTICS_READONLY,
         ]);
 
         $client->setAuthConfig($config['service_account_credentials_json']);
