@@ -2,6 +2,7 @@
 
 namespace Spatie\Analytics;
 
+use Stash;
 use Google_Client;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
@@ -26,6 +27,12 @@ class AnalyticsClientFactory
         ]);
 
         $client->setAuthConfig($config['service_account_credentials_json']);
+
+        $path = $config['cache_location'] ?? storage_path('app/laravel-google-analytics/google-cache/');
+
+        $driver = new Stash\Driver\FileSystem(['path' => $path]);
+
+        $client->setCache(new Stash\Pool($driver));
 
         return $client;
     }
