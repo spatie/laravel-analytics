@@ -25,7 +25,7 @@
     "illuminate/support": "~5.1.0|~5.2.0|~5.3.0",
     "google/apiclient" : "^2.0",
     "nesbot/carbon": "^1.21",
-    "tedivm/stash": "^0.14.1"
+    "madewithlove/illuminate-psr-cache-bridge": "^1.0"
 
   },
   "require-dev": {

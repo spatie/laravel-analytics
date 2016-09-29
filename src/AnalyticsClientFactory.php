@@ -2,10 +2,10 @@
 
 namespace Spatie\Analytics;
 
-use Stash;
 use Google_Client;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
+use Madewithlove\IlluminatePsrCacheBridge\Laravel\CacheItemPool;
 
 class AnalyticsClientFactory
 {
@@ -28,11 +28,9 @@ class AnalyticsClientFactory
 
         $client->setAuthConfig($config['service_account_credentials_json']);
 
-        $path = $config['cache_location'] ?? storage_path('app/laravel-google-analytics/google-cache/');
+        $cache = new CacheItemPool(app(Repository::class));
 
-        $driver = new Stash\Driver\FileSystem(['path' => $path]);
-
-        $client->setCache(new Stash\Pool($driver));
+        $client->setCache($cache);
 
         return $client;
     }
