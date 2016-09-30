@@ -28,7 +28,9 @@ class AnalyticsClientFactory
 
         $client->setAuthConfig($config['service_account_credentials_json']);
 
-        $cache = new CacheItemPool(app(Repository::class));
+        $store = \Cache::store($config['cache_store']);
+
+        $cache = new CacheItemPool($store);
 
         $client->setCache($cache);
 
