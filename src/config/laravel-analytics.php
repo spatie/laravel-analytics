@@ -20,8 +20,21 @@ return [
     'cache_lifetime_in_minutes' => 60 * 24,
 
     /*
-     * The directory where the underlying Google_Client will store it's cache files.
-     */
-    'cache_location' => storage_path('app/laravel-google-analytics/google-cache/'),
+    |--------------------------------------------------------------------------
+    | Google_client's cache configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the "store" that the underlying Google_Client will
+    | use to store it's data.
+    | You may also add extra parameters that will be passed on setCacheConfig (see docs for google-api-php-client).
+    |
+    | Optional parameters: "lifetime", "prefix"
+    |
+    */
+    'cache' => [
+
+        'store' => 'file',
+
+    ],
 
 ];

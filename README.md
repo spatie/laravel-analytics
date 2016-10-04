@@ -91,11 +91,25 @@ return [
      * If you set this to zero, the responses won't be cached at all.
      */
     'cache_lifetime_in_minutes' => 60 * 24,
-    
+
     /*
-     * The directory where the underlying Google_Client will store it's cache files.
-     */
-    'cache_location' => storage_path('app/laravel-google-analytics/google-cache/'),
+    |--------------------------------------------------------------------------
+    | Google_client's cache configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the "store" that the underlying Google_Client will
+    | use to store it's data.
+    | You may also add extra parameters that will be passed on setCacheConfig (see docs for google-api-php-client).
+    |
+    | Optional parameters: "lifetime", "prefix"
+    |
+    */
+    'cache' => [
+
+        'store' => 'file',
+
+    ],
+
 ];
 
 ```
@@ -157,8 +171,8 @@ $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 If you want to have more control over the period you want to fetch data for, you can pass a `startDate` and an `endDate` to the period object.
 
 ```php
-$startDate = Carbon::now();
-$endDate = Carbon::now()->subYear();
+$startDate = Carbon::now()->subYear();
+$endDate = Carbon::now();
 
 Period::create($startDate, $endDate);
 ```
@@ -199,7 +213,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 
 ### All other Google Analytics queries
 
-To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on on which metrics and dimensions might be used. 
+To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on which metrics and dimensions might be used. 
 
 ```php
 public function performQuery(Period $period, string $metrics, array $others = [])

@@ -5,6 +5,7 @@ namespace Spatie\Analytics;
 use Google_Client;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
+use Madewithlove\IlluminatePsrCacheBridge\Laravel\CacheItemPool;
 
 class AnalyticsClientFactory
 {
@@ -21,20 +22,30 @@ class AnalyticsClientFactory
     {
         $client = new Google_Client();
 
-        $client->setClassConfig(
-            'Google_Cache_File',
-            'directory',
-            $config['cache_location'] ?? storage_path('app/laravel-google-analytics/google-cache/')
-        );
+        $client->setScopes([
+            Google_Service_Analytics::ANALYTICS_READONLY,
+        ]);
 
-        $credentials = $client->loadServiceAccountJson(
-            $config['service_account_credentials_json'],
-            'https://www.googleapis.com/auth/analytics.readonly'
-        );
+        $client->setAuthConfig($config['service_account_credentials_json']);
 
-        $client->setAssertionCredentials($credentials);
+        self::configureCache($client, $config['cache']);
 
         return $client;
+    }
+
+    protected static function configureCache(Google_Client $client, $config)
+    {
+        $config = collect($config);
+
+        $store = \Cache::store($config->get('store'));
+
+        $cache = new CacheItemPool($store);
+
+        $client->setCache($cache);
+
+        $client->setCacheConfig(
+            $config->except('store')->toArray()
+        );
     }
 
     protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService): AnalyticsClient
