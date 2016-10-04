@@ -28,13 +28,24 @@ class AnalyticsClientFactory
 
         $client->setAuthConfig($config['service_account_credentials_json']);
 
-        $store = \Cache::store($config['cache_store']);
+        self::configureCache($client, $config['cache']);
+
+        return $client;
+    }
+
+    protected static function configureCache(Google_Client $client, $config)
+    {
+        $config = collect($config);
+
+        $store = \Cache::store($config->get('store'));
 
         $cache = new CacheItemPool($store);
 
         $client->setCache($cache);
 
-        return $client;
+        $client->setCacheConfig(
+            $config->except('store')->toArray()
+        );
     }
 
     protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService): AnalyticsClient
