@@ -173,7 +173,7 @@ public function fetchVisitorsAndPageViews(Period $period): Collection
 
 The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, `pageTitle` and `pageViews`.
 
-## Total visitors and pageviews
+### Total visitors and pageviews
 
 ```php
 public function fetchTotalVisitorsAndPageViews(Period $period): Collection
