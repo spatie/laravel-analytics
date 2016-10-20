@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 2.3.0 - 2016-10-20
+- added `fetchTotalVisitorsAndPageViews`
+
 ## 2.2.2 - 2016-08-23
 - added L5.3 compatibility
 

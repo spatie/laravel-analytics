@@ -73,6 +73,32 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_fetch_the_total_visitor_and_page_views()
+    {
+        $expectedArguments = [
+            $this->viewId,
+            $this->expectCarbon($this->startDate),
+            $this->expectCarbon($this->endDate),
+            'ga:users,ga:pageviews',
+            ['dimensions' => 'ga:date'],
+        ];
+
+        $this->analyticsClient
+            ->shouldReceive('performQuery')->withArgs($expectedArguments)
+            ->once()
+            ->andReturn([
+                'rows' => [['20160101', '1', '2']],
+            ]);
+
+        $response = $this->analytics->fetchTotalVisitorsAndPageViews(Period::create($this->startDate, $this->endDate));
+
+        $this->assertInstanceOf(Collection::class, $response);
+        $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
+        $this->assertEquals(1, $response->first()['visitors']);
+        $this->assertEquals(2, $response->first()['pageViews']);
+    }
+
+    /** @test */
     public function it_can_fetch_the_most_visited_pages()
     {
         $maxResults = 10;
