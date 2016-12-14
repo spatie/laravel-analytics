@@ -2,6 +2,9 @@
 
 All Notable changes to Laravel-Analytics will be documented in this file
 
+## 2.3.1 - 2016-10-14
+- improve exception message
+
 ## 2.3.0 - 2016-10-20
 - added `fetchTotalVisitorsAndPageViews`
 
