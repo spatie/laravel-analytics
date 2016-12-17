@@ -2,8 +2,8 @@
 
 namespace Spatie\Analytics\Tests\Integration;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Analytics\AnalyticsFacade;
+use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Analytics\AnalyticsServiceProvider;
 
 abstract class TestCase extends Orchestra
