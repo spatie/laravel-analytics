@@ -1,6 +1,10 @@
 # Changelog
 
-All Notable changes to Laravel-Analytics will be documented in this file
+All notable changes to Laravel-Analytics will be documented in this file
+
+## 2.4.0 - 2017-01-23
+- add support for Laravel 5.4
+- dropped support for anything lower than Laravel 5.3
 
 ## 2.3.1 - 2016-10-14
 - improve exception message
