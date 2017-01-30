@@ -120,7 +120,7 @@ class Analytics
     {
         $response = $this->performQuery(
             $period,
-            'ga:session',
+            'ga:sessions',
             [
                 'dimensions' => 'ga:userType'
             ]
