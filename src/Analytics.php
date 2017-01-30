@@ -126,7 +126,7 @@ class Analytics
             ]
         );
 
-        $userSessions = collect($userSessionsData->rows ?? [])->map(function (array $usRow) {
+        $userSessions = collect($response->rows ?? [])->map(function (array $usRow) {
             return [
                 'type' => $usRow[0],
                 'sessions' => (int) $usRow[1],
