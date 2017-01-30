@@ -48,7 +48,7 @@ You must install this service provider.
 // config/app.php
 'providers' => [
     ...
-    Spatie\Analytics\AnalyticsServiceProvider::class,
+    Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
     ...
 ];
 ```
@@ -59,7 +59,7 @@ This package also comes with a facade, which provides an easy way to call the th
 // config/app.php
 'aliases' => [
     ...
-    'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
+    'Analytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
     ...
 ];
 ```
