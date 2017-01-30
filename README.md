@@ -67,7 +67,7 @@ This package also comes with a facade, which provides an easy way to call the th
 You can publish the config file of this package with this command:
 
 ``` bash
-php artisan vendor:publish --provider="Spatie\Analytics\AnalyticsServiceProvider"
+php artisan vendor:publish --provider="Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider"
 ```
 
 The following config file will be published in `config/laravel-analytics.php`
