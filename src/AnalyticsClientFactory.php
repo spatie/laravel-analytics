@@ -29,7 +29,7 @@ class AnalyticsClientFactory
 
         $credentials = $client->loadServiceAccountJson(
             $config['service_account_credentials_json'],
-            'https://www.googleapis.com/auth/analytics.readonly'
+            ['https://www.googleapis.com/auth/analytics.readonly']
         );
 
         $client->setAssertionCredentials($credentials);
