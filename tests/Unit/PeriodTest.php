@@ -3,8 +3,8 @@
 namespace Spatie\Analytics\Tests;
 
 use Carbon\Carbon;
-use PHPUnit\Framework\TestCase;
 use Spatie\Analytics\Period;
+use PHPUnit\Framework\TestCase;
 use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class PeriodTest extends TestCase
