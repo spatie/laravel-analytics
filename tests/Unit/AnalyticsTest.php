@@ -2,15 +2,15 @@
 
 namespace Spatie\Analytics\Tests;
 
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Mockery;
-use PHPUnit_Framework_TestCase;
-use Spatie\Analytics\Analytics;
-use Spatie\Analytics\AnalyticsClient;
+use Carbon\Carbon;
+use PHPUnit\Framework\TestCase;
 use Spatie\Analytics\Period;
+use Spatie\Analytics\Analytics;
+use Illuminate\Support\Collection;
+use Spatie\Analytics\AnalyticsClient;
 
-class AnalyticsTest extends PHPUnit_Framework_TestCase
+class AnalyticsTest extends TestCase
 {
     /** @var \Spatie\Analytics\AnalyticsClient|\Mockery\Mock */
     protected $analyticsClient;
@@ -68,6 +68,32 @@ class AnalyticsTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
         $this->assertEquals('pageTitle', $response->first()['pageTitle']);
+        $this->assertEquals(1, $response->first()['visitors']);
+        $this->assertEquals(2, $response->first()['pageViews']);
+    }
+
+    /** @test */
+    public function it_can_fetch_the_total_visitor_and_page_views()
+    {
+        $expectedArguments = [
+            $this->viewId,
+            $this->expectCarbon($this->startDate),
+            $this->expectCarbon($this->endDate),
+            'ga:users,ga:pageviews',
+            ['dimensions' => 'ga:date'],
+        ];
+
+        $this->analyticsClient
+            ->shouldReceive('performQuery')->withArgs($expectedArguments)
+            ->once()
+            ->andReturn([
+                'rows' => [['20160101', '1', '2']],
+            ]);
+
+        $response = $this->analytics->fetchTotalVisitorsAndPageViews(Period::create($this->startDate, $this->endDate));
+
+        $this->assertInstanceOf(Collection::class, $response);
+        $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
         $this->assertEquals(1, $response->first()['visitors']);
         $this->assertEquals(2, $response->first()['pageViews']);
     }

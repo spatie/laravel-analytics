@@ -13,7 +13,7 @@ class AnalyticsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/laravel-analytics.php' => config_path('laravel-analytics.php'),
+            __DIR__.'/config/analytics.php' => config_path('analytics.php'),
         ]);
     }
 

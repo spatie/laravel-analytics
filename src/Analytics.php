@@ -58,6 +58,23 @@ class Analytics
         });
     }
 
+    public function fetchTotalVisitorsAndPageViews(Period $period): Collection
+    {
+        $response = $this->performQuery(
+            $period,
+            'ga:users,ga:pageviews',
+            ['dimensions' => 'ga:date']
+        );
+
+        return collect($response['rows'] ?? [])->map(function (array $dateRow) {
+            return [
+                'date' => Carbon::createFromFormat('Ymd', $dateRow[0]),
+                'visitors' => (int) $dateRow[1],
+                'pageViews' => (int) $dateRow[2],
+            ];
+        });
+    }
+
     public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
     {
         $response = $this->performQuery(

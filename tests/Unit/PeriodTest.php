@@ -3,11 +3,11 @@
 namespace Spatie\Analytics\Tests;
 
 use Carbon\Carbon;
-use PHPUnit_Framework_TestCase;
-use Spatie\Analytics\Exceptions\InvalidPeriod;
+use PHPUnit\Framework\TestCase;
 use Spatie\Analytics\Period;
+use Spatie\Analytics\Exceptions\InvalidPeriod;
 
-class PeriodTest extends PHPUnit_Framework_TestCase
+class PeriodTest extends TestCase
 {
     /** @test */
     public function it_can_create_a_period_for_a_given_amount_of_days()
@@ -38,7 +38,7 @@ class PeriodTest extends PHPUnit_Framework_TestCase
         $startDate = Carbon::create(2016, 1, 1);
         $endDate = Carbon::create(2015, 1, 1);
 
-        $this->setExpectedException(InvalidPeriod::class);
+        $this->expectException(InvalidPeriod::class);
 
         Period::create($startDate, $endDate);
     }
