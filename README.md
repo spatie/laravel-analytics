@@ -72,7 +72,7 @@ You can publish the config file of this package with this command:
 php artisan vendor:publish --provider="Spatie\Analytics\AnalyticsServiceProvider"
 ```
 
-The following config file will be published in `config/laravel-analytics.php`
+The following config file will be published in `config/analytics.php`
 
 ```php
 return [
