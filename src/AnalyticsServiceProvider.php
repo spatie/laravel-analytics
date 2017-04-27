@@ -22,7 +22,7 @@ class AnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $analyticsConfig = config('laravel-analytics');
+        $analyticsConfig = config('analytics');
 
         $this->app->bind(AnalyticsClient::class, function () use ($analyticsConfig) {
             return AnalyticsClientFactory::createForConfig($analyticsConfig);
@@ -36,7 +36,7 @@ class AnalyticsServiceProvider extends ServiceProvider
             return new Analytics($client, $analyticsConfig['view_id']);
         });
 
-        $this->app->alias(Analytics::class, 'laravel-analytics');
+        $this->app->alias(Analytics::class, 'analytics');
     }
 
     /**
