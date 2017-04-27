@@ -3,7 +3,9 @@
 All notable changes to Laravel-Analytics will be documented in this file
 
 ## 3.0.0 - 2016-08-23
-- Add support for `v2` of the Google API
+- add support for `v2` of the Google API
+- renamed config file from `laravel-analytics.php` to `analytics.php`
+- dropped support for anything lower than Laravel 5.4
 
 ## 2.4.0 - 2017-01-23
 - add support for Laravel 5.4
