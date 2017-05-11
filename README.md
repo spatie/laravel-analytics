@@ -50,7 +50,7 @@ You must install this service provider.
 // config/app.php
 'providers' => [
     ...
-    Spatie\Analytics\AnalyticsServiceProvider::class,
+    Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
     ...
 ];
 ```
@@ -61,7 +61,7 @@ This package also comes with a facade, which provides an easy way to call the th
 // config/app.php
 'aliases' => [
     ...
-    'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
+    'Analytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
     ...
 ];
 ```
@@ -69,7 +69,7 @@ This package also comes with a facade, which provides an easy way to call the th
 You can publish the config file of this package with this command:
 
 ``` bash
-php artisan vendor:publish --provider="Spatie\Analytics\AnalyticsServiceProvider"
+php artisan vendor:publish --provider="Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider"
 ```
 
 The following config file will be published in `config/analytics.php`
