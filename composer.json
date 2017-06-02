@@ -38,6 +38,16 @@
       "Spatie\\Analytics\\": "src"
     }
   },
+  "extra":{
+    "laravel":{
+      "providers":[
+        "Spatie\\Analytics\\AnalyticsServiceProvider"
+      ],
+      "aliases":{
+        "Analytics": "Spatie\\Analytics\\AnalyticsFacade"
+      }
+    }
+  },
   "autoload-dev": {
     "psr-4": {
       "Spatie\\Analytics\\Tests\\": "tests"
