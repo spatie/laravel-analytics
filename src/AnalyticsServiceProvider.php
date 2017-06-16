@@ -22,7 +22,7 @@ class AnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/analytics.php', 'analytics');
+        $this->mergeConfigFrom(__DIR__.'/config/analytics.php', 'analytics');
 
         $analyticsConfig = config('analytics');
 
