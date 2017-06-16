@@ -2,6 +2,9 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.0.1 - 2017-06-16
+- make publishing the config file optional
+
 ## 3.0.0 - 2016-08-23
 - add support for `v2` of the Google API
 - renamed config file from `laravel-analytics.php` to `analytics.php`
