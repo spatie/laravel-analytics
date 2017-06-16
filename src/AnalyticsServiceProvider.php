@@ -22,6 +22,8 @@ class AnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/config/analytics.php', 'analytics');
+
         $analyticsConfig = config('analytics');
 
         $this->app->bind(AnalyticsClient::class, function () use ($analyticsConfig) {
