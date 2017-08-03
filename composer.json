@@ -22,14 +22,14 @@
     "require": {
         "php": "^7.0",
         "google/apiclient": "^2.0",
-        "illuminate/contracts": "~5.4.0|~5.5.x-dev",
-        "illuminate/support": "~5.4.0|~5.5.x-dev",
+        "illuminate/contracts": "~5.4.0|~5.5.x-dev|~5.5.x-dev",
+        "illuminate/support": "~5.4.0|~5.5.x-dev|~5.5.x-dev",
         "madewithlove/illuminate-psr-cache-bridge": "^1.0",
         "nesbot/carbon": "^1.21"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",
-        "orchestra/testbench": "~3.4.6|~3.5.x-dev",
+        "orchestra/testbench": "~3.4.6|~3.5.x-dev|~3.5.x-dev",
         "phpunit/phpunit": "^6.2"
     },
     "autoload": {
@@ -56,3 +56,4 @@
         "sort-packages": true
     }
 }
+
