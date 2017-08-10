@@ -15,14 +15,14 @@ class Filters
 
     public function __construct($filters = [])
     {
-        foreach( $filters as $filter ) {
+        foreach ($filters as $filter) {
             $this->checkFilterSyntax($filter);
         }
 
         $this->filters = $filters;
     }
 
-    public function addFilter($filter) 
+    public function addFilter($filter)
     {
         $this->checkFilterSyntax($filter);
         $this->filters[] = $filter;
@@ -30,7 +30,7 @@ class Filters
 
     private function checkFilterSyntax($filter)
     {
-        if ( strpos( $filter, 'ga:' ) !== 0 ) {
+        if (strpos($filter, 'ga:') !== 0) {
             throw InvalidFilter::filterMustContainGA($filter);
         }
     }
