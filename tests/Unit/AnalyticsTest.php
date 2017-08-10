@@ -178,7 +178,7 @@ class AnalyticsTest extends TestCase
                 ],
             ]);
 
-        $response = $this->analytics->fetchTopBrowsers(Period::create($this->startDate, $this->endDate), 3,Filters::create(['ga:pageTitle=@Page']));
+        $response = $this->analytics->fetchTopBrowsers(Period::create($this->startDate, $this->endDate), 3, Filters::create(['ga:pageTitle=@Page']));
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals([

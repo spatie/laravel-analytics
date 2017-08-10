@@ -67,7 +67,7 @@ class Analytics
             $period,
             'ga:users,ga:pageviews',
             [
-                'dimensions' => 'ga:date', 
+                'dimensions' => 'ga:date',
                 'filters' => $filters,
             ]
         );

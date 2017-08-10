@@ -2,26 +2,24 @@
 
 namespace Spatie\Analytics;
 
-use DateTime;
-use Carbon\Carbon;
 use Spatie\Analytics\Exceptions\InvalidFilter;
 
 class Filters
 {
     private $filters;
 
-    public static function create($filters=[]): Filters
+    public static function create($filters = []): Filters
     {
         return new static($filters);
     }
 
-    public function __construct($filters=[])
+    public function __construct($filters = [])
     {
-       foreach( $filters as $filter ) {
-           $this->checkFilterSyntax($filter);
-       }
+        foreach( $filters as $filter ) {
+            $this->checkFilterSyntax($filter);
+        }
 
-       $this->filters = $filters;
+        $this->filters = $filters;
     }
 
     public function addFilter($filter) 
@@ -30,7 +28,8 @@ class Filters
         $this->filters[] = $filter;
     }
 
-    private function checkFilterSyntax($filter) {
+    private function checkFilterSyntax($filter)
+    {
         if ( strpos( $filter, 'ga:' ) !== 0 ) {
             throw InvalidFilter::filterMustContainGA($filter);
         }
