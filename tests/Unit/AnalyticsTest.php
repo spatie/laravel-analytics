@@ -5,6 +5,7 @@ namespace Spatie\Analytics\Tests;
 use Mockery;
 use Carbon\Carbon;
 use Spatie\Analytics\Period;
+use Spatie\Analytics\Filters;
 use PHPUnit\Framework\TestCase;
 use Spatie\Analytics\Analytics;
 use Illuminate\Support\Collection;
@@ -53,7 +54,7 @@ class AnalyticsTest extends TestCase
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
             'ga:users,ga:pageviews',
-            ['dimensions' => 'ga:date,ga:pageTitle'],
+            ['dimensions' => 'ga:date,ga:pageTitle', 'filters' => 'ga:pageTitle=@Page'],
         ];
 
         $this->analyticsClient
@@ -63,7 +64,7 @@ class AnalyticsTest extends TestCase
                 'rows' => [['20160101', 'pageTitle', '1', '2']],
             ]);
 
-        $response = $this->analytics->fetchVisitorsAndPageViews(Period::create($this->startDate, $this->endDate));
+        $response = $this->analytics->fetchVisitorsAndPageViews(Period::create($this->startDate, $this->endDate), Filters::create(['ga:pageTitle=@Page']));
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
@@ -80,7 +81,7 @@ class AnalyticsTest extends TestCase
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
             'ga:users,ga:pageviews',
-            ['dimensions' => 'ga:date'],
+            ['dimensions' => 'ga:date', 'filters' => 'ga:pageTitle=@Page'],
         ];
 
         $this->analyticsClient
@@ -90,7 +91,7 @@ class AnalyticsTest extends TestCase
                 'rows' => [['20160101', '1', '2']],
             ]);
 
-        $response = $this->analytics->fetchTotalVisitorsAndPageViews(Period::create($this->startDate, $this->endDate));
+        $response = $this->analytics->fetchTotalVisitorsAndPageViews(Period::create($this->startDate, $this->endDate), Filters::create(['ga:pageTitle=@Page']));
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('2016-01-01', $response->first()['date']->format('Y-m-d'));
@@ -108,7 +109,7 @@ class AnalyticsTest extends TestCase
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
             'ga:pageviews',
-            ['dimensions' => 'ga:pagePath,ga:pageTitle', 'sort' => '-ga:pageviews', 'max-results' => $maxResults],
+            ['dimensions' => 'ga:pagePath,ga:pageTitle', 'sort' => '-ga:pageviews', 'max-results' => $maxResults, 'filters' => 'ga:pageTitle=@Page'],
         ];
 
         $this->analyticsClient
@@ -118,7 +119,7 @@ class AnalyticsTest extends TestCase
                 'rows' => [['https://test.com', 'Page title', '123']],
             ]);
 
-        $response = $this->analytics->fetchMostVisitedPages(Period::create($this->startDate, $this->endDate), $maxResults);
+        $response = $this->analytics->fetchMostVisitedPages(Period::create($this->startDate, $this->endDate), $maxResults, Filters::create(['ga:pageTitle=@Page']));
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('https://test.com', $response->first()['url']);
@@ -136,7 +137,7 @@ class AnalyticsTest extends TestCase
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
             'ga:pageviews',
-            ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults],
+            ['dimensions' => 'ga:fullReferrer', 'sort' => '-ga:pageviews', 'max-results' => $maxResults, 'filters' => 'ga:pageTitle=@Page'],
         ];
 
         $this->analyticsClient
@@ -146,7 +147,7 @@ class AnalyticsTest extends TestCase
                 'rows' => [['https://referrer.com', '123']],
             ]);
 
-        $response = $this->analytics->fetchTopReferrers(Period::create($this->startDate, $this->endDate), $maxResults);
+        $response = $this->analytics->fetchTopReferrers(Period::create($this->startDate, $this->endDate), $maxResults, Filters::create(['ga:pageTitle=@Page']));
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals('https://referrer.com', $response->first()['url']);
@@ -161,7 +162,7 @@ class AnalyticsTest extends TestCase
             $this->expectCarbon($this->startDate),
             $this->expectCarbon($this->endDate),
             'ga:sessions',
-            ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions'],
+            ['dimensions' => 'ga:browser', 'sort' => '-ga:sessions', 'filters' => 'ga:pageTitle=@Page'],
         ];
 
         $this->analyticsClient
@@ -177,7 +178,7 @@ class AnalyticsTest extends TestCase
                 ],
             ]);
 
-        $response = $this->analytics->fetchTopBrowsers(Period::create($this->startDate, $this->endDate), 3);
+        $response = $this->analytics->fetchTopBrowsers(Period::create($this->startDate, $this->endDate), 3,Filters::create(['ga:pageTitle=@Page']));
 
         $this->assertInstanceOf(Collection::class, $response);
         $this->assertEquals([

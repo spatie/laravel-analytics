@@ -170,12 +170,20 @@ $endDate = Carbon::now();
 Period::create($startDate, $endDate);
 ```
 
+If you want to add filters, you can pass a `Filters` object to the method.
+
+```php
+$filter = 'ga:pagePath=@my-path';
+
+Filters::create([$filter]]);
+```
+
 ## Provided methods
 
 ### Visitors and pageviews
 
 ```php
-public function fetchVisitorsAndPageViews(Period $period): Collection
+public function fetchVisitorsAndPageViews(Period $period, Filters = $filters): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, `pageTitle` and `pageViews`.
@@ -183,7 +191,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Total visitors and pageviews
 
 ```php
-public function fetchTotalVisitorsAndPageViews(Period $period): Collection
+public function fetchTotalVisitorsAndPageViews(Period $period, Filters = $filters): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, and `pageViews`.
@@ -191,7 +199,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Most visited pages
 
 ```php
-public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
+public function fetchMostVisitedPages(Period $period, int $maxResults = 20, Filters = $filters): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `url`, `pageTitle` and `pageViews`.
@@ -199,7 +207,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top referrers
 
 ```php
-public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
+public function fetchTopReferrers(Period $period, int $maxResults = 20, Filters = $filters): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
@@ -207,7 +215,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top browsers
 
 ```php
-public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
+public function fetchTopBrowsers(Period $period, int $maxResults = 10, Filters = $filters): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `browser` and `sessions`.

@@ -40,12 +40,15 @@ class Analytics
         return $this;
     }
 
-    public function fetchVisitorsAndPageViews(Period $period): Collection
+    public function fetchVisitorsAndPageViews(Period $period, Filters $filters = null): Collection
     {
         $response = $this->performQuery(
             $period,
             'ga:users,ga:pageviews',
-            ['dimensions' => 'ga:date,ga:pageTitle']
+            [
+                'dimensions' => 'ga:date,ga:pageTitle',
+                'filters' => $filters,
+            ]
         );
 
         return collect($response['rows'] ?? [])->map(function (array $dateRow) {
@@ -58,12 +61,15 @@ class Analytics
         });
     }
 
-    public function fetchTotalVisitorsAndPageViews(Period $period): Collection
+    public function fetchTotalVisitorsAndPageViews(Period $period, Filters $filters = null): Collection
     {
         $response = $this->performQuery(
             $period,
             'ga:users,ga:pageviews',
-            ['dimensions' => 'ga:date']
+            [
+                'dimensions' => 'ga:date', 
+                'filters' => $filters,
+            ]
         );
 
         return collect($response['rows'] ?? [])->map(function (array $dateRow) {
@@ -75,7 +81,7 @@ class Analytics
         });
     }
 
-    public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
+    public function fetchMostVisitedPages(Period $period, int $maxResults = 20, Filters $filters = null): Collection
     {
         $response = $this->performQuery(
             $period,
@@ -84,6 +90,7 @@ class Analytics
                 'dimensions' => 'ga:pagePath,ga:pageTitle',
                 'sort' => '-ga:pageviews',
                 'max-results' => $maxResults,
+                'filters' => $filters,
             ]
         );
 
@@ -97,7 +104,7 @@ class Analytics
             });
     }
 
-    public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
+    public function fetchTopReferrers(Period $period, int $maxResults = 20, Filters $filters = null): Collection
     {
         $response = $this->performQuery($period,
             'ga:pageviews',
@@ -105,6 +112,7 @@ class Analytics
                 'dimensions' => 'ga:fullReferrer',
                 'sort' => '-ga:pageviews',
                 'max-results' => $maxResults,
+                'filters' => $filters,
             ]
         );
 
@@ -116,7 +124,7 @@ class Analytics
         });
     }
 
-    public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
+    public function fetchTopBrowsers(Period $period, int $maxResults = 10, Filters $filters = null): Collection
     {
         $response = $this->performQuery(
             $period,
@@ -124,6 +132,7 @@ class Analytics
             [
                 'dimensions' => 'ga:browser',
                 'sort' => '-ga:sessions',
+                'filters' => $filters,
             ]
         );
 
