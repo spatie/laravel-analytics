@@ -46,17 +46,6 @@ composer require spatie/laravel-analytics
 
 The package will automatically register itself.
 
-This package also comes with a facade, which provides an easy way to call the the class.
-
-```php
-// config/app.php
-'aliases' => [
-    ...
-    'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
-    ...
-];
-```
-
 Optionally, you can publish the config file of this package with this command:
 
 ``` bash
