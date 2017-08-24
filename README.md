@@ -44,16 +44,7 @@ This package can be installed through Composer.
 composer require spatie/laravel-analytics
 ```
 
-You must install this service provider.
-
-```php
-// config/app.php
-'providers' => [
-    ...
-    Spatie\Analytics\AnalyticsServiceProvider::class,
-    ...
-];
-```
+The package will automatically register itself.
 
 This package also comes with a facade, which provides an easy way to call the the class.
 
