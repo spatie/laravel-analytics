@@ -2,6 +2,9 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.1.0 - 2017-08-31
+- add compatibility with Laravel 5.5
+
 ## 3.0.1 - 2017-06-16
 - make publishing the config file optional
 
