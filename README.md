@@ -44,27 +44,7 @@ This package can be installed through Composer.
 composer require spatie/laravel-analytics
 ```
 
-You must install this service provider.
-
-```php
-// config/app.php
-'providers' => [
-    ...
-    Spatie\Analytics\AnalyticsServiceProvider::class,
-    ...
-];
-```
-
-This package also comes with a facade, which provides an easy way to call the the class.
-
-```php
-// config/app.php
-'aliases' => [
-    ...
-    'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
-    ...
-];
-```
+The package will automatically register itself.
 
 Optionally, you can publish the config file of this package with this command:
 
@@ -93,12 +73,12 @@ return [
      * If you set this to zero, the responses won't be cached at all.
      */
     'cache_lifetime_in_minutes' => 60 * 24,
-    
+
     /*
      * Here you may configure the "store" that the underlying Google_Client will
      * use to store it's data.  You may also add extra parameters that will
      * be passed on setCacheConfig (see docs for google-api-php-client).
-     * 
+     *
      * Optional parameters: "lifetime", "prefix"
      */
     'cache' => [
@@ -138,9 +118,9 @@ I'm assuming that you've already created a Analytics account on the [Analytics s
 On this screen you can grant access to the email address found in the `client_email` key from the json file you download in the previous step. Read only access is enough.
 
 ![6](https://spatie.github.io/laravel-analytics/v2/6.jpg)
- 
+
 ### Getting the view id
- 
+
 The last thing you'll have to do is fill in the `view_id` in the config file. You can get the right value on the [Analytics site](https://analytics.google.com/analytics). Go to "View setting" in the Admin-section of the property.
 
 ![7](https://spatie.github.io/laravel-analytics/v2/7.jpg)
@@ -214,7 +194,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 
 ### All other Google Analytics queries
 
-To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on which metrics and dimensions might be used. 
+To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on which metrics and dimensions might be used.
 
 ```php
 public function performQuery(Period $period, string $metrics, array $others = [])
