@@ -5,12 +5,12 @@ namespace Spatie\Analytics\Tests;
 use Mockery;
 use Carbon\Carbon;
 use Spatie\Analytics\Period;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Spatie\Analytics\Analytics;
 use Illuminate\Support\Collection;
 use Spatie\Analytics\AnalyticsClient;
 
-class AnalyticsTest extends PHPUnit_Framework_TestCase
+class AnalyticsTest extends TestCase
 {
     /** @var \Spatie\Analytics\AnalyticsClient|\Mockery\Mock */
     protected $analyticsClient;

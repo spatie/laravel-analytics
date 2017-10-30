@@ -26,15 +26,9 @@ Most methods will return an `\Illuminate\Support\Collection` object containing t
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-## Postcardware
+> **If you're using v1 of this package, please refer to [an older version of this readme](https://github.com/spatie/laravel-analytics/blob/88eb75beadcd8dade2f3ee2423f3716253b2104d/README.md) for the installation and usage guide.**
 
-You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown, mentioning which of our package(s) you are using.
-
-Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
-
-The best postcards will get published on the open source page on our website.
-
-## Install
+## Installation
 
 This package can be installed through Composer.
 
@@ -42,7 +36,7 @@ This package can be installed through Composer.
 composer require spatie/laravel-analytics
 ```
 
-You must install this service provider.
+In Laravel 5.5 the package will autoregister the service provider. In Laravel 5.4 you must install this service provider.
 
 ```php
 // config/app.php
@@ -53,7 +47,7 @@ You must install this service provider.
 ];
 ```
 
-This package also comes with a facade, which provides an easy way to call the the class.
+In Laravel 5.5 the package will autoregister the facade. In Laravel 5.4 you must install the facade manually.
 
 ```php
 // config/app.php
@@ -64,27 +58,27 @@ This package also comes with a facade, which provides an easy way to call the th
 ];
 ```
 
-You can publish the config file of this package with this command:
+Optionally, you can publish the config file of this package with this command:
 
 ``` bash
 php artisan vendor:publish --provider="Spatie\Analytics\AnalyticsServiceProvider"
 ```
 
-The following config file will be published in `config/laravel-analytics.php`
+The following config file will be published in `config/analytics.php`
 
 ```php
+return [
 
-return [ 
     /*
      * The view id of which you want to display data.
      */
     'view_id' => env('ANALYTICS_VIEW_ID'),
 
     /*
-     * Path to the json file with service account credentials. Take a look at the README of this package
+     * Path to the client secret json file. Take a look at the README of this package
      * to learn how to get this file.
      */
-    'service_account_credentials_json' => storage_path('app/laravel-google-analytics/service-account-credentials.json'),
+    'service_account_credentials_json' => storage_path('app/analytics/service-account-credentials.json'),
 
     /*
      * The amount of minutes the Google API responses will be cached.
@@ -93,11 +87,16 @@ return [
     'cache_lifetime_in_minutes' => 60 * 24,
     
     /*
-     * The directory where the underlying Google_Client will store it's cache files.
+     * Here you may configure the "store" that the underlying Google_Client will
+     * use to store it's data.  You may also add extra parameters that will
+     * be passed on setCacheConfig (see docs for google-api-php-client).
+     * 
+     * Optional parameters: "lifetime", "prefix"
      */
-    'cache_location' => storage_path('app/laravel-google-analytics/google-cache/'),
+    'cache' => [
+        'store' => 'file',
+    ],
 ];
-
 ```
 
 ## How to obtain the credentials to communicate with Google Analytics
@@ -227,6 +226,10 @@ Run the tests with:
 vendor/bin/phpunit
 ```
 
+### Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
@@ -235,13 +238,25 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
 
+## Postcardware
+
+You're free to use this package, but if it makes it to your production environment we highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
+
+Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
+
+We publish all received postcards [on our company website](https://spatie.be/en/opensource/postcards).
+
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
-## About Spatie
-Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+## Support us
+
+Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+
+Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
+All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License
 

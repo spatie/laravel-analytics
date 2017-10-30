@@ -191,11 +191,9 @@ class Analytics
         );
     }
 
-    /**
+    /*
      * Get the underlying Google_Service_Analytics object. You can use this
      * to basically call anything on the Google Analytics API.
-     *
-     * @return \Google_Service_Analytics
      */
     public function getAnalyticsService(): Google_Service_Analytics
     {

@@ -13,7 +13,7 @@ class AnalyticsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/laravel-analytics.php' => config_path('laravel-analytics.php'),
+            __DIR__.'/../config/analytics.php' => config_path('analytics.php'),
         ]);
     }
 
@@ -22,7 +22,9 @@ class AnalyticsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $analyticsConfig = config('laravel-analytics');
+        $this->mergeConfigFrom(__DIR__.'/../config/analytics.php', 'analytics');
+
+        $analyticsConfig = config('analytics');
 
         $this->app->bind(AnalyticsClient::class, function () use ($analyticsConfig) {
             return AnalyticsClientFactory::createForConfig($analyticsConfig);
@@ -39,12 +41,7 @@ class AnalyticsServiceProvider extends ServiceProvider
         $this->app->alias(Analytics::class, 'laravel-analytics');
     }
 
-    /**
-     * @param array|null $analyticsConfig
-     *
-     * @throws \Spatie\Analytics\Exceptions\InvalidConfiguration
-     */
-    protected function guardAgainstInvalidConfiguration($analyticsConfig)
+    protected function guardAgainstInvalidConfiguration(array $analyticsConfig = null)
     {
         if (empty($analyticsConfig['view_id'])) {
             throw InvalidConfiguration::viewIdNotSpecified();

@@ -13,7 +13,7 @@ class AnalyticsServiceProviderTest extends TestCase
     {
         $this->app['config']->set('laravel-analytics.view_id', '');
 
-        $this->setExpectedException(InvalidConfiguration::class);
+        $this->expectException(InvalidConfiguration::class);
 
         Analytics::fetchVisitorsAndPageViews(Carbon::now()->subDay(), Carbon::now());
     }
