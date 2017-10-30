@@ -126,14 +126,12 @@ class Analytics
             ]
         );
 
-        $userSessions = collect($response->rows ?? [])->map(function (array $usRow) {
+        return collect($response->rows ?? [])->map(function (array $userRow) {
             return [
-                'type' => $usRow[0],
-                'sessions' => (int) $usRow[1],
+                'type' => $userRow[0],
+                'sessions' => (int) $userRow[1],
             ];
         });
-
-        return $userSessions;
     }
 
     public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
