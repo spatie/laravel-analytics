@@ -116,6 +116,24 @@ class Analytics
         });
     }
 
+    public function fetchUserTypes(Period $period): Collection
+    {
+        $response = $this->performQuery(
+            $period,
+            'ga:sessions',
+            [
+                'dimensions' => 'ga:userType',
+            ]
+        );
+
+        return collect($response->rows ?? [])->map(function (array $userRow) {
+            return [
+                'type' => $userRow[0],
+                'sessions' => (int) $userRow[1],
+            ];
+        });
+    }
+
     public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
     {
         $response = $this->performQuery(
