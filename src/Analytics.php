@@ -122,7 +122,7 @@ class Analytics
             $period,
             'ga:sessions',
             [
-                'dimensions' => 'ga:userType'
+                'dimensions' => 'ga:userType',
             ]
         );
 
