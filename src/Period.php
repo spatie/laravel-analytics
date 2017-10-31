@@ -32,7 +32,7 @@ class Period
     {
         $endDate = Carbon::today();
 
-        $startDate = Carbon::today()->subMonth($numberOfMonths)->startOfMonth();
+        $startDate = Carbon::today()->subMonths($numberOfMonths)->startOfMonth();
 
         return new static($startDate, $endDate);
     }
@@ -41,7 +41,7 @@ class Period
     {
         $endDate = Carbon::today();
 
-        $startDate = Carbon::today()->subYear($numberOfYears)->startOfYear();
+        $startDate = Carbon::today()->subYears($numberOfYears)->startOfYear();
 
         return new static($startDate, $endDate);
     }
