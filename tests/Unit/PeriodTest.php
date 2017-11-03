@@ -21,6 +21,28 @@ class PeriodTest extends TestCase
     }
 
     /** @test */
+    public function it_can_create_a_period_for_a_given_amount_of_months()
+    {
+        Carbon::setTestNow(Carbon::create(2016, 1, 10));
+
+        $period = Period::months(10);
+
+        $this->assertSame('2015-03-10', $period->startDate->format('Y-m-d'));
+        $this->assertSame('2016-01-10', $period->endDate->format('Y-m-d'));
+    }
+
+    /** @test */
+    public function it_can_create_a_period_for_a_given_amount_of_years()
+    {
+        Carbon::setTestNow(Carbon::create(2016, 1, 12));
+
+        $period = Period::years(2);
+
+        $this->assertSame('2014-01-12', $period->startDate->format('Y-m-d'));
+        $this->assertSame('2016-01-12', $period->endDate->format('Y-m-d'));
+    }
+
+    /** @test */
     public function it_provides_a_create_method()
     {
         $startDate = Carbon::create(2015, 12, 22);

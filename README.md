@@ -146,9 +146,23 @@ You'll need the `View ID` displayed there.
 When the installation is done you can easily retrieve Analytics data. Nearly all methods will return an `Illuminate\Support\Collection`-instance.
 
 
-Here is an example to retrieve visitors and pageview data for the current day and the last seven days.
+Here are a few examples using periods 
 ```php
+//retrieve visitors and pageview data for the current day and the last seven days
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+
+//retrieve visitors and pageviews since the 6 months ago
+$analyticsData = Analytics::fetchVisitorsAndPageViews(Period::months(6));
+
+//retrieve sessions and pageviews with yearMonth dimension since 1 year ago 
+$analyticsData = Analytics::performQuery(
+    Period::years(1),
+    'ga:sessions',
+    [
+        'metrics' => 'ga:sessions, ga:pageviews',
+        'dimensions' => 'ga:yearMonth'
+    ]
+);
 ```
 
 `$analyticsData` is a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`

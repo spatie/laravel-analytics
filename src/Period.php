@@ -28,6 +28,24 @@ class Period
         return new static($startDate, $endDate);
     }
 
+    public static function months(int $numberOfMonths): Period
+    {
+        $endDate = Carbon::today();
+
+        $startDate = Carbon::today()->subMonths($numberOfMonths)->startOfDay();
+
+        return new static($startDate, $endDate);
+    }
+
+    public static function years(int $numberOfYears): Period
+    {
+        $endDate = Carbon::today();
+
+        $startDate = Carbon::today()->subYears($numberOfYears)->startOfDay();
+
+        return new static($startDate, $endDate);
+    }
+
     public function __construct(DateTime $startDate, DateTime $endDate)
     {
         if ($startDate > $endDate) {
