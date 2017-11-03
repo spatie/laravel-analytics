@@ -2,6 +2,9 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.3.0 - 2017-11-03
+- add `months` and `years` methods to `Period`
+
 ## 3.2.0 - 2017-10-30
 - add `fetchUserTypes`
 
