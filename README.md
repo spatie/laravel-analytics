@@ -151,12 +151,12 @@ Here are a few examples using periods
 //retrieve visitors and pageview data for the current day and the last seven days
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 
-//retrieve visitors and pageviews since the first day of 6 months ago
+//retrieve visitors and pageviews since the 6 months ago
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::months(6));
 
-//retrieve sessions and pageviews with yearMonth dimension since the first day of current year
+//retrieve sessions and pageviews with yearMonth dimension since 1 year ago 
 $analyticsData = Analytics::performQuery(
-    Period::years(0),
+    Period::years(1),
     'ga:sessions',
     [
         'metrics' => 'ga:sessions, ga:pageviews',
