@@ -2,6 +2,9 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.4.0 - 2018-01-08
+- allow dynamic modification of config
+
 ## 3.3.0 - 2017-11-03
 - add `months` and `years` methods to `Period`
 
