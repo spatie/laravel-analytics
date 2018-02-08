@@ -2,6 +2,9 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+# 3.4.1 - 2018-02-08
+- add compatibility with Laravel 5.6
+
 ## 3.4.0 - 2018-01-08
 - allow dynamic modification of config
 

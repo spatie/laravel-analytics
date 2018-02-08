@@ -36,7 +36,7 @@ This package can be installed through Composer.
 composer require spatie/laravel-analytics
 ```
 
-In Laravel 5.5 the package will autoregister the service provider. In Laravel 5.4 you must install this service provider.
+In Laravel 5.5 and above the package will autoregister the service provider. In Laravel 5.4 you must install this service provider.
 
 ```php
 // config/app.php
@@ -47,7 +47,7 @@ In Laravel 5.5 the package will autoregister the service provider. In Laravel 5.
 ];
 ```
 
-In Laravel 5.5 the package will autoregister the facade. In Laravel 5.4 you must install the facade manually.
+In Laravel 5.5 and above the package will autoregister the facade. In Laravel 5.4 you must install the facade manually.
 
 ```php
 // config/app.php
