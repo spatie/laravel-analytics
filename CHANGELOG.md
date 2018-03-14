@@ -2,6 +2,9 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+# 3.5.0 - 2018-03-17
+- `service_account_credentials_json` now also accepts an array
+
 # 3.4.1 - 2018-02-08
 - add compatibility with Laravel 5.6
 
