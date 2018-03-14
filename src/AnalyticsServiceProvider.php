@@ -24,7 +24,6 @@ class AnalyticsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/analytics.php', 'analytics');
 
-
         $this->app->bind(AnalyticsClient::class, function () {
             $analyticsConfig = config('analytics');
 
@@ -48,6 +47,10 @@ class AnalyticsServiceProvider extends ServiceProvider
     {
         if (empty($analyticsConfig['view_id'])) {
             throw InvalidConfiguration::viewIdNotSpecified();
+        }
+
+        if (is_array($analyticsConfig['service_account_credentials_json'])) {
+            return;
         }
 
         if (! file_exists($analyticsConfig['service_account_credentials_json'])) {

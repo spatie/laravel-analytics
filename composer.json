@@ -29,6 +29,7 @@
 
   },
   "require-dev": {
+    "league/flysystem": ">=1.0.8",
     "mockery/mockery": "^1.0",
     "orchestra/testbench" : "~3.4.6|~3.5.0|~3.6.0",
     "phpunit/phpunit" : "^6.1|^7.0"
