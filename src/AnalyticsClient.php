@@ -58,13 +58,29 @@ class AnalyticsClient
         }
 
         return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others) {
-            return $this->service->data_ga->get(
-               "ga:{$viewId}",
-               $startDate->format('Y-m-d'),
-               $endDate->format('Y-m-d'),
-               $metrics,
-               $others
-           );
+            $result = $this->service->data_ga->get(
+                "ga:{$viewId}",
+                $startDate->format('Y-m-d'),
+                $endDate->format('Y-m-d'),
+                $metrics,
+                $others
+            );
+
+            $nextLink = $result->getNextLink();
+
+            while ($nextLink) {
+                $options = [];
+                /**
+                 * @source https://stackoverflow.com/a/33526740
+                 */
+                parse_str(substr($nextLink, strpos($nextLink, '?') + 1), $options);
+                $data = $this->service->data_ga->call('get', [$options], "Google_Service_Analytics_GaData");
+                $result->rows = array_merge($result->rows, $data->rows);
+
+                $nextLink = $data->getNextLink();
+            }
+
+            return $result;
         });
     }
 
