@@ -5,7 +5,6 @@ namespace Spatie\Analytics;
 use DateTime;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
-use Psr\Log\LoggerInterface;
 
 class AnalyticsClient
 {
@@ -93,6 +92,6 @@ class AnalyticsClient
      */
     protected function determineCacheName(array $properties): string
     {
-        return 'spatie.laravel-analytics.' . md5(serialize($properties));
+        return 'spatie.laravel-analytics.'.md5(serialize($properties));
     }
 }
