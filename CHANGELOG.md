@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+# 3.6.0 - 2018-04-30
+
+- add pagination to `performQuery`
+
 # 3.5.0 - 2018-03-17
 - `service_account_credentials_json` now also accepts an array
 
