@@ -72,10 +72,10 @@ class AnalyticsClient
 
                 parse_str(substr($nextLink, strpos($nextLink, '?') + 1), $options);
 
-                $data = $this->service->data_ga->call('get', [$options], 'Google_Service_Analytics_GaData');
+                $response = $this->service->data_ga->call('get', [$options], 'Google_Service_Analytics_GaData');
 
-                if ($data->rows) {
-                    $result->rows = array_merge($result->rows, $data->rows);
+                if ($response->rows) {
+                    $result->rows = array_merge($result->rows, $response->rows);
                 }
             }
 
