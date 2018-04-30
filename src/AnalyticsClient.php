@@ -42,11 +42,11 @@ class AnalyticsClient
     /**
      * Query the Google Analytics Service with given parameters.
      *
-     * @param string    $viewId
+     * @param string $viewId
      * @param \DateTime $startDate
      * @param \DateTime $endDate
-     * @param string    $metrics
-     * @param array     $others
+     * @param string $metrics
+     * @param array $others
      *
      * @return array|null
      */
@@ -93,6 +93,6 @@ class AnalyticsClient
      */
     protected function determineCacheName(array $properties): string
     {
-        return 'spatie.laravel-analytics.'.md5(serialize($properties));
+        return 'spatie.laravel-analytics.' . md5(serialize($properties));
     }
 }
