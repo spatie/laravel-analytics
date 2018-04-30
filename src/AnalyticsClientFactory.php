@@ -50,7 +50,7 @@ class AnalyticsClientFactory
 
     protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService): AnalyticsClient
     {
-        $client = new AnalyticsClient($googleService, app(Repository::class), app( \Psr\Log\LoggerInterface::class ));
+        $client = new AnalyticsClient($googleService, app(Repository::class));
 
         $client->setCacheLifeTimeInMinutes($analyticsConfig['cache_lifetime_in_minutes']);
 
