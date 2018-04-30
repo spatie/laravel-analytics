@@ -15,19 +15,14 @@ class AnalyticsClient
     /** @var \Illuminate\Contracts\Cache\Repository */
     protected $cache;
 
-    /** @var LoggerInterface */
-    protected $log;
-
     /** @var int */
     protected $cacheLifeTimeInMinutes = 0;
 
-    public function __construct(Google_Service_Analytics $service, Repository $cache, LoggerInterface $log)
+    public function __construct(Google_Service_Analytics $service, Repository $cache)
     {
         $this->service = $service;
 
         $this->cache = $cache;
-
-        $this->log = $log;
     }
 
     /**
@@ -64,7 +59,6 @@ class AnalyticsClient
         }
 
         return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others) {
-            $this->log->notice('[AnalyticsClient.performQuery] Fetching - first page');
             $result = $this->service->data_ga->get(
                 "ga:{$viewId}",
                 $startDate->format('Y-m-d'),
@@ -73,28 +67,16 @@ class AnalyticsClient
                 $others
             );
 
-            $nextLink = $result->getNextLink();
-
-            while ($nextLink) {
+            while ($nextLink = $result->getNextLink()) {
                 $options = [];
-                /**
-                 * @source https://stackoverflow.com/a/33526740
-                 */
+
                 parse_str(substr($nextLink, strpos($nextLink, '?') + 1), $options);
 
-                $percentage = $options['start-index'] * 100 / $result->getTotalResults();
-                $this->log->notice(sprintf('[AnalyticsClient.performQuery] Fetching - paging active %.2f%% of %d [%s]',
-                    $percentage, $result->getTotalResults(), $nextLink)
-                );
-
-                $data = $this->service->data_ga->call('get', [$options], "Google_Service_Analytics_GaData");
+                $data = $this->service->data_ga->call('get', [$options], 'Google_Service_Analytics_GaData');
 
                 if ($data->rows) {
                     $result->rows = array_merge($result->rows, $data->rows);
                 }
-
-                $nextLink = $data->getNextLink();
-
             }
 
             return $result;
