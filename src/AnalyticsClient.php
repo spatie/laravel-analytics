@@ -67,6 +67,10 @@ class AnalyticsClient
             );
 
             while ($nextLink = $result->getNextLink()) {
+                if (isset($others['max-results']) && count($result->rows) >= $others['max-results']) {
+                    break;
+                }
+
                 $options = [];
 
                 parse_str(substr($nextLink, strpos($nextLink, '?') + 1), $options);
@@ -76,6 +80,8 @@ class AnalyticsClient
                 if ($response->rows) {
                     $result->rows = array_merge($result->rows, $response->rows);
                 }
+
+                $result->nextLink = $response->nextLink;
             }
 
             return $result;
