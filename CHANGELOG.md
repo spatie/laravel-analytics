@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+# 3.6.1 - 2018-05-04
+
+- fix infinite loop
+
 # 3.6.0 - 2018-04-30
 
 - add pagination to `performQuery`
