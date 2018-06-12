@@ -99,7 +99,8 @@ class Analytics
 
     public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
     {
-        $response = $this->performQuery($period,
+        $response = $this->performQuery(
+            $period,
             'ga:pageviews',
             [
                 'dimensions' => 'ga:fullReferrer',
