@@ -2,18 +2,22 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
-# 3.6.1 - 2018-05-04
+## 3.6.2 - 2018-08-24
+
+- add support for Laravel 5.7
+
+## 3.6.1 - 2018-05-04
 
 - fix infinite loop
 
-# 3.6.0 - 2018-04-30
+## 3.6.0 - 2018-04-30
 
 - add pagination to `performQuery`
 
-# 3.5.0 - 2018-03-17
+## 3.5.0 - 2018-03-17
 - `service_account_credentials_json` now also accepts an array
 
-# 3.4.1 - 2018-02-08
+## 3.4.1 - 2018-02-08
 - add compatibility with Laravel 5.6
 
 ## 3.4.0 - 2018-01-08
