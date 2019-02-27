@@ -27,7 +27,7 @@ class AnalyticsTest extends TestCase
     /** @var \Carbon\Carbon */
     protected $endDate;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->analyticsClient = Mockery::mock(AnalyticsClient::class);
 
@@ -40,7 +40,7 @@ class AnalyticsTest extends TestCase
         $this->endDate = Carbon::now();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }

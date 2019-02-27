@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.6.3 - 2019-02-27
+
+- add support for Laravel 5.8
+
 ## 3.6.2 - 2018-08-24
 
 - add support for Laravel 5.7
