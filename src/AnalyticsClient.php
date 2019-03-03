@@ -33,7 +33,7 @@ class AnalyticsClient
      */
     public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes)
     {
-        $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes;
+        $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes * 60;
 
         return $this;
     }
