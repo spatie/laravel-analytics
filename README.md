@@ -254,7 +254,7 @@ Things were working just fine before and you come back at a later time and run i
 }
 ```
 
-Good news is yhis isn't an issue with the package, Google, or even your application. When working with Homestead and you suspend the machine, the internal clock in homestead falls out of sync with the real world. Google's servers catches this discrepency and denies the request. To resolve this, simply `reload` homestead.
+Good news is this isn't an issue with the package, Google, or even your application. When working with Homestead and you suspend the machine, the internal clock in homestead falls out of sync with the real world. Google's servers catches this discrepency and denies the request. To resolve this, simply `reload` homestead.
 
 <a name="testing"></a>
 ## Testing
