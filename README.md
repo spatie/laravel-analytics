@@ -9,6 +9,25 @@
 
 Using this package you can easily retrieve data from Google Analytics.
 
+- [Examples](#examples)
+- [Installation](#installation)
+- [Getting Google Analytic Credentials](#getting-google-analytic-credentials)
+- [Usage](#usage)
+- [Provided Methods](#provided-methods)
+- [FAQ](#faq)
+- [Testing](#testing)
+- [Changelog](#changelog)
+- [Contributing](#contributing)
+- [Security](#security)
+- [Postcardware](#postcardware)
+- [Credits](#credits)
+- [Support Us](#support-us)
+- [License](#license)
+
+---
+
+<a name="examples"></a>
+## Examples
 Here are a few examples of the provided methods:
 
 ```php
@@ -28,6 +47,7 @@ Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all
 
 > **If you're using v1 of this package, please refer to [an older version of this readme](https://github.com/spatie/laravel-analytics/blob/88eb75beadcd8dade2f3ee2423f3716253b2104d/README.md) for the installation and usage guide.**
 
+<a name="installation"></a>
 ## Installation
 
 This package can be installed through Composer.
@@ -78,9 +98,8 @@ return [
 ];
 ```
 
-## How to obtain the credentials to communicate with Google Analytics
-
-### Getting credentials
+<a name="getting-google-analytic-credentials"></a>
+## Getting Google Analytic Credentials
 
 The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and click "Select a project" in the header.
 
@@ -120,6 +139,7 @@ You'll need the `View ID` displayed there.
 
 ![8](https://spatie.github.io/laravel-analytics/v2/8.jpg)
 
+<a name="usage"></a>
 ## Usage
 
 When the installation is done you can easily retrieve Analytics data. Nearly all methods will return an `Illuminate\Support\Collection`-instance.
@@ -155,7 +175,8 @@ $endDate = Carbon::now();
 Period::create($startDate, $endDate);
 ```
 
-## Provided methods
+<a name="provided-methods"></a>
+## Provided Methods
 
 ### Visitors and pageviews
 
@@ -219,6 +240,23 @@ You can get access to the underlying `Google_Service_Analytics` object:
 Analytics::getAnalyticsService();
 ```
 
+<a name="faq"></a>
+## FAQ
+
+### I received an `invalid_grant` error about an invalid JWT token
+
+Things were working just fine before and you come back at a later time and run into this error:
+
+```json
+{
+    "error": "invalid_grant",
+    "error_description": "Invalid JWT: Token must be a short-lived token (60 minutes) and in a reasonable timeframe. Check your iat and exp values and use a clock with skew to account for clock differences between systems."
+}
+```
+
+Good news is yhis isn't an issue with the package, Google, or even your application. When working with Homestead and you suspend the machine, the internal clock in homestead falls out of sync with the real world. Google's servers catches this discrepency and denies the request. To resolve this, simply `reload` homestead.
+
+<a name="testing"></a>
 ## Testing
 
 Run the tests with:
@@ -227,18 +265,22 @@ Run the tests with:
 vendor/bin/phpunit
 ```
 
-### Changelog
+<a name="changelog"></a>
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
+<a name="contributing"></a>
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
+<a name="security"></a>
 ## Security
 
 If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
 
+<a name="postcardware"></a>
 ## Postcardware
 
 You're free to use this package, but if it makes it to your production environment we highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
@@ -247,18 +289,21 @@ Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
 
 We publish all received postcards [on our company website](https://spatie.be/en/opensource/postcards).
 
+<a name="credits"></a>
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
-## Support us
+<a name="support-us"></a>
+## Support Us
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie).
 All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
+<a name="license"></a>
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
