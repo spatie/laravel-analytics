@@ -14,7 +14,7 @@ class Period
     /** @var \DateTime */
     public $endDate;
 
-    public static function create(DateTime $startDate, $endDate): self
+    public static function create(DateTime $startDate, DateTime $endDate): self
     {
         return new static($startDate, $endDate);
     }
