@@ -22,7 +22,7 @@
   "require": {
     "php" : "^7.2",
     "google/apiclient" : "^2.0",
-    "laravel/framework": "~5.8.0",
+    "laravel/framework": "~5.8.0|~6.0",
     "madewithlove/illuminate-psr-cache-bridge": "^1.0",
     "nesbot/carbon": "^1.21 | ^2.0"
 
