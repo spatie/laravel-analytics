@@ -5,7 +5,8 @@ namespace Spatie\Analytics;
 use Google_Client;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
-use Madewithlove\IlluminatePsrCacheBridge\Laravel\CacheItemPool;
+use Illuminate\Support\Facades\Cache;
+use Symfony\Component\Cache\Adapter\Psr16Adapter;
 
 class AnalyticsClientFactory
 {
@@ -37,9 +38,9 @@ class AnalyticsClientFactory
     {
         $config = collect($config);
 
-        $store = \Cache::store($config->get('store'));
+        $store = Cache::store($config->get('store'));
 
-        $cache = new CacheItemPool($store);
+        $cache = new Psr16Adapter($store);
 
         $client->setCache($cache);
 

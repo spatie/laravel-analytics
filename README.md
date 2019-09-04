@@ -30,6 +30,8 @@ Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all
 
 ## Installation
 
+> For Laravel 5.8, use version 3.7.0 of this package!
+
 This package can be installed through Composer.
 
 ``` bash

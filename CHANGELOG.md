@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.8.0 - 2019-09-04
+
+- add support for Laravel 6
+
 ## 3.7.1 - 2019-03-05
 
 - fix cache lifetime
