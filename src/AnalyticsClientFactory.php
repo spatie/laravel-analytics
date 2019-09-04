@@ -4,8 +4,8 @@ namespace Spatie\Analytics;
 
 use Google_Client;
 use Google_Service_Analytics;
-use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Cache\Repository;
 use Symfony\Component\Cache\Adapter\Psr16Adapter;
 
 class AnalyticsClientFactory
