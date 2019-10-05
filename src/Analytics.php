@@ -168,6 +168,26 @@ class Analytics
                 'sessions' => $topBrowsers->splice($maxResults - 1)->sum('sessions'),
             ]);
     }
+    
+    // Function to get Visitors Device
+    public function fetchDeviceVisitors(Period $period, int $maxResults = 10): Collection
+    {
+        $response = $this->performQuery(
+            $period,
+            'ga:users',
+            [
+                'dimensions' => 'ga:deviceCategory',
+                'sort' => '-ga:deviceCategory',
+            ]
+        );
+
+        return collect($response->rows ?? [])->map(function (array $userRow) {
+            return [
+                'device' => $userRow[0],
+                'sessions' => (int) $userRow[1],
+            ];
+        });
+    }
 
     /**
      * Call the query method on the authenticated client.
