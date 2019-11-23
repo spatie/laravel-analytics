@@ -24,7 +24,7 @@
         "google/apiclient": "^2.0",
         "laravel/framework": "^6.0",
         "nesbot/carbon": "^2.0",
-        "symfony/cache": "^4.3"
+        "symfony/cache": "^4.3|^5.0"
     },
     "require-dev": {
         "league/flysystem": ">=1.0.8",
