@@ -2,10 +2,10 @@
 
 namespace Spatie\Analytics\Tests\Integration;
 
-use Storage;
 use Analytics;
 use Carbon\Carbon;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
+use Storage;
 
 class AnalyticsServiceProviderTest extends TestCase
 {
