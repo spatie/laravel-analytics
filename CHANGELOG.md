@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.9.0 - 2020-03-03
+
+- add support for Laravel 7c
+
 ## 3.8.1 - 2019-11-23
 
 - allow symfony 5 components
