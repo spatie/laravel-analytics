@@ -8,8 +8,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                os: [ubuntu-latest]
-                php: [7.4]
+                os: [ubuntu-latest, windows-latest]
+                php: [7.2, 7.3, 7.4]
                 laravel: [6.*, 7.*]
                 dependency-version: [prefer-lowest, prefer-stable]
                 include:
@@ -41,6 +41,5 @@ jobs:
                 run: |
                     composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                     composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
-
             -   name: Execute tests
                 run: vendor/bin/phpunit
