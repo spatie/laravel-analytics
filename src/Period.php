@@ -2,8 +2,8 @@
 
 namespace Spatie\Analytics;
 
-use DateTime;
 use Carbon\Carbon;
+use DateTime;
 use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class Period
