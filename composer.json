@@ -1,6 +1,6 @@
 {
     "name": "spatie/laravel-analytics",
-    "description": "A Laravel 5 package to retrieve Google Analytics data.",
+    "description": "A Laravel package to retrieve Google Analytics data.",
     "keywords": [
         "spatie",
         "google",
