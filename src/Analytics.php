@@ -40,6 +40,11 @@ class Analytics
         return $this;
     }
 
+    public function getViewId()
+    {
+        return $this->viewId;
+    }
+
     public function fetchVisitorsAndPageViews(Period $period): Collection
     {
         $response = $this->performQuery(
