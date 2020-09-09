@@ -10,22 +10,27 @@ jobs:
             matrix:
                 os: [ubuntu-latest]
                 php: [7.2, 7.3, 7.4]
-                laravel: [6.*, 7.*]
+                laravel: [8.*, 6.*, 7.*]
                 dependency-version: [prefer-lowest, prefer-stable]
                 include:
+                    -   laravel: 8.*
+                        testbench: 6.*
                     -   laravel: 7.*
                         testbench: 5.*
                     -   laravel: 6.*
                         testbench: 4.*
+                exclude:
+                    -   laravel: 8.*
+                        php: 7.2
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v1
+                uses: actions/checkout@v2
 
             -   name: Cache dependencies
-                uses: actions/cache@v1
+                uses: actions/cache@v2
                 with:
                     path: ~/.composer/cache/files
                     key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}

@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.10.1 - 2020-09-09
+
+- Add support for Laravel 8
+
 ## 3.10.0 - 2020-06-26
 
 - Create getter for $viewId in Analytics Class
