@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.2|^8.0",
+        "php": "^7.3|^8.0",
         "google/apiclient": "^2.0|^2.7",
         "laravel/framework": "^6.0|^7.0|^8.0",
         "nesbot/carbon": "^2.0",
