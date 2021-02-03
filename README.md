@@ -110,9 +110,11 @@ On the next screen you can give the service account a name. You can name it anyt
 
 Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information I don't recommend committing it to your git repository.
 
-I recommend to put your json file on **your_laravel_project**/storage/app/analytics
+I recommend to put your json file on `your_laravel_project/storage/app/analytics`
 
-and call it in config file with app/analytics/**My Project 2458-d7a5e20af27f.json**
+and call it in config file with `app/analytics/My Project 2458-d7a5e20af27f.json`
+
+` My Project 2458-d7a5e20af27f.json` is same as `service_account_credentials_json`
 
 ### Granting permissions to your Analytics property
 
@@ -128,16 +130,18 @@ On this screen you can grant access to the email address found in the `client_em
 
 The last thing you'll have to do is fill in the `view_id` in the config file. You can get the right value on the [Analytics site](https://analytics.google.com/analytics). Go to "View setting" in the Admin-section of the property.
 
+**If you can't find the viewid**
+
+Maybe you are using Google Analytics 4 (GA 4), its the newest version of google analytics
+
+[Go to stackoverflow](https://stackoverflow.com/questions/64510635/how-do-i-get-view-id-from-google-analytics-4)
+
+
 ![7](https://spatie.github.io/laravel-analytics/v2/7.jpg)
 
 You'll need the `View ID` displayed there.
 
 ![8](https://spatie.github.io/laravel-analytics/v2/8.jpg)
-
-**If you can't find the viewid**
-Maybe you are using Google Analytics 4 (GA 4), its the newest version of google analytics
-
-[Go to stackoverflow here](https://stackoverflow.com/questions/64510635/how-do-i-get-view-id-from-google-analytics-4)
 
 ## Usage
 
