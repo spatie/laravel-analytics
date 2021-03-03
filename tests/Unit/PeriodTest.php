@@ -3,6 +3,7 @@
 namespace Spatie\Analytics\Tests;
 
 use Carbon\Carbon;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Spatie\Analytics\Exceptions\InvalidPeriod;
 use Spatie\Analytics\Period;
@@ -47,6 +48,18 @@ class PeriodTest extends TestCase
     {
         $startDate = Carbon::create(2015, 12, 22);
         $endDate = Carbon::create(2016, 1, 1);
+
+        $period = Period::create($startDate, $endDate);
+
+        $this->assertSame('2015-12-22', $period->startDate->format('Y-m-d'));
+        $this->assertSame('2016-01-01', $period->endDate->format('Y-m-d'));
+    }
+
+    /** @test */
+    public function it_accepts_datetime_immutable_instances()
+    {
+        $startDate = Carbon::create(2015, 12, 22)->toDateTimeImmutable();
+        $endDate = Carbon::create(2016, 1, 1)->toDateTimeImmutable();
 
         $period = Period::create($startDate, $endDate);
 
