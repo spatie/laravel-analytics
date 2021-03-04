@@ -3,18 +3,18 @@
 namespace Spatie\Analytics;
 
 use Carbon\Carbon;
-use DateTime;
+use DateTimeInterface;
 use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class Period
 {
-    /** @var \DateTime */
+    /** @var \DateTimeInterface */
     public $startDate;
 
-    /** @var \DateTime */
+    /** @var \DateTimeInterface */
     public $endDate;
 
-    public static function create(DateTime $startDate, DateTime $endDate): self
+    public static function create(DateTimeInterface $startDate, DateTimeInterface $endDate): self
     {
         return new static($startDate, $endDate);
     }
@@ -46,7 +46,7 @@ class Period
         return new static($startDate, $endDate);
     }
 
-    public function __construct(DateTime $startDate, DateTime $endDate)
+    public function __construct(DateTimeInterface $startDate, DateTimeInterface $endDate)
     {
         if ($startDate > $endDate) {
             throw InvalidPeriod::startDateCannotBeAfterEndDate($startDate, $endDate);

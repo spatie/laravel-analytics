@@ -2,7 +2,7 @@
 
 namespace Spatie\Analytics;
 
-use DateTime;
+use DateTimeInterface;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
 
@@ -42,14 +42,14 @@ class AnalyticsClient
      * Query the Google Analytics Service with given parameters.
      *
      * @param string $viewId
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param \DateTimeInterface $startDate
+     * @param \DateTimeInterface $endDate
      * @param string $metrics
      * @param array $others
      *
      * @return array|null
      */
-    public function performQuery(string $viewId, DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
+    public function performQuery(string $viewId, DateTimeInterface $startDate, DateTimeInterface $endDate, string $metrics, array $others = [])
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
