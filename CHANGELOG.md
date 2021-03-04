@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 3.11.0 - 2021-03-04
+
+- widened DateTime to DateTimeInterface to allow immutables usage (#390)
+
 ## 3.10.2 - 2020-11-28
 
 - add support for PHP 8
