@@ -59,9 +59,9 @@ class PeriodTest extends TestCase
     public function it_accepts_datetime_immutable_instances()
     {
         $startDate = Carbon::create(2015, 12, 22)->toIso8601String();
-        $startDateImmutable= new DateTimeImmutable($startDate);
+        $startDateImmutable = new DateTimeImmutable($startDate);
         $endDate = Carbon::create(2016, 1, 1)->toIso8601String();
-        $endDateImmutable= new DateTimeImmutable($endDate);
+        $endDateImmutable = new DateTimeImmutable($endDate);
 
         $period = Period::create($startDateImmutable, $endDateImmutable);
 
