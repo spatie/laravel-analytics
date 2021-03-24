@@ -8,18 +8,16 @@ use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class Period
 {
-    /** @var \DateTimeInterface */
-    public $startDate;
+    public \DateTimeInterface $startDate;
 
-    /** @var \DateTimeInterface */
-    public $endDate;
+    public \DateTimeInterface $endDate;
 
     public static function create(DateTimeInterface $startDate, DateTimeInterface $endDate): self
     {
         return new static($startDate, $endDate);
     }
 
-    public static function days(int $numberOfDays): self
+    public static function days(int $numberOfDays): static
     {
         $endDate = Carbon::today();
 
@@ -28,7 +26,7 @@ class Period
         return new static($startDate, $endDate);
     }
 
-    public static function months(int $numberOfMonths): self
+    public static function months(int $numberOfMonths): static
     {
         $endDate = Carbon::today();
 
@@ -37,7 +35,7 @@ class Period
         return new static($startDate, $endDate);
     }
 
-    public static function years(int $numberOfYears): self
+    public static function years(int $numberOfYears): static
     {
         $endDate = Carbon::today();
 

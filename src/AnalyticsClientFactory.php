@@ -34,7 +34,7 @@ class AnalyticsClientFactory
         return $client;
     }
 
-    protected static function configureCache(Google_Client $client, $config)
+    protected static function configureCache(Google_Client $client, $config): void
     {
         $config = collect($config);
 
