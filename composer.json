@@ -20,10 +20,11 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "google/apiclient": "^2.0|^2.7",
         "laravel/framework": "^6.0|^7.0|^8.0",
         "nesbot/carbon": "^2.0",
+        "spatie/laravel-package-tools": "^1.6",
         "symfony/cache": "^4.3|^5.0"
     },
     "require-dev": {
