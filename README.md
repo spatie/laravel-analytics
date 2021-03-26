@@ -232,7 +232,7 @@ Run the tests with:
 vendor/bin/phpunit
 ```
 
-### Changelog
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
