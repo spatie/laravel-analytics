@@ -2,6 +2,12 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 4.0.0 - unreleased
+
+- support PHP 8+
+- drop support for PHP 7.x
+- use PHP 8 syntax where possible
+
 ## 3.11.0 - 2021-03-04
 
 - widened DateTime to DateTimeInterface to allow immutables usage (#390)

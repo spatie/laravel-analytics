@@ -8,20 +8,13 @@ use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsClient
 {
-    /** @var \Google_Service_Analytics */
-    protected $service;
+    protected int $cacheLifeTimeInMinutes = 0;
 
-    /** @var \Illuminate\Contracts\Cache\Repository */
-    protected $cache;
-
-    /** @var int */
-    protected $cacheLifeTimeInMinutes = 0;
-
-    public function __construct(Google_Service_Analytics $service, Repository $cache)
-    {
-        $this->service = $service;
-
-        $this->cache = $cache;
+    public function __construct(
+        protected Google_Service_Analytics $service,
+        protected Repository $cache,
+    ) {
+        //
     }
 
     /**
@@ -31,7 +24,7 @@ class AnalyticsClient
      *
      * @return self
      */
-    public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes)
+    public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes): self
     {
         $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes * 60;
 
@@ -49,7 +42,7 @@ class AnalyticsClient
      *
      * @return array|null
      */
-    public function performQuery(string $viewId, DateTimeInterface $startDate, DateTimeInterface $endDate, string $metrics, array $others = [])
+    public function performQuery(string $viewId, DateTimeInterface $startDate, DateTimeInterface $endDate, string $metrics, array $others = []): array|null
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
@@ -93,7 +86,7 @@ class AnalyticsClient
         return $this->service;
     }
 
-    /*
+    /**
      * Determine the cache name for the set of query properties given.
      */
     protected function determineCacheName(array $properties): string

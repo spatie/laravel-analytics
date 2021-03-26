@@ -11,16 +11,10 @@ class Analytics
 {
     use Macroable;
 
-    /** @var \Spatie\Analytics\AnalyticsClient */
-    protected $client;
+    protected AnalyticsClient $client;
 
-    /** @var string */
-    protected $viewId;
+    protected string $viewId;
 
-    /**
-     * @param \Spatie\Analytics\AnalyticsClient $client
-     * @param string                            $viewId
-     */
     public function __construct(AnalyticsClient $client, string $viewId)
     {
         $this->client = $client;
@@ -28,12 +22,7 @@ class Analytics
         $this->viewId = $viewId;
     }
 
-    /**
-     * @param string $viewId
-     *
-     * @return $this
-     */
-    public function setViewId(string $viewId)
+    public function setViewId(string $viewId): self
     {
         $this->viewId = $viewId;
 
@@ -184,7 +173,7 @@ class Analytics
      *
      * @return array|null
      */
-    public function performQuery(Period $period, string $metrics, array $others = [])
+    public function performQuery(Period $period, string $metrics, array $others = []): array|null
     {
         return $this->client->performQuery(
             $this->viewId,
@@ -195,7 +184,7 @@ class Analytics
         );
     }
 
-    /*
+    /**
      * Get the underlying Google_Service_Analytics object. You can use this
      * to basically call anything on the Google Analytics API.
      */
