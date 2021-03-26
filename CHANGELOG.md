@@ -2,7 +2,7 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
-## 4.0.0 - unreleased
+## 4.0.0 - 2021-03-26
 
 - support PHP 8+
 - drop support for PHP 7.x
