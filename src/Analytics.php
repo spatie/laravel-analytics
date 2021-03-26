@@ -173,7 +173,7 @@ class Analytics
      *
      * @return array|null
      */
-    public function performQuery(Period $period, string $metrics, array $others = []): array|null
+    public function performQuery(Period $period, string $metrics, array $others = []): array | null
     {
         return $this->client->performQuery(
             $this->viewId,
