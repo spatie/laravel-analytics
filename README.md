@@ -35,10 +35,6 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 
 ## Installation
 
-> For Laravel 6.x, use version 3.x of this package.
-
-> For Laravel 5.8, use version 3.7.0 of this package!
-
 This package can be installed through Composer.
 
 ``` bash
