@@ -17,13 +17,6 @@ class AnalyticsClient
         //
     }
 
-    /**
-     * Set the cache time.
-     *
-     * @param int $cacheLifeTimeInMinutes
-     *
-     * @return self
-     */
     public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes): self
     {
         $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes * 60;
@@ -56,7 +49,7 @@ class AnalyticsClient
                 $startDate->format('Y-m-d'),
                 $endDate->format('Y-m-d'),
                 $metrics,
-                $others
+                $others,
             );
 
             while ($nextLink = $result->getNextLink()) {
