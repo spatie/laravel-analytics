@@ -45,7 +45,7 @@ class AnalyticsClientFactory
         $client->setCache($cache);
 
         $client->setCacheConfig(
-            $config->except('store')->toArray()
+            $config->except('store')->toArray(),
         );
     }
 

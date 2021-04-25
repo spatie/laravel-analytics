@@ -8,9 +8,9 @@ use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class Period
 {
-    public \DateTimeInterface $startDate;
+    public DateTimeInterface $startDate;
 
-    public \DateTimeInterface $endDate;
+    public DateTimeInterface $endDate;
 
     public static function create(DateTimeInterface $startDate, DateTimeInterface $endDate): self
     {

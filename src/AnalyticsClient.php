@@ -17,13 +17,6 @@ class AnalyticsClient
         //
     }
 
-    /**
-     * Set the cache time.
-     *
-     * @param int $cacheLifeTimeInMinutes
-     *
-     * @return self
-     */
     public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes): self
     {
         $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes * 60;
@@ -46,7 +39,7 @@ class AnalyticsClient
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
-        if ($this->cacheLifeTimeInMinutes == 0) {
+        if ($this->cacheLifeTimeInMinutes === 0) {
             $this->cache->forget($cacheName);
         }
 
@@ -56,7 +49,7 @@ class AnalyticsClient
                 $startDate->format('Y-m-d'),
                 $endDate->format('Y-m-d'),
                 $metrics,
-                $others
+                $others,
             );
 
             while ($nextLink = $result->getNextLink()) {
