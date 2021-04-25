@@ -46,7 +46,7 @@ class AnalyticsClient
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
-        if ($this->cacheLifeTimeInMinutes == 0) {
+        if ($this->cacheLifeTimeInMinutes === 0) {
             $this->cache->forget($cacheName);
         }
 
