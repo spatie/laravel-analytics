@@ -34,7 +34,7 @@ class AnalyticsClient
      * @param string $metrics
      * @param array $others
      *
-     * @return array|null
+     * @return Google_Service_Analytics_GaData|array|null
      */
     public function performQuery(string $viewId, DateTimeInterface $startDate, DateTimeInterface $endDate, string $metrics, array $others = []): Google_Service_Analytics_GaData | array | null
     {
