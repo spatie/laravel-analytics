@@ -153,9 +153,9 @@ class Analytics
      * @param string $metrics
      * @param array  $others
      *
-     * @return array|null
+     * @return mixed
      */
-    public function performQuery(Period $period, string $metrics, array $others = []): array | null
+    public function performQuery(Period $period, string $metrics, array $others = []): mixed
     {
         return $this->client->performQuery(
             $this->viewId,

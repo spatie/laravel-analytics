@@ -33,9 +33,9 @@ class AnalyticsClient
      * @param string $metrics
      * @param array $others
      *
-     * @return array|null
+     * @return mixed
      */
-    public function performQuery(string $viewId, DateTimeInterface $startDate, DateTimeInterface $endDate, string $metrics, array $others = []): array | null
+    public function performQuery(string $viewId, DateTimeInterface $startDate, DateTimeInterface $endDate, string $metrics, array $others = []): mixed
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
