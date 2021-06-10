@@ -4,6 +4,7 @@ namespace Spatie\Analytics;
 
 use Carbon\Carbon;
 use Google_Service_Analytics;
+use Google_Service_Analytics_GaData;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
@@ -153,9 +154,9 @@ class Analytics
      * @param string $metrics
      * @param array  $others
      *
-     * @return array|null
+     * @return Google_Service_Analytics_GaData|array|null
      */
-    public function performQuery(Period $period, string $metrics, array $others = []): array | null
+    public function performQuery(Period $period, string $metrics, array $others = []): Google_Service_Analytics_GaData | array | null
     {
         return $this->client->performQuery(
             $this->viewId,
