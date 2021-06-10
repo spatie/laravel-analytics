@@ -87,23 +87,32 @@ return [
 
 ### Getting credentials
 
-The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and click "Select a project" in the header.
+The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and click "Select a project" in the header. Then click enable APIs and services
 
-![1](https://spatie.github.io/laravel-analytics/v2/1.jpg)
+![Picture1](https://user-images.githubusercontent.com/29292018/106677220-f6111780-65ea-11eb-9190-7b953ba6a0c5.png)
 
 Next up we must specify which API’s the project may consume. In the list of available API’s click "Google Analytics API". On the next screen click "Enable".
 
-![2](https://spatie.github.io/laravel-analytics/v2/2.jpg)
+![Picture2](https://user-images.githubusercontent.com/29292018/106677059-9b77bb80-65ea-11eb-8fa3-e1f7baa8a3de.png)
 
-Now that you’ve created a project that has access to the Analytics API it’s time to download a file with these credentials. Click "Credentials" in the sidebar. You’ll want to create a "Service account key".
 
-![3](https://spatie.github.io/laravel-analytics/v2/3.jpg)
+Now that you’ve created a project that has access to the Analytics API it’s time to download a file with these credentials. Click "Create Credentials". You’ll want to create a "Service account key".
+
+![Picture3](https://user-images.githubusercontent.com/29292018/106677063-a16d9c80-65ea-11eb-920d-eed8822e7ee4.png)
 
 On the next screen you can give the service account a name. You can name it anything you’d like. In the service account id you’ll see an email address. We’ll use this email address later on in this guide. Select "JSON" as the key type and click "Create" to download the JSON file.
 
-![4](https://spatie.github.io/laravel-analytics/v2/4.jpg)
+![Picture4](https://user-images.githubusercontent.com/29292018/106677069-a7fc1400-65ea-11eb-9fce-061ffd965c67.png)
+
+![Picture5](https://user-images.githubusercontent.com/29292018/106677077-acc0c800-65ea-11eb-8c68-0fa657c1778f.png)
 
 Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information I don't recommend committing it to your git repository.
+
+I recommend to put your json file on `your_laravel_project/storage/app/analytics`
+
+and call it in config file with `app/analytics/My Project 2458-d7a5e20af27f.json`
+
+` My Project 2458-d7a5e20af27f.json` is same as `service_account_credentials_json`
 
 ### Granting permissions to your Analytics property
 
@@ -118,6 +127,13 @@ On this screen you can grant access to the email address found in the `client_em
 ### Getting the view id
 
 The last thing you'll have to do is fill in the `view_id` in the config file. You can get the right value on the [Analytics site](https://analytics.google.com/analytics). Go to "View setting" in the Admin-section of the property.
+
+**If you can't find the viewid**
+
+Maybe you are using Google Analytics 4 (GA 4), its the newest version of google analytics
+
+[Go to stackoverflow](https://stackoverflow.com/questions/64510635/how-do-i-get-view-id-from-google-analytics-4)
+
 
 ![7](https://spatie.github.io/laravel-analytics/v2/7.jpg)
 
