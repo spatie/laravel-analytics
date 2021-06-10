@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 4.0.1 - 2021-06-10
+
+- allow "Google_Service_Analytics_GaData" return type for performQuery methods (#402)
+
 ## 4.0.0 - 2021-03-26
 
 - support PHP 8+
