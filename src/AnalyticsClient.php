@@ -46,7 +46,7 @@ class AnalyticsClient
 
         $requiresSerialization = $this->cache->getStore() instanceof \Illuminate\Cache\RedisStore;
 		
-        $result = $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others) {
+        $result = $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others, $requiresSerialization) {
             $result = $this->service->data_ga->get(
                 "ga:{$viewId}",
                 $startDate->format('Y-m-d'),
