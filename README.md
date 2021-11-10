@@ -13,14 +13,30 @@ Using this package you can easily retrieve data from Google Analytics.
 Here are a few examples of the provided methods:
 
 ```php
-use Analytics;
+use Spatie\Analytics\Analytics;
 use Spatie\Analytics\Period;
 
-//fetch the most visited pages for today and the past week
-Analytics::fetchMostVisitedPages(Period::days(7));
+class ViewController extends Controller
+{
+    protected $analytics = null;
 
-//fetch visitors and page views for the past week
-Analytics::fetchVisitorsAndPageViews(Period::days(7));
+    public function __construct(Analytics $analytics)
+    {
+        $this->analytics = $analytics;
+    }
+
+    public function index()
+    {
+        //fetch the most visited pages for today and the past week
+        $mostViewed = $this->analytics->fetchMostVisitedPages(Period::days(7));
+
+        //fetch visitors and page views for the past week
+        $visitors = $this->analytics->fetchVisitorsAndPageViews(Period::days(7));
+        
+        // process and return the data to the view 
+        ...
+    }
+}
 ```
 
 Most methods will return an `\Illuminate\Support\Collection` object containing the results.
