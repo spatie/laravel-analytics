@@ -2,6 +2,7 @@
 
 namespace Spatie\Analytics;
 
+use Illuminate\Foundation\AliasLoader;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -34,6 +35,10 @@ class AnalyticsServiceProvider extends PackageServiceProvider
         });
 
         $this->app->alias(Analytics::class, 'laravel-analytics');
+        
+        // load the `Analytics` singleton instance into the app alias list
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Analytics', AnalyticsFacade::class);
     }
 
     protected function guardAgainstInvalidConfiguration(array $analyticsConfig = null): void
