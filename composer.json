@@ -22,16 +22,16 @@
     "require": {
         "php": "^8.0",
         "google/apiclient": "^2.0|^2.7",
-        "laravel/framework": "^7.0|^8.0",
+        "laravel/framework": "^8.0",
         "nesbot/carbon": "^2.0",
-        "spatie/laravel-package-tools": "^1.6",
-        "symfony/cache": "^4.3|^5.0"
+        "spatie/laravel-package-tools": "^1.9",
+        "symfony/cache": "^5.0"
     },
     "require-dev": {
         "league/flysystem": ">=1.0.8",
         "mockery/mockery": "^1.4.2",
-        "orchestra/testbench": "^5.0|^6.0",
-        "phpunit/phpunit": "^8.0|^9.0"
+        "orchestra/testbench": "^6.23",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
