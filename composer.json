@@ -21,8 +21,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "google/apiclient": "^2.0|^2.7",
-        "laravel/framework": "^8.0",
+        "google/apiclient": "^2.7",
+        "laravel/framework": "^8.71",
         "nesbot/carbon": "^2.0",
         "spatie/laravel-package-tools": "^1.9",
         "symfony/cache": "^5.0"
