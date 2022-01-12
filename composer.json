@@ -15,22 +15,22 @@
         {
             "name": "Freek Van der Herten",
             "email": "freek@spatie.be",
-            "homepage": "https://murze.be",
+            "homepage": "https://spatie.be",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.0",
         "google/apiclient": "^2.7",
-        "laravel/framework": "^8.71",
+        "laravel/framework": "^8.71|^9.0",
         "nesbot/carbon": "^2.0",
         "spatie/laravel-package-tools": "^1.9",
-        "symfony/cache": "^5.0"
+        "symfony/cache": "^5.0|^6.0"
     },
     "require-dev": {
         "league/flysystem": "^1.0.8",
         "mockery/mockery": "^1.3",
-        "orchestra/testbench": "^6.23",
+        "orchestra/testbench": "^6.23|^7.0",
         "phpunit/phpunit": "^9.4"
     },
     "autoload": {
