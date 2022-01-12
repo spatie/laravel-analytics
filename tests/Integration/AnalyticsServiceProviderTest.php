@@ -4,8 +4,8 @@ namespace Spatie\Analytics\Tests\Integration;
 
 use Analytics;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
-use Storage;
 
 class AnalyticsServiceProviderTest extends TestCase
 {
@@ -27,14 +27,11 @@ class AnalyticsServiceProviderTest extends TestCase
         Storage::disk('testing-storage')
             ->put('test-credentials.json', json_encode($this->get_credentials()));
 
-        $credentials_json_file_path = Storage::disk('testing-storage')
-            ->getDriver()
-            ->getAdapter()
-            ->applyPathPrefix('test-credentials.json');
+        $credentialsPath = storage_path('framework/testing/disks/testing-storage/test-credentials.json');
 
-        $this->app['config']->set('analytics.view_id', '123456');
+        config()->set('analytics.view_id', '123456');
 
-        $this->app['config']->set('analytics.service_account_credentials_json', $credentials_json_file_path);
+        config()->set('analytics.service_account_credentials_json', $credentialsPath);
 
         $analytics = $this->app['laravel-analytics'];
 
