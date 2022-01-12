@@ -158,6 +158,10 @@ class Analytics
      */
     public function performQuery(Period $period, string $metrics, array $others = []): Google_Service_Analytics_GaData | array | null
     {
+        if (empty($this->viewId)) {
+            return null;
+        }
+
         return $this->client->performQuery(
             $this->viewId,
             $period->startDate,

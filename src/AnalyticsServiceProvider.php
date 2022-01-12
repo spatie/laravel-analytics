@@ -38,10 +38,6 @@ class AnalyticsServiceProvider extends PackageServiceProvider
 
     protected function guardAgainstInvalidConfiguration(array $analyticsConfig = null): void
     {
-        if (empty($analyticsConfig['view_id'])) {
-            throw InvalidConfiguration::viewIdNotSpecified();
-        }
-
         if (is_array($analyticsConfig['service_account_credentials_json'])) {
             return;
         }
