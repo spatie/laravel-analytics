@@ -11,18 +11,16 @@
     ],
     "homepage": "https://github.com/spatie/laravel-analytics",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Freek Van der Herten",
-            "email": "freek@spatie.be",
-            "homepage": "https://spatie.be",
-            "role": "Developer"
-        }
-    ],
+    "authors": [{
+        "name": "Freek Van der Herten",
+        "email": "freek@spatie.be",
+        "homepage": "https://spatie.be",
+        "role": "Developer"
+    }],
     "require": {
         "php": "^8.0",
         "google/apiclient": "^2.7",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^8.0",
         "nesbot/carbon": "^2.0",
         "spatie/laravel-package-tools": "^1.9",
         "symfony/cache": "^6.0"
