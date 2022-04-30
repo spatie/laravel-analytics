@@ -1,8 +1,8 @@
 <?php
 
 use Carbon\Carbon;
-use Spatie\Analytics\Period;
 use Spatie\Analytics\Exceptions\InvalidPeriod;
+use Spatie\Analytics\Period;
 
 it('can_create_a_period_for_a_given_amount_of_days', function () {
     Carbon::setTestNow(Carbon::create(2016, 1, 1));

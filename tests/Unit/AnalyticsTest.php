@@ -1,10 +1,10 @@
 <?php
 
 use Carbon\Carbon;
-use Spatie\Analytics\Period;
-use Spatie\Analytics\Analytics;
 use Illuminate\Support\Collection;
+use Spatie\Analytics\Analytics;
 use Spatie\Analytics\AnalyticsClient;
+use Spatie\Analytics\Period;
 
 beforeEach(function () {
     $this->analyticsClient = Mockery::mock(AnalyticsClient::class);
