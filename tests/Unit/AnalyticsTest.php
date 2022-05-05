@@ -196,6 +196,6 @@ it('can_fetch_the_top_browsers', function () {
 function expectCarbon(Carbon $carbon)
 {
     return Mockery::on(function (Carbon $argument) use ($carbon) {
-        return $argument->format('Y-m-d') == $carbon->format('Y-m-d');
+        return $argument->format('Y-m-d') === $carbon->format('Y-m-d');
     });
 }
