@@ -25,14 +25,14 @@
         "laravel/framework": "^9.41",
         "nesbot/carbon": "^2.63",
         "spatie/laravel-package-tools": "^1.13.7",
-        "symfony/cache": "^6.1"
+        "symfony/cache": "^6.0"
     },
     "require-dev": {
-        "league/flysystem": "^2.0|^3.10.3",
-        "mockery/mockery": "^1.5.1",
-        "orchestra/testbench": "^7.14",
+        "league/flysystem": "^2.0|^3.0",
+        "mockery/mockery": "^1.5",
+        "orchestra/testbench": "^7.0",
         "pestphp/pest": "^1.22.2",
-        "phpunit/phpunit": "^9.5.26"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
