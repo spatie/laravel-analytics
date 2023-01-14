@@ -20,19 +20,19 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "google/apiclient": "^2.12.6",
-        "laravel/framework": "^9.41",
-        "nesbot/carbon": "^2.63",
-        "spatie/laravel-package-tools": "^1.13.7",
+        "php": "^8.1",
+        "google/apiclient": "^2.13",
+        "laravel/framework": "^10.0",
+        "nesbot/carbon": "^2.65",
+        "spatie/laravel-package-tools": "^1.14",
         "symfony/cache": "^6.0"
     },
     "require-dev": {
-        "league/flysystem": "^2.0|^3.0",
+        "league/flysystem": "^3.12",
         "mockery/mockery": "^1.5",
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^8.0",
         "pestphp/pest": "^1.22.2",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {
