@@ -8,9 +8,6 @@ use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsClientFactory
 {
-    /**
-     * @throws ValidationException
-     */
     public static function createForConfig(array $analyticsConfig): AnalyticsClient
     {
         $authenticatedClient = self::createAuthenticatedGoogleClient($analyticsConfig);
@@ -18,9 +15,6 @@ class AnalyticsClientFactory
         return self::createAnalyticsClient($analyticsConfig, $authenticatedClient);
     }
 
-    /**
-     * @throws ValidationException
-     */
     public static function createAuthenticatedGoogleClient(array $config): BetaAnalyticsDataClient
     {
         return new BetaAnalyticsDataClient([
@@ -28,7 +22,10 @@ class AnalyticsClientFactory
         ]);
     }
 
-    protected static function createAnalyticsClient(array $analyticsConfig, BetaAnalyticsDataClient $googleService): AnalyticsClient
+    protected static function createAnalyticsClient(
+        array $analyticsConfig,
+        BetaAnalyticsDataClient $googleService
+    ): AnalyticsClient
     {
         $client = new AnalyticsClient($googleService, app(Repository::class));
 

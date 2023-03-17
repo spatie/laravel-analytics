@@ -4,8 +4,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 
-uses(\Spatie\Analytics\Tests\Integration\TestCase::class);
-
 it('will_throw_an_exception_if_the_view_id_is_not_set', function () {
     config()->set('analytics.view_id', '');
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Analytics\Tests\Integration;
+namespace Spatie\Analytics\Tests\TestSupport;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Analytics\AnalyticsServiceProvider;
