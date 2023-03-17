@@ -198,7 +198,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `url`, `pageTitle` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `fullPAgeUrl`, `pageTitle` and `screenPageViews`.
 
 ### Top referrers
 
