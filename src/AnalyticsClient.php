@@ -100,20 +100,16 @@ class AnalyticsClient
 
     protected function getFormattedMetrics(array $metrics): array
     {
-        return collect($metrics)->map(function ($metric) {
-            return new Metric([
-                'name' => $metric,
-            ]);
-        })->toArray();
+        return collect($metrics)
+            ->map(fn($metric) => new Metric(['name' => $metric,]))
+            ->toArray();
     }
 
     protected function getFormattedDimensions(array $dimensions): array
     {
-        return collect($dimensions)->map(function ($dimension) {
-            return new Dimension([
-                'name' => $dimension,
-            ]);
-        })->toArray();
+        return collect($dimensions)
+            ->map(fn($dimension) => new Dimension(['name' => $dimension]))
+            ->toArray();
     }
 
     protected function cast(string $key, string $value): mixed
