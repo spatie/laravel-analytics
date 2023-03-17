@@ -29,11 +29,8 @@ class AnalyticsClient
     }
 
     /**
-     * @param Period $period
-     * @param array<string> $metrics
-     * @param array<string> $dimensions
-     * @param int $limit
-     * @return Collection
+     * @param  array<string>  $metrics
+     * @param  array<string>  $dimensions
      */
     public function get(string $propertyId, Period $period, array $metrics, array $dimensions = [], int $limit = 10): Collection
     {
@@ -116,8 +113,7 @@ class AnalyticsClient
     {
         return match ($key) {
             'date' => Carbon::createFromFormat('Ymd', $value),
-            'visitors', 'pageViews', 'activeUsers', 'newUsers', 'screenPageViews'
-            => (int) $value,
+            'visitors', 'pageViews', 'activeUsers', 'newUsers', 'screenPageViews' => (int) $value,
             default => $value,
         };
     }
