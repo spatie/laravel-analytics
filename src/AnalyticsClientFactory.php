@@ -24,7 +24,7 @@ class AnalyticsClientFactory
     public static function createAuthenticatedGoogleClient(array $config): BetaAnalyticsDataClient
     {
         return new BetaAnalyticsDataClient([
-            'credentials' => $config['service_account_credentials_json']
+            'credentials' => $config['service_account_credentials_json'],
         ]);
     }
 

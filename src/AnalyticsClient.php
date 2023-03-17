@@ -40,7 +40,7 @@ class AnalyticsClient
         $response = $this->runReport([
             'property' => "properties/{$propertyId}",
             'dateRanges' => [
-                $period->toDateRange()
+                $period->toDateRange(),
             ],
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
