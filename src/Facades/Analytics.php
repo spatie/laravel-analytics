@@ -5,12 +5,7 @@ namespace Spatie\Analytics\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Analytics facade.
- *
- * @method static \Spatie\Analytics\Analytics setPropertyId(string $propertyId)
- * @method static string getPropertyId()
- * @method static \Spatie\Analytics\Analytics get()
- * @method static \Illuminate\Support\Collection fetchVisitorsAndPageViews(\Spatie\Analytics\Period $period)
+ * @mixin \Spatie\Analytics\Facades\Analytics
  */
 class Analytics extends Facade
 {
