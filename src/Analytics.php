@@ -37,11 +37,18 @@ class Analytics
         return  $this->client->get($this->propertyId, $period, ['activeUsers', 'screenPageViews'], ['pageTitle', 'date']);
     }
 
-    public function fetchMostVisitedPages(Period $period, $limit = 20): Collection
+    public function fetchMostVisitedPages(Period $period, $maxResults = 20): Collection
     {
         return  $this->client->get(
-            $this->propertyId, $period, ['screenPageViews'], ['pageTitle', 'fullPageUrl'], $limit,
+            $this->propertyId, $period, ['screenPageViews'], ['pageTitle', 'fullPageUrl'], $maxResults,
             ['screenPageViews']
+        );
+    }
+
+    public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
+    {
+        return  $this->client->get(
+            $this->propertyId, $period, ['screenPageViews'], ['pageReferrer'], $maxResults, ['screenPageViews']
         );
     }
 }
