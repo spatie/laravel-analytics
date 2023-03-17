@@ -29,8 +29,12 @@ class Analytics
 
     public function fetchVisitorsAndPageViews(Period $period): Collection
     {
-        // TODO: set correct metrics and dimensions.
-        return $this->performQuery($period, ['activeUsers', 'newUsers'], ['pageTitle']);
+        return $this->performQuery($period, ['activeUsers', 'screenPageViews'], ['pageTitle']);
+    }
+
+    public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
+    {
+        return $this->performQuery($period, ['activeUsers', 'screenPageViews'], ['pageTitle', 'date']);
     }
 
     public function performQuery(Period $period, array $metrics, array $dimensions = [], int $limit = 10): Collection

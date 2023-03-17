@@ -174,7 +174,15 @@ Period::create($startDate, $endDate);
 public function fetchVisitorsAndPageViews(Period $period): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, `pageTitle` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `activeUsers`, `screenPageViews` and `pageTitle`.
+
+### Visitors and pageviews by date
+
+```php
+public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
+```
+
+The function returns a `Collection` in which each item is an array that holds keys `date`, `activeUsers`, `screenPageViews` and `pageTitle`.
 
 ### Total visitors and pageviews
 

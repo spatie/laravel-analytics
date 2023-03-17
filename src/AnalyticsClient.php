@@ -116,7 +116,7 @@ class AnalyticsClient
     {
         return match ($key) {
             'date' => Carbon::createFromFormat('Ymd', $value),
-            'visitors', 'pageViews', 'activeUsers', 'newUsers',
+            'visitors', 'pageViews', 'activeUsers', 'newUsers', 'screenPageViews'
             => (int) $value,
             default => $value,
         };
