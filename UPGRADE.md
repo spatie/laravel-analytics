@@ -10,8 +10,11 @@ As mentioned v5 uses a different API so you will need to enable it on https://co
 ## Method changes
 
 ### `fetchVisitorsAndPageViews`
- will now return `activeUsers`, `screenPageViews` and `pageTitle`. The `date` property has been removed.
+will now return `activeUsers`, `screenPageViews` and `pageTitle`. The `date` property has been removed.
 If you want to have the results grouped by day you can use the `fetchVisitorsAndPageViewsByDate` function.
 
 ### `fetchMostVisitedPages`
-will now return `fullPAgeUrl`, `pageTitle` and `screenPageViews`.
+will now return `fullPageUrl`, `pageTitle` and `screenPageViews`.
+
+### `fetchTopReferrers`
+will now return `screenPageViews` and `pageReferrer`.
