@@ -3,8 +3,8 @@
 namespace Spatie\Analytics\Tests\Integration;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\Analytics\AnalyticsFacade;
 use Spatie\Analytics\AnalyticsServiceProvider;
+use Spatie\Analytics\Facade\Analytics;
 
 abstract class TestCase extends Orchestra
 {
@@ -28,7 +28,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageAliases($app)
     {
         return [
-            'Analytics' => AnalyticsFacade::class,
+            'Analytics' => Analytics::class,
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace Spatie\Analytics;
 
 use Carbon\Carbon;
 use DateTimeInterface;
+use Google\Analytics\Data\V1beta\DateRange;
 use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class Period
@@ -53,5 +54,12 @@ class Period
         $this->startDate = $startDate;
 
         $this->endDate = $endDate;
+    }
+
+    public function toDateRange(): DateRange
+    {
+        return (new DateRange())
+            ->setStartDate($this->startDate->format('Y-m-d'))
+            ->setEndDate($this->endDate->format('Y-m-d'));
     }
 }

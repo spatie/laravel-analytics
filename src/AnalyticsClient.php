@@ -2,17 +2,20 @@
 
 namespace Spatie\Analytics;
 
-use DateTimeInterface;
-use Google_Service_Analytics;
-use Google_Service_Analytics_GaData;
+use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
+use Google\Analytics\Data\V1beta\Dimension;
+use Google\Analytics\Data\V1beta\Metric;
+use Google\Analytics\Data\V1beta\RunReportResponse;
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class AnalyticsClient
 {
     protected int $cacheLifeTimeInMinutes = 0;
 
     public function __construct(
-        protected Google_Service_Analytics $service,
+        protected BetaAnalyticsDataClient $service,
         protected Repository $cache,
     ) {
         //
@@ -26,17 +29,46 @@ class AnalyticsClient
     }
 
     /**
-     * Query the Google Analytics Service with given parameters.
-     *
-     * @param string $viewId
-     * @param \DateTimeInterface $startDate
-     * @param \DateTimeInterface $endDate
-     * @param string $metrics
-     * @param array $others
-     *
-     * @return Google_Service_Analytics_GaData|array|null
+     * @param Period $period
+     * @param array<string> $metrics
+     * @param array<string> $dimensions
+     * @param int $limit
+     * @return Collection
      */
-    public function performQuery(string $viewId, DateTimeInterface $startDate, DateTimeInterface $endDate, string $metrics, array $others = []): Google_Service_Analytics_GaData | array | null
+    public function get(string $propertyId, Period $period, array $metrics, array $dimensions = [], int $limit = 10): Collection
+    {
+        $response = $this->runReport([
+            'property' => "properties/{$propertyId}",
+            'dateRanges' => [
+                $period->toDateRange()
+            ],
+            'metrics' => $this->getFormattedMetrics($metrics),
+            'dimensions' => $this->getFormattedDimensions($dimensions),
+            'limit' => $limit,
+        ]);
+
+        $result = collect();
+
+        foreach ($response->getRows() as $row) {
+            $rowResult = [];
+
+            foreach ($row->getDimensionValues() as $i => $dimensionValue) {
+                $rowResult[$dimensions[$i]] =
+                    $this->cast($dimensions[$i], $dimensionValue->getValue());
+            }
+
+            foreach ($row->getMetricValues() as $i => $metricValue) {
+                $rowResult[$metrics[$i]] =
+                    $this->cast($metrics[$i], $metricValue->getValue());
+            }
+
+            $result->push($rowResult);
+        }
+
+        return $result;
+    }
+
+    public function runReport(array $request): RunReportResponse
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
@@ -44,38 +76,12 @@ class AnalyticsClient
             $this->cache->forget($cacheName);
         }
 
-        return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($viewId, $startDate, $endDate, $metrics, $others) {
-            $result = $this->service->data_ga->get(
-                "ga:{$viewId}",
-                $startDate->format('Y-m-d'),
-                $endDate->format('Y-m-d'),
-                $metrics,
-                $others,
-            );
-
-            while ($nextLink = $result->getNextLink()) {
-                if (isset($others['max-results']) && count($result->rows) >= $others['max-results']) {
-                    break;
-                }
-
-                $options = [];
-
-                parse_str(substr($nextLink, strpos($nextLink, '?') + 1), $options);
-
-                $response = $this->service->data_ga->call('get', [$options], 'Google_Service_Analytics_GaData');
-
-                if ($response->rows) {
-                    $result->rows = array_merge($result->rows, $response->rows);
-                }
-
-                $result->nextLink = $response->nextLink;
-            }
-
-            return $result;
+        return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($request) {
+            return $this->service->runReport($request);
         });
     }
 
-    public function getAnalyticsService(): Google_Service_Analytics
+    public function getAnalyticsService(): BetaAnalyticsDataClient
     {
         return $this->service;
     }
@@ -86,5 +92,33 @@ class AnalyticsClient
     protected function determineCacheName(array $properties): string
     {
         return 'spatie.laravel-analytics.'.md5(serialize($properties));
+    }
+
+    protected function getFormattedMetrics(array $metrics): array
+    {
+        return collect($metrics)->map(function ($metric) {
+            return new Metric([
+                'name' => $metric,
+            ]);
+        })->toArray();
+    }
+
+    protected function getFormattedDimensions(array $dimensions): array
+    {
+        return collect($dimensions)->map(function ($dimension) {
+            return new Dimension([
+                'name' => $dimension,
+            ]);
+        })->toArray();
+    }
+
+    protected function cast(string $key, string $value): mixed
+    {
+        return match ($key) {
+            'date' => Carbon::createFromFormat('Ymd', $value),
+            'visitors', 'pageViews', 'activeUsers', 'newUsers',
+            => (int) $value,
+            default => $value,
+        };
     }
 }

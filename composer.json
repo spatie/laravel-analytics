@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "google/apiclient": "^2.12.6",
+        "google/analytics-data": "^0.9.4",
         "laravel/framework": "^9.41|^10.0",
         "nesbot/carbon": "^2.63",
         "spatie/laravel-package-tools": "^1.13.7",
@@ -45,7 +45,7 @@
                 "Spatie\\Analytics\\AnalyticsServiceProvider"
             ],
             "aliases": {
-                "Analytics": "Spatie\\Analytics\\AnalyticsFacade"
+                "Analytics": "AnalyticsFacadeLegacy"
             }
         }
     },
