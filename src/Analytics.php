@@ -37,10 +37,10 @@ class Analytics
         return  $this->client->get($this->propertyId, $period, ['activeUsers', 'screenPageViews'], ['pageTitle', 'date']);
     }
 
-    public function fetchMostVisitedPages(Period $period): Collection
+    public function fetchMostVisitedPages(Period $period, $limit = 20): Collection
     {
         return  $this->client->get(
-            $this->propertyId, $period, ['screenPageViews'], ['pageTitle', 'fullPageUrl'], 10,
+            $this->propertyId, $period, ['screenPageViews'], ['pageTitle', 'fullPageUrl'], $limit,
             ['screenPageViews']
         );
     }
