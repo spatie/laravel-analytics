@@ -13,7 +13,7 @@ Using this package you can easily retrieve data from Google Analytics.
 Here are a few examples of the provided methods:
 
 ```php
-use Analytics;
+use Spatie\Analytics\Facades\Analytics;
 use Spatie\Analytics\Period;
 
 //fetch the most visited pages for today and the past week
@@ -44,7 +44,7 @@ composer require spatie/laravel-analytics
 Optionally, you can publish the config file of this package with this command:
 
 ``` bash
-php artisan vendor:publish --provider="Spatie\Analytics\AnalyticsServiceProvider"
+php artisan vendor:publish --tag="analytics-config"
 ```
 
 The following config file will be published in `config/analytics.php`
@@ -138,13 +138,13 @@ When the installation is done you can easily retrieve Analytics data. Nearly all
 
 Here are a few examples using periods
 ```php
-//retrieve visitors and pageview data for the current day and the last seven days
+//retrieve visitors and page view data for the current day and the last seven days
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 
-//retrieve visitors and pageviews since the 6 months ago
+//retrieve visitors and page views since the 6 months ago
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::months(6));
 
-//retrieve sessions and pageviews with yearMonth dimension since 1 year ago
+//retrieve sessions and page views with yearMonth dimension since 1 year ago
 $analyticsData = Analytics::performQuery(
     Period::years(1),
     'ga:sessions',
@@ -168,7 +168,7 @@ Period::create($startDate, $endDate);
 
 ## Provided methods
 
-### Visitors and pageviews
+### Visitors and page views
 
 ```php
 public function fetchVisitorsAndPageViews(Period $period): Collection
@@ -176,7 +176,7 @@ public function fetchVisitorsAndPageViews(Period $period): Collection
 
 The function returns a `Collection` in which each item is an array that holds keys `activeUsers`, `screenPageViews` and `pageTitle`.
 
-### Visitors and pageviews by date
+### Visitors and page views by date
 
 ```php
 public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
@@ -243,7 +243,7 @@ Analytics::getAnalyticsService();
 Run the tests with:
 
 ``` bash
-vendor/bin/phpunit
+vendor/bin/pest
 ```
 
 ## Changelog
