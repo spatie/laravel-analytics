@@ -8,25 +8,10 @@ use Spatie\Analytics\Facades\Analytics;
 
 abstract class TestCase extends Orchestra
 {
-    /**
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array
-     */
     protected function getPackageProviders($app)
     {
         return [
             AnalyticsServiceProvider::class,
-        ];
-    }
-
-    /**
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Analytics' => Analytics::class,
         ];
     }
 }
