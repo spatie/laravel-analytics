@@ -29,23 +29,17 @@ class AnalyticsClient
     }
 
     /**
-     * @param string $propertyId
-     * @param Period $period
-     * @param array<string> $metrics
-     * @param array<string> $dimensions
-     * @param int $limit
-     * @param array $orderBy
-     * @return Collection
+     * @param  array<string>  $metrics
+     * @param  array<string>  $dimensions
      */
     public function get(
         string $propertyId,
         Period $period,
-        array  $metrics,
-        array  $dimensions = [],
-        int    $limit = 10,
-        array  $orderBy = [],
-    ): Collection
-    {
+        array $metrics,
+        array $dimensions = [],
+        int $limit = 10,
+        array $orderBy = [],
+    ): Collection {
         $response = $this->runReport([
             'property' => "properties/{$propertyId}",
             'dateRanges' => [
