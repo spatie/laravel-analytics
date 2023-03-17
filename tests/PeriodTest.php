@@ -4,7 +4,7 @@ use Carbon\Carbon;
 use Spatie\Analytics\Exceptions\InvalidPeriod;
 use Spatie\Analytics\Period;
 
-it('can_create_a_period_for_a_given_amount_of_days', function () {
+it('can create a period for a given amount of days', function () {
     $expectedDate = Carbon::create(2016, 1, 1);
     Carbon::setTestNow($expectedDate);
 
@@ -15,7 +15,7 @@ it('can_create_a_period_for_a_given_amount_of_days', function () {
         ->startDate->toEqual($expectedDate->subDays(10));
 });
 
-it('can_create_a_period_for_a_given_amount_of_months', function () {
+it('can create a period for a given amount of months', function () {
     $expectedDate = Carbon::create(2016, 1, 10);
     Carbon::setTestNow($expectedDate);
 
@@ -26,7 +26,7 @@ it('can_create_a_period_for_a_given_amount_of_months', function () {
         ->startDate->toEqual($expectedDate->subMonths(10));
 });
 
-it('can_create_a_period_for_a_given_amount_of_years', function () {
+it('can create a period for a given amount of years', function () {
     $expectedDate = Carbon::create(2016, 1, 12);
     Carbon::setTestNow($expectedDate);
 
@@ -37,7 +37,7 @@ it('can_create_a_period_for_a_given_amount_of_years', function () {
         ->startDate->toEqual($expectedDate->subYears(2));
 });
 
-it('provides_a_create_method', function () {
+it('provides a create method', function () {
     $startDate = Carbon::create(2015, 12, 22);
     $endDate = Carbon::create(2016, 1, 1);
 
@@ -48,7 +48,7 @@ it('provides_a_create_method', function () {
         ->endDate->toBe($endDate);
 });
 
-it('accepts_datetime_immutable_instances', function () {
+it('accepts datetime immutable instances', function () {
     $startDate = Carbon::create(2015, 12, 22);
     $startDateImmutable = new DateTimeImmutable($startDate->toIso8601String());
 
@@ -62,7 +62,7 @@ it('accepts_datetime_immutable_instances', function () {
         ->endDate->toEqual($endDate);
 });
 
-it('will_throw_an_exception_if_the_start_date_comes_after_the_end_date', function () {
+it('will throw an exception if the start date comes after the end date', function () {
     $startDate = Carbon::create(2016, 1, 1);
     $endDate = Carbon::create(2015, 1, 1);
 

@@ -4,13 +4,13 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 
-it('will_throw_an_exception_if_the_view_id_is_not_set', function () {
+it('will throw an exception if the view id is not set', function () {
     config()->set('analytics.view_id', '');
 
     Analytics::fetchVisitorsAndPageViews(Carbon::now()->subDay(), Carbon::now());
 })->throws(InvalidConfiguration::class);
 
-it('allows_credentials_json_file', function () {
+it('allows credentials json file', function () {
     Storage::fake('testing-storage');
 
     Storage::disk('testing-storage')
@@ -27,7 +27,7 @@ it('allows_credentials_json_file', function () {
     expect($analytics)->toBeInstanceOf(\Spatie\Analytics\AnalyticsLegacy::class);
 });
 
-it('will_throw_an_exception_if_the_credentials_json_does_not_exist', function () {
+it('will throw an exception if the credentials json does not exist', function () {
     config()->set('analytics.view_id', '123456');
 
     config()->set('analytics.service_account_credentials_json', 'bogus.json');
@@ -35,7 +35,7 @@ it('will_throw_an_exception_if_the_credentials_json_does_not_exist', function ()
     Analytics::fetchVisitorsAndPageViews(Carbon::now()->subDay(), Carbon::now());
 })->throws(InvalidConfiguration::class);
 
-it('allows_credentials_json_to_be_array', function () {
+it('allows credentials json to be array', function () {
     config()->set('analytics.view_id', '123456');
 
     config()->set('analytics.service_account_credentials_json', credentials());
@@ -45,7 +45,7 @@ it('allows_credentials_json_to_be_array', function () {
     expect($analytics)->toBeInstanceOf(\Spatie\Analytics\AnalyticsLegacy::class);
 });
 
-function credentials()
+function credentials(): array
 {
     return [
         'type' => 'service_account',

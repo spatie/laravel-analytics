@@ -20,7 +20,7 @@ beforeEach(function () {
 
 afterEach(fn () => Mockery::close());
 
-it('can_fetch_the_visitor_and_page_views', function () {
+it('can fetch the visitor and page views', function () {
     $expectedArguments = [
         $this->viewId,
         expectCarbon($this->startDate),
@@ -51,7 +51,7 @@ it('can_fetch_the_visitor_and_page_views', function () {
     expect($response->first()['pageViews'])->toBe(2);
 });
 
-it('can_fetch_the_total_visitor_and_page_views', function () {
+it('can fetch the total visitor and page views', function () {
     $expectedArguments = [
         $this->viewId,
         expectCarbon($this->startDate),
@@ -81,7 +81,7 @@ it('can_fetch_the_total_visitor_and_page_views', function () {
     expect($response->first()['pageViews'])->toBe(2);
 });
 
-it('can_fetch_the_most_visited_pages', function () {
+it('can fetch the most visited pages', function () {
     $maxResults = 10;
 
     $expectedArguments = [
@@ -118,7 +118,7 @@ it('can_fetch_the_most_visited_pages', function () {
     expect($response->first()['pageViews'])->toBe(123);
 });
 
-it('can_fetch_the_top_referrers', function () {
+it('can fetch the top referrers', function () {
     $maxResults = 10;
 
     $expectedArguments = [
@@ -154,7 +154,7 @@ it('can_fetch_the_top_referrers', function () {
     expect($response->first()['pageViews'])->toBe(123);
 });
 
-it('can_fetch_the_top_browsers', function () {
+it('can fetch the top browsers', function () {
     $expectedArguments = [
         $this->viewId,
         expectCarbon($this->startDate),
