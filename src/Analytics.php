@@ -42,8 +42,12 @@ class Analytics
         return $this->performQuery($period, ['activeUsers', 'screenPageViews'], ['date']);
     }
 
-    public function performQuery(Period $period, array $metrics, array $dimensions = [], int $limit = 10): Collection
-    {
+    public function performQuery(
+        Period $period,
+        array $metrics,
+        array $dimensions = [],
+        int $limit = 10
+    ): Collection {
         return $this->client->get($this->propertyId, $period, $metrics, $dimensions, $limit);
     }
 }
