@@ -4,7 +4,7 @@ namespace Spatie\Analytics\Tests\Integration;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Analytics\AnalyticsServiceProvider;
-use Spatie\Analytics\Facade\Analytics;
+use Spatie\Analytics\Facades\Analytics;
 
 abstract class TestCase extends Orchestra
 {
