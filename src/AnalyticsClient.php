@@ -101,14 +101,14 @@ class AnalyticsClient
     protected function getFormattedMetrics(array $metrics): array
     {
         return collect($metrics)
-            ->map(fn($metric) => new Metric(['name' => $metric,]))
+            ->map(fn ($metric) => new Metric(['name' => $metric]))
             ->toArray();
     }
 
     protected function getFormattedDimensions(array $dimensions): array
     {
         return collect($dimensions)
-            ->map(fn($dimension) => new Dimension(['name' => $dimension]))
+            ->map(fn ($dimension) => new Dimension(['name' => $dimension]))
             ->toArray();
     }
 
