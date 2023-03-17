@@ -29,10 +29,22 @@ class AnalyticsClient
     }
 
     /**
-     * @param  array<string>  $metrics
-     * @param  array<string>  $dimensions
+     * @param string $propertyId
+     * @param Period $period
+     * @param array<string> $metrics
+     * @param array<string> $dimensions
+     * @param int $limit
+     * @param array $orderBy
+     * @return Collection
      */
-    public function get(string $propertyId, Period $period, array $metrics, array $dimensions = [], int $limit = 10): Collection
+    public function get(
+        string $propertyId,
+        Period $period,
+        array  $metrics,
+        array  $dimensions = [],
+        int    $limit = 10,
+        array  $orderBy = [],
+    ): Collection
     {
         $response = $this->runReport([
             'property' => "properties/{$propertyId}",
@@ -42,6 +54,7 @@ class AnalyticsClient
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
             'limit' => $limit,
+            'orderBy' => $orderBy,
         ]);
 
         $result = collect();

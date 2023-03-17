@@ -29,25 +29,19 @@ class Analytics
 
     public function fetchVisitorsAndPageViews(Period $period): Collection
     {
-        return $this->performQuery($period, ['activeUsers', 'screenPageViews'], ['pageTitle']);
+        return $this->client->get($this->propertyId, $period, ['activeUsers', 'screenPageViews'], ['pageTitle']);
     }
 
     public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
     {
-        return $this->performQuery($period, ['activeUsers', 'screenPageViews'], ['pageTitle', 'date']);
+        return  $this->client->get($this->propertyId, $period, ['activeUsers', 'screenPageViews'], ['pageTitle', 'date']);
     }
 
-    public function fetchTotalVisitorsAndPageViews(Period $period): Collection
+    public function fetchMostVisitedPages(Period $period): Collection
     {
-        return $this->performQuery($period, ['activeUsers', 'screenPageViews'], ['date']);
-    }
-
-    public function performQuery(
-        Period $period,
-        array $metrics,
-        array $dimensions = [],
-        int $limit = 10
-    ): Collection {
-        return $this->client->get($this->propertyId, $period, $metrics, $dimensions, $limit);
+        return  $this->client->get(
+            $this->propertyId, $period, ['screenPageViews'], ['pageTitle', 'fullPageUrl'], 10,
+            ['screenPageViews']
+        );
     }
 }
