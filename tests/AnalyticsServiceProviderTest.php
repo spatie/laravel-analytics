@@ -1,13 +1,13 @@
 <?php
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
+use Spatie\Analytics\Facades\Analytics;
 
 it('will throw an exception if the view id is not set', function () {
     config()->set('analytics.view_id', '');
 
-    Analytics::fetchVisitorsAndPageViews(Carbon::now()->subDay(), Carbon::now());
+    Analytics::fetchVisitorsAndPageViews(now()->subDay(), now());
 })->throws(InvalidConfiguration::class);
 
 it('allows credentials json file', function () {
@@ -32,7 +32,7 @@ it('will throw an exception if the credentials json does not exist', function ()
 
     config()->set('analytics.service_account_credentials_json', 'bogus.json');
 
-    Analytics::fetchVisitorsAndPageViews(Carbon::now()->subDay(), Carbon::now());
+    Analytics::fetchVisitorsAndPageViews(now()->subDay(), now());
 })->throws(InvalidConfiguration::class);
 
 it('allows credentials json to be array', function () {

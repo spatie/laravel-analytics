@@ -5,7 +5,7 @@ namespace Spatie\Analytics\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @mixin \Spatie\Analytics\Facades\Analytics
+ * @mixin \Spatie\Analytics\Analytics
  */
 class Analytics extends Facade
 {

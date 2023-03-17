@@ -29,26 +29,44 @@ class Analytics
 
     public function fetchVisitorsAndPageViews(Period $period): Collection
     {
-        return $this->client->get($this->propertyId, $period, ['activeUsers', 'screenPageViews'], ['pageTitle']);
+        return $this->client->get(
+            $this->propertyId,
+            $period,
+            ['activeUsers', 'screenPageViews'],
+            ['pageTitle'],
+        );
     }
 
     public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
     {
-        return  $this->client->get($this->propertyId, $period, ['activeUsers', 'screenPageViews'], ['pageTitle', 'date']);
+        return $this->client->get(
+            $this->propertyId, $period,
+            ['activeUsers', 'screenPageViews'],
+            ['pageTitle', 'date'],
+        );
     }
 
     public function fetchMostVisitedPages(Period $period, $maxResults = 20): Collection
     {
-        return  $this->client->get(
-            $this->propertyId, $period, ['screenPageViews'], ['pageTitle', 'fullPageUrl'], $maxResults,
-            ['screenPageViews']
+        return $this->client->get(
+            $this->propertyId,
+            $period,
+            ['screenPageViews'],
+            ['pageTitle', 'fullPageUrl'],
+            $maxResults,
+            ['screenPageViews'],
         );
     }
 
     public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
     {
-        return  $this->client->get(
-            $this->propertyId, $period, ['screenPageViews'], ['pageReferrer'], $maxResults, ['screenPageViews']
+        return $this->client->get(
+            $this->propertyId,
+            $period,
+            ['screenPageViews'],
+            ['pageReferrer'],
+            $maxResults,
+            ['screenPageViews'],
         );
     }
 }
