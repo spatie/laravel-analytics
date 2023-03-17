@@ -55,7 +55,7 @@ return [
     /*
      * The view id of which you want to display data.
      */
-    'view_id' => env('ANALYTICS_VIEW_ID'),
+    'property_id' => env('PROPERTY_ID'),
 
     /*
      * Path to the client secret json file. Take a look at the README of this package
@@ -87,51 +87,49 @@ return [
 
 ### Getting credentials
 
-The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and click "Select a project" in the header.
+The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and select or create a project.
 
-![1](https://spatie.github.io/laravel-analytics/v4/1.png)
+![1](https://spatie.github.io/laravel-analytics/v5/1.png)
 
-Next up we must specify which API’s the project may consume. In the list of `API Library` click "Google Analytics API". On the next screen click "Enable".
+Next up we must specify which API’s the project may consume. Go to the API Library and search for "Google Analytics Data API".
 
-![2](https://spatie.github.io/laravel-analytics/v4/2.png)
+![2](https://spatie.github.io/laravel-analytics/v5/2.png)
+![3](https://spatie.github.io/laravel-analytics/v5/3.png)
+
+Choose enable to enable the API.
+![4](https://spatie.github.io/laravel-analytics/v5/4.png)
 
 Now that you’ve created a project that has access to the Analytics API it’s time to download a file with these credentials. Click "Credentials" in the sidebar. You’ll want to create a "Service account key".
-
-![3](https://spatie.github.io/laravel-analytics/v4/3.png)
+![5](https://spatie.github.io/laravel-analytics/v5/5.png)
 
 On the next screen you can give the service account a name. You can name it anything you’d like. In the service account id you’ll see an email address. We’ll use this email address later on in this guide.
 
-![4](https://spatie.github.io/laravel-analytics/v4/4.png)
+![6](https://spatie.github.io/laravel-analytics/v5/6.png)
+
+Go to the details screen of your created service account and select "keys", from the "Add key" dropdown select "Create new key". 
+
+![7](https://spatie.github.io/laravel-analytics/v5/7.png)
 
 Select "JSON" as the key type and click "Create" to download the JSON file.
 
-![5](https://spatie.github.io/laravel-analytics/v4/5.png)
+![8](https://spatie.github.io/laravel-analytics/v5/8.png)
 
 Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information I don't recommend committing it to your git repository.
 
 ### Granting permissions to your Analytics property
 
-I'm assuming that you've already created a Analytics account on the [Analytics site](https://analytics.google.com/analytics). When setting up your property, click on "Advanced options" and make sure you enable `Universal Analytics`.
+I'm assuming that you've already created a Analytics account on the [Analytics site](https://analytics.google.com/analytics) and are using the new GA4 properties.
 
-![6](https://spatie.github.io/laravel-analytics/v4/6.png)
+First you will need to know your property ID. In Analytics, go to Settings > Property Settings. Here you will be able to copy your property ID. Use this value for the `ANALYTICS_PROPERTY_ID` key in your .env file.
 
-Go to "User management" in the Admin-section of the property.
+![a1](https://spatie.github.io/laravel-analytics/v5/a1.png)
 
-![7](https://spatie.github.io/laravel-analytics/v4/7.png)
+Now we will need to give access to the service account you created. Go to "Property Access Management" in the Admin-section of the property.
+Click the plus sign in the top right corner to add a new user.
 
 On this screen you can grant access to the email address found in the `client_email` key from the json file you download in the previous step. Analyst role is enough.
 
-![8](https://spatie.github.io/laravel-analytics/v4/8.png)
-
-### Getting the view id
-
-The last thing you'll have to do is fill in the `view_id` in the config file. You can get the right value on the [Analytics site](https://analytics.google.com/analytics). Go to "View setting" in the Admin-section of the property.
-
-![9](https://spatie.github.io/laravel-analytics/v4/9.png)
-
-You'll need the `View ID` displayed there.
-
-![10](https://spatie.github.io/laravel-analytics/v4/10.png)
+![a2](https://spatie.github.io/laravel-analytics/v5/a2.png)
 
 ## Usage
 
