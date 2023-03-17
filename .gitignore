@@ -3,4 +3,3 @@ composer.lock
 docs
 vendor
 .phpunit.result.cache
-.php-cs-fixer.cache
