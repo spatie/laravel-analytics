@@ -18,7 +18,6 @@ class AnalyticsClient
         protected BetaAnalyticsDataClient $service,
         protected Repository $cache,
     ) {
-        //
     }
 
     public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes): self
@@ -80,9 +79,11 @@ class AnalyticsClient
             $this->cache->forget($cacheName);
         }
 
-        return $this->cache->remember($cacheName, $this->cacheLifeTimeInMinutes, function () use ($request) {
-            return $this->service->runReport($request);
-        });
+        return $this->cache->remember(
+            $cacheName,
+            $this->cacheLifeTimeInMinutes,
+            fn() => $this->service->runReport($request),
+        );
     }
 
     public function getAnalyticsService(): BetaAnalyticsDataClient
