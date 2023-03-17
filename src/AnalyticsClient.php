@@ -82,7 +82,7 @@ class AnalyticsClient
         return $this->cache->remember(
             $cacheName,
             $this->cacheLifeTimeInMinutes,
-            fn() => $this->service->runReport($request),
+            fn () => $this->service->runReport($request),
         );
     }
 
