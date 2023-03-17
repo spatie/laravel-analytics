@@ -40,7 +40,8 @@ class Analytics
     public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
     {
         return $this->client->get(
-            $this->propertyId, $period,
+            $this->propertyId,
+            $period,
             ['activeUsers', 'screenPageViews'],
             ['pageTitle', 'date'],
         );
