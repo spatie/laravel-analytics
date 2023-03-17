@@ -3,7 +3,6 @@
 namespace Spatie\Analytics;
 
 use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
-use Google\ApiCore\ValidationException;
 use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsClientFactory
@@ -25,8 +24,7 @@ class AnalyticsClientFactory
     protected static function createAnalyticsClient(
         array $analyticsConfig,
         BetaAnalyticsDataClient $googleService
-    ): AnalyticsClient
-    {
+    ): AnalyticsClient {
         $client = new AnalyticsClient($googleService, app(Repository::class));
 
         $client->setCacheLifeTimeInMinutes($analyticsConfig['cache_lifetime_in_minutes']);
