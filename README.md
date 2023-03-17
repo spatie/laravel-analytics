@@ -198,7 +198,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `fullPAgeUrl`, `pageTitle` and `screenPageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `fullPageUrl`, `pageTitle` and `screenPageViews`.
 
 ### Top referrers
 
@@ -206,7 +206,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `pageReferrer`.
 
 ### User Types
 
