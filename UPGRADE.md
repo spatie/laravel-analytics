@@ -21,3 +21,6 @@ will now return `screenPageViews` and `pageReferrer`.
 
 ### `fetchTopBrowsers`
 will now return `screenPageViews` and `browser`.
+
+### `fetchUserTypes`
+will return a collection with items that have `activeUsers` and `newVsReturning` which can equal to `new` or `returning`.

@@ -214,7 +214,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchUserTypes(Period $period): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `type` and `sessions`.
+The function returns a `Collection` in which each item is an array that holds keys `activeUsers` and `newVsReturning` which can equal to `new` or `returning`.
 
 ### Top browsers
 
@@ -222,7 +222,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `browser` and `sessions`.
+The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `browser`.
 
 ### All other Google Analytics queries
 

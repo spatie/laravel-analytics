@@ -71,6 +71,16 @@ class Analytics
         );
     }
 
+    public function fetchUserTypes(Period $period): Collection
+    {
+        return $this->client->get(
+            $this->propertyId,
+            $period,
+            ['activeUsers'],
+            ['newVsReturning'],
+        );
+    }
+
     public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
     {
         return $this->client->get(
