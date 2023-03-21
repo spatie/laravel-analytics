@@ -2,21 +2,23 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Spatie\Analytics\Analytics;
+use Spatie\Analytics\AnalyticsClient;
 use Spatie\Analytics\AnalyticsClientLegacy;
 use Spatie\Analytics\AnalyticsLegacy;
 use Spatie\Analytics\Period;
 
 beforeEach(function () {
-    $this->analyticsClient = Mockery::mock(AnalyticsClientLegacy::class);
+    $this->analyticsClient = Mockery::mock(AnalyticsClient::class);
 
-    $this->viewId = '1234567';
+    $this->propertyId = '1234567';
 
-    $this->analytics = new AnalyticsLegacy($this->analyticsClient, $this->viewId);
+    $this->analytics = new Analytics($this->analyticsClient, $this->propertyId);
 
     $this->startDate = Carbon::now()->subDays(7);
 
     $this->endDate = Carbon::now();
-})->skip('old tests');
+});
 
 afterEach(fn () => Mockery::close());
 

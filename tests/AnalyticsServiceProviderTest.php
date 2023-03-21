@@ -18,13 +18,13 @@ it('allows credentials json file', function () {
 
     $credentialsPath = storage_path('framework/testing/disks/testing-storage/test-credentials.json');
 
-    config()->set('analytics.view_id', '123456');
+    config()->set('analytics.property_id', '123456');
 
     config()->set('analytics.service_account_credentials_json', $credentialsPath);
 
     $analytics = $this->app['laravel-analytics'];
 
-    expect($analytics)->toBeInstanceOf(\Spatie\Analytics\AnalyticsLegacy::class);
+    expect($analytics)->toBeInstanceOf(\Spatie\Analytics\Analytics::class);
 });
 
 it('will throw an exception if the credentials json does not exist', function () {
