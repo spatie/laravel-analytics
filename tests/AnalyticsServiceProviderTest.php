@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 use Spatie\Analytics\Facades\Analytics;
 
-it('will throw an exception if the view id is not set', function () {
-    config()->set('analytics.view_id', '');
+it('will throw an exception if the property id is not set', function () {
+    config()->set('analytics.property_id', '');
 
     Analytics::fetchVisitorsAndPageViews(now()->subDay(), now());
 })->throws(InvalidConfiguration::class);
@@ -28,7 +28,7 @@ it('allows credentials json file', function () {
 });
 
 it('will throw an exception if the credentials json does not exist', function () {
-    config()->set('analytics.view_id', '123456');
+    config()->set('analytics.property_id', '123456');
 
     config()->set('analytics.service_account_credentials_json', 'bogus.json');
 
@@ -36,13 +36,13 @@ it('will throw an exception if the credentials json does not exist', function ()
 })->throws(InvalidConfiguration::class);
 
 it('allows credentials json to be array', function () {
-    config()->set('analytics.view_id', '123456');
+    config()->set('analytics.property_id', '123456');
 
     config()->set('analytics.service_account_credentials_json', credentials());
 
     $analytics = $this->app['laravel-analytics'];
 
-    expect($analytics)->toBeInstanceOf(\Spatie\Analytics\AnalyticsLegacy::class);
+    expect($analytics)->toBeInstanceOf(\Spatie\Analytics\Analytics::class);
 });
 
 function credentials(): array
