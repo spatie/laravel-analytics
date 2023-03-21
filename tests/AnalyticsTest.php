@@ -4,8 +4,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Spatie\Analytics\Analytics;
 use Spatie\Analytics\AnalyticsClient;
-use Spatie\Analytics\AnalyticsClientLegacy;
-use Spatie\Analytics\AnalyticsLegacy;
 use Spatie\Analytics\Period;
 
 beforeEach(function () {
