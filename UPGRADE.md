@@ -18,3 +18,6 @@ will now return `fullPageUrl`, `pageTitle` and `screenPageViews`.
 
 ### `fetchTopReferrers`
 will now return `screenPageViews` and `pageReferrer`.
+
+### `fetchTopBrowsers`
+will now return `screenPageViews` and `browser`.
