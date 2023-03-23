@@ -37,10 +37,10 @@ it('can fetch the visitor and page views', function () {
         ->once()
         ->andReturn(collect([
             [
-                "pageTitle" => "pageTitle",
-                "activeUsers" => 1,
-                "screenPageViews" => 2,
-            ]
+                'pageTitle' => 'pageTitle',
+                'activeUsers' => 1,
+                'screenPageViews' => 2,
+            ],
         ]));
 
     $response = $this
