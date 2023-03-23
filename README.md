@@ -190,7 +190,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchTotalVisitorsAndPageViews(Period $period): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `date`, `date`, `visitors`, and `pageViews`.
 
 ### Most visited pages
 

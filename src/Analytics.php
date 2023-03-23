@@ -51,6 +51,20 @@ class Analytics
         );
     }
 
+    public function fetchTotalVisitorsAndPageViews(Period $period, $limit = 20): Collection
+    {
+        return $this->client->get(
+            $this->propertyId,
+            $period,
+            ['activeUsers', 'screenPageViews'],
+            ['date'],
+            $limit,
+            [
+                OrderBy::dimension('date', true),
+            ],
+        );
+    }
+
     public function fetchMostVisitedPages(Period $period, $maxResults = 20): Collection
     {
         return $this->client->get(

@@ -115,7 +115,7 @@ class AnalyticsClient
     protected function cast(string $key, string $value): mixed
     {
         return match ($key) {
-//            'date' => Carbon::createFromFormat('Ymd', $value),
+            'date' => Carbon::createFromFormat('Ymd', $value),
             'visitors', 'pageViews', 'activeUsers', 'newUsers', 'screenPageViews' => (int) $value,
             default => $value,
         };

@@ -13,6 +13,9 @@ As mentioned v5 uses a different API so you will need to enable it on https://co
 will now return `activeUsers`, `screenPageViews` and `pageTitle`. The `date` property has been removed.
 If you want to have the results grouped by day you can use the `fetchVisitorsAndPageViewsByDate` function.
 
+### `fetchTotalVisitorsAndPageViews`
+will now return `date`, `activeUsers` and `screenPageViews`.
+
 ### `fetchMostVisitedPages`
 will now return `fullPageUrl`, `pageTitle` and `screenPageViews`.
 

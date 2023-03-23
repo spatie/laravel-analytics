@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Spatie\Analytics\Analytics;
 use Spatie\Analytics\AnalyticsClient;
+use Spatie\Analytics\OrderBy;
 use Spatie\Analytics\Period;
 
 beforeEach(function () {
@@ -54,33 +55,42 @@ it('can fetch the visitor and page views', function () {
 });
 
 it('can fetch the total visitor and page views', function () {
+    $period = Period::create($this->startDate, $this->endDate);
+
     $expectedArguments = [
-        $this->viewId,
-        expectCarbon($this->startDate),
-        expectCarbon($this->endDate),
-        'ga:users,ga:pageviews',
-        ['dimensions' => 'ga:date'],
+        $this->propertyId,
+        $period,
+        ['activeUsers', 'screenPageViews'],
+        ['date'],
+        20,
+        [
+            OrderBy::dimension('date', true),
+        ],
     ];
 
     $this
         ->analyticsClient
-        ->shouldReceive('performQuery')
+        ->shouldReceive('get')
         ->withArgs($expectedArguments)
         ->once()
-        ->andReturn([
-            'rows' => [['20160101', '1', '2']],
-        ]);
+        ->andReturn(collect([
+            [
+                'date' => Carbon::createFromFormat('Ymd', '20160101'),
+                'activeUsers' => 1,
+                'screenPageViews' => 2,
+            ],
+        ]));
 
     $response = $this
         ->analytics
-        ->fetchTotalVisitorsAndPageViews(
-            Period::create($this->startDate, $this->endDate)
-        );
+        ->fetchTotalVisitorsAndPageViews($period);
 
-    expect($response)->toBeInstanceOf(Collection::class);
-    expect($response->first()['date']->format('Y-m-d'))->toBe('2016-01-01');
-    expect($response->first()['visitors'])->toBe(1);
-    expect($response->first()['pageViews'])->toBe(2);
+    $firstItem =$response->first();
+
+    expect($response)->toBeInstanceOf(Collection::class)
+        ->and($firstItem['date']->format('Y-m-d'))->toBe(Carbon::parse('2016-01-01')->format('Y-m-d'))
+        ->and($firstItem['activeUsers'])->toBe(1)
+        ->and($firstItem['screenPageViews'])->toBe(2);
 });
 
 it('can fetch the most visited pages', function () {
