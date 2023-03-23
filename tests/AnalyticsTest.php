@@ -21,34 +21,36 @@ beforeEach(function () {
 afterEach(fn () => Mockery::close());
 
 it('can fetch the visitor and page views', function () {
+    $period = Period::create($this->startDate, $this->endDate);
+
     $expectedArguments = [
-        $this->viewId,
-        expectCarbon($this->startDate),
-        expectCarbon($this->endDate),
-        'ga:users,ga:pageviews',
-        ['dimensions' => 'ga:date,ga:pageTitle'],
+        $this->propertyId,
+        $period,
+        ['activeUsers', 'screenPageViews'],
+        ['pageTitle'],
     ];
 
     $this
         ->analyticsClient
-        ->shouldReceive('performQuery')
+        ->shouldReceive('get')
         ->withArgs($expectedArguments)
         ->once()
-        ->andReturn([
-            'rows' => [['20160101', 'pageTitle', '1', '2']],
-        ]);
+        ->andReturn(collect([
+            [
+                "pageTitle" => "pageTitle",
+                "activeUsers" => 1,
+                "screenPageViews" => 2,
+            ]
+        ]));
 
     $response = $this
         ->analytics
-        ->fetchVisitorsAndPageViews(
-            Period::create($this->startDate, $this->endDate)
-        );
+        ->fetchVisitorsAndPageViews($period);
 
     expect($response)->toBeInstanceOf(Collection::class);
-    expect($response->first()['date']->format('Y-m-d'))->toBe('2016-01-01');
     expect($response->first()['pageTitle'])->toBe('pageTitle');
-    expect($response->first()['visitors'])->toBe(1);
-    expect($response->first()['pageViews'])->toBe(2);
+    expect($response->first()['activeUsers'])->toBe(1);
+    expect($response->first()['screenPageViews'])->toBe(2);
 });
 
 it('can fetch the total visitor and page views', function () {
