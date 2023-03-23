@@ -48,10 +48,10 @@ it('can fetch the visitor and page views', function () {
         ->analytics
         ->fetchVisitorsAndPageViews($period);
 
-    expect($response)->toBeInstanceOf(Collection::class);
-    expect($response->first()['pageTitle'])->toBe('pageTitle');
-    expect($response->first()['activeUsers'])->toBe(1);
-    expect($response->first()['screenPageViews'])->toBe(2);
+    expect($response)->toBeInstanceOf(Collection::class)
+        ->and($response->first()['pageTitle'])->toBe('pageTitle')
+        ->and($response->first()['activeUsers'])->toBe(1)
+        ->and($response->first()['screenPageViews'])->toBe(2);
 });
 
 it('can fetch the total visitor and page views', function () {
