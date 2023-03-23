@@ -2,7 +2,7 @@
 
 namespace Spatie\Analytics;
 
-use \Google\Analytics\Data\V1beta\OrderBy as GoogleOrderBy;
+use Google\Analytics\Data\V1beta\OrderBy as GoogleOrderBy;
 use Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy;
 use Google\Analytics\Data\V1beta\OrderBy\MetricOrderBy;
 

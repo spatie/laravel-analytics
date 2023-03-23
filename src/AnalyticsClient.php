@@ -5,7 +5,6 @@ namespace Spatie\Analytics;
 use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
-use Google\Analytics\Data\V1beta\OrderBy;
 use Google\Analytics\Data\V1beta\RunReportResponse;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Carbon;
