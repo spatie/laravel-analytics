@@ -85,7 +85,7 @@ it('can fetch the total visitor and page views', function () {
         ->analytics
         ->fetchTotalVisitorsAndPageViews($period);
 
-    $firstItem =$response->first();
+    $firstItem = $response->first();
 
     expect($response)->toBeInstanceOf(Collection::class)
         ->and($firstItem['date']->format('Y-m-d'))->toBe(Carbon::parse('2016-01-01')->format('Y-m-d'))
