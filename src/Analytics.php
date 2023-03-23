@@ -37,13 +37,17 @@ class Analytics
         );
     }
 
-    public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
+    public function fetchVisitorsAndPageViewsByDate(Period $period, $limit = 10): Collection
     {
         return $this->client->get(
             $this->propertyId,
             $period,
             ['activeUsers', 'screenPageViews'],
             ['pageTitle', 'date'],
+            $limit,
+            [
+                OrderBy::dimension('date', true),
+            ],
         );
     }
 
@@ -55,7 +59,9 @@ class Analytics
             ['screenPageViews'],
             ['pageTitle', 'fullPageUrl'],
             $maxResults,
-            ['screenPageViews'],
+            [
+                OrderBy::metric('screenPageViews', true),
+            ],
         );
     }
 

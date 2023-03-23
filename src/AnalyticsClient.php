@@ -5,6 +5,7 @@ namespace Spatie\Analytics;
 use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
+use Google\Analytics\Data\V1beta\OrderBy;
 use Google\Analytics\Data\V1beta\RunReportResponse;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Carbon;
@@ -47,7 +48,7 @@ class AnalyticsClient
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
             'limit' => $limit,
-            'orderBy' => $orderBy,
+            'orderBys' => $orderBy,
         ]);
 
         $result = collect();
@@ -115,7 +116,7 @@ class AnalyticsClient
     protected function cast(string $key, string $value): mixed
     {
         return match ($key) {
-            'date' => Carbon::createFromFormat('Ymd', $value),
+//            'date' => Carbon::createFromFormat('Ymd', $value),
             'visitors', 'pageViews', 'activeUsers', 'newUsers', 'screenPageViews' => (int) $value,
             default => $value,
         };
