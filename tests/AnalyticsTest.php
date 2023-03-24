@@ -30,7 +30,7 @@ it('can fetch the visitor and page views', function () {
         ['activeUsers', 'screenPageViews'],
         ['pageTitle'],
         10,
-        []
+        [],
     ];
 
     $this
