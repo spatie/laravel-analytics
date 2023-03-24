@@ -27,7 +27,7 @@ class Analytics
         return $this->propertyId;
     }
 
-    public function fetchVisitorsAndPageViews(Period $period): Collection
+    public function fetchVisitorsAndPageViews(Period $period, $limit = 10): Collection
     {
         return $this->get(
             $period,
@@ -82,7 +82,9 @@ class Analytics
             ['screenPageViews'],
             ['pageReferrer'],
             $maxResults,
-            ['screenPageViews'],
+            [
+                OrderBy::metric('screenPageViews', true),
+            ],
         );
     }
 
@@ -102,12 +104,14 @@ class Analytics
             ['screenPageViews'],
             ['browser'],
             $maxResults,
-            ['screenPageViews'],
+            [
+                OrderBy::metric('screenPageViews', true),
+            ],
         );
     }
 
-    public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = []): Collection
+    public function get(Period $period, array $metrics, array $dimensions = [], int $maxResults = 10, array $orderBy = []): Collection
     {
-        return $this->client->get($this->propertyId, $period, $metrics, $dimensions, $limit, $orderBy);
+        return $this->client->get($this->propertyId, $period, $metrics, $dimensions, $maxResults, $orderBy);
     }
 }

@@ -29,12 +29,14 @@ it('can fetch the visitor and page views', function () {
         $period,
         ['activeUsers', 'screenPageViews'],
         ['pageTitle'],
+        10,
+        []
     ];
 
     $this
         ->analyticsClient
         ->shouldReceive('get')
-//        ->withArgs($expectedArguments)
+        ->withArgs($expectedArguments)
         ->once()
         ->andReturn(collect([
             [
@@ -133,7 +135,7 @@ it('can fetch the total visitor and page views', function () {
 });
 
 it('can fetch the most visited pages', function () {
-    $maxResults = 10;
+    $maxResults = 20;
     $period = Period::create($this->startDate, $this->endDate);
 
     $expectedArguments = [
@@ -143,15 +145,14 @@ it('can fetch the most visited pages', function () {
         ['pageTitle', 'fullPageUrl'],
         $maxResults,
         [
-            OrderBy::dimension('screenPageViews', true),
+            OrderBy::metric('screenPageViews', true),
         ],
     ];
 
     $this
         ->analyticsClient
         ->shouldReceive('get')
-        // TODO: debug why this fails
-//        ->withArgs($expectedArguments)
+        ->withArgs($expectedArguments)
         ->once()
         ->andReturn(collect([
             [
@@ -184,14 +185,15 @@ it('can fetch the top referrers', function () {
         ['screenPageViews'],
         ['pageReferrer'],
         $maxResults,
-        ['screenPageViews'],
+        [
+            OrderBy::metric('screenPageViews', true),
+        ],
     ];
 
     $this
         ->analyticsClient
         ->shouldReceive('get')
-        // TODO: fix this
-//        ->withArgs($expectedArguments)
+        ->withArgs($expectedArguments)
         ->once()
         ->andReturn(
             collect([
@@ -204,10 +206,7 @@ it('can fetch the top referrers', function () {
 
     $response = $this
         ->analytics
-        ->fetchTopReferrers(
-            Period::create($this->startDate, $this->endDate),
-            $maxResults
-        );
+        ->fetchTopReferrers($period, $maxResults);
 
     expect($response)->toBeInstanceOf(Collection::class)
         ->and($response->first()['pageReferrer'])->toBe('https://referrer.com')
@@ -222,15 +221,16 @@ it('can fetch the top browsers', function () {
         $period,
         ['screenPageViews'],
         ['browser'],
-        10,
-        ['screenPageViews'],
+        3,
+        [
+            OrderBy::metric('screenPageViews', true),
+        ],
     ];
 
     $this
         ->analyticsClient
         ->shouldReceive('get')
-        // TODO: fix this
-//        ->withArgs($expectedArguments)
+        ->withArgs($expectedArguments)
         ->once()
         ->andReturn(collect(
             [
@@ -251,10 +251,7 @@ it('can fetch the top browsers', function () {
 
     $response = $this
         ->analytics
-        ->fetchTopBrowsers(
-            Period::create($this->startDate, $this->endDate),
-            3
-        );
+        ->fetchTopBrowsers($period, 3);
 
     expect($response)->toBeInstanceOf(Collection::class)
         ->and($response->toArray())->toBe([
