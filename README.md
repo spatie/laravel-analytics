@@ -226,16 +226,30 @@ The function returns a `Collection` in which each item is an array that holds ke
 
 ### All other Google Analytics queries
 
-To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on which metrics and dimensions might be used.
+For all other queries you can use the `get` function.
 
 ```php
-public function performQuery(Period $period, string $metrics, array $others = [])
+public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = []): Collection
 ```
 
-You can get access to the underlying `Google_Service_Analytics` object:
+Here's some extra info on the arguments you can pass:
 
+`Period $period`: a Spatie\Analytics\Period object to indicate that start and end date for your query.
+
+`array $metrics`: an array of metrics to retrieve. You can find a list of all metrics [here](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics).
+
+`array $dimensions`: an array of dimensions to group the results by. You can find a list of all dimensions [here](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#dimensions).
+
+`int $limit`: the maximum number of results to return.
+
+`array $orderBy`: of OrderBy objects to sort the results by. 
+
+For example:
 ```php
-Analytics::getAnalyticsService();
+$orderBy = [
+    OrderBy::dimension('date', true),
+    OrderBy::metric('pageViews', false),
+];
 ```
 
 ## Testing

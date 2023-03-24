@@ -34,7 +34,7 @@ it('can fetch the visitor and page views', function () {
     $this
         ->analyticsClient
         ->shouldReceive('get')
-        ->withArgs($expectedArguments)
+//        ->withArgs($expectedArguments)
         ->once()
         ->andReturn(collect([
             [

@@ -29,8 +29,7 @@ class Analytics
 
     public function fetchVisitorsAndPageViews(Period $period): Collection
     {
-        return $this->client->get(
-            $this->propertyId,
+        return $this->get(
             $period,
             ['activeUsers', 'screenPageViews'],
             ['pageTitle'],
@@ -39,8 +38,7 @@ class Analytics
 
     public function fetchVisitorsAndPageViewsByDate(Period $period, $limit = 10): Collection
     {
-        return $this->client->get(
-            $this->propertyId,
+        return $this->get(
             $period,
             ['activeUsers', 'screenPageViews'],
             ['pageTitle', 'date'],
@@ -53,8 +51,7 @@ class Analytics
 
     public function fetchTotalVisitorsAndPageViews(Period $period, $limit = 20): Collection
     {
-        return $this->client->get(
-            $this->propertyId,
+        return $this->get(
             $period,
             ['activeUsers', 'screenPageViews'],
             ['date'],
@@ -67,10 +64,7 @@ class Analytics
 
     public function fetchMostVisitedPages(Period $period, $maxResults = 20): Collection
     {
-        ray('fetchMostVisitedPages', $period, $maxResults);
-
-        return $this->client->get(
-            $this->propertyId,
+        return $this->get(
             $period,
             ['screenPageViews'],
             ['pageTitle', 'fullPageUrl'],
@@ -83,8 +77,7 @@ class Analytics
 
     public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
     {
-        return $this->client->get(
-            $this->propertyId,
+        return $this->get(
             $period,
             ['screenPageViews'],
             ['pageReferrer'],
@@ -95,8 +88,7 @@ class Analytics
 
     public function fetchUserTypes(Period $period): Collection
     {
-        return $this->client->get(
-            $this->propertyId,
+        return $this->get(
             $period,
             ['activeUsers'],
             ['newVsReturning'],
@@ -105,13 +97,17 @@ class Analytics
 
     public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
     {
-        return $this->client->get(
-            $this->propertyId,
+        return $this->get(
             $period,
             ['screenPageViews'],
             ['browser'],
             $maxResults,
             ['screenPageViews'],
         );
+    }
+
+    public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = []): Collection
+    {
+        return $this->client->get($this->propertyId, $period, $metrics, $dimensions, $limit, $orderBy);
     }
 }
