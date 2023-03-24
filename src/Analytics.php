@@ -68,6 +68,7 @@ class Analytics
     public function fetchMostVisitedPages(Period $period, $maxResults = 20): Collection
     {
         ray('fetchMostVisitedPages', $period, $maxResults);
+
         return $this->client->get(
             $this->propertyId,
             $period,
