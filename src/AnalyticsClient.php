@@ -7,7 +7,6 @@ use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\RunReportResponse;
 use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class AnalyticsClient
@@ -35,6 +34,8 @@ class AnalyticsClient
         int $maxResults = 10,
         array $orderBy = [],
     ): Collection {
+        $typeCaster = resolve(TypeCaster::class);
+
         $response = $this->runReport([
             'property' => "properties/{$propertyId}",
             'dateRanges' => [
@@ -53,12 +54,12 @@ class AnalyticsClient
 
             foreach ($row->getDimensionValues() as $i => $dimensionValue) {
                 $rowResult[$dimensions[$i]] =
-                    $this->cast($dimensions[$i], $dimensionValue->getValue());
+                    $typeCaster->castValue($dimensions[$i], $dimensionValue->getValue());
             }
 
             foreach ($row->getMetricValues() as $i => $metricValue) {
                 $rowResult[$metrics[$i]] =
-                    $this->cast($metrics[$i], $metricValue->getValue());
+                    $typeCaster->castValue($metrics[$i], $metricValue->getValue());
             }
 
             $result->push($rowResult);
@@ -106,14 +107,5 @@ class AnalyticsClient
         return collect($dimensions)
             ->map(fn ($dimension) => new Dimension(['name' => $dimension]))
             ->toArray();
-    }
-
-    protected function cast(string $key, string $value): mixed
-    {
-        return match ($key) {
-            'date' => Carbon::createFromFormat('Ymd', $value),
-            'visitors', 'pageViews', 'activeUsers', 'newUsers', 'screenPageViews' => (int) $value,
-            default => $value,
-        };
     }
 }
