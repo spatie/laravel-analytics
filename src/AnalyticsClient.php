@@ -27,10 +27,6 @@ class AnalyticsClient
         return $this;
     }
 
-    /**
-     * @param  array<string>  $metrics
-     * @param  array<string>  $dimensions
-     */
     public function get(
         string $propertyId,
         Period $period,
