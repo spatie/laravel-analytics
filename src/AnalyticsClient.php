@@ -32,7 +32,7 @@ class AnalyticsClient
         Period $period,
         array $metrics,
         array $dimensions = [],
-        int $limit = 10,
+        int $maxResults = 10,
         array $orderBy = [],
     ): Collection {
         $response = $this->runReport([
@@ -42,7 +42,7 @@ class AnalyticsClient
             ],
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
-            'limit' => $limit,
+            'limit' => $maxResults,
             'orderBys' => $orderBy,
         ]);
 

@@ -27,35 +27,36 @@ class Analytics
         return $this->propertyId;
     }
 
-    public function fetchVisitorsAndPageViews(Period $period, $limit = 10): Collection
+    public function fetchVisitorsAndPageViews(Period $period, $maxResults = 10): Collection
     {
         return $this->get(
             $period,
             ['activeUsers', 'screenPageViews'],
             ['pageTitle'],
+            $maxResults,
         );
     }
 
-    public function fetchVisitorsAndPageViewsByDate(Period $period, $limit = 10): Collection
+    public function fetchVisitorsAndPageViewsByDate(Period $period, $maxResults = 10): Collection
     {
         return $this->get(
             $period,
             ['activeUsers', 'screenPageViews'],
             ['pageTitle', 'date'],
-            $limit,
+            $maxResults,
             [
                 OrderBy::dimension('date', true),
             ],
         );
     }
 
-    public function fetchTotalVisitorsAndPageViews(Period $period, $limit = 20): Collection
+    public function fetchTotalVisitorsAndPageViews(Period $period, $maxResults = 20): Collection
     {
         return $this->get(
             $period,
             ['activeUsers', 'screenPageViews'],
             ['date'],
-            $limit,
+            $maxResults,
             [
                 OrderBy::dimension('date', true),
             ],
