@@ -12,8 +12,6 @@ it('should cast a date to a Carbon object', function () {
 it('should cast integers', function () {
     $typeCaster = resolve(TypeCaster::class);
 
-    //  4, 8, 15, 16, 23 and 42
-
     $value = $typeCaster->castValue('visitors', '4');
     expect($value)->toBeInt()->toBe(4);
 
