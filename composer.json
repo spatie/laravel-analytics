@@ -41,10 +41,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Analytics\\Facades\\Analytics"
+                "Spatie\\Analytics\\AnalyticsServiceProvider"
             ],
             "aliases": {
-                "Analytics": "Analytics"
+                "Analytics": "Spatie\\Analytics\\Facades\\Analytics"
             }
         }
     },
