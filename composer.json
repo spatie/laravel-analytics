@@ -44,7 +44,7 @@
                 "Spatie\\Analytics\\Facades\\Analytics"
             ],
             "aliases": {
-                "Analytics": "AnalyticsFacadeLegacy"
+                "Analytics": "Analytics"
             }
         }
     },
