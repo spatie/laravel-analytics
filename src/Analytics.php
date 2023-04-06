@@ -28,9 +28,7 @@ class Analytics
     }
 
     /**
-     * @param \Spatie\Analytics\Period $period
-     * @param int $maxResults
-     *
+     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   pageTitle: string,
      *   activeUsers: int,
@@ -48,9 +46,7 @@ class Analytics
     }
 
     /**
-     * @param \Spatie\Analytics\Period $period
-     * @param int $maxResults
-     *
+     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   pageTitle: string,
      *   date: \Carbon\Carbon,
@@ -72,9 +68,7 @@ class Analytics
     }
 
     /**
-     * @param \Spatie\Analytics\Period $period
-     * @param int $maxResults
-     *
+     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   date: \Carbon\Carbon,
      *   activeUsers: int,
@@ -95,9 +89,7 @@ class Analytics
     }
 
     /**
-     * @param \Spatie\Analytics\Period $period
-     * @param int $maxResults
-     *
+     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   pageTitle: string,
      *   fullPageUrl: string,
@@ -117,11 +109,8 @@ class Analytics
         );
     }
 
-
     /**
-     * @param \Spatie\Analytics\Period $period
-     * @param int $maxResults
-     *
+     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   pageReferrer: string,
      *   screenPageViews: int
@@ -141,8 +130,7 @@ class Analytics
     }
 
     /**
-     * @param \Spatie\Analytics\Period $period
-     *
+     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   newVsReturning: string,
      *   activeUsers: int
@@ -158,9 +146,7 @@ class Analytics
     }
 
     /**
-     * @param \Spatie\Analytics\Period $period
-     * @param int $maxResults
-     *
+     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   browser: string,
      *   screenPageViews: int
@@ -185,8 +171,7 @@ class Analytics
         array $dimensions = [],
         int $maxResults = 10,
         array $orderBy = [],
-    ): Collection
-    {
+    ): Collection {
         return $this->client->get(
             $this->propertyId,
             $period,
