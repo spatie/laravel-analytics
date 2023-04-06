@@ -20,19 +20,19 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "google/apiclient": "^2.12.6",
-        "laravel/framework": "^9.41|^10.0",
-        "nesbot/carbon": "^2.63",
+        "php": "^8.1",
+        "google/analytics-data": "^0.9.4",
+        "laravel/framework": "^10.0",
+        "nesbot/carbon": "^2.66",
         "spatie/laravel-package-tools": "^1.13.7",
         "symfony/cache": "^6.0"
     },
     "require-dev": {
-        "league/flysystem": "^2.0|^3.0",
-        "mockery/mockery": "^1.5|^1.4.4",
-        "orchestra/testbench": "^7.0|^8.0",
-        "pestphp/pest": "^1.22.2|^1.22",
-        "phpunit/phpunit": "^9.5"
+        "league/flysystem": "^3.0",
+        "mockery/mockery": "^1.5",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.0",
+        "spatie/ray": "^1.37"
     },
     "autoload": {
         "psr-4": {
@@ -45,7 +45,7 @@
                 "Spatie\\Analytics\\AnalyticsServiceProvider"
             ],
             "aliases": {
-                "Analytics": "Spatie\\Analytics\\AnalyticsFacade"
+                "Analytics": "Spatie\\Analytics\\Facades\\Analytics"
             }
         }
     },

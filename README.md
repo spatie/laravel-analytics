@@ -12,7 +12,7 @@ Using this package you can easily retrieve data from Google Analytics.
 Here are a few examples of the provided methods:
 
 ```php
-use Analytics;
+use Spatie\Analytics\Facades\Analytics;
 use Spatie\Analytics\Period;
 
 //fetch the most visited pages for today and the past week
@@ -43,7 +43,7 @@ composer require spatie/laravel-analytics
 Optionally, you can publish the config file of this package with this command:
 
 ``` bash
-php artisan vendor:publish --provider="Spatie\Analytics\AnalyticsServiceProvider"
+php artisan vendor:publish --tag="analytics-config"
 ```
 
 The following config file will be published in `config/analytics.php`
@@ -54,7 +54,7 @@ return [
     /*
      * The view id of which you want to display data.
      */
-    'view_id' => env('ANALYTICS_VIEW_ID'),
+    'property_id' => env('PROPERTY_ID'),
 
     /*
      * Path to the client secret json file. Take a look at the README of this package
@@ -86,51 +86,49 @@ return [
 
 ### Getting credentials
 
-The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and click "Select a project" in the header.
+The first thing you’ll need to do is to get some credentials to use Google API’s. I’m assuming that you’ve already created a Google account and are signed in. Head over to [Google API’s site](https://console.developers.google.com/apis) and select or create a project.
 
-![1](https://spatie.github.io/laravel-analytics/v4/1.png)
+![1](https://spatie.github.io/laravel-analytics/v5/1.png)
 
-Next up we must specify which API’s the project may consume. In the list of `API Library` click "Google Analytics API". On the next screen click "Enable".
+Next up we must specify which API’s the project may consume. Go to the API Library and search for "Google Analytics Data API".
 
-![2](https://spatie.github.io/laravel-analytics/v4/2.png)
+![2](https://spatie.github.io/laravel-analytics/v5/2.png)
+![3](https://spatie.github.io/laravel-analytics/v5/3.png)
+
+Choose enable to enable the API.
+![4](https://spatie.github.io/laravel-analytics/v5/4.png)
 
 Now that you’ve created a project that has access to the Analytics API it’s time to download a file with these credentials. Click "Credentials" in the sidebar. You’ll want to create a "Service account key".
-
-![3](https://spatie.github.io/laravel-analytics/v4/3.png)
+![5](https://spatie.github.io/laravel-analytics/v5/5.png)
 
 On the next screen you can give the service account a name. You can name it anything you’d like. In the service account id you’ll see an email address. We’ll use this email address later on in this guide.
 
-![4](https://spatie.github.io/laravel-analytics/v4/4.png)
+![6](https://spatie.github.io/laravel-analytics/v5/6.png)
+
+Go to the details screen of your created service account and select "keys", from the "Add key" dropdown select "Create new key". 
+
+![7](https://spatie.github.io/laravel-analytics/v5/7.png)
 
 Select "JSON" as the key type and click "Create" to download the JSON file.
 
-![5](https://spatie.github.io/laravel-analytics/v4/5.png)
+![8](https://spatie.github.io/laravel-analytics/v5/8.png)
 
 Save the json inside your Laravel project at the location specified in the `service_account_credentials_json` key of the config file of this package. Because the json file contains potentially sensitive information I don't recommend committing it to your git repository.
 
 ### Granting permissions to your Analytics property
 
-I'm assuming that you've already created a Analytics account on the [Analytics site](https://analytics.google.com/analytics). When setting up your property, click on "Advanced options" and make sure you enable `Universal Analytics`.
+I'm assuming that you've already created a Analytics account on the [Analytics site](https://analytics.google.com/analytics) and are using the new GA4 properties.
 
-![6](https://spatie.github.io/laravel-analytics/v4/6.png)
+First you will need to know your property ID. In Analytics, go to Settings > Property Settings. Here you will be able to copy your property ID. Use this value for the `ANALYTICS_PROPERTY_ID` key in your .env file.
 
-Go to "User management" in the Admin-section of the property.
+![a1](https://spatie.github.io/laravel-analytics/v5/a1.png)
 
-![7](https://spatie.github.io/laravel-analytics/v4/7.png)
+Now we will need to give access to the service account you created. Go to "Property Access Management" in the Admin-section of the property.
+Click the plus sign in the top right corner to add a new user.
 
 On this screen you can grant access to the email address found in the `client_email` key from the json file you download in the previous step. Analyst role is enough.
 
-![8](https://spatie.github.io/laravel-analytics/v4/8.png)
-
-### Getting the view id
-
-The last thing you'll have to do is fill in the `view_id` in the config file. You can get the right value on the [Analytics site](https://analytics.google.com/analytics). Go to "View setting" in the Admin-section of the property.
-
-![9](https://spatie.github.io/laravel-analytics/v4/9.png)
-
-You'll need the `View ID` displayed there.
-
-![10](https://spatie.github.io/laravel-analytics/v4/10.png)
+![a2](https://spatie.github.io/laravel-analytics/v5/a2.png)
 
 ## Usage
 
@@ -139,13 +137,13 @@ When the installation is done you can easily retrieve Analytics data. Nearly all
 
 Here are a few examples using periods
 ```php
-//retrieve visitors and pageview data for the current day and the last seven days
+//retrieve visitors and page view data for the current day and the last seven days
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 
-//retrieve visitors and pageviews since the 6 months ago
+//retrieve visitors and page views since the 6 months ago
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::months(6));
 
-//retrieve sessions and pageviews with yearMonth dimension since 1 year ago
+//retrieve sessions and page views with yearMonth dimension since 1 year ago
 $analyticsData = Analytics::performQuery(
     Period::years(1),
     'ga:sessions',
@@ -169,13 +167,21 @@ Period::create($startDate, $endDate);
 
 ## Provided methods
 
-### Visitors and pageviews
+### Visitors and page views
 
 ```php
 public function fetchVisitorsAndPageViews(Period $period): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, `pageTitle` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `activeUsers`, `screenPageViews` and `pageTitle`.
+
+### Visitors and page views by date
+
+```php
+public function fetchVisitorsAndPageViewsByDate(Period $period): Collection
+```
+
+The function returns a `Collection` in which each item is an array that holds keys `date`, `activeUsers`, `screenPageViews` and `pageTitle`.
 
 ### Total visitors and pageviews
 
@@ -183,7 +189,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchTotalVisitorsAndPageViews(Period $period): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `date`, `visitors`, and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `date`, `date`, `visitors`, and `pageViews`.
 
 ### Most visited pages
 
@@ -191,7 +197,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `url`, `pageTitle` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `fullPageUrl`, `pageTitle` and `screenPageViews`.
 
 ### Top referrers
 
@@ -199,7 +205,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `url` and `pageViews`.
+The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `pageReferrer`.
 
 ### User Types
 
@@ -207,7 +213,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchUserTypes(Period $period): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `type` and `sessions`.
+The function returns a `Collection` in which each item is an array that holds keys `activeUsers` and `newVsReturning` which can equal to `new` or `returning`.
 
 ### Top browsers
 
@@ -215,20 +221,34 @@ The function returns a `Collection` in which each item is an array that holds ke
 public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
 ```
 
-The function returns a `Collection` in which each item is an array that holds keys `browser` and `sessions`.
+The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `browser`.
 
 ### All other Google Analytics queries
 
-To perform all other queries on the Google Analytics resource use `performQuery`.  [Google's Core Reporting API](https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries) provides more information on which metrics and dimensions might be used.
+For all other queries you can use the `get` function.
 
 ```php
-public function performQuery(Period $period, string $metrics, array $others = [])
+public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = []): Collection
 ```
 
-You can get access to the underlying `Google_Service_Analytics` object:
+Here's some extra info on the arguments you can pass:
 
+`Period $period`: a Spatie\Analytics\Period object to indicate that start and end date for your query.
+
+`array $metrics`: an array of metrics to retrieve. You can find a list of all metrics [here](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics).
+
+`array $dimensions`: an array of dimensions to group the results by. You can find a list of all dimensions [here](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#dimensions).
+
+`int $limit`: the maximum number of results to return.
+
+`array $orderBy`: of OrderBy objects to sort the results by. 
+
+For example:
 ```php
-Analytics::getAnalyticsService();
+$orderBy = [
+    OrderBy::dimension('date', true),
+    OrderBy::metric('pageViews', false),
+];
 ```
 
 ## Testing
@@ -236,7 +256,7 @@ Analytics::getAnalyticsService();
 Run the tests with:
 
 ``` bash
-vendor/bin/phpunit
+vendor/bin/pest
 ```
 
 ## Changelog
