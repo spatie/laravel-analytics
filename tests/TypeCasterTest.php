@@ -6,6 +6,7 @@ use Spatie\Analytics\TypeCaster;
 it('should cast a date to a Carbon object', function () {
     $typeCaster = resolve(TypeCaster::class);
     $value = $typeCaster->castValue('date', '20210101');
+
     expect($value)->toBeInstanceOf(Carbon::class);
 });
 
@@ -34,5 +35,6 @@ it('should cast integers', function () {
 it('should return a string as a default', function () {
     $typeCaster = resolve(TypeCaster::class);
     $value = $typeCaster->castValue('foo', 'bar');
+
     expect($value)->toBeString()->toBe('bar');
 });

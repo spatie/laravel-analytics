@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Storage;
 use Spatie\Analytics\Exceptions\InvalidConfiguration;
 use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 it('will throw an exception if the property id is not set', function () {
     config()->set('analytics.property_id', '');
 
-    Analytics::fetchVisitorsAndPageViews(now()->subDay(), now());
+    Analytics::fetchVisitorsAndPageViews(Period::days(7), now());
 })->throws(InvalidConfiguration::class);
 
 it('allows credentials json file', function () {

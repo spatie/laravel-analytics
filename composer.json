@@ -31,7 +31,8 @@
         "league/flysystem": "^3.0",
         "mockery/mockery": "^1.5",
         "orchestra/testbench": "^8.0",
-        "pestphp/pest": "^2.0"
+        "pestphp/pest": "^2.0",
+        "spatie/ray": "^1.37"
     },
     "autoload": {
         "psr-4": {
