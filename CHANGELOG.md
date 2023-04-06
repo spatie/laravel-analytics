@@ -2,6 +2,18 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.0.0 - 2023-04-06
+
+### What's Changed
+
+- Analytics API v4 by @timvandijck in https://github.com/spatie/laravel-analytics/pull/475
+
+### New Contributors
+
+- @timvandijck made their first contribution in https://github.com/spatie/laravel-analytics/pull/475
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/4.1.1...5.0.0
+
 ## 4.1.1 - 2023-02-01
 
 ### What's Changed
