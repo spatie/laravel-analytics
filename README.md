@@ -136,7 +136,10 @@ When the installation is done you can easily retrieve Analytics data. Nearly all
 
 
 Here are a few examples using periods
+
 ```php
+use Spatie\Analytics\Facades\Analytics;
+
 //retrieve visitors and page view data for the current day and the last seven days
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 
