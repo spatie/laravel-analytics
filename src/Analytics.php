@@ -3,7 +3,7 @@
 namespace Spatie\Analytics;
 
 use Illuminate\Support\Collection;
-use Spatie\Macroable\Macroable;
+use Illuminate\Support\Traits\Macroable;
 
 class Analytics
 {
