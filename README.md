@@ -52,7 +52,7 @@ The following config file will be published in `config/analytics.php`
 return [
 
     /*
-     * The view id of which you want to display data.
+     * The property id of which you want to display data.
      */
     'property_id' => env('PROPERTY_ID'),
 
