@@ -254,7 +254,7 @@ $orderBy = [
 ];
 ```
 
-`FilterExpression $dimensionFilter`: filter the result to include only specific dimension values. You can find more details [here](https://cloud.google.com/php/docs/reference/analytics-data/latest/V1beta.RunReportRequest#_Google_Analytics_Data_V1beta_RunReportRequest__setDimensionFilter__).
+`FilterExpression $dimensionFilter`: filter the result to include only specific dimension values. You can find more details [here](https://cloud.google.com/php/docs/reference/analytics-data/latest/V1beta.RunReportRequest).
 
 For example:
 ```php
