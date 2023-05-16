@@ -231,7 +231,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 For all other queries you can use the `get` function.
 
 ```php
-public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = []): Collection
+public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = [], FilterExpression $dimensionFilter = null): Collection
 ```
 
 Here's some extra info on the arguments you can pass:
@@ -252,6 +252,26 @@ $orderBy = [
     OrderBy::dimension('date', true),
     OrderBy::metric('pageViews', false),
 ];
+```
+
+`FilterExpression $dimensionFilter`: filter the result to include only specific dimension values. You can find more details [here](https://cloud.google.com/php/docs/reference/analytics-data/latest/V1beta.RunReportRequest#_Google_Analytics_Data_V1beta_RunReportRequest__setDimensionFilter__).
+
+For example:
+```php
+use Google\Analytics\Data\V1beta\Filter;
+use Google\Analytics\Data\V1beta\FilterExpression;
+use Google\Analytics\Data\V1beta\Filter\StringFilter;
+use Google\Analytics\Data\V1beta\Filter\StringFilter\MatchType;
+
+$dimensionFilter = new FilterExpression ([
+    'filter' => new Filter([
+        'field_name' => 'eventName',
+        'string_filter' => new StringFilter ([
+            'match_type' => MatchType::EXACT,
+            'value' => 'click',
+        ]),
+    ]),    
+]);
 ```
 
 ## Testing
