@@ -33,6 +33,7 @@ class AnalyticsClient
         array $dimensions = [],
         int $maxResults = 10,
         array $orderBy = [],
+        int $offset = 0,
     ): Collection {
         $typeCaster = resolve(TypeCaster::class);
 
@@ -44,6 +45,7 @@ class AnalyticsClient
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
             'limit' => $maxResults,
+            'offset' => $offset,
             'orderBys' => $orderBy,
         ]);
 

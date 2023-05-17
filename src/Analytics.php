@@ -171,6 +171,7 @@ class Analytics
         array $dimensions = [],
         int $maxResults = 10,
         array $orderBy = [],
+        int $offset = 0,
     ): Collection {
         return $this->client->get(
             $this->propertyId,
@@ -179,6 +180,7 @@ class Analytics
             $dimensions,
             $maxResults,
             $orderBy,
+            $offset,
         );
     }
 }
