@@ -236,6 +236,8 @@ Here's some extra info on the arguments you can pass:
 
 `array $orderBy`: of OrderBy objects to sort the results by. 
 
+`array $offset`: Defaults to 0, you can use this in combination with the $limit param to have pagination.
+
 For example:
 ```php
 $orderBy = [
