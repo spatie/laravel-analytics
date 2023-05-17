@@ -145,16 +145,6 @@ $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
 
 //retrieve visitors and page views since the 6 months ago
 $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::months(6));
-
-//retrieve sessions and page views with yearMonth dimension since 1 year ago
-$analyticsData = Analytics::performQuery(
-    Period::years(1),
-    'ga:sessions',
-    [
-        'metrics' => 'ga:sessions, ga:pageviews',
-        'dimensions' => 'ga:yearMonth'
-    ]
-);
 ```
 
 `$analyticsData` is a `Collection` in which each item is an array that holds keys `date`, `visitors` and `pageViews`
