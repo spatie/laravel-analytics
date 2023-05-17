@@ -2,6 +2,10 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.0.1 - 2023-05-17
+
+- Adds an `$offset` paramter to the get method and all methods that already accepted a `$limit` paramter.
+
 ## 5.0.0 - 2023-04-06
 
 ### What's Changed
