@@ -35,13 +35,14 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchVisitorsAndPageViews(Period $period, int $maxResults = 10): Collection
+    public function fetchVisitorsAndPageViews(Period $period, int $maxResults = 10, int $offset = 0): Collection
     {
         return $this->get(
-            $period,
-            ['activeUsers', 'screenPageViews'],
-            ['pageTitle'],
-            $maxResults,
+            period: $period,
+            metrics: ['activeUsers', 'screenPageViews'],
+            dimensions: ['pageTitle'],
+            maxResults: $maxResults,
+            offset: $offset,
         );
     }
 
@@ -54,16 +55,17 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchVisitorsAndPageViewsByDate(Period $period, int $maxResults = 10): Collection
+    public function fetchVisitorsAndPageViewsByDate(Period $period, int $maxResults = 10, $offset = 0): Collection
     {
         return $this->get(
-            $period,
-            ['activeUsers', 'screenPageViews'],
-            ['pageTitle', 'date'],
-            $maxResults,
-            [
+            period: $period,
+            metrics: ['activeUsers', 'screenPageViews'],
+            dimensions: ['pageTitle', 'date'],
+            maxResults: $maxResults,
+            orderBy: [
                 OrderBy::dimension('date', true),
             ],
+            offset: $offset,
         );
     }
 
@@ -75,16 +77,17 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTotalVisitorsAndPageViews(Period $period, int $maxResults = 20): Collection
+    public function fetchTotalVisitorsAndPageViews(Period $period, int $maxResults = 20, int $offset = 0): Collection
     {
         return $this->get(
-            $period,
-            ['activeUsers', 'screenPageViews'],
-            ['date'],
-            $maxResults,
-            [
+            period: $period,
+            metrics: ['activeUsers', 'screenPageViews'],
+            dimensions: ['date'],
+            maxResults: $maxResults,
+            orderBy: [
                 OrderBy::dimension('date', true),
             ],
+            offset: $offset,
         );
     }
 
@@ -96,16 +99,17 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchMostVisitedPages(Period $period, int $maxResults = 20): Collection
+    public function fetchMostVisitedPages(Period $period, int $maxResults = 20, int $offset = 0): Collection
     {
         return $this->get(
-            $period,
-            ['screenPageViews'],
-            ['pageTitle', 'fullPageUrl'],
-            $maxResults,
-            [
+            period: $period,
+            metrics: ['screenPageViews'],
+            dimensions: ['pageTitle', 'fullPageUrl'],
+            maxResults: $maxResults,
+            orderBy: [
                 OrderBy::metric('screenPageViews', true),
             ],
+            offset: $offset,
         );
     }
 
@@ -116,16 +120,17 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTopReferrers(Period $period, int $maxResults = 20): Collection
+    public function fetchTopReferrers(Period $period, int $maxResults = 20, int $offset = 0): Collection
     {
         return $this->get(
-            $period,
-            ['screenPageViews'],
-            ['pageReferrer'],
-            $maxResults,
-            [
+            period: $period,
+            metrics: ['screenPageViews'],
+            dimensions: ['pageReferrer'],
+            maxResults: $maxResults,
+            orderBy: [
                 OrderBy::metric('screenPageViews', true),
             ],
+            offset: $offset,
         );
     }
 
@@ -152,16 +157,17 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTopBrowsers(Period $period, int $maxResults = 10): Collection
+    public function fetchTopBrowsers(Period $period, int $maxResults = 10, int $offset = 0): Collection
     {
         return $this->get(
-            $period,
-            ['screenPageViews'],
-            ['browser'],
-            $maxResults,
-            [
+            period: $period,
+            metrics: ['screenPageViews'],
+            dimensions: ['browser'],
+            maxResults: $maxResults,
+            orderBy: [
                 OrderBy::metric('screenPageViews', true),
             ],
+            offset: $offset,
         );
     }
 
