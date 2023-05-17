@@ -4,6 +4,7 @@ namespace Spatie\Analytics;
 
 use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\Dimension;
+use Google\Analytics\Data\V1beta\FilterExpression;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\RunReportResponse;
 use Illuminate\Contracts\Cache\Repository;
@@ -34,6 +35,7 @@ class AnalyticsClient
         int $maxResults = 10,
         array $orderBy = [],
         int $offset = 0,
+        FilterExpression $dimensionFilter = null,
     ): Collection {
         $typeCaster = resolve(TypeCaster::class);
 
@@ -47,6 +49,7 @@ class AnalyticsClient
             'limit' => $maxResults,
             'offset' => $offset,
             'orderBys' => $orderBy,
+            'dimensionFilter' => $dimensionFilter,
         ]);
 
         $result = collect();
