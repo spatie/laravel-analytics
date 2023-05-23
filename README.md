@@ -255,10 +255,10 @@ use Google\Analytics\Data\V1beta\FilterExpression;
 use Google\Analytics\Data\V1beta\Filter\StringFilter;
 use Google\Analytics\Data\V1beta\Filter\StringFilter\MatchType;
 
-$dimensionFilter = new FilterExpression ([
+$dimensionFilter = new FilterExpression([
     'filter' => new Filter([
         'field_name' => 'eventName',
-        'string_filter' => new StringFilter ([
+        'string_filter' => new StringFilter([
             'match_type' => MatchType::EXACT,
             'value' => 'click',
         ]),
