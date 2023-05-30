@@ -2,6 +2,7 @@
 
 namespace Spatie\Analytics;
 
+use Google\Analytics\Data\V1beta\FilterExpression;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
@@ -178,6 +179,7 @@ class Analytics
         int $maxResults = 10,
         array $orderBy = [],
         int $offset = 0,
+        FilterExpression $dimensionFilter = null,
     ): Collection {
         return $this->client->get(
             $this->propertyId,
@@ -187,6 +189,7 @@ class Analytics
             $maxResults,
             $orderBy,
             $offset,
+            $dimensionFilter,
         );
     }
 }
