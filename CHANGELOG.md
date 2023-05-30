@@ -2,6 +2,22 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.0.2 - 2023-05-30
+
+### What's Changed
+
+- Bump aglipanci/laravel-pint-action from 0.1.0 to 2.2.0 by @dependabot in https://github.com/spatie/laravel-analytics/pull/477
+- Bump dependabot/fetch-metadata from 1.4.0 to 1.5.0 by @dependabot in https://github.com/spatie/laravel-analytics/pull/488
+- Bump dependabot/fetch-metadata from 1.5.0 to 1.5.1 by @dependabot in https://github.com/spatie/laravel-analytics/pull/489
+- Bump aglipanci/laravel-pint-action from 2.2.0 to 2.3.0 by @dependabot in https://github.com/spatie/laravel-analytics/pull/490
+- Extend Analytics::get with dimensionFilter parameter by @gmbenedek in https://github.com/spatie/laravel-analytics/pull/487
+
+### New Contributors
+
+- @gmbenedek made their first contribution in https://github.com/spatie/laravel-analytics/pull/487
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.0.1...5.0.2
+
 ## 5.0.1 - 2023-05-17
 
 - Adds an `$offset` paramter to the get method and all methods that already accepted a `$limit` paramter.
