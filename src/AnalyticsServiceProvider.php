@@ -15,7 +15,7 @@ class AnalyticsServiceProvider extends PackageServiceProvider
             ->hasConfigFile();
     }
 
-    public function registeringPackage(): void
+    public function bootingPackage()
     {
         $this->app->bind(AnalyticsClient::class, function () {
             $analyticsConfig = config('analytics');
@@ -23,23 +23,21 @@ class AnalyticsServiceProvider extends PackageServiceProvider
             return AnalyticsClientFactory::createForConfig($analyticsConfig);
         });
 
-        $this->app->bind(Analytics::class, function () {
+        $this->app->singleton('laravel-analytics', function () {
             $analyticsConfig = config('analytics');
 
             $this->guardAgainstInvalidConfiguration($analyticsConfig);
 
             $client = app(AnalyticsClient::class);
 
-            return new Analytics($client, $analyticsConfig['view_id']);
+            return new Analytics($client, $analyticsConfig['property_id']);
         });
-
-        $this->app->alias(Analytics::class, 'laravel-analytics');
     }
 
     protected function guardAgainstInvalidConfiguration(array $analyticsConfig = null): void
     {
-        if (empty($analyticsConfig['view_id'])) {
-            throw InvalidConfiguration::viewIdNotSpecified();
+        if (empty($analyticsConfig['property_id'])) {
+            throw InvalidConfiguration::propertyIdNotSpecified();
         }
 
         if (is_array($analyticsConfig['service_account_credentials_json'])) {
