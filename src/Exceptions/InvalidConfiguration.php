@@ -1,18 +1,23 @@
 <?php
 
-namespace Spatie\Analytics\Exceptions;
+namespace Botble\Analytics\Exceptions;
 
 use Exception;
 
 class InvalidConfiguration extends Exception
 {
-    public static function viewIdNotSpecified(): static
+    public static function propertyIdNotSpecified(): self
     {
-        return new static('There was no view ID specified. You must provide a valid view ID to execute queries on Google Analytics.');
+        return new self(trans('plugins/analytics::analytics.property_id_not_specified'));
     }
 
-    public static function credentialsJsonDoesNotExist(string $path): static
+    public static function credentialsIsNotValid(): self
     {
-        return new static("Could not find a credentials file at `{$path}`.");
+        return new self(trans('plugins/analytics::analytics.credential_is_not_valid'));
+    }
+
+    public static function invalidPropertyId(): self
+    {
+        return new self(trans('plugins/analytics::analytics.property_id_is_invalid'));
     }
 }

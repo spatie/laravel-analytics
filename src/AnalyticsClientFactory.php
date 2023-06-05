@@ -1,8 +1,7 @@
 <?php
 
-namespace Spatie\Analytics;
+namespace Botble\Analytics;
 
-use Google_Client;
 use Google_Service_Analytics;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Facades\Cache;
@@ -19,22 +18,22 @@ class AnalyticsClientFactory
         return self::createAnalyticsClient($analyticsConfig, $googleService);
     }
 
-    public static function createAuthenticatedGoogleClient(array $config): Google_Client
+    public static function createAuthenticatedGoogleClient(array $config): GoogleClient
     {
-        $client = new Google_Client();
+        $client = new GoogleClient();
 
         $client->setScopes([
             Google_Service_Analytics::ANALYTICS_READONLY,
         ]);
 
-        $client->setAuthConfig($config['service_account_credentials_json']);
+        $client->setAuthConfig(setting('analytics_service_account_credentials'));
 
         self::configureCache($client, $config['cache']);
 
         return $client;
     }
 
-    protected static function configureCache(Google_Client $client, $config): void
+    protected static function configureCache(GoogleClient $client, array $config): void
     {
         $config = collect($config);
 
@@ -44,13 +43,13 @@ class AnalyticsClientFactory
 
         $client->setCache($cache);
 
-        $client->setCacheConfig(
-            $config->except('store')->toArray(),
-        );
+        $client->setCacheConfig($config->except(['store'])->toArray());
     }
 
-    protected static function createAnalyticsClient(array $analyticsConfig, Google_Service_Analytics $googleService): AnalyticsClient
-    {
+    protected static function createAnalyticsClient(
+        array $analyticsConfig,
+        Google_Service_Analytics $googleService
+    ): AnalyticsClient {
         $client = new AnalyticsClient($googleService, app(Repository::class));
 
         $client->setCacheLifeTimeInMinutes($analyticsConfig['cache_lifetime_in_minutes']);
