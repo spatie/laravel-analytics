@@ -2,8 +2,8 @@
 
 namespace Botble\Analytics\Http\Controllers;
 
-use Botble\Analytics\Facades\Analytics;
 use Botble\Analytics\Exceptions\InvalidConfiguration;
+use Botble\Analytics\Facades\Analytics;
 use Botble\Analytics\Period;
 use Botble\Base\Http\Controllers\BaseController;
 use Botble\Base\Http\Responses\BaseHttpResponse;
@@ -35,9 +35,9 @@ class AnalyticsController extends BaseController
 
             $visitorData = [];
 
-            $queryData = Analytics::performQuery($period, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:' . $dimensions]);
+            $queryData = Analytics::performQuery($period, 'ga:visits,ga:pageviews', ['dimensions' => 'ga:'.$dimensions]);
 
-            $queryRows = property_exists($queryData, 'rows') ? (array)$queryData->rows : $queryData->toArray();
+            $queryRows = property_exists($queryData, 'rows') ? (array) $queryData->rows : $queryData->toArray();
 
             foreach ($queryRows as $dateRow) {
                 $dateRow = array_values($dateRow);
@@ -53,7 +53,7 @@ class AnalyticsController extends BaseController
                 for ($index = 0; $index < 24; $index++) {
                     if (! isset($visitorData[$index])) {
                         $visitorData[$index] = [
-                            'axis' => $index . 'h',
+                            'axis' => $index.'h',
                             'visitors' => 0,
                             'pageViews' => 0,
                         ];
@@ -68,7 +68,7 @@ class AnalyticsController extends BaseController
                 ['dimensions' => 'ga:countryIsoCode']
             );
 
-            $countryStats = property_exists($countryStatsQuery, 'rows') ? (array)$countryStatsQuery->rows : $countryStatsQuery->toArray();
+            $countryStats = property_exists($countryStatsQuery, 'rows') ? (array) $countryStatsQuery->rows : $countryStatsQuery->toArray();
 
             $metrics = 'ga:sessions, ga:users, ga:pageviews, ga:percentNewSessions, ga:bounceRate, ga:pageviewsPerVisit, ga:avgSessionDuration, ga:newUsers';
 
@@ -126,7 +126,7 @@ class AnalyticsController extends BaseController
         return match ($dimensions) {
             'date' => Carbon::parse($dateRow)->toDateString(),
             'yearMonth' => Carbon::createFromFormat('Ym', $dateRow)->format('Y-m'),
-            default => (int)$dateRow . 'h',
+            default => (int) $dateRow.'h',
         };
     }
 

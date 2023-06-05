@@ -22,7 +22,7 @@ trait MetricTrait
 
         $items = $this->validateMetrics($items);
 
-        foreach ((array)$items as $item) {
+        foreach ((array) $items as $item) {
             $item = trim($item);
             $this->metric($item);
         }
@@ -32,7 +32,7 @@ trait MetricTrait
 
     protected function validateMetrics(string|array $metrics): array|string
     {
-        $metrics = (array)$metrics;
+        $metrics = (array) $metrics;
 
         foreach ($metrics as $key => $item) {
             switch ($item) {

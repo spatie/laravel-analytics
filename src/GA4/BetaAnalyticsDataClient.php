@@ -15,23 +15,18 @@ class BetaAnalyticsDataClient extends BetaAnalyticsDataGapicClient
     {
         return [
             'serviceName' => self::SERVICE_NAME,
-            'apiEndpoint' =>
-                self::SERVICE_ADDRESS . ':' . self::DEFAULT_SERVICE_PORT,
-            'clientConfig' =>
-                __DIR__ .
+            'apiEndpoint' => self::SERVICE_ADDRESS.':'.self::DEFAULT_SERVICE_PORT,
+            'clientConfig' => __DIR__.
                 '/../../ga4/beta_analytics_data_client_config.json',
-            'descriptorsConfigPath' =>
-                __DIR__ .
+            'descriptorsConfigPath' => __DIR__.
                 '/../../ga4/beta_analytics_data_descriptor_config.php',
-            'gcpApiConfigPath' =>
-                __DIR__ . '/../../ga4/beta_analytics_data_grpc_config.json',
+            'gcpApiConfigPath' => __DIR__.'/../../ga4/beta_analytics_data_grpc_config.json',
             'credentialsConfig' => [
                 'defaultScopes' => self::$serviceScopes,
             ],
             'transportConfig' => [
                 'rest' => [
-                    'restClientConfigPath' =>
-                        __DIR__ .
+                    'restClientConfigPath' => __DIR__.
                         '/../../ga4/beta_analytics_data_rest_client_config.php',
                 ],
             ],

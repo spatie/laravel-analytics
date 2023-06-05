@@ -55,7 +55,7 @@ class CredentialsWrapper extends \Google\ApiCore\CredentialsWrapper
 
             $loader = CredentialsLoader::makeCredentials(
                 $args['scopes'],
-                (array)$keyFile,
+                (array) $keyFile,
                 $args['defaultScopes']
             );
         }

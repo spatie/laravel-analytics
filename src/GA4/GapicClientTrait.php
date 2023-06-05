@@ -27,13 +27,19 @@ trait GapicClientTrait
     use BaseGapicClientTrait;
 
     private $transport;
+
     private $credentialsWrapper;
 
     private static $gapicVersionFromFile;
+
     private $retrySettings;
+
     private $serviceName;
+
     private $agentHeader;
+
     private $descriptors;
+
     private $transportCallMethods = [
         Call::UNARY_CALL => 'startUnaryCall',
         Call::BIDI_STREAMING_CALL => 'startBidiStreamingCall',
@@ -250,7 +256,7 @@ trait GapicClientTrait
             ], $options)
         );
         self::validateFileExists($options['descriptorsConfigPath']);
-        $descriptors = require($options['descriptorsConfigPath']);
+        $descriptors = require $options['descriptorsConfigPath'];
         $this->descriptors = $descriptors['interfaces'][$this->serviceName];
 
         $this->credentialsWrapper = $this->createCredentialsWrapper(
@@ -283,7 +289,7 @@ trait GapicClientTrait
             return $credentials;
         } else {
             throw new ValidationException(
-                'Unexpected value in $auth option, got: ' .
+                'Unexpected value in $auth option, got: '.
                 print_r($credentials, true)
             );
         }
@@ -297,7 +303,7 @@ trait GapicClientTrait
     ): GrpcTransport|GrpcFallbackTransport|RestTransport {
         if (! is_string($transport)) {
             throw new ValidationException(
-                "'transport' must be a string, instead got:" .
+                "'transport' must be a string, instead got:".
                 print_r($transport, true)
             );
         }
@@ -329,7 +335,7 @@ trait GapicClientTrait
                 return RestTransport::build($apiEndpoint, $restConfigPath, $configForSpecifiedTransport);
             default:
                 throw new ValidationException(
-                    "Unexpected 'transport' option: " . $transport . ". Supported values: ['grpc', 'rest', 'grpc-fallback']"
+                    "Unexpected 'transport' option: ".$transport.". Supported values: ['grpc', 'rest', 'grpc-fallback']"
                 );
         }
     }
@@ -444,7 +450,7 @@ trait GapicClientTrait
             return null;
         }
 
-        return 'https://' . self::SERVICE_ADDRESS . '/';
+        return 'https://'.self::SERVICE_ADDRESS.'/';
     }
 
     private static function supportedTransports(): array

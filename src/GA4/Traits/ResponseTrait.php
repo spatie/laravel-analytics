@@ -8,6 +8,7 @@ use Google\Analytics\Data\V1beta\RunReportResponse;
 trait ResponseTrait
 {
     public array $metricHeaders = [];
+
     public array $dimensionHeaders = [];
 
     private function formatResponse(RunReportResponse $response): AnalyticsResponse

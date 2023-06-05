@@ -101,7 +101,7 @@ class HookServiceProvider extends ServiceProvider
 
     public function addAnalyticsSetting(string|null $data = null): string
     {
-        return $data . view('plugins/analytics::setting')->render();
+        return $data.view('plugins/analytics::setting')->render();
     }
 
     public function addAnalyticsSettingRules(array $rules): array
@@ -119,6 +119,6 @@ class HookServiceProvider extends ServiceProvider
             return $html;
         }
 
-        return $html . view('plugins/analytics::missing-library-warning')->render();
+        return $html.view('plugins/analytics::missing-library-warning')->render();
     }
 }

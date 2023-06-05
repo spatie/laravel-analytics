@@ -14,7 +14,7 @@ trait CustomEngagementTrait
             ->get()
             ->table;
 
-        return (float)Arr::first(Arr::flatten($result));
+        return (float) Arr::first(Arr::flatten($result));
     }
 
     public function getAverageSessionDurationByDate(Period $period): array
@@ -35,7 +35,7 @@ trait CustomEngagementTrait
             ->get()
             ->table;
 
-        return (int)Arr::first(Arr::flatten($result));
+        return (int) Arr::first(Arr::flatten($result));
     }
 
     public function getTotalViewsByDate(Period $period): array

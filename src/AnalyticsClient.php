@@ -44,7 +44,7 @@ class AnalyticsClient
             $this->cacheLifeTimeInMinutes,
             function () use ($propertyId, $startDate, $endDate, $metrics, $others) {
                 $result = $this->service->data_ga->get(
-                    'ga:' . $propertyId,
+                    'ga:'.$propertyId,
                     $startDate->format('Y-m-d'),
                     $endDate->format('Y-m-d'),
                     $metrics,
@@ -76,7 +76,7 @@ class AnalyticsClient
 
     protected function determineCacheName(array $properties): string
     {
-        return 'analytics.' . md5(serialize($properties));
+        return 'analytics.'.md5(serialize($properties));
     }
 
     /**

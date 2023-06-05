@@ -46,7 +46,7 @@ class Analytics extends AnalyticsAbstract implements AnalyticsContract
                 return [
                     'url' => $pageRow[0],
                     'pageTitle' => $pageRow[1],
-                    'pageViews' => (int)$pageRow[2],
+                    'pageViews' => (int) $pageRow[2],
                 ];
             });
     }
@@ -66,7 +66,7 @@ class Analytics extends AnalyticsAbstract implements AnalyticsContract
         return collect($response['rows'] ?? [])->map(function (array $pageRow) {
             return [
                 'url' => $pageRow[0],
-                'pageViews' => (int)$pageRow[1],
+                'pageViews' => (int) $pageRow[1],
             ];
         });
     }
@@ -84,7 +84,7 @@ class Analytics extends AnalyticsAbstract implements AnalyticsContract
         $data = Arr::map($response->rows ?? [], function (array $userRow) {
             return [
                 'type' => $userRow[0],
-                'sessions' => (int)$userRow[1],
+                'sessions' => (int) $userRow[1],
             ];
         });
 
@@ -105,7 +105,7 @@ class Analytics extends AnalyticsAbstract implements AnalyticsContract
         $topBrowsers = collect($response['rows'] ?? [])->map(function (array $browserRow) {
             return [
                 'browser' => $browserRow[0],
-                'sessions' => (int)$browserRow[1],
+                'sessions' => (int) $browserRow[1],
             ];
         });
 

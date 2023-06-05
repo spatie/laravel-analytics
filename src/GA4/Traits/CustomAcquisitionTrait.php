@@ -14,7 +14,7 @@ trait CustomAcquisitionTrait
             ->get()
             ->table;
 
-        return (int)Arr::first(Arr::flatten($result));
+        return (int) Arr::first(Arr::flatten($result));
     }
 
     public function getTotalUsersByDate(Period $period): array

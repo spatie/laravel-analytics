@@ -65,7 +65,7 @@ class Analytics extends AnalyticsAbstract implements AnalyticsContract
     public function get(): AnalyticsResponse
     {
         $response = $this->getClient()->runReport([
-            'property' => 'properties/' . $this->getPropertyId(),
+            'property' => 'properties/'.$this->getPropertyId(),
             'dateRanges' => $this->dateRanges,
             'metrics' => $this->metrics,
             'dimensions' => $this->dimensions,

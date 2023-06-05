@@ -12,7 +12,8 @@ class GoogleClient extends Client
      * This structure should match the file downloaded from
      * the "Download JSON" button on in the Google Developer
      * Console.
-     * @param string|array $config the configuration json
+     *
+     * @param  string|array  $config the configuration json
      */
     public function setAuthConfig($config): void
     {

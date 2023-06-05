@@ -2,16 +2,16 @@
 
 namespace Botble\Analytics\Providers;
 
+use Botble\Analytics\Abstracts\AnalyticsAbstract;
 use Botble\Analytics\Analytics;
 use Botble\Analytics\AnalyticsClient;
 use Botble\Analytics\AnalyticsClientFactory;
-use Botble\Analytics\Abstracts\AnalyticsAbstract;
+use Botble\Analytics\Exceptions\InvalidConfiguration;
 use Botble\Analytics\Facades\Analytics as AnalyticsFacade;
 use Botble\Analytics\GA4\Analytics as AnalyticsGA4;
 use Botble\Base\Traits\LoadAndPublishDataTrait;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Botble\Analytics\Exceptions\InvalidConfiguration;
 
 class AnalyticsServiceProvider extends ServiceProvider
 {
