@@ -180,6 +180,7 @@ class Analytics
         array $orderBy = [],
         int $offset = 0,
         FilterExpression $dimensionFilter = null,
+        bool $keepEmptyRows = false,
     ): Collection {
         return $this->client->get(
             $this->propertyId,
@@ -190,6 +191,7 @@ class Analytics
             $orderBy,
             $offset,
             $dimensionFilter,
+            $keepEmptyRows
         );
     }
 }
