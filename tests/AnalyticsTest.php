@@ -33,6 +33,7 @@ it('can fetch the visitor and page views', function () {
         [],
         0,
         null,
+        false,
     ];
 
     $this
@@ -72,6 +73,7 @@ it('can fetch the visitor and page views by date', function () {
         ],
         0,
         null,
+        false,
     ];
 
     $this
@@ -113,6 +115,7 @@ it('can fetch the total visitor and page views', function () {
         ],
         0,
         null,
+        false,
     ];
 
     $this
@@ -155,6 +158,7 @@ it('can fetch the most visited pages', function () {
         ],
         0,
         null,
+        false,
     ];
 
     $this
@@ -198,6 +202,7 @@ it('can fetch the top referrers', function () {
         ],
         0,
         null,
+        false,
     ];
 
     $this
@@ -237,6 +242,7 @@ it('can fetch the top browsers', function () {
         ],
         0,
         null,
+        false,
     ];
 
     $this

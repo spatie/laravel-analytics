@@ -238,6 +238,8 @@ Here's some extra info on the arguments you can pass:
 
 `array $offset`: Defaults to 0, you can use this in combination with the $limit param to have pagination.
 
+`bool $keepEmptyRows`: If false or unspecified, each row with all metrics equal to 0 will not be returned. If true, these rows will be returned if they are not separately removed by a filter.
+
 For example:
 ```php
 $orderBy = [
