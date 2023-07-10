@@ -2,6 +2,19 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.0.3 - 2023-07-10
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/spatie/laravel-analytics/pull/497
+- Adds a $keepEmptyRows parameter to get the empty rows too. by @golchha21 in https://github.com/spatie/laravel-analytics/pull/494
+
+### New Contributors
+
+- @golchha21 made their first contribution in https://github.com/spatie/laravel-analytics/pull/494
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.0.2...5.0.3
+
 ## 5.0.2 - 2023-05-30
 
 ### What's Changed
