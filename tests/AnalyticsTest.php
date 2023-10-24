@@ -279,6 +279,57 @@ it('can fetch the top browsers', function () {
         ]);
 });
 
+it('can fetch the top countries', function () {
+    $period = Period::create($this->startDate, $this->endDate);
+
+    $expectedArguments = [
+        $this->propertyId,
+        $period,
+        ['screenPageViews'],
+        ['country'],
+        3,
+        [
+            OrderBy::metric('screenPageViews', true),
+        ],
+        0,
+        null,
+        false,
+    ];
+
+    $this
+        ->analyticsClient
+        ->shouldReceive('get')
+        ->withArgs($expectedArguments)
+        ->once()
+        ->andReturn(collect(
+            [
+                [
+                    'country' => 'Country 1',
+                    'screenPageViews' => 100,
+                ],
+                [
+                    'country' => 'Country 2',
+                    'screenPageViews' => 90,
+                ],
+                [
+                    'country' => 'Country 3',
+                    'screenPageViews' => 60,
+                ],
+            ]
+        ));
+
+    $response = $this
+        ->analytics
+        ->fetchTopCountries($period, 3);
+
+    expect($response)->toBeInstanceOf(Collection::class)
+        ->and($response->toArray())->toBe([
+            ['country' => 'Country 1', 'screenPageViews' => 100],
+            ['country' => 'Country 2', 'screenPageViews' => 90],
+            ['country' => 'Country 3', 'screenPageViews' => 60],
+        ]);
+});
+
 function expectCarbon(Carbon $carbon)
 {
     return Mockery::on(function (Carbon $argument) use ($carbon) {
