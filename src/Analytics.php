@@ -186,6 +186,27 @@ class Analytics
         );
     }
 
+    /**
+     * @param  \Spatie\Analytics\Period  $period
+     * @return \Illuminate\Support\Collection<int, array{
+     *   operatingSystem: string,
+     *   screenPageViews: int
+     * }>
+     */
+    public function fetchTopOperatingSystems(Period $period, int $maxResults = 10, int $offset = 0): Collection
+    {
+        return $this->get(
+            period: $period,
+            metrics: ['screenPageViews'],
+            dimensions: ['operatingSystem'],
+            maxResults: $maxResults,
+            orderBy: [
+                OrderBy::metric('screenPageViews', true),
+            ],
+            offset: $offset,
+        );
+    }
+
     public function get(
         Period $period,
         array $metrics,

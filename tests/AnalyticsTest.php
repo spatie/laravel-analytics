@@ -330,6 +330,57 @@ it('can fetch the top countries', function () {
         ]);
 });
 
+it('can fetch the top operating systems', function () {
+    $period = Period::create($this->startDate, $this->endDate);
+
+    $expectedArguments = [
+        $this->propertyId,
+        $period,
+        ['screenPageViews'],
+        ['operatingSystem'],
+        3,
+        [
+            OrderBy::metric('screenPageViews', true),
+        ],
+        0,
+        null,
+        false,
+    ];
+
+    $this
+        ->analyticsClient
+        ->shouldReceive('get')
+        ->withArgs($expectedArguments)
+        ->once()
+        ->andReturn(collect(
+            [
+                [
+                    'operatingSystem' => 'Operating system 1',
+                    'screenPageViews' => 100,
+                ],
+                [
+                    'operatingSystem' => 'Operating system 2',
+                    'screenPageViews' => 90,
+                ],
+                [
+                    'operatingSystem' => 'Operating system 3',
+                    'screenPageViews' => 60,
+                ],
+            ]
+        ));
+
+    $response = $this
+        ->analytics
+        ->fetchTopOperatingSystems($period, 3);
+
+    expect($response)->toBeInstanceOf(Collection::class)
+        ->and($response->toArray())->toBe([
+            ['operatingSystem' => 'Operating system 1', 'screenPageViews' => 100],
+            ['operatingSystem' => 'Operating system 2', 'screenPageViews' => 90],
+            ['operatingSystem' => 'Operating system 3', 'screenPageViews' => 60],
+        ]);
+});
+
 function expectCarbon(Carbon $carbon)
 {
     return Mockery::on(function (Carbon $argument) use ($carbon) {
