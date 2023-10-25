@@ -2,6 +2,20 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.1.0 - 2023-10-25
+
+### What's Changed
+
+- Updated example env value key in README.md by @khsuzan in https://github.com/spatie/laravel-analytics/pull/503
+- Added method to fetch the top countries & top operating systems by @stijnvanouplines in https://github.com/spatie/laravel-analytics/pull/506
+
+### New Contributors
+
+- @khsuzan made their first contribution in https://github.com/spatie/laravel-analytics/pull/503
+- @stijnvanouplines made their first contribution in https://github.com/spatie/laravel-analytics/pull/506
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.0.3...5.1.0
+
 ## 5.0.3 - 2023-07-10
 
 ### What's Changed
