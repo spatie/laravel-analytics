@@ -224,6 +224,14 @@ public function fetchTopCountries(Period $period, int $maxResults = 10): Collect
 
 The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `country`.
 
+### Top operating systems
+
+```php
+public function fetchTopOperatingSystems(Period $period, int $maxResults = 10): Collection
+```
+
+The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `operatingSystem`.
+
 ### All other Google Analytics queries
 
 For all other queries you can use the `get` function.
