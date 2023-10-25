@@ -166,7 +166,6 @@ class Analytics
     }
 
     /**
-     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   country: string,
      *   screenPageViews: int
@@ -187,7 +186,6 @@ class Analytics
     }
 
     /**
-     * @param  \Spatie\Analytics\Period  $period
      * @return \Illuminate\Support\Collection<int, array{
      *   operatingSystem: string,
      *   screenPageViews: int
