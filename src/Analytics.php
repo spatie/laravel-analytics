@@ -35,7 +35,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchVisitorsAndPageViews(Period $period, int $maxResults = 10, int $offset = 0): Collection
+    public function fetchVisitorsAndPageViews(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -43,6 +43,8 @@ class Analytics
             dimensions: ['pageTitle'],
             maxResults: $maxResults,
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
@@ -54,7 +56,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchVisitorsAndPageViewsByDate(Period $period, int $maxResults = 10, $offset = 0): Collection
+    public function fetchVisitorsAndPageViewsByDate(Period $period, int $maxResults = 10, $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -65,6 +67,8 @@ class Analytics
                 OrderBy::dimension('date', true),
             ],
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
@@ -75,7 +79,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTotalVisitorsAndPageViews(Period $period, int $maxResults = 20, int $offset = 0): Collection
+    public function fetchTotalVisitorsAndPageViews(Period $period, int $maxResults = 20, int $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -86,6 +90,8 @@ class Analytics
                 OrderBy::dimension('date', true),
             ],
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
@@ -96,7 +102,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchMostVisitedPages(Period $period, int $maxResults = 20, int $offset = 0): Collection
+    public function fetchMostVisitedPages(Period $period, int $maxResults = 20, int $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -107,6 +113,8 @@ class Analytics
                 OrderBy::metric('screenPageViews', true),
             ],
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
@@ -116,7 +124,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTopReferrers(Period $period, int $maxResults = 20, int $offset = 0): Collection
+    public function fetchTopReferrers(Period $period, int $maxResults = 20, int $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -127,6 +135,8 @@ class Analytics
                 OrderBy::metric('screenPageViews', true),
             ],
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
@@ -151,7 +161,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTopBrowsers(Period $period, int $maxResults = 10, int $offset = 0): Collection
+    public function fetchTopBrowsers(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -162,6 +172,8 @@ class Analytics
                 OrderBy::metric('screenPageViews', true),
             ],
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
@@ -171,7 +183,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTopCountries(Period $period, int $maxResults = 10, int $offset = 0): Collection
+    public function fetchTopCountries(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -182,6 +194,8 @@ class Analytics
                 OrderBy::metric('screenPageViews', true),
             ],
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
@@ -191,7 +205,7 @@ class Analytics
      *   screenPageViews: int
      * }>
      */
-    public function fetchTopOperatingSystems(Period $period, int $maxResults = 10, int $offset = 0): Collection
+    public function fetchTopOperatingSystems(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
     {
         return $this->get(
             period: $period,
@@ -202,6 +216,8 @@ class Analytics
                 OrderBy::metric('screenPageViews', true),
             ],
             offset: $offset,
+            dimensionFilter: null,
+            keepEmptyRows: $keepEmptyRows,
         );
     }
 
