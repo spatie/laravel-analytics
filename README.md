@@ -163,7 +163,7 @@ Period::create($startDate, $endDate);
 ### Visitors and page views
 
 ```php
-public function fetchVisitorsAndPageViews(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchVisitorsAndPageViews(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `activeUsers`, `screenPageViews` and `pageTitle`.
@@ -171,7 +171,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Visitors and page views by date
 
 ```php
-public function fetchVisitorsAndPageViewsByDate(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchVisitorsAndPageViewsByDate(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `date`, `activeUsers`, `screenPageViews` and `pageTitle`.
@@ -179,7 +179,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Total visitors and pageviews
 
 ```php
-public function fetchTotalVisitorsAndPageViews(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchTotalVisitorsAndPageViews(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `date`, `date`, `visitors`, and `pageViews`.
@@ -187,7 +187,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Most visited pages
 
 ```php
-public function fetchMostVisitedPages(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchMostVisitedPages(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `fullPageUrl`, `pageTitle` and `screenPageViews`.
@@ -195,7 +195,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top referrers
 
 ```php
-public function fetchTopReferrers(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchTopReferrers(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `pageReferrer`.
@@ -211,7 +211,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top browsers
 
 ```php
-public function fetchTopBrowsers(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchTopBrowsers(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `browser`.
@@ -219,7 +219,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top countries
 
 ```php
-public function fetchTopCountries(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchTopCountries(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `country`.
@@ -227,7 +227,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 ### Top operating systems
 
 ```php
-public function fetchTopOperatingSystems(Period $period, int $maxResults = 10, int $offset = 0): Collection
+public function fetchTopOperatingSystems(Period $period, int $maxResults = 10, int $offset = 0, bool $keepEmptyRows = false): Collection
 ```
 
 The function returns a `Collection` in which each item is an array that holds keys `screenPageViews` and `operatingSystem`.
