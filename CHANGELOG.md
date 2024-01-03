@@ -2,6 +2,20 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.2.0 - 2024-01-03
+
+### What's Changed
+
+* feat: period macroable by @Muetze42 in https://github.com/spatie/laravel-analytics/pull/511
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/spatie/laravel-analytics/pull/504
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/spatie/laravel-analytics/pull/502
+
+### New Contributors
+
+* @Muetze42 made their first contribution in https://github.com/spatie/laravel-analytics/pull/511
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.1.0...5.2.0
+
 ## 5.1.0 - 2023-10-25
 
 ### What's Changed
