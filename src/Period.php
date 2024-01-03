@@ -5,8 +5,8 @@ namespace Spatie\Analytics;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Google\Analytics\Data\V1beta\DateRange;
-use Spatie\Analytics\Exceptions\InvalidPeriod;
 use Illuminate\Support\Traits\Macroable;
+use Spatie\Analytics\Exceptions\InvalidPeriod;
 
 class Period
 {
