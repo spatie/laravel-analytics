@@ -6,6 +6,7 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 ![Check & fix styling](https://github.com/spatie/laravel-analytics/workflows/Check%20&%20fix%20styling/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-analytics.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-analytics)
+[![Check Imports](https://github.com/spatie/laravel-analytics/actions/workflows/check_imports.yml/badge.svg?branch=master)](https://github.com/spatie/laravel-analytics/actions/workflows/check_imports.yml)
 
 Using this package you can easily retrieve data from Google Analytics.
 
