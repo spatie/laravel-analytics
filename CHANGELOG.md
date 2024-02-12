@@ -2,6 +2,15 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.2.1 - 2024-02-12
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.3.0 to 2.3.1 by @dependabot in https://github.com/spatie/laravel-analytics/pull/513
+* Add support for laravel 11 by @shuvroroy in https://github.com/spatie/laravel-analytics/pull/514
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.2.0...5.2.1
+
 ## 5.2.0 - 2024-01-03
 
 ### What's Changed
