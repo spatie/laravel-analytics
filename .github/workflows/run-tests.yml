@@ -9,30 +9,35 @@ jobs:
             fail-fast: false
             matrix:
                 os: [ubuntu-latest]
-                php: [8.2, 8.1]
-                laravel: [10.*]
+                php: [8.3, 8.2, 8.1]
+                laravel: ["^11.0", "^10.0"]
                 dependency-version: [prefer-lowest, prefer-stable]
                 include:
-                    -   laravel: 10.*
-                        testbench: 8.*
+                    - laravel: "^10.0"
+                      testbench: "^8.0"
+                    - laravel: "^11.0"
+                      testbench: "^9.0"
+                exclude:
+                    - laravel: "^11.0"
+                      php: 8.1
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
         steps:
-            -   name: Checkout code
-                uses: actions/checkout@v4
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-                    coverage: none
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+                  coverage: none
 
-            -   name: Install dependencies
-                run: |
-                    composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                    composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+            - name: Install dependencies
+              run: |
+                  composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
-            -   name: Execute tests
-                run: vendor/bin/pest
+            - name: Execute tests
+              run: vendor/bin/pest
