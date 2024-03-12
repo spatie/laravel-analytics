@@ -2,6 +2,18 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.3.0 - 2024-03-12
+
+### What's Changed
+
+* Allow carbon 3 by @oriceon in https://github.com/spatie/laravel-analytics/pull/516
+
+### New Contributors
+
+* @oriceon made their first contribution in https://github.com/spatie/laravel-analytics/pull/516
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.2.1...5.3.0
+
 ## 5.2.1 - 2024-02-12
 
 ### What's Changed
