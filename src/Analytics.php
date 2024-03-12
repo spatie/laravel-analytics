@@ -212,7 +212,7 @@ class Analytics
         int $maxResults = 10,
         array $orderBy = [],
         int $offset = 0,
-        FilterExpression $dimensionFilter = null,
+        ?FilterExpression $dimensionFilter = null,
         bool $keepEmptyRows = false,
     ): Collection {
         return $this->client->get(

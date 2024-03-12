@@ -34,7 +34,7 @@ class AnalyticsServiceProvider extends PackageServiceProvider
         });
     }
 
-    protected function guardAgainstInvalidConfiguration(array $analyticsConfig = null): void
+    protected function guardAgainstInvalidConfiguration(?array $analyticsConfig = null): void
     {
         if (empty($analyticsConfig['property_id'])) {
             throw InvalidConfiguration::propertyIdNotSpecified();
