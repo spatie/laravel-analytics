@@ -213,6 +213,7 @@ class Analytics
         array $orderBy = [],
         int $offset = 0,
         ?FilterExpression $dimensionFilter = null,
+        ?FilterExpression $metricFilter = null,
         bool $keepEmptyRows = false,
     ): Collection {
         return $this->client->get(
@@ -224,6 +225,7 @@ class Analytics
             $orderBy,
             $offset,
             $dimensionFilter,
+            $metricFilter,
             $keepEmptyRows
         );
     }

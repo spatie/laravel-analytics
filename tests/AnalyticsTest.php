@@ -33,6 +33,7 @@ it('can fetch the visitor and page views', function () {
         [],
         0,
         null,
+        null,
         false,
     ];
 
@@ -72,6 +73,7 @@ it('can fetch the visitor and page views by date', function () {
             OrderBy::dimension('date', true),
         ],
         0,
+        null,
         null,
         false,
     ];
@@ -115,6 +117,7 @@ it('can fetch the total visitor and page views', function () {
         ],
         0,
         null,
+        null,
         false,
     ];
 
@@ -157,6 +160,7 @@ it('can fetch the most visited pages', function () {
             OrderBy::metric('screenPageViews', true),
         ],
         0,
+        null,
         null,
         false,
     ];
@@ -202,6 +206,7 @@ it('can fetch the top referrers', function () {
         ],
         0,
         null,
+        null,
         false,
     ];
 
@@ -241,6 +246,7 @@ it('can fetch the top browsers', function () {
             OrderBy::metric('screenPageViews', true),
         ],
         0,
+        null,
         null,
         false,
     ];
@@ -293,6 +299,7 @@ it('can fetch the top countries', function () {
         ],
         0,
         null,
+        null,
         false,
     ];
 
@@ -343,6 +350,7 @@ it('can fetch the top operating systems', function () {
             OrderBy::metric('screenPageViews', true),
         ],
         0,
+        null,
         null,
         false,
     ];
