@@ -213,8 +213,8 @@ class Analytics
         array $orderBy = [],
         int $offset = 0,
         ?FilterExpression $dimensionFilter = null,
-        ?FilterExpression $metricFilter = null,
         bool $keepEmptyRows = false,
+        ?FilterExpression $metricFilter = null,
     ): Collection {
         return $this->client->get(
             $this->propertyId,
