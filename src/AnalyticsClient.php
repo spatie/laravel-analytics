@@ -36,8 +36,8 @@ class AnalyticsClient
         array $orderBy = [],
         int $offset = 0,
         ?FilterExpression $dimensionFilter = null,
-        ?FilterExpression $metricFilter = null,
         bool $keepEmptyRows = false,
+        ?FilterExpression $metricFilter = null,
     ): Collection {
         $typeCaster = resolve(TypeCaster::class);
 
@@ -52,8 +52,8 @@ class AnalyticsClient
             'offset' => $offset,
             'orderBys' => $orderBy,
             'dimensionFilter' => $dimensionFilter,
-            'metricFilter' => $metricFilter,
             'keepEmptyRows' => $keepEmptyRows,
+            'metricFilter' => $metricFilter
         ]);
 
         $result = collect();

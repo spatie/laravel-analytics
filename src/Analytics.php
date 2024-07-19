@@ -225,8 +225,8 @@ class Analytics
             $orderBy,
             $offset,
             $dimensionFilter,
-            $metricFilter,
-            $keepEmptyRows
+            $keepEmptyRows,
+            $metricFilter
         );
     }
 }
