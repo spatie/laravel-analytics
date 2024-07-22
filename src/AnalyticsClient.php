@@ -17,8 +17,7 @@ class AnalyticsClient
     public function __construct(
         protected BetaAnalyticsDataClient $service,
         protected Repository $cache,
-    ) {
-    }
+    ) {}
 
     public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes): self
     {
@@ -53,7 +52,7 @@ class AnalyticsClient
             'orderBys' => $orderBy,
             'dimensionFilter' => $dimensionFilter,
             'keepEmptyRows' => $keepEmptyRows,
-            'metricFilter' => $metricFilter
+            'metricFilter' => $metricFilter,
         ]);
 
         $result = collect();

@@ -13,8 +13,7 @@ class Analytics
     public function __construct(
         protected AnalyticsClient $client,
         protected string $propertyId,
-    ) {
-    }
+    ) {}
 
     public function setPropertyId(string $propertyId): self
     {
