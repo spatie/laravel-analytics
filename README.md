@@ -237,7 +237,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 For all other queries you can use the `get` function.
 
 ```php
-public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = [], FilterExpression $dimensionFilter = null): Collection
+public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = [], FilterExpression $dimensionFilter = null, FilterExpression $metricFilter = null): Collection
 ```
 
 Here's some extra info on the arguments you can pass:
@@ -283,6 +283,28 @@ $dimensionFilter = new FilterExpression([
     ]),    
 ]);
 ```
+
+`FilterExpression $metricFilter`: filter applied after aggregating the report's rows, similar to SQL having-clause. Dimensions cannot be used in this filter. You can find more details [here](https://cloud.google.com/php/docs/reference/analytics-data/latest/V1beta.RunReportRequest).
+
+For example:
+```php
+use Google\Analytics\Data\V1beta\Filter;
+use Google\Analytics\Data\V1beta\FilterExpression;
+use Google\Analytics\Data\V1beta\Filter\NumericFilter;
+use Google\Analytics\Data\V1beta\NumericValue;
+use Google\Analytics\Data\V1beta\Filter\NumericFilter\Operation;
+
+$metricFilter = new FilterExpression([
+    'filter' => new Filter([
+        'field_name' => 'eventCount',
+        'numeric_filter' => new NumericFilter([
+            'operation' => Operation::GREATER_THAN,
+            'value' => new NumericValue([
+                'int64_value' => 3,
+            ]),
+        ]),
+    ]),    
+]);
 
 ## Testing
 
