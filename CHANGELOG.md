@@ -2,6 +2,20 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.4.0 - 2024-07-22
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.4 by @dependabot in https://github.com/spatie/laravel-analytics/pull/521
+* feat: add new param 'metricFilter' in signature method 'get' by @laudefe in https://github.com/spatie/laravel-analytics/pull/523
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.2.0 by @dependabot in https://github.com/spatie/laravel-analytics/pull/525
+
+### New Contributors
+
+* @laudefe made their first contribution in https://github.com/spatie/laravel-analytics/pull/523
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.3.0...5.4.0
+
 ## 5.3.0 - 2024-03-12
 
 ### What's Changed
