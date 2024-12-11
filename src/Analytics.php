@@ -228,4 +228,29 @@ class Analytics
             $metricFilter
         );
     }
+    
+    public function getRealtime(
+        Period $period,
+        array $metrics,
+        array $dimensions = [],
+        int $maxResults = 10,
+        array $orderBy = [],
+        int $offset = 0,
+        ?FilterExpression $dimensionFilter = null,
+        bool $keepEmptyRows = false,
+        ?FilterExpression $metricFilter = null,
+    ): Collection {
+        return $this->client->getRealtime(
+            $this->propertyId,
+            $period,
+            $metrics,
+            $dimensions,
+            $maxResults,
+            $orderBy,
+            $offset,
+            $dimensionFilter,
+            $keepEmptyRows,
+            $metricFilter
+        );
+    }
 }
