@@ -61,7 +61,7 @@ class Period
 
     public function toDateRange(): DateRange
     {
-        return (new DateRange())
+        return (new DateRange)
             ->setStartDate($this->startDate->format('Y-m-d'))
             ->setEndDate($this->endDate->format('Y-m-d'));
     }

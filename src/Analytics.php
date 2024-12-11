@@ -228,7 +228,7 @@ class Analytics
             $metricFilter
         );
     }
-    
+
     public function getRealtime(
         Period $period,
         array $metrics,

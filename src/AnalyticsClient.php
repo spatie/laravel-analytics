@@ -6,8 +6,8 @@ use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\FilterExpression;
 use Google\Analytics\Data\V1beta\Metric;
-use Google\Analytics\Data\V1beta\RunReportResponse;
 use Google\Analytics\Data\V1beta\RunRealtimeReportResponse;
+use Google\Analytics\Data\V1beta\RunReportResponse;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Collection;
 
@@ -156,7 +156,6 @@ class AnalyticsClient
             fn () => $this->service->runRealtimeReport($request),
         );
     }
-
 
     public function getAnalyticsService(): BetaAnalyticsDataClient
     {

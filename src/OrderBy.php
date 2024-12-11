@@ -10,18 +10,18 @@ class OrderBy
 {
     public static function dimension(string $dimension, bool $descending = false): GoogleOrderBy
     {
-        $dimensionOrderBy = (new DimensionOrderBy())->setDimensionName($dimension);
+        $dimensionOrderBy = (new DimensionOrderBy)->setDimensionName($dimension);
 
-        return (new GoogleOrderBy())->setDimension(
+        return (new GoogleOrderBy)->setDimension(
             $dimensionOrderBy,
         )->setDesc($descending);
     }
 
     public static function metric(string $metric, bool $descending = false): GoogleOrderBy
     {
-        $metricOrderBy = (new MetricOrderBy())->setMetricName($metric);
+        $metricOrderBy = (new MetricOrderBy)->setMetricName($metric);
 
-        return (new GoogleOrderBy())->setMetric(
+        return (new GoogleOrderBy)->setMetric(
             $metricOrderBy,
         )->setDesc($descending);
     }
