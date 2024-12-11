@@ -2,6 +2,18 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.5.0 - 2024-12-11
+
+### What's Changed
+
+* Ability to run realtime reports from GA4 by @jaroslavstefanec in https://github.com/spatie/laravel-analytics/pull/528
+
+### New Contributors
+
+* @jaroslavstefanec made their first contribution in https://github.com/spatie/laravel-analytics/pull/528
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.4.0...5.5.0
+
 ## 5.4.0 - 2024-07-22
 
 ### What's Changed
