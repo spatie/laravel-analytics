@@ -7,6 +7,7 @@ use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\FilterExpression;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\RunReportResponse;
+use Google\Analytics\Data\V1beta\RunRealtimeReportResponse;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Collection;
 
@@ -76,6 +77,56 @@ class AnalyticsClient
         return $result;
     }
 
+    public function getRealtime(
+        string $propertyId,
+        Period $period,
+        array $metrics,
+        array $dimensions = [],
+        int $maxResults = 10,
+        array $orderBy = [],
+        int $offset = 0,
+        ?FilterExpression $dimensionFilter = null,
+        bool $keepEmptyRows = false,
+        ?FilterExpression $metricFilter = null,
+    ): Collection {
+        $typeCaster = resolve(TypeCaster::class);
+
+        $response = $this->runRealtimeReport([
+            'property' => "properties/{$propertyId}",
+            'dateRanges' => [
+                $period->toDateRange(),
+            ],
+            'metrics' => $this->getFormattedMetrics($metrics),
+            'dimensions' => $this->getFormattedDimensions($dimensions),
+            'limit' => $maxResults,
+            'offset' => $offset,
+            'orderBys' => $orderBy,
+            'dimensionFilter' => $dimensionFilter,
+            'keepEmptyRows' => $keepEmptyRows,
+            'metricFilter' => $metricFilter,
+        ]);
+
+        $result = collect();
+
+        foreach ($response->getRows() as $row) {
+            $rowResult = [];
+
+            foreach ($row->getDimensionValues() as $i => $dimensionValue) {
+                $rowResult[$dimensions[$i]] =
+                    $typeCaster->castValue($dimensions[$i], $dimensionValue->getValue());
+            }
+
+            foreach ($row->getMetricValues() as $i => $metricValue) {
+                $rowResult[$metrics[$i]] =
+                    $typeCaster->castValue($metrics[$i], $metricValue->getValue());
+            }
+
+            $result->push($rowResult);
+        }
+
+        return $result;
+    }
+
     public function runReport(array $request): RunReportResponse
     {
         $cacheName = $this->determineCacheName(func_get_args());
@@ -90,6 +141,22 @@ class AnalyticsClient
             fn () => $this->service->runReport($request),
         );
     }
+
+    public function runRealtimeReport(array $request): RunRealtimeReportResponse
+    {
+        $cacheName = $this->determineCacheName(func_get_args());
+
+        if ($this->cacheLifeTimeInMinutes === 0) {
+            $this->cache->forget($cacheName);
+        }
+
+        return $this->cache->remember(
+            $cacheName,
+            $this->cacheLifeTimeInMinutes,
+            fn () => $this->service->runRealtimeReport($request),
+        );
+    }
+
 
     public function getAnalyticsService(): BetaAnalyticsDataClient
     {
