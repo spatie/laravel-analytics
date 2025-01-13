@@ -2,6 +2,18 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.5.1 - 2025-01-13
+
+### What's Changed
+
+* Update `googleapis/php-analytics-data` dependency by @JayBizzle in https://github.com/spatie/laravel-analytics/pull/529
+
+### New Contributors
+
+* @JayBizzle made their first contribution in https://github.com/spatie/laravel-analytics/pull/529
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.5.0...5.5.1
+
 ## 5.5.0 - 2024-12-11
 
 ### What's Changed
