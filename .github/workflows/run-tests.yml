@@ -20,7 +20,7 @@ jobs:
             testbench: ^8.0
           - laravel: ^11.0
             testbench: ^9.0
-          - laravel: '12.0'
+          - laravel: ^12.0
             testbench: ^10.0
         exclude:
           - laravel: ^11.0
