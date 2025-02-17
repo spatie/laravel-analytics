@@ -2,7 +2,7 @@
 
 namespace Spatie\Analytics;
 
-use Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
+use Google\Analytics\Data\V1beta\Client\BetaAnalyticsDataClient;
 use Illuminate\Contracts\Cache\Repository;
 
 class AnalyticsClientFactory
