@@ -2,6 +2,16 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.5.2 - 2025-02-17
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/spatie/laravel-analytics/pull/531
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/spatie/laravel-analytics/pull/532
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-analytics/pull/533
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.5.1...5.5.2
+
 ## 5.5.1 - 2025-01-13
 
 ### What's Changed
