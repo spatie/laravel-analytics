@@ -2,6 +2,18 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.5.3 - 2025-02-20
+
+### What's Changed
+
+* Fix TypeError in runReport after upgrading to 5.5.2 by @abr4xas in https://github.com/spatie/laravel-analytics/pull/535
+
+### New Contributors
+
+* @abr4xas made their first contribution in https://github.com/spatie/laravel-analytics/pull/535
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.5.2...5.5.3
+
 ## 5.5.2 - 2025-02-17
 
 ### What's Changed
