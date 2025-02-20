@@ -6,6 +6,7 @@ use Google\Analytics\Data\V1beta\Client\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\FilterExpression;
 use Google\Analytics\Data\V1beta\Metric;
+use Google\Analytics\Data\V1beta\RunRealtimeReportRequest;
 use Google\Analytics\Data\V1beta\RunRealtimeReportResponse;
 use Google\Analytics\Data\V1beta\RunReportRequest;
 use Google\Analytics\Data\V1beta\RunReportResponse;
@@ -154,7 +155,7 @@ class AnalyticsClient
         return $this->cache->remember(
             $cacheName,
             $this->cacheLifeTimeInMinutes,
-            fn () => $this->service->runRealtimeReport($request),
+            fn () => $this->service->runRealtimeReport(new RunRealtimeReportRequest($request)),
         );
     }
 
