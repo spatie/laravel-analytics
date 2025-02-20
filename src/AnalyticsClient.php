@@ -44,17 +44,17 @@ class AnalyticsClient
 
         $response = $this->runReport([
             'property' => "properties/{$propertyId}",
-            'dateRanges' => [
+            'date_ranges' => [
                 $period->toDateRange(),
             ],
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
             'limit' => $maxResults,
             'offset' => $offset,
-            'orderBys' => $orderBy,
-            'dimensionFilter' => $dimensionFilter,
-            'keepEmptyRows' => $keepEmptyRows,
-            'metricFilter' => $metricFilter,
+            'order_bys' => $orderBy,
+            'dimension_filter' => $dimensionFilter,
+            'keep_empty_rows' => $keepEmptyRows,
+            'metric_filter' => $metricFilter,
         ]);
 
         $result = collect();
@@ -94,17 +94,17 @@ class AnalyticsClient
 
         $response = $this->runRealtimeReport([
             'property' => "properties/{$propertyId}",
-            'dateRanges' => [
+            'date_ranges' => [
                 $period->toDateRange(),
             ],
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
             'limit' => $maxResults,
             'offset' => $offset,
-            'orderBys' => $orderBy,
-            'dimensionFilter' => $dimensionFilter,
-            'keepEmptyRows' => $keepEmptyRows,
-            'metricFilter' => $metricFilter,
+            'order_bys' => $orderBy,
+            'dimension_filter' => $dimensionFilter,
+            'keep_empty_rows' => $keepEmptyRows,
+            'metric_filter' => $metricFilter,
         ]);
 
         $result = collect();
