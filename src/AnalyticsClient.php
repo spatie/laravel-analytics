@@ -95,16 +95,14 @@ class AnalyticsClient
 
         $response = $this->runRealtimeReport([
             'property' => "properties/{$propertyId}",
-            'date_ranges' => [
-                $period->toDateRange(),
+            'minute_ranges' => [
+                $period->toMinuteRange(),
             ],
             'metrics' => $this->getFormattedMetrics($metrics),
             'dimensions' => $this->getFormattedDimensions($dimensions),
             'limit' => $maxResults,
-            'offset' => $offset,
             'order_bys' => $orderBy,
             'dimension_filter' => $dimensionFilter,
-            'keep_empty_rows' => $keepEmptyRows,
             'metric_filter' => $metricFilter,
         ]);
 
