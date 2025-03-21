@@ -2,6 +2,14 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.5.4 - 2025-03-21
+
+### What's Changed
+
+* Fix TypeError in runRealtimeReport after upgrading by @jaroslavstefanec in https://github.com/spatie/laravel-analytics/pull/536
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.5.3...5.5.4
+
 ## 5.5.3 - 2025-02-20
 
 ### What's Changed
