@@ -1,11 +1,19 @@
-<p align="center"><img src="/art/socialcard.png" alt="Social Card of Laravel Analytics"></p>
+<div align="left">
+    <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=laravel-analytics">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/laravel-analytics/html/dark.webp">
+        <img alt="Logo for laravel-analytics" src=" https://spatie.be/packages/header/laravel-analytics/html/light.webp" height="190">
+      </picture>
+    </a>
 
-#  Retrieve data from Google Analytics
+<h1>Retrieve data from Google Analytics</h1>
 
 [![Latest Version](https://img.shields.io/github/release/spatie/laravel-analytics.svg?style=flat-square)](https://github.com/spatie/laravel-analytics/releases)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 ![Check & fix styling](https://github.com/spatie/laravel-analytics/workflows/Check%20&%20fix%20styling/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-analytics.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-analytics)
+    
+</div>
 
 Using this package you can easily retrieve data from Google Analytics.
 
@@ -331,7 +339,7 @@ If you've found a bug regarding security please mail [security@spatie.be](mailto
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
-And a special thanks to [Caneco](https://twitter.com/caneco) for the logo ✨
+Special thanks to [Caneco](https://twitter.com/caneco) for the original logo.
 
 ## License
 
