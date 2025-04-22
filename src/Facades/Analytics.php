@@ -2,12 +2,14 @@
 
 namespace Spatie\Analytics\Facades;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 use Spatie\Analytics\Fakes\Analytics as AnalyticsFake;
 
 /**
  * @mixin \Spatie\Analytics\Analytics
  */
+
 class Analytics extends Facade
 {
     protected static function getFacadeAccessor(): string
@@ -15,8 +17,11 @@ class Analytics extends Facade
         return 'laravel-analytics';
     }
 
-    public static function fake()
+    /**
+     * @param array|Collection $result
+     */
+    public static function fake($result = [])
     {
-        return static::swap(new AnalyticsFake());
+        return static::swap(new AnalyticsFake($result));
     }
 }
