@@ -3,12 +3,11 @@
 namespace Spatie\Analytics\Fakes;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Testing\Fakes\Fake;
 
 /**
  * @mixin \Spatie\Analytics\Analytics
  */
-class Analytics implements Fake
+class Analytics
 {
     /**
      * @param array|Collection $result
