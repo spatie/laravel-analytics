@@ -313,8 +313,61 @@ $metricFilter = new FilterExpression([
         ]),
     ]),    
 ]);
+```
 
 ## Testing
+
+### Faking
+
+To fake calls within the package in your own project you can use the `fake` method on the `Spatie\Analytics\Facades\Analytics` facade.
+
+For example:
+
+```php
+<?php
+
+use Spatie\Analytics\Facades\Analytics;
+
+test('feature in your project', function () {
+    // Arrange
+    Analytics::fake();
+
+    // Act
+    $response = $this->actingAs($admin)->get('/analytics');
+
+    // Assert
+    $response->assertStatus(200);
+});
+```
+
+You can also specify the expected result either as an array or `Illuminate\Support\Collection` to be returned when a method is called on the facade.
+
+For example:
+
+```php
+<?php
+
+use Spatie\Analytics\Facades\Analytics;
+
+test('feature in your project', function () {
+    // Arrange
+    Analytics::fake([
+        [
+            'pageTitle' => 'Test Page',
+            'activeUsers' => 10,
+            'screenPageViews' => 20,
+        ],
+    ]);
+
+    // Act
+    $response = $this->actingAs($admin)->get('/analytics');
+
+    // Assert
+    $response->assertStatus(200);
+});
+```
+
+### Package tests
 
 Run the tests with:
 
