@@ -9,7 +9,7 @@ it('can intercept method calls and return specified result', function () {
     $expectedResult = Collection::make([
         ['pageTitle' => 'Test Page', 'activeUsers' => 10, 'screenPageViews' => 20],
     ]);
-    
+
     $instance = new Analytics($expectedResult);
 
     // Act

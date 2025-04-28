@@ -8,7 +8,6 @@ use Spatie\Analytics\Fakes\Analytics as AnalyticsFake;
 /**
  * @mixin \Spatie\Analytics\Analytics
  */
-
 class Analytics extends Facade
 {
     protected static function getFacadeAccessor(): string
