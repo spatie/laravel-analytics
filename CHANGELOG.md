@@ -2,6 +2,18 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.6.0 - 2025-04-28
+
+### What's Changed
+
+* Feat: Adds faking ability to facade by @chikondikamwendo in https://github.com/spatie/laravel-analytics/pull/538
+
+### New Contributors
+
+* @chikondikamwendo made their first contribution in https://github.com/spatie/laravel-analytics/pull/538
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.5.4...5.6.0
+
 ## 5.5.4 - 2025-03-21
 
 ### What's Changed
