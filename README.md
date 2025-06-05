@@ -2,7 +2,7 @@
     <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=laravel-analytics">
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/laravel-analytics/html/dark.webp">
-        <img alt="Logo for laravel-analytics" src=" https://spatie.be/packages/header/laravel-analytics/html/light.webp" height="190">
+        <img alt="Logo for laravel-analytics" src="https://spatie.be/packages/header/laravel-analytics/html/light.webp">
       </picture>
     </a>
 
