@@ -245,7 +245,7 @@ The function returns a `Collection` in which each item is an array that holds ke
 For all other queries you can use the `get` function.
 
 ```php
-public function get(Period $period, array $metrics, array $dimensions = [], int $limit = 10, array $orderBy = [], FilterExpression $dimensionFilter = null, FilterExpression $metricFilter = null): Collection
+public function get(Period $period, array $metrics, array $dimensions = [], int $maxResults = 10, array $orderBy = [], int $offset = 0, ?FilterExpression $dimensionFilter = null, bool $keepEmptyRows = false, ?FilterExpression $metricFilter = null): Collection
 ```
 
 Here's some extra info on the arguments you can pass:
@@ -256,11 +256,11 @@ Here's some extra info on the arguments you can pass:
 
 `array $dimensions`: an array of dimensions to group the results by. You can find a list of all dimensions [here](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#dimensions).
 
-`int $limit`: the maximum number of results to return.
+`int $maxResults`: the maximum number of results to return.
 
 `array $orderBy`: of OrderBy objects to sort the results by. 
 
-`array $offset`: Defaults to 0, you can use this in combination with the $limit param to have pagination.
+`init $offset`: Defaults to 0, you can use this in combination with the $maxResults param to have pagination.
 
 `bool $keepEmptyRows`: If false or unspecified, each row with all metrics equal to 0 will not be returned. If true, these rows will be returned if they are not separately removed by a filter.
 
