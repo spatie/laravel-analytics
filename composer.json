@@ -22,7 +22,7 @@
     "require": {
         "php": "^8.3",
         "google/analytics-data": "^0.22.3",
-        "laravel/framework": "^11.42.1|^12.40.1",
+        "laravel/framework": "^12.40.1",
         "nesbot/carbon": "^2.66|^3.10.3",
         "spatie/laravel-package-tools": "^1.92.7",
         "symfony/cache": "^7.3.6|^8.0"
@@ -30,7 +30,7 @@
     "require-dev": {
         "league/flysystem": "^3.30.2",
         "mockery/mockery": "^1.6.12",
-        "orchestra/testbench": "^9.10|^10.0",
+        "orchestra/testbench": "^10.0",
         "pestphp/pest": "^4.1.5",
         "spatie/ray": "^1.44.1"
     },
