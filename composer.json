@@ -21,18 +21,18 @@
     ],
     "require": {
         "php": "^8.3",
-        "google/analytics-data": "^0.22.2",
-        "laravel/framework": "^11.42.1|^12.0",
-        "nesbot/carbon": "^2.66|^3.8.5",
-        "spatie/laravel-package-tools": "^1.19.0",
-        "symfony/cache": "^7.2.3|^8.0"
+        "google/analytics-data": "^0.22.3",
+        "laravel/framework": "^11.42.1|^12.40.1",
+        "nesbot/carbon": "^2.66|^3.10.3",
+        "spatie/laravel-package-tools": "^1.92.7",
+        "symfony/cache": "^7.3.6|^8.0"
     },
     "require-dev": {
-        "league/flysystem": "^3.29.1",
+        "league/flysystem": "^3.30.2",
         "mockery/mockery": "^1.6.12",
         "orchestra/testbench": "^9.10|^10.0",
-        "pestphp/pest": "^4.0",
-        "spatie/ray": "^1.41.5"
+        "pestphp/pest": "^4.1.5",
+        "spatie/ray": "^1.44.1"
     },
     "autoload": {
         "psr-4": {
