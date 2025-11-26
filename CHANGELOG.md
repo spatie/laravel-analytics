@@ -2,6 +2,25 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.6.1 - 2025-11-26
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/spatie/laravel-analytics/pull/539
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/spatie/laravel-analytics/pull/544
+* Update README.md by @Krasomir in https://github.com/spatie/laravel-analytics/pull/542
+* Update issue template by @AlexVanderbist in https://github.com/spatie/laravel-analytics/pull/545
+* Bump actions/checkout from 4 to 6 by @dependabot[bot] in https://github.com/spatie/laravel-analytics/pull/549
+* Added Symfony 8 support to all symfony/* packages. by @thecaliskan in https://github.com/spatie/laravel-analytics/pull/548
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/spatie/laravel-analytics/pull/546
+
+### New Contributors
+
+* @Krasomir made their first contribution in https://github.com/spatie/laravel-analytics/pull/542
+* @thecaliskan made their first contribution in https://github.com/spatie/laravel-analytics/pull/548
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.6.0...5.6.1
+
 ## 5.6.0 - 2025-04-28
 
 ### What's Changed
