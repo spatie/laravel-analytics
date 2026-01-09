@@ -8,6 +8,11 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class AnalyticsServiceProvider extends PackageServiceProvider
 {
+    public function registeringPackage()
+    {
+        $this->app->bind(\Spatie\Analytics\Contracts\Analytics::class, Analytics::class);
+    }
+
     public function configurePackage(Package $package): void
     {
         $package
@@ -30,7 +35,10 @@ class AnalyticsServiceProvider extends PackageServiceProvider
 
             $client = app(AnalyticsClient::class);
 
-            return new Analytics($client, $analyticsConfig['property_id']);
+            return $this->app->makeWith(
+                \Spatie\Analytics\Contracts\Analytics::class,
+                ['client' => $client, 'propertyId' => $analyticsConfig['property_id']]
+            );
         });
     }
 
