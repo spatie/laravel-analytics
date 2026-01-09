@@ -367,6 +367,53 @@ test('feature in your project', function () {
 });
 ```
 
+## Custom Analytics implementations
+
+Laravel Analytics exposes a public `Analytics` contract that is resolved via the Laravel service container.  
+This allows you to replace or extend the default implementation.
+
+### Using your own Analytics implementation
+
+You can replace the default Google Analytics implementation with your own:
+
+```php
+use Spatie\Analytics\Contracts\Analytics;
+use App\Analytics\MyAnalytics;
+
+app()->bind(Analytics::class, MyAnalytics::class);
+```
+
+Your class must implement `Spatie\Analytics\Contracts\Analytics`.
+
+---
+
+### Extending the default Analytics class
+
+You may also extend the built-in implementation:
+
+```php
+use Spatie\Analytics\Analytics as BaseAnalytics;
+use Spatie\Analytics\Contracts\Analytics;
+
+class MyAnalytics extends BaseAnalytics
+{
+    // override or extend behavior here
+}
+```
+
+And register it in a service provider (for example in `AppServiceProvider`):
+
+```php
+use Spatie\Analytics\Contracts\Analytics;
+
+public function boot()
+{
+    $this->app->bind(Analytics::class, MyAnalytics::class);
+}
+```
+
+This makes it possible to add caching, logging, multi-property support, or even replace Google Analytics entirely without modifying this package.
+
 ### Package tests
 
 Run the tests with:

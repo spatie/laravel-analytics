@@ -6,7 +6,7 @@ use Google\Analytics\Data\V1beta\FilterExpression;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
-class Analytics
+class Analytics implements \Spatie\Analytics\Contracts\Analytics
 {
     use Macroable;
 
