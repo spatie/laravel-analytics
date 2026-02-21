@@ -2,6 +2,12 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.7.0 - 2026-02-21
+
+### What's Changed
+
+- Add Laravel 13 support
+
 ## 5.6.1 - 2025-11-26
 
 ### What's Changed
