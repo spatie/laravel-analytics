@@ -135,11 +135,16 @@ class AnalyticsClient
             $this->cache->forget($cacheName);
         }
 
-        return $this->cache->remember(
+        $serialized = $this->cache->remember(
             $cacheName,
             $this->cacheLifeTimeInMinutes,
-            fn () => $this->service->runReport(new RunReportRequest($request)),
+            fn () => $this->service->runReport(new RunReportRequest($request))->serializeToString(),
         );
+
+        $response = new RunReportResponse();
+        $response->mergeFromString($serialized);
+
+        return $response;
     }
 
     public function runRealtimeReport(array $request): RunRealtimeReportResponse
@@ -150,11 +155,16 @@ class AnalyticsClient
             $this->cache->forget($cacheName);
         }
 
-        return $this->cache->remember(
+        $serialized = $this->cache->remember(
             $cacheName,
             $this->cacheLifeTimeInMinutes,
-            fn () => $this->service->runRealtimeReport(new RunRealtimeReportRequest($request)),
+            fn () => $this->service->runRealtimeReport(new RunRealtimeReportRequest($request))->serializeToString(),
         );
+
+        $response = new RunRealtimeReportResponse();
+        $response->mergeFromString($serialized);
+
+        return $response;
     }
 
     public function getAnalyticsService(): BetaAnalyticsDataClient
