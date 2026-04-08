@@ -25,7 +25,7 @@ it('allows credentials json file', function () {
 
     $analytics = $this->app['laravel-analytics'];
 
-    expect($analytics)->toBeInstanceOf(\Spatie\Analytics\Analytics::class);
+    expect($analytics)->toBeInstanceOf(Spatie\Analytics\Analytics::class);
 });
 
 it('will throw an exception if the credentials json does not exist', function () {
@@ -43,7 +43,7 @@ it('allows credentials json to be array', function () {
 
     $analytics = $this->app['laravel-analytics'];
 
-    expect($analytics)->toBeInstanceOf(\Spatie\Analytics\Analytics::class);
+    expect($analytics)->toBeInstanceOf(Spatie\Analytics\Analytics::class);
 });
 
 function credentials(): array
