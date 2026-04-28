@@ -2,6 +2,14 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.7.1 - 2026-04-28
+
+### What's Changed
+
+- Fix cache incompatibility with Laravel 13's `serializable_classes` by @bezhanSalleh in https://github.com/spatie/laravel-analytics/pull/553
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.7.0...5.7.1
+
 ## 5.7.0 - 2026-02-21
 
 ### What's Changed
