@@ -141,7 +141,7 @@ class AnalyticsClient
             fn () => $this->service->runReport(new RunReportRequest($request))->serializeToString(),
         );
 
-        $response = new RunReportResponse();
+        $response = new RunReportResponse;
         $response->mergeFromString($serialized);
 
         return $response;
@@ -161,7 +161,7 @@ class AnalyticsClient
             fn () => $this->service->runRealtimeReport(new RunRealtimeReportRequest($request))->serializeToString(),
         );
 
-        $response = new RunRealtimeReportResponse();
+        $response = new RunRealtimeReportResponse;
         $response->mergeFromString($serialized);
 
         return $response;
