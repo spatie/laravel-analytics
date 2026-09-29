@@ -1,8 +1,8 @@
 <?php
 
-use JMac\Testing\Double;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use JMac\Testing\Double;
 use Spatie\Analytics\Analytics;
 use Spatie\Analytics\AnalyticsClient;
 use Spatie\Analytics\OrderBy;
