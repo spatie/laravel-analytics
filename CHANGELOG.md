@@ -2,6 +2,19 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.7.2 - 2026-09-29
+
+### What's Changed
+
+* Bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/spatie/laravel-analytics/pull/556
+* Mockery to Double by @jasonmccreary in https://github.com/spatie/laravel-analytics/pull/557
+
+### New Contributors
+
+* @jasonmccreary made their first contribution in https://github.com/spatie/laravel-analytics/pull/557
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.7.1...5.7.2
+
 ## 5.7.1 - 2026-04-28
 
 ### What's Changed
