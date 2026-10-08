@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "google/analytics-data": "^0.22.3",
+        "google/analytics-data": "^0.28.0",
         "laravel/framework": "^12.40.1|^13.0",
         "nesbot/carbon": "^2.66|^3.10.3|^3.8.4",
         "spatie/laravel-package-tools": "^1.92.7",
