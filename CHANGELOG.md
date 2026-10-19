@@ -2,6 +2,26 @@
 
 All notable changes to Laravel-Analytics will be documented in this file
 
+## 5.8.0 - 2026-10-19
+
+### What’s Changed
+
+- Update `google/analytics-data` from `^0.22.3` to `^0.28.0` in #558, allowing current Google Analytics Data client releases.
+- Add compatibility coverage for standard and realtime reports through the Google REST client, including request encoding, typed results, and cached responses.
+- Update the test toolchain to Pest 5.3.3, PHPUnit 13.4, and Orchestra Testbench 11.
+
+### Requirements
+
+This release requires **PHP 8.4+ and Laravel 13**. PHP 8.3 and Laravel 12 are no longer supported by this release; applications on those versions can remain on the 5.7.x series.
+
+### Validation
+
+All four CI combinations pass: PHP 8.4/8.5 × lowest/latest stable dependencies (29 tests, 83 assertions each). Existing file-path and array credential configuration remains supported, although upstream now deprecates that usage. No live GA4 property was tested.
+
+Thanks to @adrian-nita for the dependency update.
+
+**Full Changelog**: https://github.com/spatie/laravel-analytics/compare/5.7.2...5.8.0
+
 ## 5.7.2 - 2026-09-29
 
 ### What's Changed
