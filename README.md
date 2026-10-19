@@ -42,6 +42,8 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 
 ## Installation
 
+This version requires PHP 8.4 or higher and Laravel 13.
+
 This package can be installed through Composer.
 
 ``` bash
